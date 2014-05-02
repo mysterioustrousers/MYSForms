@@ -1,0 +1,593 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		C289A2521913440A0047D0CF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C289A2511913440A0047D0CF /* Foundation.framework */; };
+		C289A2541913440A0047D0CF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C289A2531913440A0047D0CF /* CoreGraphics.framework */; };
+		C289A2561913440A0047D0CF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C289A2551913440A0047D0CF /* UIKit.framework */; };
+		C289A25C1913440A0047D0CF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C289A25A1913440A0047D0CF /* InfoPlist.strings */; };
+		C289A25E1913440A0047D0CF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C289A25D1913440A0047D0CF /* main.m */; };
+		C289A2621913440A0047D0CF /* MYSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C289A2611913440A0047D0CF /* MYSAppDelegate.m */; };
+		C289A2651913440A0047D0CF /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C289A2631913440A0047D0CF /* Main_iPhone.storyboard */; };
+		C289A2681913440A0047D0CF /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C289A2661913440A0047D0CF /* Main_iPad.storyboard */; };
+		C289A26D1913440A0047D0CF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C289A26C1913440A0047D0CF /* Images.xcassets */; };
+		C289A2741913440A0047D0CF /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C289A2731913440A0047D0CF /* XCTest.framework */; };
+		C289A2751913440A0047D0CF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C289A2511913440A0047D0CF /* Foundation.framework */; };
+		C289A2761913440B0047D0CF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C289A2551913440A0047D0CF /* UIKit.framework */; };
+		C289A27E1913440B0047D0CF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C289A27C1913440B0047D0CF /* InfoPlist.strings */; };
+		C289A2801913440B0047D0CF /* MYSFormsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C289A27F1913440B0047D0CF /* MYSFormsTests.m */; };
+		C289A28B1913447E0047D0CF /* MYSForms.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C289A28A1913447E0047D0CF /* MYSForms.storyboard */; };
+		C289A28E191344DC0047D0CF /* MYSFormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C289A28D191344DC0047D0CF /* MYSFormViewController.m */; };
+		C289A2911913D6890047D0CF /* MYSFormButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C289A2901913D6890047D0CF /* MYSFormButtonCell.m */; };
+		C289A2941913D73E0047D0CF /* MYSFormHeadlineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C289A2931913D73E0047D0CF /* MYSFormHeadlineCell.m */; };
+		C289A2971913D74E0047D0CF /* MYSFormFootnoteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C289A2961913D74E0047D0CF /* MYSFormFootnoteCell.m */; };
+		C289A29A1913D7660047D0CF /* MYSFormTextInputCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C289A2991913D7660047D0CF /* MYSFormTextInputCell.m */; };
+		C289A29E1913DAD30047D0CF /* MYSSpringyCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = C289A29D1913DAD30047D0CF /* MYSSpringyCollectionViewFlowLayout.m */; };
+		C289A2A11913DC1B0047D0CF /* MYSTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C289A2A01913DC1B0047D0CF /* MYSTableViewController.m */; };
+		C2AAD8D519140BFB00FDF78E /* MYSFakeUser.m in Sources */ = {isa = PBXBuildFile; fileRef = C2AAD8D419140BFB00FDF78E /* MYSFakeUser.m */; };
+		C2AAD8D91914145E00FDF78E /* MYSInputAccessoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2AAD8D81914145E00FDF78E /* MYSInputAccessoryView.m */; };
+		C2AAD8DB1914146B00FDF78E /* MYSInputAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2AAD8DA1914146B00FDF78E /* MYSInputAccessoryView.xib */; };
+		C2AAD8DD191414C400FDF78E /* MYSFormsMedia.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C2AAD8DC191414C400FDF78E /* MYSFormsMedia.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C289A2771913440B0047D0CF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C289A2461913440A0047D0CF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C289A24D1913440A0047D0CF;
+			remoteInfo = MYSForms;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		C289A24E1913440A0047D0CF /* MYSForms.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MYSForms.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C289A2511913440A0047D0CF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		C289A2531913440A0047D0CF /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		C289A2551913440A0047D0CF /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		C289A2591913440A0047D0CF /* MYSForms-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MYSForms-Info.plist"; sourceTree = "<group>"; };
+		C289A25B1913440A0047D0CF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		C289A25D1913440A0047D0CF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		C289A25F1913440A0047D0CF /* MYSForms-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MYSForms-Prefix.pch"; sourceTree = "<group>"; };
+		C289A2601913440A0047D0CF /* MYSAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MYSAppDelegate.h; sourceTree = "<group>"; };
+		C289A2611913440A0047D0CF /* MYSAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MYSAppDelegate.m; sourceTree = "<group>"; };
+		C289A2641913440A0047D0CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
+		C289A2671913440A0047D0CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
+		C289A26C1913440A0047D0CF /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		C289A2721913440A0047D0CF /* MYSFormsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MYSFormsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C289A2731913440A0047D0CF /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		C289A27B1913440B0047D0CF /* MYSFormsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MYSFormsTests-Info.plist"; sourceTree = "<group>"; };
+		C289A27D1913440B0047D0CF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		C289A27F1913440B0047D0CF /* MYSFormsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MYSFormsTests.m; sourceTree = "<group>"; };
+		C289A28A1913447E0047D0CF /* MYSForms.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MYSForms.storyboard; sourceTree = "<group>"; };
+		C289A28C191344DC0047D0CF /* MYSFormViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYSFormViewController.h; sourceTree = "<group>"; };
+		C289A28D191344DC0047D0CF /* MYSFormViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYSFormViewController.m; sourceTree = "<group>"; };
+		C289A28F1913D6890047D0CF /* MYSFormButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYSFormButtonCell.h; sourceTree = "<group>"; };
+		C289A2901913D6890047D0CF /* MYSFormButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYSFormButtonCell.m; sourceTree = "<group>"; };
+		C289A2921913D73E0047D0CF /* MYSFormHeadlineCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYSFormHeadlineCell.h; sourceTree = "<group>"; };
+		C289A2931913D73E0047D0CF /* MYSFormHeadlineCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYSFormHeadlineCell.m; sourceTree = "<group>"; };
+		C289A2951913D74E0047D0CF /* MYSFormFootnoteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYSFormFootnoteCell.h; sourceTree = "<group>"; };
+		C289A2961913D74E0047D0CF /* MYSFormFootnoteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYSFormFootnoteCell.m; sourceTree = "<group>"; };
+		C289A2981913D7660047D0CF /* MYSFormTextInputCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYSFormTextInputCell.h; sourceTree = "<group>"; };
+		C289A2991913D7660047D0CF /* MYSFormTextInputCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYSFormTextInputCell.m; sourceTree = "<group>"; };
+		C289A29C1913DAD30047D0CF /* MYSSpringyCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYSSpringyCollectionViewFlowLayout.h; sourceTree = "<group>"; };
+		C289A29D1913DAD30047D0CF /* MYSSpringyCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYSSpringyCollectionViewFlowLayout.m; sourceTree = "<group>"; };
+		C289A29F1913DC1B0047D0CF /* MYSTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYSTableViewController.h; sourceTree = "<group>"; };
+		C289A2A01913DC1B0047D0CF /* MYSTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYSTableViewController.m; sourceTree = "<group>"; };
+		C2AAD8D11913FEDE00FDF78E /* MYSFormCellProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MYSFormCellProtocol.h; sourceTree = "<group>"; };
+		C2AAD8D319140BFB00FDF78E /* MYSFakeUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYSFakeUser.h; sourceTree = "<group>"; };
+		C2AAD8D419140BFB00FDF78E /* MYSFakeUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYSFakeUser.m; sourceTree = "<group>"; };
+		C2AAD8D71914145E00FDF78E /* MYSInputAccessoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYSInputAccessoryView.h; sourceTree = "<group>"; };
+		C2AAD8D81914145E00FDF78E /* MYSInputAccessoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYSInputAccessoryView.m; sourceTree = "<group>"; };
+		C2AAD8DA1914146B00FDF78E /* MYSInputAccessoryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MYSInputAccessoryView.xib; sourceTree = "<group>"; };
+		C2AAD8DC191414C400FDF78E /* MYSFormsMedia.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = MYSFormsMedia.xcassets; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C289A24B1913440A0047D0CF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C289A2541913440A0047D0CF /* CoreGraphics.framework in Frameworks */,
+				C289A2561913440A0047D0CF /* UIKit.framework in Frameworks */,
+				C289A2521913440A0047D0CF /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C289A26F1913440A0047D0CF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C289A2741913440A0047D0CF /* XCTest.framework in Frameworks */,
+				C289A2761913440B0047D0CF /* UIKit.framework in Frameworks */,
+				C289A2751913440A0047D0CF /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		C289A2451913440A0047D0CF = {
+			isa = PBXGroup;
+			children = (
+				C289A2571913440A0047D0CF /* MYSForms */,
+				C289A2791913440B0047D0CF /* MYSFormsTests */,
+				C289A2501913440A0047D0CF /* Frameworks */,
+				C289A24F1913440A0047D0CF /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		C289A24F1913440A0047D0CF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C289A24E1913440A0047D0CF /* MYSForms.app */,
+				C289A2721913440A0047D0CF /* MYSFormsTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C289A2501913440A0047D0CF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C289A2511913440A0047D0CF /* Foundation.framework */,
+				C289A2531913440A0047D0CF /* CoreGraphics.framework */,
+				C289A2551913440A0047D0CF /* UIKit.framework */,
+				C289A2731913440A0047D0CF /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C289A2571913440A0047D0CF /* MYSForms */ = {
+			isa = PBXGroup;
+			children = (
+				C289A2601913440A0047D0CF /* MYSAppDelegate.h */,
+				C289A2611913440A0047D0CF /* MYSAppDelegate.m */,
+				C289A2631913440A0047D0CF /* Main_iPhone.storyboard */,
+				C289A2661913440A0047D0CF /* Main_iPad.storyboard */,
+				C289A29F1913DC1B0047D0CF /* MYSTableViewController.h */,
+				C289A2A01913DC1B0047D0CF /* MYSTableViewController.m */,
+				C2AAD8D219140BE500FDF78E /* Models */,
+				C289A2891913443C0047D0CF /* MYSForms */,
+				C289A26C1913440A0047D0CF /* Images.xcassets */,
+				C289A2581913440A0047D0CF /* Supporting Files */,
+			);
+			path = MYSForms;
+			sourceTree = "<group>";
+		};
+		C289A2581913440A0047D0CF /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C289A2591913440A0047D0CF /* MYSForms-Info.plist */,
+				C289A25A1913440A0047D0CF /* InfoPlist.strings */,
+				C289A25D1913440A0047D0CF /* main.m */,
+				C289A25F1913440A0047D0CF /* MYSForms-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C289A2791913440B0047D0CF /* MYSFormsTests */ = {
+			isa = PBXGroup;
+			children = (
+				C289A27F1913440B0047D0CF /* MYSFormsTests.m */,
+				C289A27A1913440B0047D0CF /* Supporting Files */,
+			);
+			path = MYSFormsTests;
+			sourceTree = "<group>";
+		};
+		C289A27A1913440B0047D0CF /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C289A27B1913440B0047D0CF /* MYSFormsTests-Info.plist */,
+				C289A27C1913440B0047D0CF /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C289A2891913443C0047D0CF /* MYSForms */ = {
+			isa = PBXGroup;
+			children = (
+				C289A28A1913447E0047D0CF /* MYSForms.storyboard */,
+				C289A28C191344DC0047D0CF /* MYSFormViewController.h */,
+				C289A28D191344DC0047D0CF /* MYSFormViewController.m */,
+				C289A29C1913DAD30047D0CF /* MYSSpringyCollectionViewFlowLayout.h */,
+				C289A29D1913DAD30047D0CF /* MYSSpringyCollectionViewFlowLayout.m */,
+				C289A29B1913D7740047D0CF /* Form Cells */,
+				C2AAD8D61914142100FDF78E /* Input Accessory */,
+				C2AAD8DC191414C400FDF78E /* MYSFormsMedia.xcassets */,
+			);
+			path = MYSForms;
+			sourceTree = "<group>";
+		};
+		C289A29B1913D7740047D0CF /* Form Cells */ = {
+			isa = PBXGroup;
+			children = (
+				C289A2921913D73E0047D0CF /* MYSFormHeadlineCell.h */,
+				C289A2931913D73E0047D0CF /* MYSFormHeadlineCell.m */,
+				C289A2951913D74E0047D0CF /* MYSFormFootnoteCell.h */,
+				C289A2961913D74E0047D0CF /* MYSFormFootnoteCell.m */,
+				C289A2981913D7660047D0CF /* MYSFormTextInputCell.h */,
+				C289A2991913D7660047D0CF /* MYSFormTextInputCell.m */,
+				C289A28F1913D6890047D0CF /* MYSFormButtonCell.h */,
+				C289A2901913D6890047D0CF /* MYSFormButtonCell.m */,
+				C2AAD8D11913FEDE00FDF78E /* MYSFormCellProtocol.h */,
+			);
+			name = "Form Cells";
+			sourceTree = "<group>";
+		};
+		C2AAD8D219140BE500FDF78E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C2AAD8D319140BFB00FDF78E /* MYSFakeUser.h */,
+				C2AAD8D419140BFB00FDF78E /* MYSFakeUser.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		C2AAD8D61914142100FDF78E /* Input Accessory */ = {
+			isa = PBXGroup;
+			children = (
+				C2AAD8D71914145E00FDF78E /* MYSInputAccessoryView.h */,
+				C2AAD8D81914145E00FDF78E /* MYSInputAccessoryView.m */,
+				C2AAD8DA1914146B00FDF78E /* MYSInputAccessoryView.xib */,
+			);
+			name = "Input Accessory";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C289A24D1913440A0047D0CF /* MYSForms */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C289A2831913440B0047D0CF /* Build configuration list for PBXNativeTarget "MYSForms" */;
+			buildPhases = (
+				C289A24A1913440A0047D0CF /* Sources */,
+				C289A24B1913440A0047D0CF /* Frameworks */,
+				C289A24C1913440A0047D0CF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MYSForms;
+			productName = MYSForms;
+			productReference = C289A24E1913440A0047D0CF /* MYSForms.app */;
+			productType = "com.apple.product-type.application";
+		};
+		C289A2711913440A0047D0CF /* MYSFormsTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C289A2861913440B0047D0CF /* Build configuration list for PBXNativeTarget "MYSFormsTests" */;
+			buildPhases = (
+				C289A26E1913440A0047D0CF /* Sources */,
+				C289A26F1913440A0047D0CF /* Frameworks */,
+				C289A2701913440A0047D0CF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C289A2781913440B0047D0CF /* PBXTargetDependency */,
+			);
+			name = MYSFormsTests;
+			productName = MYSFormsTests;
+			productReference = C289A2721913440A0047D0CF /* MYSFormsTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C289A2461913440A0047D0CF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = MYS;
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "Mysterious Trousers";
+				TargetAttributes = {
+					C289A24D1913440A0047D0CF = {
+						DevelopmentTeam = JXK78JN25R;
+					};
+					C289A2711913440A0047D0CF = {
+						TestTargetID = C289A24D1913440A0047D0CF;
+					};
+				};
+			};
+			buildConfigurationList = C289A2491913440A0047D0CF /* Build configuration list for PBXProject "MYSForms" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = C289A2451913440A0047D0CF;
+			productRefGroup = C289A24F1913440A0047D0CF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C289A24D1913440A0047D0CF /* MYSForms */,
+				C289A2711913440A0047D0CF /* MYSFormsTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C289A24C1913440A0047D0CF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C289A28B1913447E0047D0CF /* MYSForms.storyboard in Resources */,
+				C289A2681913440A0047D0CF /* Main_iPad.storyboard in Resources */,
+				C2AAD8DD191414C400FDF78E /* MYSFormsMedia.xcassets in Resources */,
+				C289A26D1913440A0047D0CF /* Images.xcassets in Resources */,
+				C289A2651913440A0047D0CF /* Main_iPhone.storyboard in Resources */,
+				C2AAD8DB1914146B00FDF78E /* MYSInputAccessoryView.xib in Resources */,
+				C289A25C1913440A0047D0CF /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C289A2701913440A0047D0CF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C289A27E1913440B0047D0CF /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C289A24A1913440A0047D0CF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C289A29A1913D7660047D0CF /* MYSFormTextInputCell.m in Sources */,
+				C2AAD8D91914145E00FDF78E /* MYSInputAccessoryView.m in Sources */,
+				C2AAD8D519140BFB00FDF78E /* MYSFakeUser.m in Sources */,
+				C289A2621913440A0047D0CF /* MYSAppDelegate.m in Sources */,
+				C289A2971913D74E0047D0CF /* MYSFormFootnoteCell.m in Sources */,
+				C289A2941913D73E0047D0CF /* MYSFormHeadlineCell.m in Sources */,
+				C289A2A11913DC1B0047D0CF /* MYSTableViewController.m in Sources */,
+				C289A28E191344DC0047D0CF /* MYSFormViewController.m in Sources */,
+				C289A2911913D6890047D0CF /* MYSFormButtonCell.m in Sources */,
+				C289A25E1913440A0047D0CF /* main.m in Sources */,
+				C289A29E1913DAD30047D0CF /* MYSSpringyCollectionViewFlowLayout.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C289A26E1913440A0047D0CF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C289A2801913440B0047D0CF /* MYSFormsTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C289A2781913440B0047D0CF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C289A24D1913440A0047D0CF /* MYSForms */;
+			targetProxy = C289A2771913440B0047D0CF /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		C289A25A1913440A0047D0CF /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C289A25B1913440A0047D0CF /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		C289A2631913440A0047D0CF /* Main_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C289A2641913440A0047D0CF /* Base */,
+			);
+			name = Main_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		C289A2661913440A0047D0CF /* Main_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C289A2671913440A0047D0CF /* Base */,
+			);
+			name = Main_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+		C289A27C1913440B0047D0CF /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C289A27D1913440B0047D0CF /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		C289A2811913440B0047D0CF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C289A2821913440B0047D0CF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C289A2841913440B0047D0CF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MYSForms/MYSForms-Prefix.pch";
+				INFOPLIST_FILE = "MYSForms/MYSForms-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		C289A2851913440B0047D0CF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MYSForms/MYSForms-Prefix.pch";
+				INFOPLIST_FILE = "MYSForms/MYSForms-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		C289A2871913440B0047D0CF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MYSForms.app/MYSForms";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MYSForms/MYSForms-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "MYSFormsTests/MYSFormsTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		C289A2881913440B0047D0CF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MYSForms.app/MYSForms";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MYSForms/MYSForms-Prefix.pch";
+				INFOPLIST_FILE = "MYSFormsTests/MYSFormsTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C289A2491913440A0047D0CF /* Build configuration list for PBXProject "MYSForms" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C289A2811913440B0047D0CF /* Debug */,
+				C289A2821913440B0047D0CF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C289A2831913440B0047D0CF /* Build configuration list for PBXNativeTarget "MYSForms" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C289A2841913440B0047D0CF /* Debug */,
+				C289A2851913440B0047D0CF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C289A2861913440B0047D0CF /* Build configuration list for PBXNativeTarget "MYSFormsTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C289A2871913440B0047D0CF /* Debug */,
+				C289A2881913440B0047D0CF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C289A2461913440A0047D0CF /* Project object */;
+}

@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="YlN-12-x3K">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+    </dependencies>
+    <scenes>
+        <!--Form View Controller-->
+        <scene sceneID="KIg-M0-x20">
+            <objects>
+                <collectionViewController autoresizesArchivedViewToFullSize="NO" id="YlN-12-x3K" customClass="MYSFormViewController" sceneMemberID="viewController">
+                    <collectionView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="A6T-MC-79N">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="UMi-gc-DZS" customClass="MYSSpringyCollectionViewFlowLayout">
+                            <size key="itemSize" width="319" height="50"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="HeadlineFormCell" id="0s6-En-Tkl" customClass="MYSFormHeadlineCell">
+                                <rect key="frame" x="1" y="0.0" width="319" height="50"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="319" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Headline" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="erE-dY-cTg">
+                                            <rect key="frame" x="20" y="15" width="279" height="20"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <constraints>
+                                    <constraint firstItem="erE-dY-cTg" firstAttribute="leading" secondItem="0s6-En-Tkl" secondAttribute="leading" constant="20" id="VQW-wA-IwF"/>
+                                    <constraint firstAttribute="centerY" secondItem="erE-dY-cTg" secondAttribute="centerY" constant="0.5" id="gD6-F3-R0i"/>
+                                    <constraint firstAttribute="trailing" secondItem="erE-dY-cTg" secondAttribute="trailing" constant="20" id="yBe-Ro-dDD"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="headlineLabel" destination="erE-dY-cTg" id="zvV-JX-gF1"/>
+                                </connections>
+                            </collectionViewCell>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FootnoteFormCell" id="jgt-i7-Qps" customClass="MYSFormFootnoteCell">
+                                <rect key="frame" x="1" y="60" width="319" height="120"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="319" height="120"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="279" translatesAutoresizingMaskIntoConstraints="NO" id="GGp-pw-n8H">
+                                            <rect key="frame" x="20" y="12" width="279" height="95"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <string key="text">A collection view is a way to present an ordered set of data items using a flexible and changeable layout. The most common use for collection views is to present items in a grid-like arrangement, but collection views in iOS are capable of more than just rows and columns.</string>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="GGp-pw-n8H" secondAttribute="trailing" constant="20" id="PxC-b5-WuG"/>
+                                    <constraint firstItem="GGp-pw-n8H" firstAttribute="leading" secondItem="jgt-i7-Qps" secondAttribute="leading" constant="20" id="rzR-HC-ETl"/>
+                                    <constraint firstAttribute="centerY" secondItem="GGp-pw-n8H" secondAttribute="centerY" constant="0.5" id="zRd-oi-pow"/>
+                                </constraints>
+                                <size key="customSize" width="319" height="120"/>
+                                <connections>
+                                    <outlet property="footnoteLabel" destination="GGp-pw-n8H" id="eHb-3u-Tsj"/>
+                                </connections>
+                            </collectionViewCell>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="TextInputFormCell" id="STH-Bt-YEz" customClass="MYSFormTextInputCell">
+                                <rect key="frame" x="1" y="190" width="319" height="50"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="319" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3Gv-XV-1uy">
+                                            <rect key="frame" x="129" y="5" width="170" height="40"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="40" id="TMl-nD-WVu"/>
+                                                <constraint firstAttribute="width" constant="170" id="gQs-17-YQz"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dj0-4J-27k">
+                                            <rect key="frame" x="20" y="14" width="101" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <constraints>
+                                    <constraint firstItem="3Gv-XV-1uy" firstAttribute="leading" secondItem="Dj0-4J-27k" secondAttribute="trailing" constant="8" id="0C9-P4-wMk"/>
+                                    <constraint firstAttribute="centerY" secondItem="Dj0-4J-27k" secondAttribute="centerY" constant="0.5" id="RMZ-Qs-kU1"/>
+                                    <constraint firstAttribute="trailing" secondItem="3Gv-XV-1uy" secondAttribute="trailing" constant="20" id="YQ8-5t-PLI"/>
+                                    <constraint firstAttribute="centerY" secondItem="3Gv-XV-1uy" secondAttribute="centerY" id="fre-J2-hBI"/>
+                                    <constraint firstItem="Dj0-4J-27k" firstAttribute="leading" secondItem="STH-Bt-YEz" secondAttribute="leading" constant="20" id="j1Q-by-5rf"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="label" destination="Dj0-4J-27k" id="jH4-XL-2Xa"/>
+                                    <outlet property="textField" destination="3Gv-XV-1uy" id="zcg-ag-ISQ"/>
+                                </connections>
+                            </collectionViewCell>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ButtonFormCell" id="sGI-AV-Duo" customClass="MYSFormButtonCell">
+                                <rect key="frame" x="1" y="250" width="319" height="50"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="319" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MLG-Np-0J2">
+                                            <rect key="frame" x="20" y="10" width="279" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="Button">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                        </button>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <constraints>
+                                    <constraint firstAttribute="centerY" secondItem="MLG-Np-0J2" secondAttribute="centerY" id="2rL-mL-M3y"/>
+                                    <constraint firstItem="MLG-Np-0J2" firstAttribute="leading" secondItem="sGI-AV-Duo" secondAttribute="leading" constant="20" id="D7g-NI-IC5"/>
+                                    <constraint firstAttribute="trailing" secondItem="MLG-Np-0J2" secondAttribute="trailing" constant="20" id="cyR-Eg-IMu"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="button" destination="MLG-Np-0J2" id="VB5-ZA-eqX"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="YlN-12-x3K" id="b3P-Zn-KY1"/>
+                            <outlet property="delegate" destination="YlN-12-x3K" id="nnf-1d-v0L"/>
+                        </connections>
+                    </collectionView>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mgo-Xk-8JO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="335" y="95"/>
+        </scene>
+    </scenes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>

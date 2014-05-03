@@ -31,11 +31,13 @@
  */
 @property (nonatomic, weak, readonly) id model;
 
+- (void)configureForm;
+
 /**
  Use this method to create a form view controller, then use the methods below to add form elements. This is the only valid 
  way to create a form view controller.
  */
-+ (instancetype)newFormViewControllerWithModel:(id)model;
++ (instancetype)formViewControllerWithModel:(id)model;
 
 /**
  Add a headline form element. This is a display element and not an input element, so it cannot be linked to a property on the model.

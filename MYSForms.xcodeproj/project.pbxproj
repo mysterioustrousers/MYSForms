@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C26614E6191554700073DAD8 /* MYSSignUpFormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C26614E5191554700073DAD8 /* MYSSignUpFormViewController.m */; };
 		C289A2521913440A0047D0CF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C289A2511913440A0047D0CF /* Foundation.framework */; };
 		C289A2541913440A0047D0CF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C289A2531913440A0047D0CF /* CoreGraphics.framework */; };
 		C289A2561913440A0047D0CF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C289A2551913440A0047D0CF /* UIKit.framework */; };
@@ -47,6 +48,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C26614E4191554700073DAD8 /* MYSSignUpFormViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYSSignUpFormViewController.h; sourceTree = "<group>"; };
+		C26614E5191554700073DAD8 /* MYSSignUpFormViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYSSignUpFormViewController.m; sourceTree = "<group>"; };
 		C289A24E1913440A0047D0CF /* MYSForms.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MYSForms.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C289A2511913440A0047D0CF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C289A2531913440A0047D0CF /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -154,6 +157,8 @@
 				C289A2661913440A0047D0CF /* Main_iPad.storyboard */,
 				C289A29F1913DC1B0047D0CF /* MYSTableViewController.h */,
 				C289A2A01913DC1B0047D0CF /* MYSTableViewController.m */,
+				C26614E4191554700073DAD8 /* MYSSignUpFormViewController.h */,
+				C26614E5191554700073DAD8 /* MYSSignUpFormViewController.m */,
 				C2AAD8D219140BE500FDF78E /* Models */,
 				C289A2891913443C0047D0CF /* MYSForms */,
 				C289A26C1913440A0047D0CF /* Images.xcassets */,
@@ -357,6 +362,7 @@
 				C289A2941913D73E0047D0CF /* MYSFormHeadlineCell.m in Sources */,
 				C289A2A11913DC1B0047D0CF /* MYSTableViewController.m in Sources */,
 				C289A28E191344DC0047D0CF /* MYSFormViewController.m in Sources */,
+				C26614E6191554700073DAD8 /* MYSSignUpFormViewController.m in Sources */,
 				C289A2911913D6890047D0CF /* MYSFormButtonCell.m in Sources */,
 				C289A25E1913440A0047D0CF /* main.m in Sources */,
 				C289A29E1913DAD30047D0CF /* MYSSpringyCollectionViewFlowLayout.m in Sources */,

@@ -39,7 +39,7 @@
     // log in form
     if (indexPath.row == 0) {
         MYSFakeUser *user = [MYSFakeUser new];
-        MYSFormViewController *formViewController = [MYSFormViewController newFormViewControllerWithModel:user];
+        MYSFormViewController *formViewController = [MYSFormViewController formViewControllerWithModel:user];
         [formViewController addHeadlineElementWithString:@"Log In"];
         [formViewController addFootnoteElementWithString:@"A table view displays a list of items in a single column. UITableView is a subclass of UIScrollView."];
         [formViewController addTextInputElementWithModelKeyPath:@"email"
@@ -55,30 +55,30 @@
     }
 
     // sign up form
-    else if (indexPath.row == 1) {
-        MYSFakeUser *user = [MYSFakeUser new];
-        MYSFormViewController *formViewController = [MYSFormViewController newFormViewControllerWithModel:user];
-        [formViewController addHeadlineElementWithString:@"Sign Up"];
-        [formViewController addFootnoteElementWithString:@"A table view displays a list of items in a single column. UITableView is a subclass of UIScrollView."];
-        [formViewController addTextInputElementWithModelKeyPath:@"firstName"
-                                                          label:@"First Name"
-                                                   keyboardType:UIKeyboardTypeDefault
-                                                         secure:NO];
-        [formViewController addTextInputElementWithModelKeyPath:@"lastName"
-                                                          label:@"Last Name"
-                                                   keyboardType:UIKeyboardTypeDefault
-                                                         secure:NO];
-        [formViewController addTextInputElementWithModelKeyPath:@"email"
-                                                          label:@"E-mail"
-                                                   keyboardType:UIKeyboardTypeEmailAddress
-                                                         secure:NO];
-        [formViewController addTextInputElementWithModelKeyPath:@"password"
-                                                          label:@"Password"
-                                                   keyboardType:UIKeyboardTypeDefault
-                                                         secure:YES];
-        [formViewController addButtonElementWithTitle:@"Log In" target:self action:@selector(logInButtonWasTapped:)];
-        [self.navigationController pushViewController:formViewController animated:YES];
-    }
+//    else if (indexPath.row == 1) {
+//        MYSFakeUser *user = [MYSFakeUser new];
+//        MYSFormViewController *formViewController = [MYSFormViewController formViewControllerWithModel:user];
+//        [formViewController addHeadlineElementWithString:@"Sign Up"];
+//        [formViewController addFootnoteElementWithString:@"A table view displays a list of items in a single column. UITableView is a subclass of UIScrollView."];
+//        [formViewController addTextInputElementWithModelKeyPath:@"firstName"
+//                                                          label:@"First Name"
+//                                                   keyboardType:UIKeyboardTypeDefault
+//                                                         secure:NO];
+//        [formViewController addTextInputElementWithModelKeyPath:@"lastName"
+//                                                          label:@"Last Name"
+//                                                   keyboardType:UIKeyboardTypeDefault
+//                                                         secure:NO];
+//        [formViewController addTextInputElementWithModelKeyPath:@"email"
+//                                                          label:@"E-mail"
+//                                                   keyboardType:UIKeyboardTypeEmailAddress
+//                                                         secure:NO];
+//        [formViewController addTextInputElementWithModelKeyPath:@"password"
+//                                                          label:@"Password"
+//                                                   keyboardType:UIKeyboardTypeDefault
+//                                                         secure:YES];
+//        [formViewController addButtonElementWithTitle:@"Log In" target:self action:@selector(logInButtonWasTapped:)];
+//        [self.navigationController pushViewController:formViewController animated:YES];
+//    }
 }
 
 

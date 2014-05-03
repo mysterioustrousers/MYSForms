@@ -28,19 +28,22 @@
 
 @implementation MYSFormViewController
 
-+ (instancetype)newFormViewControllerWithModel:(id)model
++ (instancetype)formViewControllerWithModel:(id)model
 {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MYSForms" bundle:nil];
     MYSFormViewController *formViewController = [storyboard instantiateInitialViewController];
-    formViewController.model = model;
+    formViewController.model    = model;
+    formViewController.rows     = [NSMutableArray new];
+    formViewController.cells    = [NSMutableDictionary new];
     return formViewController;
 }
 
-- (void)awakeFromNib
+- (id)awakeAfterUsingCoder:(NSCoder *)aDecoder
 {
-    [super awakeFromNib];
-    self.rows   = [NSMutableArray new];
-    self.cells  = [NSMutableDictionary new];
+    if (![self isMemberOfClass:[MYSFormViewController class]]) {
+        return [MYSFormViewController formViewControllerWithModel:nil];
+    }
+    return self;
 }
 
 - (void)viewDidLoad
@@ -52,6 +55,11 @@
 
 
 #pragma mark - Public
+
+- (void)configureForm
+{
+    // override in subclass
+}
 
 - (MYSFormHeadlineCellData *)addHeadlineElementWithString:(NSString *)headline
 {

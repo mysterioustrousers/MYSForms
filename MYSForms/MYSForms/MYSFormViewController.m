@@ -67,6 +67,7 @@
     [super viewDidLoad];
 
     self.collectionView.backgroundColor         = [UIColor groupTableViewBackgroundColor];
+    self.view.backgroundColor         = [UIColor groupTableViewBackgroundColor];
     self.collectionView.alwaysBounceVertical    = YES;
 
     [self setupKeyboardNotifications];
@@ -76,6 +77,27 @@
     [MYSFormFootnoteCell registerForReuseWithCollectionView:self.collectionView];
     [MYSFormTextInputCell registerForReuseWithCollectionView:self.collectionView];
     [MYSFormButtonCell registerForReuseWithCollectionView:self.collectionView];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    UIEdgeInsets insets = self.collectionView.contentInset;
+    insets.bottom = self.collectionView.bounds.size.height;
+    self.collectionView.contentInset = insets;
+    self.collectionView.hidden = YES;
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [self.collectionView scrollRectToVisible:CGRectMake(0, self.collectionView.bounds.size.height, 1, 1) animated:NO];
+    self.collectionView.hidden = NO;
+    [super viewDidAppear:animated];
+    UIEdgeInsets insets = self.collectionView.contentInset;
+    insets.bottom = 0;
+    [UIView animateWithDuration:0.5 animations:^{
+        self.collectionView.contentInset = insets;
+    }];
 }
 
 
@@ -198,7 +220,7 @@
         CGFloat animationDuration   = [note.userInfo[UIKeyboardAnimationDurationUserInfoKey] floatValue];
         UIViewAnimationCurve curve  = [note.userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue];
         UIEdgeInsets insets         = self.collectionView.contentInset;
-        insets.bottom               = self.collectionView.bounds.size.height - endFrame.size.height;
+        insets.bottom               = (self.collectionView.bounds.size.height - endFrame.size.height) + self.inputAccessoryView.frame.size.height;
         [UIView animateWithDuration:animationDuration delay:0 options:(curve << 16) animations:^{
             self.collectionView.contentInset = insets;
         } completion:^(BOOL finished) {

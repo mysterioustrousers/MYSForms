@@ -74,11 +74,11 @@
             </objects>
             <point key="canvasLocation" x="869" y="208"/>
         </scene>
-        <!--Collection View Controller-->
+        <!--Sign Up Form View Controller-->
         <scene sceneID="GjZ-5J-VZL">
             <objects>
-                <collectionViewController autoresizesArchivedViewToFullSize="NO" id="UjM-iF-C9J" sceneMemberID="viewController">
-                    <collectionView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="Ei7-CF-cal" customClass="MYSFormView">
+                <collectionViewController autoresizesArchivedViewToFullSize="NO" id="UjM-iF-C9J" customClass="MYSSignUpFormViewController" sceneMemberID="viewController">
+                    <collectionView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="Ei7-CF-cal">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="XE8-U4-VVs" customClass="MYSSpringyCollectionViewFlowLayout">

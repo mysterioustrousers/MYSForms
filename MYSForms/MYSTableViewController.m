@@ -7,8 +7,8 @@
 //
 
 #import "MYSTableViewController.h"
-#import "MYSFormView.h"
-#import "MYSSignUpFormView.h"
+#import "MYSFormViewController.h"
+#import "MYSSignUpFormViewController.h"
 
 // test models
 #import "MYSFakeUser.h"

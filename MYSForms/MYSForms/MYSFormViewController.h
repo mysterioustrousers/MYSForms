@@ -15,7 +15,7 @@
 
 
 
-@interface MYSFormView : UICollectionView
+@interface MYSFormViewController : UICollectionViewController
 
 /**
  Set the model for this form. As you add form elements, you will associated those elements with key paths on the model and they will

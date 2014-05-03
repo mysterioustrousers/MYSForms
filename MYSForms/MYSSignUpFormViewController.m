@@ -6,15 +6,15 @@
 //  Copyright (c) 2014 Mysterious Trousers. All rights reserved.
 //
 
-#import "MYSSignUpFormView.h"
+#import "MYSSignUpFormViewController.h"
 #import "MYSFakeUser.h"
 
 
-@interface MYSSignUpFormView ()
+@interface MYSSignUpFormViewController ()
 @end
 
 
-@implementation MYSSignUpFormView
+@implementation MYSSignUpFormViewController
 
 - (void)configureForm
 {

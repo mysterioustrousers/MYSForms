@@ -40,12 +40,6 @@
 
 @implementation MYSFormHeadlineCellData
 
-- (NSString *)cellIdentifier
-{
-    static NSString *cellIdentifier = @"HeadlineFormCell";
-    return cellIdentifier;
-}
-
 - (Class)cellClass
 {
     return [MYSFormHeadlineCell class];

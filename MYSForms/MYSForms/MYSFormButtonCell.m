@@ -27,12 +27,6 @@
 
 @implementation MYSFormButtonCellData
 
-- (NSString *)cellIdentifier
-{
-    static NSString *cellIdentifier = @"ButtonFormCell";
-    return cellIdentifier;
-}
-
 - (Class)cellClass
 {
     return [MYSFormButtonCell class];

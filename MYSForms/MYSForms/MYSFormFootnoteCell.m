@@ -38,12 +38,6 @@
 
 @implementation MYSFormFootnoteCellData
 
-- (NSString *)cellIdentifier
-{
-    static NSString *cellIdentifier = @"FootnoteFormCell";
-    return cellIdentifier;
-}
-
 - (Class)cellClass
 {
     return [MYSFormFootnoteCell class];

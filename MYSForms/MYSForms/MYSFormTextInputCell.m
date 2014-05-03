@@ -63,12 +63,6 @@
 
 @implementation MYSFormTextInputCellData
 
-- (NSString *)cellIdentifier
-{
-    static NSString *cellIdentifier = @"TextInputFormCell";
-    return cellIdentifier;
-}
-
 - (Class)cellClass
 {
     return [MYSFormTextInputCell class];

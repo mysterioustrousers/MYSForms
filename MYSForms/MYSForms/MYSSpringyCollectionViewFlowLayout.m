@@ -29,9 +29,26 @@
 {
     self.minimumInteritemSpacing    = 0;
     self.minimumLineSpacing         = 5;
+    self.dynamicAnimator            = [[UIDynamicAnimator alloc] initWithCollectionViewLayout:self];
+    self.visibleIndexPathsSet       = [NSMutableSet set];
+}
 
-    self.dynamicAnimator        = [[UIDynamicAnimator alloc] initWithCollectionViewLayout:self];
-    self.visibleIndexPathsSet   = [NSMutableSet set];
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        [self commonInit];
+    }
+    return self;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)coder
+{
+    self = [super initWithCoder:coder];
+    if (self) {
+        [self commonInit];
+    }
+    return self;
 }
 
 - (void)prepareLayout

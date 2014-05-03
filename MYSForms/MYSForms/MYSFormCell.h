@@ -10,7 +10,7 @@
 
 
 @interface MYSFormCell : UICollectionViewCell
-+ (instancetype)loadCellFromNib;
++ (void)registerForReuseWithCollectionView:(UICollectionView *)collectionView;
 + (CGSize)sizeRequiredForCellData:(id<MYSFormCellDataProtocol>)cellData width:(CGFloat)width;
 + (UIEdgeInsets)cellContentInset;
 - (void)populateWithCellData:(id<MYSFormCellDataProtocol>)cellData;
@@ -18,6 +18,5 @@
 
 
 @protocol MYSFormCellDataProtocol <NSObject>
-- (NSString *)cellIdentifier;
 - (Class)cellClass;
 @end

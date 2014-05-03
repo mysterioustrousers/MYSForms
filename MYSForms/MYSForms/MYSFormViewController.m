@@ -28,24 +28,55 @@
 
 @implementation MYSFormViewController
 
-- (void)awakeFromNib
+- (void)commonInit
 {
     self.rows   = [NSMutableArray new];
     self.cells  = [NSMutableDictionary new];
-    self.collectionView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     [self configureForm];
-    [self setupKeyboardNotifications];
-    self.inputAccessoryView = [MYSInputAccessoryView accessoryViewWithDelegate:self];
 }
 
-//- (instancetype)initWithCoder:(NSCoder *)coder
-//{
-//    self = [super initWithCoder:coder];
-//    if (self) {
-//        [self commonInit];
-//    }
-//    return self;
-//}
+- (instancetype)init
+{
+    self = [super initWithCollectionViewLayout:[MYSSpringyCollectionViewFlowLayout new]];
+    if (self) {
+        [self commonInit];
+    }
+    return self;
+}
+
+- (id)initWithCollectionViewLayout:(UICollectionViewLayout *)layout
+{
+    self = [super initWithCollectionViewLayout:layout];
+    if (self) {
+        [self commonInit];
+    }
+    return self;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)coder
+{
+    self = [super initWithCoder:coder];
+    if (self) {
+        [self commonInit];
+    }
+    return self;
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+
+    self.collectionView.backgroundColor         = [UIColor groupTableViewBackgroundColor];
+    self.collectionView.alwaysBounceVertical    = YES;
+
+    [self setupKeyboardNotifications];
+    self.inputAccessoryView = [MYSInputAccessoryView accessoryViewWithDelegate:self];
+
+    [MYSFormHeadlineCell registerForReuseWithCollectionView:self.collectionView];
+    [MYSFormFootnoteCell registerForReuseWithCollectionView:self.collectionView];
+    [MYSFormTextInputCell registerForReuseWithCollectionView:self.collectionView];
+    [MYSFormButtonCell registerForReuseWithCollectionView:self.collectionView];
+}
 
 
 #pragma mark - Public
@@ -110,7 +141,7 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     id<MYSFormCellDataProtocol> cellData = self.rows[indexPath.row];
-    MYSFormCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[cellData cellIdentifier] forIndexPath:indexPath];
+    MYSFormCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([cellData cellClass]) forIndexPath:indexPath];
     [cell populateWithCellData:cellData];
     return cell;
 }

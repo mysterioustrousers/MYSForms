@@ -8,13 +8,13 @@
 
 #import "MYSFormCell.h"
 
+
 @implementation MYSFormCell
 
-+ (instancetype)loadCellFromNib
++ (void)registerForReuseWithCollectionView:(UICollectionView *)collectionView
 {
-    static UINib *nib = nil;
-    if (!nib) nib = [UINib nibWithNibName:NSStringFromClass(self) bundle:nil];
-    return [[nib instantiateWithOwner:nil options:nil] lastObject];
+    UINib *nib = [UINib nibWithNibName:NSStringFromClass(self) bundle:nil];
+    [collectionView registerNib:nib forCellWithReuseIdentifier:NSStringFromClass(self)];
 }
 
 + (CGSize)sizeRequiredForCellData:(id<MYSFormCellDataProtocol>)cellData width:(CGFloat)width

@@ -6,69 +6,34 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MYSFormViewController"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" id="iN0-l3-epB" customClass="MYSInputAccessoryView">
+        <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="1cx-SE-7OF" customClass="MYSInputAccessoryView">
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nI4-ni-sZU">
-                    <rect key="frame" x="10" y="0.0" width="44" height="44"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="44" id="p0a-dH-34p"/>
-                    </constraints>
-                    <state key="normal" image="icon_arrow_left">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+            <items>
+                <barButtonItem image="icon_arrow_left" style="plain" id="FaC-dH-J1i">
                     <connections>
-                        <action selector="previousButtonWasTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="slZ-sC-68n"/>
+                        <action selector="previousButtonWasTapped:" destination="1cx-SE-7OF" id="D55-5W-ucE"/>
                     </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uf0-Zp-VIF">
-                    <rect key="frame" x="62" y="0.0" width="44" height="44"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="44" id="eI0-58-iHg"/>
-                    </constraints>
-                    <state key="normal" image="icon_arrow_right">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
+                </barButtonItem>
+                <barButtonItem width="20" style="plain" systemItem="fixedSpace" id="ssw-hp-ztK"/>
+                <barButtonItem image="icon_arrow_right" id="rc8-47-8MT">
                     <connections>
-                        <action selector="nextButtonWasTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="JPr-mm-Bmg"/>
+                        <action selector="nextButtonWasTapped:" destination="1cx-SE-7OF" id="Xt4-dS-nho"/>
                     </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G7z-hX-TmY">
-                    <rect key="frame" x="266" y="0.0" width="44" height="44"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="44" id="6hc-le-mGC"/>
-                    </constraints>
-                    <state key="normal" image="icon_arrow_down">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
+                </barButtonItem>
+                <barButtonItem style="plain" systemItem="flexibleSpace" id="SGk-i5-bQX"/>
+                <barButtonItem image="icon_arrow_down" id="4sT-ZL-XVv">
                     <connections>
-                        <action selector="dismissButtonWasTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="lhz-mo-cc2"/>
+                        <action selector="dismissButtonWasTapped:" destination="1cx-SE-7OF" id="OJS-Xl-Yxz"/>
                     </connections>
-                </button>
-            </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-            <constraints>
-                <constraint firstItem="G7z-hX-TmY" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="40G-w7-qXn"/>
-                <constraint firstItem="nI4-ni-sZU" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="6Cx-H8-0AI"/>
-                <constraint firstAttribute="bottom" secondItem="nI4-ni-sZU" secondAttribute="bottom" id="BON-F4-r57"/>
-                <constraint firstItem="Uf0-Zp-VIF" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="KwJ-v0-3oY"/>
-                <constraint firstAttribute="bottom" secondItem="Uf0-Zp-VIF" secondAttribute="bottom" id="LR8-lx-NdV"/>
-                <constraint firstItem="Uf0-Zp-VIF" firstAttribute="leading" secondItem="nI4-ni-sZU" secondAttribute="trailing" constant="8" symbolic="YES" id="gSW-YP-wfT"/>
-                <constraint firstItem="nI4-ni-sZU" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="joC-zk-lcl"/>
-                <constraint firstAttribute="trailing" secondItem="G7z-hX-TmY" secondAttribute="trailing" constant="10" id="tXq-DT-Awe"/>
-                <constraint firstAttribute="bottom" secondItem="G7z-hX-TmY" secondAttribute="bottom" id="yzu-Np-wAR"/>
-            </constraints>
-            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                </barButtonItem>
+            </items>
             <connections>
-                <outlet property="dismissButton" destination="G7z-hX-TmY" id="I3k-5J-dKc"/>
-                <outlet property="nextButton" destination="Uf0-Zp-VIF" id="1h7-Uk-9v5"/>
-                <outlet property="previousButton" destination="nI4-ni-sZU" id="OKq-8D-JUg"/>
+                <outlet property="dismissButton" destination="4sT-ZL-XVv" id="9h9-uC-WVz"/>
+                <outlet property="nextButton" destination="rc8-47-8MT" id="Uzi-UP-3Jr"/>
+                <outlet property="previousButton" destination="FaC-dH-J1i" id="Bey-kK-zez"/>
             </connections>
-        </view>
+        </toolbar>
     </objects>
     <resources>
         <image name="icon_arrow_down" width="21" height="10"/>

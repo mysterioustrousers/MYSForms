@@ -10,7 +10,9 @@
 
 
 @interface MYSFormTextInputCell ()
-@property (nonatomic, strong) MYSFormTextInputCellData *cellData;
+@property (nonatomic, strong)          MYSFormTextInputCellData *cellData;
+@property (nonatomic, weak  ) IBOutlet NSLayoutConstraint       *textFieldCenterYConstraint;
+@property (nonatomic, weak  ) IBOutlet NSLayoutConstraint       *labelCenterYConstraint;
 @end
 
 
@@ -18,8 +20,10 @@
 
 - (void)populateWithCellData:(MYSFormTextInputCellData *)cellData
 {
-    self.label.text             = cellData.label;
-    self.textField.placeholder  = cellData.placeholder;
+    self.label.text                 = cellData.label;
+    self.textField.placeholder      = cellData.label;
+    self.textField.secureTextEntry  = cellData.secureTextEntry;
+    self.textField.keyboardType     = cellData.keyboardType;
 }
 
 + (CGSize)sizeRequiredForCellData:(id<MYSFormCellDataProtocol>)cellData width:(CGFloat)width
@@ -30,6 +34,46 @@
 + (UIEdgeInsets)cellContentInset
 {
     return UIEdgeInsetsMake(0, 20, 0, 20);
+}
+
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    [[NSNotificationCenter defaultCenter] addObserverForName:UITextFieldTextDidChangeNotification
+                                                      object:nil
+                                                       queue:[NSOperationQueue mainQueue]
+                                                  usingBlock:^(NSNotification *note)
+    {
+        if (note.object == self.textField) {
+            if (![self.textField.text isEqualToString:@""] && self.labelCenterYConstraint.constant == 0) {
+                [UIView animateWithDuration:0.25 animations:^{
+                    self.labelCenterYConstraint.constant        = 12;
+                    self.textFieldCenterYConstraint.constant    = -8;
+                    [self layoutIfNeeded];
+                }];
+            }
+            else if ([self.textField.text isEqualToString:@""]) {
+                [UIView animateWithDuration:0.25 animations:^{
+                    self.textFieldCenterYConstraint.constant    = 0;
+                    self.labelCenterYConstraint.constant        = 0;
+                    [self layoutIfNeeded];
+                }];
+            }
+        }
+    }];
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+
+#pragma mark - Private
+
+- (void)showLabel
+{
+
 }
 
 @end

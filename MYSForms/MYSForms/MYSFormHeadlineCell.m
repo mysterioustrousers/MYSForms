@@ -24,15 +24,13 @@
 + (CGSize)sizeRequiredForCellData:(MYSFormHeadlineCellData *)cellData width:(CGFloat)width
 {
     width -= [self cellContentInset].left + [self cellContentInset].right;
-
-
     CGSize size = [cellData.headline boundingRectWithSize:CGSizeMake(width, FLT_MAX)
                                                   options:NSStringDrawingUsesLineFragmentOrigin
                                                attributes:@{
                                                             NSFontAttributeName : [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline]
                                                             }
                                                   context:nil].size;
-    size.height += 40;
+    size.height += 20;
 
     return size;
 }

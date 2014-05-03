@@ -16,7 +16,8 @@
 
 
 @interface MYSFormTextInputCellData : NSObject <MYSFormCellDataProtocol>
-@property (nonatomic, copy) NSString *modelKeyPath;
-@property (nonatomic, copy) NSString *label;
-@property (nonatomic, copy) NSString *placeholder;
+@property (nonatomic, copy                            ) NSString       *modelKeyPath;
+@property (nonatomic, copy                            ) NSString       *label;
+@property (nonatomic, assign, getter=isSecureTextEntry) BOOL           secureTextEntry;
+@property (nonatomic, assign                          ) UIKeyboardType keyboardType;
 @end

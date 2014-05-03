@@ -41,9 +41,41 @@
         MYSFakeUser *user = [MYSFakeUser new];
         MYSFormViewController *formViewController = [MYSFormViewController newFormViewControllerWithModel:user];
         [formViewController addHeadlineElementWithString:@"Log In"];
-        [formViewController addFootnoteElementWithString:@"A table view displays a list of items in a single column. UITableView is a subclass of UIScrollView, which allows users to scroll through the table, although UITableView allows vertical scrolling only. The cells comprising the individual items of the table are UITableViewCell objects; UITableView uses these objects to draw the visible rows of the table."];
-        [formViewController addTextInputElementWithModelKeyPath:@"email" label:@"E-mail" placeholder:@"john@example.com"];
-        [formViewController addTextInputElementWithModelKeyPath:@"password" label:@"Password" placeholder:nil];
+        [formViewController addFootnoteElementWithString:@"A table view displays a list of items in a single column. UITableView is a subclass of UIScrollView."];
+        [formViewController addTextInputElementWithModelKeyPath:@"email"
+                                                          label:@"E-mail"
+                                                   keyboardType:UIKeyboardTypeEmailAddress
+                                                         secure:NO];
+        [formViewController addTextInputElementWithModelKeyPath:@"password"
+                                                          label:@"Password"
+                                                   keyboardType:UIKeyboardTypeDefault
+                                                         secure:YES];
+        [formViewController addButtonElementWithTitle:@"Log In" target:self action:@selector(logInButtonWasTapped:)];
+        [self.navigationController pushViewController:formViewController animated:YES];
+    }
+
+    // sign up form
+    else if (indexPath.row == 1) {
+        MYSFakeUser *user = [MYSFakeUser new];
+        MYSFormViewController *formViewController = [MYSFormViewController newFormViewControllerWithModel:user];
+        [formViewController addHeadlineElementWithString:@"Sign Up"];
+        [formViewController addFootnoteElementWithString:@"A table view displays a list of items in a single column. UITableView is a subclass of UIScrollView."];
+        [formViewController addTextInputElementWithModelKeyPath:@"firstName"
+                                                          label:@"First Name"
+                                                   keyboardType:UIKeyboardTypeDefault
+                                                         secure:NO];
+        [formViewController addTextInputElementWithModelKeyPath:@"lastName"
+                                                          label:@"Last Name"
+                                                   keyboardType:UIKeyboardTypeDefault
+                                                         secure:NO];
+        [formViewController addTextInputElementWithModelKeyPath:@"email"
+                                                          label:@"E-mail"
+                                                   keyboardType:UIKeyboardTypeEmailAddress
+                                                         secure:NO];
+        [formViewController addTextInputElementWithModelKeyPath:@"password"
+                                                          label:@"Password"
+                                                   keyboardType:UIKeyboardTypeDefault
+                                                         secure:YES];
         [formViewController addButtonElementWithTitle:@"Log In" target:self action:@selector(logInButtonWasTapped:)];
         [self.navigationController pushViewController:formViewController animated:YES];
     }

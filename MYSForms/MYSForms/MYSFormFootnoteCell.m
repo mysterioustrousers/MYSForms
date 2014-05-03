@@ -24,8 +24,6 @@
 + (CGSize)sizeRequiredForCellData:(MYSFormFootnoteCellData *)cellData width:(CGFloat)width
 {
     width -= [self cellContentInset].left + [self cellContentInset].right;
-
-
     CGSize size = [cellData.footnote boundingRectWithSize:CGSizeMake(width, FLT_MAX)
                                                   options:NSStringDrawingUsesLineFragmentOrigin
                                                attributes:@{

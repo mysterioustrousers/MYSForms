@@ -10,17 +10,17 @@
 @protocol MYSInputAccessoryViewDelegate;
 
 
-@interface MYSInputAccessoryView : UIView
-@property (nonatomic, weak)          id<MYSInputAccessoryViewDelegate> delegate;
-@property (nonatomic, weak) IBOutlet UIButton                          *previousButton;
-@property (nonatomic, weak) IBOutlet UIButton                          *nextButton;
-@property (nonatomic, weak) IBOutlet UIButton                          *dismissButton;
+@interface MYSInputAccessoryView : UIToolbar
+@property (nonatomic, weak)          id<MYSInputAccessoryViewDelegate> accessoryViewDelegate;
+@property (nonatomic, weak) IBOutlet UIBarButtonItem                   *previousButton;
+@property (nonatomic, weak) IBOutlet UIBarButtonItem                   *nextButton;
+@property (nonatomic, weak) IBOutlet UIBarButtonItem                   *dismissButton;
 + (instancetype)accessoryViewWithDelegate:(id<MYSInputAccessoryViewDelegate>)delegate;
 @end
 
 
 @protocol MYSInputAccessoryViewDelegate <NSObject>
-- (void)accessoryInputView:(MYSInputAccessoryView *)view didPressPreviousButton:(UIButton *)button;
-- (void)accessoryInputView:(MYSInputAccessoryView *)view didPressNextButton:(UIButton *)button;
-- (void)accessoryInputView:(MYSInputAccessoryView *)view didPressDismissButton:(UIButton *)button;
+- (void)accessoryInputView:(MYSInputAccessoryView *)view didPressPreviousButton:(UIBarButtonItem *)button;
+- (void)accessoryInputView:(MYSInputAccessoryView *)view didPressNextButton:(UIBarButtonItem *)button;
+- (void)accessoryInputView:(MYSInputAccessoryView *)view didPressDismissButton:(UIBarButtonItem *)button;
 @end

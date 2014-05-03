@@ -15,23 +15,23 @@
     UINib *nib                                  = [UINib nibWithNibName:NSStringFromClass([self class]) bundle:nil];
     NSArray *objects                            = [nib instantiateWithOwner:delegate options:nil];
     MYSInputAccessoryView *inputAccessoryView   = [objects lastObject];
-    inputAccessoryView.delegate                 = delegate;
+    inputAccessoryView.accessoryViewDelegate    = delegate;
     return inputAccessoryView;
 }
 
 - (IBAction)previousButtonWasTapped:(id)sender
 {
-    [self.delegate accessoryInputView:self didPressPreviousButton:sender];
+    [self.accessoryViewDelegate accessoryInputView:self didPressPreviousButton:sender];
 }
 
 - (IBAction)nextButtonWasTapped:(id)sender
 {
-    [self.delegate accessoryInputView:self didPressNextButton:sender];
+    [self.accessoryViewDelegate accessoryInputView:self didPressNextButton:sender];
 }
 
 - (IBAction)dismissButtonWasTapped:(id)sender
 {
-    [self.delegate accessoryInputView:self didPressDismissButton:sender];
+    [self.accessoryViewDelegate accessoryInputView:self didPressDismissButton:sender];
 }
 
 

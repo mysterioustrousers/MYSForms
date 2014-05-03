@@ -52,7 +52,9 @@
  */
 - (MYSFormTextInputCellData *)addTextInputElementWithModelKeyPath:(NSString *)keyPath
                                                             label:(NSString *)label
-                                                      placeholder:(NSString *)placeholder;
+                                                     keyboardType:(UIKeyboardType)keyboardType
+                                                           secure:(BOOL)secure;
+
 
 /**
  Add a button form element. this is useful for submit buttons for example. This does not edit anything so it is not bound to a 

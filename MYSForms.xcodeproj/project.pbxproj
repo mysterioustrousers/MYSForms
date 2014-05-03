@@ -33,6 +33,7 @@
 		C2AAD8D91914145E00FDF78E /* MYSInputAccessoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2AAD8D81914145E00FDF78E /* MYSInputAccessoryView.m */; };
 		C2AAD8DB1914146B00FDF78E /* MYSInputAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2AAD8DA1914146B00FDF78E /* MYSInputAccessoryView.xib */; };
 		C2AAD8DD191414C400FDF78E /* MYSFormsMedia.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C2AAD8DC191414C400FDF78E /* MYSFormsMedia.xcassets */; };
+		C2FE303F19149E5500C291A2 /* MYSFormButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C2FE303E19149E5500C291A2 /* MYSFormButton.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +87,8 @@
 		C2AAD8D81914145E00FDF78E /* MYSInputAccessoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYSInputAccessoryView.m; sourceTree = "<group>"; };
 		C2AAD8DA1914146B00FDF78E /* MYSInputAccessoryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MYSInputAccessoryView.xib; sourceTree = "<group>"; };
 		C2AAD8DC191414C400FDF78E /* MYSFormsMedia.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = MYSFormsMedia.xcassets; sourceTree = "<group>"; };
+		C2FE303D19149E5500C291A2 /* MYSFormButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYSFormButton.h; sourceTree = "<group>"; };
+		C2FE303E19149E5500C291A2 /* MYSFormButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYSFormButton.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -197,7 +200,7 @@
 				C289A29C1913DAD30047D0CF /* MYSSpringyCollectionViewFlowLayout.h */,
 				C289A29D1913DAD30047D0CF /* MYSSpringyCollectionViewFlowLayout.m */,
 				C289A29B1913D7740047D0CF /* Form Cells */,
-				C2AAD8D61914142100FDF78E /* Input Accessory */,
+				C2AAD8D61914142100FDF78E /* Custom Views */,
 				C2AAD8DC191414C400FDF78E /* MYSFormsMedia.xcassets */,
 			);
 			path = MYSForms;
@@ -228,14 +231,16 @@
 			name = Models;
 			sourceTree = "<group>";
 		};
-		C2AAD8D61914142100FDF78E /* Input Accessory */ = {
+		C2AAD8D61914142100FDF78E /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
 				C2AAD8D71914145E00FDF78E /* MYSInputAccessoryView.h */,
 				C2AAD8D81914145E00FDF78E /* MYSInputAccessoryView.m */,
 				C2AAD8DA1914146B00FDF78E /* MYSInputAccessoryView.xib */,
+				C2FE303D19149E5500C291A2 /* MYSFormButton.h */,
+				C2FE303E19149E5500C291A2 /* MYSFormButton.m */,
 			);
-			name = "Input Accessory";
+			name = "Custom Views";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -346,6 +351,7 @@
 				C289A29A1913D7660047D0CF /* MYSFormTextInputCell.m in Sources */,
 				C2AAD8D91914145E00FDF78E /* MYSInputAccessoryView.m in Sources */,
 				C2AAD8D519140BFB00FDF78E /* MYSFakeUser.m in Sources */,
+				C2FE303F19149E5500C291A2 /* MYSFormButton.m in Sources */,
 				C289A2621913440A0047D0CF /* MYSAppDelegate.m in Sources */,
 				C289A2971913D74E0047D0CF /* MYSFormFootnoteCell.m in Sources */,
 				C289A2941913D73E0047D0CF /* MYSFormHeadlineCell.m in Sources */,

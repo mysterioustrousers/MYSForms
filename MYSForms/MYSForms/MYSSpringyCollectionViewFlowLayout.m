@@ -30,7 +30,7 @@
     if (!(self = [super init])) return nil;
     
     self.minimumInteritemSpacing    = 0;
-    self.minimumLineSpacing         = 0;
+    self.minimumLineSpacing         = 5;
 
     self.dynamicAnimator        = [[UIDynamicAnimator alloc] initWithCollectionViewLayout:self];
     self.visibleIndexPathsSet   = [NSMutableSet set];
@@ -76,14 +76,13 @@
         UIAttachmentBehavior *springBehaviour = [[UIAttachmentBehavior alloc] initWithItem:item attachedToAnchor:center];
         
         springBehaviour.length      = 0.0f;
-        springBehaviour.damping     = 0.8f;
+        springBehaviour.damping     = 1.0f;
         springBehaviour.frequency   = 1.0f;
 
         // If our touchLocation is not (0,0), we'll need to adjust our item's center "in flight"
         if (!CGPointEqualToPoint(CGPointZero, touchLocation)) {
             CGFloat yDistanceFromTouch = fabsf(touchLocation.y - springBehaviour.anchorPoint.y);
-            CGFloat xDistanceFromTouch = fabsf(touchLocation.x - springBehaviour.anchorPoint.x);
-            CGFloat scrollResistance = (yDistanceFromTouch + xDistanceFromTouch) / 1000.0f;
+            CGFloat scrollResistance = yDistanceFromTouch / 1000.0f;
             
             if (self.latestDelta < 0) {
                 center.y += MAX(self.latestDelta, self.latestDelta * scrollResistance);
@@ -120,8 +119,7 @@
     
     [self.dynamicAnimator.behaviors enumerateObjectsUsingBlock:^(UIAttachmentBehavior *springBehaviour, NSUInteger idx, BOOL *stop) {
         CGFloat yDistanceFromTouch = fabsf(touchLocation.y - springBehaviour.anchorPoint.y);
-        CGFloat xDistanceFromTouch = fabsf(touchLocation.x - springBehaviour.anchorPoint.x);
-        CGFloat scrollResistance = (yDistanceFromTouch + xDistanceFromTouch) / 1000.0f;
+        CGFloat scrollResistance = yDistanceFromTouch / 1000.0f;
         
         UICollectionViewLayoutAttributes *item = [springBehaviour.items firstObject];
         CGPoint center = item.center;

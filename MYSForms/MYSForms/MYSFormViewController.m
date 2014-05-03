@@ -70,13 +70,15 @@
 }
 
 - (MYSFormTextInputCellData *)addTextInputElementWithModelKeyPath:(NSString *)keyPath
-                                                           label:(NSString *)label
-                                                     placeholder:(NSString *)placeholder
+                                                            label:(NSString *)label
+                                                     keyboardType:(UIKeyboardType)keyboardType
+                                                           secure:(BOOL)secure
 {
     MYSFormTextInputCellData *cellData  = [MYSFormTextInputCellData new];
     cellData.modelKeyPath               = keyPath;
     cellData.label                      = label;
-    cellData.placeholder                = placeholder;
+    cellData.keyboardType               = keyboardType;
+    cellData.secureTextEntry            = secure;
     [self.rows addObject:cellData];
     return cellData;
 }

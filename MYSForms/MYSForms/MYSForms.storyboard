@@ -8,7 +8,7 @@
         <scene sceneID="KIg-M0-x20">
             <objects>
                 <collectionViewController autoresizesArchivedViewToFullSize="NO" id="YlN-12-x3K" customClass="MYSFormViewController" sceneMemberID="viewController">
-                    <collectionView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="A6T-MC-79N">
+                    <collectionView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="A6T-MC-79N">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -79,35 +79,39 @@
                                     <rect key="frame" x="0.0" y="0.0" width="319" height="50"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3Gv-XV-1uy">
-                                            <rect key="frame" x="129" y="5" width="170" height="40"/>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dj0-4J-27k">
+                                            <rect key="frame" x="20" y="18" width="29" height="14"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="40" id="TMl-nD-WVu"/>
-                                                <constraint firstAttribute="width" constant="170" id="gQs-17-YQz"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits"/>
-                                        </textField>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dj0-4J-27k">
-                                            <rect key="frame" x="20" y="14" width="101" height="21"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3Gv-XV-1uy">
+                                            <rect key="frame" x="20" y="10" width="279" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="30" id="lPB-Qe-KXF"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="3Gv-XV-1uy" firstAttribute="leading" secondItem="Dj0-4J-27k" secondAttribute="trailing" constant="8" id="0C9-P4-wMk"/>
-                                    <constraint firstAttribute="centerY" secondItem="Dj0-4J-27k" secondAttribute="centerY" constant="0.5" id="RMZ-Qs-kU1"/>
+                                    <constraint firstAttribute="centerY" secondItem="Dj0-4J-27k" secondAttribute="centerY" id="RMZ-Qs-kU1"/>
                                     <constraint firstAttribute="trailing" secondItem="3Gv-XV-1uy" secondAttribute="trailing" constant="20" id="YQ8-5t-PLI"/>
+                                    <constraint firstItem="3Gv-XV-1uy" firstAttribute="leading" secondItem="STH-Bt-YEz" secondAttribute="leading" constant="20" id="YQS-R5-Xme"/>
                                     <constraint firstAttribute="centerY" secondItem="3Gv-XV-1uy" secondAttribute="centerY" id="fre-J2-hBI"/>
                                     <constraint firstItem="Dj0-4J-27k" firstAttribute="leading" secondItem="STH-Bt-YEz" secondAttribute="leading" constant="20" id="j1Q-by-5rf"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="label" destination="Dj0-4J-27k" id="jH4-XL-2Xa"/>
+                                    <outlet property="labelCenterYConstraint" destination="RMZ-Qs-kU1" id="wkT-Nd-fUI"/>
                                     <outlet property="textField" destination="3Gv-XV-1uy" id="zcg-ag-ISQ"/>
+                                    <outlet property="textFieldCenterYConstraint" destination="fre-J2-hBI" id="hRi-Lh-hoG"/>
                                 </connections>
                             </collectionViewCell>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ButtonFormCell" id="sGI-AV-Duo" customClass="MYSFormButtonCell">
@@ -117,9 +121,12 @@
                                     <rect key="frame" x="0.0" y="0.0" width="319" height="50"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MLG-Np-0J2">
-                                            <rect key="frame" x="20" y="10" width="279" height="30"/>
+                                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MLG-Np-0J2" customClass="MYSFormButton">
+                                            <rect key="frame" x="20" y="5" width="279" height="40"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="40" id="CNc-2b-lLP"/>
+                                            </constraints>
                                             <state key="normal" title="Button">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
@@ -148,6 +155,7 @@
             <point key="canvasLocation" x="335" y="95"/>
         </scene>
     </scenes>
+    <color key="tintColor" red="0.84313725490000002" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

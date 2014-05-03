@@ -16,11 +16,6 @@
 
 @implementation MYSFormHeadlineCell
 
-- (void)populateWithCellData:(MYSFormHeadlineCellData *)cellData
-{
-    self.headlineLabel.text = cellData.headline;
-}
-
 + (CGSize)sizeRequiredForCellData:(MYSFormHeadlineCellData *)cellData width:(CGFloat)width
 {
     width -= [self cellContentInset].left + [self cellContentInset].right;
@@ -35,9 +30,9 @@
     return size;
 }
 
-+ (UIEdgeInsets)cellContentInset
+- (void)populateWithCellData:(MYSFormHeadlineCellData *)cellData
 {
-    return UIEdgeInsetsMake(0, 20, 0, 20);
+    self.headlineLabel.text = cellData.headline;
 }
 
 @end

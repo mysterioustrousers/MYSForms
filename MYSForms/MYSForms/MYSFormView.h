@@ -13,29 +13,21 @@
 @class MYSFormButtonCellData;
 
 
-@protocol MYSFormViewControllerDelegate;
 
 
-
-
-@interface MYSFormViewController : UICollectionViewController
-
-/**
- Receives messages regarding actions the user takes while interacting with your form.
- */
-@property (nonatomic, weak) id<MYSFormViewControllerDelegate> delegate;
+@interface MYSFormView : UICollectionView
 
 /**
  Set the model for this form. As you add form elements, you will associated those elements with key paths on the model and they will
- be linked bi-directionally.
+ be linked bi-directionally. The form element will always display the current value of the model and the model will always be
+ updated as the form element is updated by the user.
  */
-@property (nonatomic, weak, readonly) id model;
+@property (nonatomic, strong) id model;
 
 /**
- Use this method to create a form view controller, then use the methods below to add form elements. This is the only valid 
- way to create a form view controller.
+ If your method of choice is to subclass `MYSFormCollectionView`, override this method in your subclass to configure your form.
  */
-+ (instancetype)newFormViewControllerWithModel:(id)model;
+- (void)configureForm;
 
 /**
  Add a headline form element. This is a display element and not an input element, so it cannot be linked to a property on the model.
@@ -65,8 +57,3 @@
 
 @end
 
-
-
-
-@protocol MYSFormViewControllerDelegate <NSObject>
-@end

@@ -25,18 +25,15 @@
 
 @implementation MYSSpringyCollectionViewFlowLayout
 
-- (id)awakeAfterUsingCoder:(NSCoder *)aDecoder
+- (void)commonInit
 {
-    if (!(self = [super init])) return nil;
-    
     self.minimumInteritemSpacing    = 0;
     self.minimumLineSpacing         = 5;
 
     self.dynamicAnimator        = [[UIDynamicAnimator alloc] initWithCollectionViewLayout:self];
     self.visibleIndexPathsSet   = [NSMutableSet set];
-
-    return self;
 }
+
 
 - (void)prepareLayout
 {

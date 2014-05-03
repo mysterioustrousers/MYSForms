@@ -16,11 +16,6 @@
 
 @implementation MYSFormFootnoteCell
 
-- (void)populateWithCellData:(MYSFormFootnoteCellData *)cellData
-{
-    self.footnoteLabel.text = cellData.footnote;
-}
-
 + (CGSize)sizeRequiredForCellData:(MYSFormFootnoteCellData *)cellData width:(CGFloat)width
 {
     width -= [self cellContentInset].left + [self cellContentInset].right;
@@ -33,9 +28,9 @@
     return size;
 }
 
-+ (UIEdgeInsets)cellContentInset
+- (void)populateWithCellData:(MYSFormFootnoteCellData *)cellData
 {
-    return UIEdgeInsetsMake(0, 20, 0, 20);
+    self.footnoteLabel.text = cellData.footnote;
 }
 
 @end

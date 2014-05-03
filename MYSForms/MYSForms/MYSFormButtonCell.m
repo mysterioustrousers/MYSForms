@@ -22,16 +22,6 @@
     [self.button addTarget:cellData.target action:cellData.action forControlEvents:UIControlEventTouchUpInside];
 }
 
-+ (CGSize)sizeRequiredForCellData:(id<MYSFormCellDataProtocol>)cellData width:(CGFloat)width
-{
-    return CGSizeMake(width, 50);
-}
-
-+ (UIEdgeInsets)cellContentInset
-{
-    return UIEdgeInsetsMake(0, 20, 0, 20);
-}
-
 @end
 
 

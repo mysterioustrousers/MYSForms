@@ -6,10 +6,10 @@
 //  Copyright (c) 2014 Mysterious Trousers. All rights reserved.
 //
 
-#import "MYSFormCellProtocol.h"
+#import "MYSFormCell.h"
 
 
-@interface MYSFormFootnoteCell : UICollectionViewCell <MYSFormCellProtocol>
+@interface MYSFormFootnoteCell : MYSFormCell
 @property (weak, nonatomic) IBOutlet UILabel *footnoteLabel;
 @end
 

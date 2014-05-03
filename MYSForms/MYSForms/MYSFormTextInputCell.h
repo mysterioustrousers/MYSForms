@@ -6,10 +6,10 @@
 //  Copyright (c) 2014 Mysterious Trousers. All rights reserved.
 //
 
-#import "MYSFormCellProtocol.h"
+#import "MYSFormCell.h"
 
 
-@interface MYSFormTextInputCell : UICollectionViewCell <MYSFormCellProtocol>
+@interface MYSFormTextInputCell : MYSFormCell
 @property (nonatomic, weak) IBOutlet UILabel     *label;
 @property (nonatomic, weak) IBOutlet UITextField *textField;
 @end

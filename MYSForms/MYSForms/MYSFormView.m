@@ -6,7 +6,8 @@
 //  Copyright (c) 2014 Mysterious Trousers. All rights reserved.
 //
 
-#import "MYSFormViewController.h"
+#import "MYSFormView.h"
+#import "MYSSpringyCollectionViewFlowLayout.h"
 #import "MYSFormHeadlineCell.h"
 #import "MYSFormFootnoteCell.h"
 #import "MYSFormTextInputCell.h"
@@ -14,11 +15,13 @@
 #import "MYSInputAccessoryView.h"
 
 
-@interface MYSFormViewController () <UICollectionViewDelegateFlowLayout, MYSInputAccessoryViewDelegate>
-@property (nonatomic, weak,   readwrite) id                    model;
-@property (nonatomic, strong           ) NSMutableArray        *rows;
-@property (nonatomic, strong           ) NSMutableDictionary   *cells;
-@property (nonatomic, strong           ) MYSInputAccessoryView *inputAccessoryView;
+@interface MYSFormView () <UICollectionViewDataSource,
+                                     UICollectionViewDelegate,
+                                     UICollectionViewDelegateFlowLayout,
+                                     MYSInputAccessoryViewDelegate>
+@property (nonatomic, strong) NSMutableArray        *rows;
+@property (nonatomic, strong) NSMutableDictionary   *cells;
+@property (nonatomic, strong) MYSInputAccessoryView *inputAccessoryView;
 
 // caches
 @property (nonatomic, strong) NSMutableDictionary *cachedCellSizes;
@@ -26,32 +29,46 @@
 @end
 
 
-@implementation MYSFormViewController
+@implementation MYSFormView
 
-+ (instancetype)newFormViewControllerWithModel:(id)model
+- (void)commonInit
 {
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MYSForms" bundle:nil];
-    MYSFormViewController *formViewController = [storyboard instantiateInitialViewController];
-    formViewController.model = model;
-    return formViewController;
-}
-
-- (void)awakeFromNib
-{
-    [super awakeFromNib];
+    self.dataSource = self;
+    self.delegate = self;
     self.rows   = [NSMutableArray new];
     self.cells  = [NSMutableDictionary new];
-}
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
+    self.collectionViewLayout = [MYSSpringyCollectionViewFlowLayout new];
+    [self configureForm];
     [self setupKeyboardNotifications];
     self.inputAccessoryView = [MYSInputAccessoryView accessoryViewWithDelegate:self];
 }
 
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self commonInit];
+    }
+    return self;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)coder
+{
+    self = [super initWithCoder:coder];
+    if (self) {
+        [self commonInit];
+    }
+    return self;
+}
+
+
 
 #pragma mark - Public
+
+- (void)configureForm
+{
+    // overriden by subclasses
+}
 
 - (MYSFormHeadlineCellData *)addHeadlineElementWithString:(NSString *)headline
 {
@@ -108,7 +125,7 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     id<MYSFormCellDataProtocol> cellData            = self.rows[indexPath.row];
-    UICollectionViewCell<MYSFormCellProtocol> *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[cellData cellIdentifier]
+    MYSFormCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[cellData cellIdentifier]
                                                                                                 forIndexPath:indexPath];
     [cell populateWithCellData:cellData];
     return cell;
@@ -124,7 +141,7 @@
     NSValue *cachedSize = self.cachedCellSizes[indexPath];
     if (!cachedSize) {
         id<MYSFormCellDataProtocol> cellData = self.rows[indexPath.row];
-        CGSize size = [[cellData cellClass] sizeRequiredForCellData:cellData width:collectionView.frame.size.width];
+        CGSize size = [[cellData cellClass] sizeRequiredForCellData:cellData width:self.frame.size.width];
         size.width = collectionView.frame.size.width;
         cachedSize = [NSValue valueWithCGSize:size];
         self.cachedCellSizes[indexPath] = cachedSize;
@@ -149,7 +166,7 @@
 
 - (void)accessoryInputView:(MYSInputAccessoryView *)view didPressDismissButton:(UIButton *)button
 {
-    [self.view endEditing:YES];
+    [self endEditing:YES];
 }
 
 
@@ -165,10 +182,10 @@
         CGRect endFrame             = [note.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
         CGFloat animationDuration   = [note.userInfo[UIKeyboardAnimationDurationUserInfoKey] floatValue];
         UIViewAnimationCurve curve  = [note.userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue];
-        UIEdgeInsets insets         = self.collectionView.contentInset;
-        insets.bottom               = self.collectionView.bounds.size.height - endFrame.size.height;
+        UIEdgeInsets insets         = self.contentInset;
+        insets.bottom               = self.bounds.size.height - endFrame.size.height;
         [UIView animateWithDuration:animationDuration delay:0 options:(curve << 16) animations:^{
-            self.collectionView.contentInset = insets;
+            self.contentInset = insets;
         } completion:^(BOOL finished) {
             [self updatePrevAndNextButtons];
         }];
@@ -181,10 +198,10 @@
     {
         CGFloat animationDuration   = [note.userInfo[UIKeyboardAnimationDurationUserInfoKey] floatValue];
         UIViewAnimationCurve curve  = [note.userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue];
-        UIEdgeInsets insets         = self.collectionView.contentInset;
+        UIEdgeInsets insets         = self.contentInset;
         insets.bottom               = 0;
         [UIView animateWithDuration:animationDuration delay:0 options:(curve << 16) animations:^{
-            self.collectionView.contentInset = insets;
+            self.contentInset = insets;
         } completion:nil];
     }];
 }

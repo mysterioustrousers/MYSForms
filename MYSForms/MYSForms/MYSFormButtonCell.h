@@ -6,10 +6,10 @@
 //  Copyright (c) 2014 Mysterious Trousers. All rights reserved.
 //
 
-#import "MYSFormCellProtocol.h"
+#import "MYSFormCell.h"
 
 
-@interface MYSFormButtonCell : UICollectionViewCell <MYSFormCellProtocol>
+@interface MYSFormButtonCell : MYSFormCell
 @property (nonatomic, weak) IBOutlet UIButton *button;
 @end
 

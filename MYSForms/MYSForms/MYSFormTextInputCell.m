@@ -18,24 +18,6 @@
 
 @implementation MYSFormTextInputCell
 
-- (void)populateWithCellData:(MYSFormTextInputCellData *)cellData
-{
-    self.label.text                 = cellData.label;
-    self.textField.placeholder      = cellData.label;
-    self.textField.secureTextEntry  = cellData.secureTextEntry;
-    self.textField.keyboardType     = cellData.keyboardType;
-}
-
-+ (CGSize)sizeRequiredForCellData:(id<MYSFormCellDataProtocol>)cellData width:(CGFloat)width
-{
-    return CGSizeMake(width, 50);
-}
-
-+ (UIEdgeInsets)cellContentInset
-{
-    return UIEdgeInsetsMake(0, 20, 0, 20);
-}
-
 - (void)awakeFromNib
 {
     [super awakeFromNib];
@@ -63,17 +45,17 @@
     }];
 }
 
+- (void)populateWithCellData:(MYSFormTextInputCellData *)cellData
+{
+    self.label.text                 = cellData.label;
+    self.textField.placeholder      = cellData.label;
+    self.textField.secureTextEntry  = cellData.secureTextEntry;
+    self.textField.keyboardType     = cellData.keyboardType;
+}
+
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
-
-#pragma mark - Private
-
-- (void)showLabel
-{
-
 }
 
 @end

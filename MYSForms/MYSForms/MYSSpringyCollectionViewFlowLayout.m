@@ -34,7 +34,6 @@
     self.visibleIndexPathsSet   = [NSMutableSet set];
 }
 
-
 - (void)prepareLayout
 {
     [super prepareLayout];

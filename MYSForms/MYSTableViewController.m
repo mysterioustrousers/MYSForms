@@ -47,17 +47,28 @@
     if (indexPath.row == 0) {
         MYSFakeUser *user = [MYSFakeUser new];
         MYSFormViewController *formViewController = [MYSFormViewController new];
-        [formViewController addHeadlineElementWithString:@"Log In"];
-        [formViewController addFootnoteElementWithString:@"A table view displays a list of items in a single column. UITableView is a subclass of UIScrollView."];
-        [formViewController addTextInputElementWithModelKeyPath:@"email"
-                                                          label:@"E-mail"
-                                                   keyboardType:UIKeyboardTypeEmailAddress
-                                                         secure:NO];
-        [formViewController addTextInputElementWithModelKeyPath:@"password"
-                                                          label:@"Password"
-                                                   keyboardType:UIKeyboardTypeDefault
-                                                         secure:YES];
-        [formViewController addButtonElementWithTitle:@"Log In" target:self action:@selector(logInButtonWasTapped:)];
+
+        MYSFormHeadlineElement *headline = [MYSFormHeadlineElement headlineFormElementWithHeadline:@"Log In"];
+        [formViewController addFormElement:headline];
+
+
+        MYSFormFootnoteElement *footnote = [MYSFormFootnoteElement new];
+        footnote.footnote = @"This is good for descriptions of what a form element is and what it means.";
+        [formViewController addFormElement:footnote];
+
+        MYSFormTextFieldElement *emailField = [MYSFormTextFieldElement textFieldFormElementWithLabel:@"E-mail" modelKeyPath:@"email"];
+        emailField.keyboardType = UIKeyboardTypeEmailAddress;
+        [formViewController addFormElement:emailField];
+
+        MYSFormTextFieldElement *passwordField = [MYSFormTextFieldElement textFieldFormElementWithLabel:@"Password" modelKeyPath:@"password"];
+        passwordField.secure = YES;
+        [formViewController addFormElement:passwordField];
+
+        MYSFormButtonElement *logInButton = [MYSFormButtonElement buttonFormElementWithTitle:@"Log In"
+                                                                                   target:self
+                                                                                   action:@selector(logInButtonWasTapped:)];
+        [formViewController addFormElement:logInButton];
+
         [self.navigationController pushViewController:formViewController animated:YES];
     }
 

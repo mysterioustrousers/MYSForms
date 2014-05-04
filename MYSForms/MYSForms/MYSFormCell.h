@@ -6,17 +6,12 @@
 //  Copyright (c) 2014 Mysterious Trousers. All rights reserved.
 //
 
-@protocol MYSFormCellDataProtocol;
-
+@class MYSFormElement;
 
 @interface MYSFormCell : UICollectionViewCell
 + (void)registerForReuseWithCollectionView:(UICollectionView *)collectionView;
-+ (CGSize)sizeRequiredForCellData:(id<MYSFormCellDataProtocol>)cellData width:(CGFloat)width;
++ (CGSize)sizeRequiredForElement:(MYSFormElement *)element width:(CGFloat)width;
 + (UIEdgeInsets)cellContentInset;
-- (void)populateWithCellData:(id<MYSFormCellDataProtocol>)cellData;
-@end
-
-
-@protocol MYSFormCellDataProtocol <NSObject>
-- (Class)cellClass;
+- (void)populateWithElement:(MYSFormElement *)element;
+- (UIView *)availableTextInput;
 @end

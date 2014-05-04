@@ -7,42 +7,29 @@
 //
 
 #import "MYSFormHeadlineCell.h"
-
-
-@interface MYSFormHeadlineCell ()
-@property (nonatomic, strong) MYSFormHeadlineCellData *cellData;
-@end
+#import "MYSFormHeadlineElement.h"
 
 
 @implementation MYSFormHeadlineCell
 
-+ (CGSize)sizeRequiredForCellData:(MYSFormHeadlineCellData *)cellData width:(CGFloat)width
++ (CGSize)sizeRequiredForElement:(MYSFormHeadlineElement *)element width:(CGFloat)width
 {
     width -= [self cellContentInset].left + [self cellContentInset].right;
-    CGSize size = [cellData.headline boundingRectWithSize:CGSizeMake(width, FLT_MAX)
-                                                  options:NSStringDrawingUsesLineFragmentOrigin
-                                               attributes:@{
-                                                            NSFontAttributeName : [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline]
-                                                            }
-                                                  context:nil].size;
+    CGSize size = [element.headline boundingRectWithSize:CGSizeMake(width, FLT_MAX)
+                                                 options:NSStringDrawingUsesLineFragmentOrigin
+                                              attributes:@{
+                                                           NSFontAttributeName : [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline]
+                                                           }
+                                                 context:nil].size;
     size.height += 20;
 
     return size;
 }
 
-- (void)populateWithCellData:(MYSFormHeadlineCellData *)cellData
+- (void)populateWithElement:(MYSFormHeadlineElement *)element
 {
-    self.headlineLabel.text = cellData.headline;
+    self.headlineLabel.text = element.headline;
 }
 
 @end
 
-
-@implementation MYSFormHeadlineCellData
-
-- (Class)cellClass
-{
-    return [MYSFormHeadlineCell class];
-}
-
-@end

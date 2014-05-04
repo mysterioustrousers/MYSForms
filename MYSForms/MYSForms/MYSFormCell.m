@@ -7,6 +7,7 @@
 //
 
 #import "MYSFormCell.h"
+#import "MYSFormElement.h"
 
 
 @implementation MYSFormCell
@@ -17,7 +18,7 @@
     [collectionView registerNib:nib forCellWithReuseIdentifier:NSStringFromClass(self)];
 }
 
-+ (CGSize)sizeRequiredForCellData:(id<MYSFormCellDataProtocol>)cellData width:(CGFloat)width
++ (CGSize)sizeRequiredForElement:(MYSFormElement *)element width:(CGFloat)width
 {
     return CGSizeMake(width, 50);
 }
@@ -27,9 +28,15 @@
     return UIEdgeInsetsMake(0, 20, 0, 20);
 }
 
-- (void)populateWithCellData:(id<MYSFormCellDataProtocol>)cellData
+- (void)populateWithElement:(MYSFormElement *)element
 {
     // used by subclasses
 }
+
+- (UIView *)availableTextInput
+{
+    return nil;
+}
+
 
 @end

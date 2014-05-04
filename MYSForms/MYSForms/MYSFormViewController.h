@@ -6,13 +6,13 @@
 //  Copyright (c) 2014 Mysterious Trousers. All rights reserved.
 //
 
+#import "MYSFormHeadlineElement.h"
+#import "MYSFormFootnoteElement.h"
+#import "MYSFormTextFieldElement.h"
+#import "MYSFormButtonElement.h"
 
-@class MYSFormHeadlineCellData;
-@class MYSFormFootnoteCellData;
-@class MYSFormTextInputCellData;
-@class MYSFormButtonCellData;
 
-
+@protocol MYSFormViewControllerDelegate;
 
 
 @interface MYSFormViewController : UICollectionViewController
@@ -24,36 +24,34 @@
  */
 @property (nonatomic, strong) id model;
 
+
+/**
+ The delegate for the form controller that lets you know of interesting events.
+ */
+@property (nonatomic, weak) id<MYSFormViewControllerDelegate> formDelegate;
+
 /**
  If your method of choice is to subclass `MYSFormCollectionView`, override this method in your subclass to configure your form.
  */
 - (void)configureForm;
 
 /**
- Add a headline form element. This is a display element and not an input element, so it cannot be linked to a property on the model.
+ Create subclasses of `MYSFormElement` and use this method to add them to the form. Elements will be displayed in the order they were
+ added with this method.
  */
-- (MYSFormHeadlineCellData *)addHeadlineElementWithString:(NSString *)headline;
+- (void)addFormElement:(MYSFormElement *)element;
 
 /**
- Add a footnote form element. This is a display element and not an input element, so it cannot be linked to a property on the model.
+ All fields that have a field below them have a return key type of "Next" and when pressed, the cursor is moved to the next field. By
+ default, the return key of the last field is "Done" but you can customize it. When the return key is pressed when the last field is
+ first responder, you'll be notified by the delegate method.
  */
-- (MYSFormFootnoteCellData *)addFootnoteElementWithString:(NSString *)footnote;
-
-/**
- Add a text input form element. Provide a keypath to a property on `model` and that property will be bound to the value of the input.
- */
-- (MYSFormTextInputCellData *)addTextInputElementWithModelKeyPath:(NSString *)keyPath
-                                                            label:(NSString *)label
-                                                     keyboardType:(UIKeyboardType)keyboardType
-                                                           secure:(BOOL)secure;
-
-
-/**
- Add a button form element. this is useful for submit buttons for example. This does not edit anything so it is not bound to a 
- model keyPath.
- */
-- (MYSFormButtonCellData *)addButtonElementWithTitle:(NSString *)title target:(id)target action:(SEL)action;
+@property (nonatomic, assign) UIReturnKeyType lastFieldReturnKeyType;
 
 
 @end
 
+
+@protocol MYSFormViewControllerDelegate <NSObject>
+- (void)formViewControllerReturnKeyPressedOnLastField:(MYSFormViewController *)controller;
+@end

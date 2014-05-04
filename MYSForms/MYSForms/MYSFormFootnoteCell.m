@@ -7,19 +7,15 @@
 //
 
 #import "MYSFormFootnoteCell.h"
-
-
-@interface MYSFormFootnoteCell ()
-@property (nonatomic, strong) MYSFormFootnoteCellData *cellData;
-@end
+#import "MYSFormFootnoteElement.h"
 
 
 @implementation MYSFormFootnoteCell
 
-+ (CGSize)sizeRequiredForCellData:(MYSFormFootnoteCellData *)cellData width:(CGFloat)width
++ (CGSize)sizeRequiredForElement:(MYSFormFootnoteElement *)element width:(CGFloat)width
 {
     width -= [self cellContentInset].left + [self cellContentInset].right;
-    CGSize size = [cellData.footnote boundingRectWithSize:CGSizeMake(width, FLT_MAX)
+    CGSize size = [element.footnote boundingRectWithSize:CGSizeMake(width, FLT_MAX)
                                                   options:NSStringDrawingUsesLineFragmentOrigin
                                                attributes:@{
                                                             NSFontAttributeName : [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote]
@@ -28,19 +24,10 @@
     return size;
 }
 
-- (void)populateWithCellData:(MYSFormFootnoteCellData *)cellData
+- (void)populateWithElement:(MYSFormFootnoteElement *)element
 {
-    self.footnoteLabel.text = cellData.footnote;
+    self.footnoteLabel.text = element.footnote;
 }
 
 @end
 
-
-@implementation MYSFormFootnoteCellData
-
-- (Class)cellClass
-{
-    return [MYSFormFootnoteCell class];
-}
-
-@end

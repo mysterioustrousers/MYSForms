@@ -1,30 +1,29 @@
 //
-//  MYSSignUpFormViewController.m
+//  MYSEditFormViewController.m
 //  MYSForms
 //
 //  Created by Adam Kirk on 5/3/14.
 //  Copyright (c) 2014 Mysterious Trousers. All rights reserved.
 //
 
-#import "MYSSignUpFormViewController.h"
-#import "MYSFakeUser.h"
+#import "MYSEditFormViewController.h"
 
 
-@interface MYSSignUpFormViewController ()
+@interface MYSEditFormViewController ()
 @end
 
 
-@implementation MYSSignUpFormViewController
+@implementation MYSEditFormViewController
 
 - (void)configureForm
 {
     [super configureForm];
 
-    MYSFormHeadlineElement *title = [MYSFormHeadlineElement headlineFormElementWithHeadline:@"Sign Up"];
+    MYSFormHeadlineElement *title = [MYSFormHeadlineElement headlineFormElementWithHeadline:@"Edit User"];
     [self addFormElement:title];
 
     MYSFormFootnoteElement *description = [MYSFormFootnoteElement new];
-    description.footnote = @"A table view displays a list of items in a single column. UITableView is a subclass of UIScrollView.";
+    description.footnote = @"This form demonstrates a how setEditing: works with MYSForms.";
     [self addFormElement:description];
 
     MYSFormTextFieldElement *firstNameField = [MYSFormTextFieldElement textFieldFormElementWithLabel:@"First Name" modelKeyPath:@"firstName"];
@@ -41,21 +40,7 @@
     passwordField.secure = YES;
     [self addFormElement:passwordField];
 
-    MYSFormButtonElement *signUpButton = [MYSFormButtonElement buttonFormElementWithTitle:@"Sign Up"
-                                                                                   target:self
-                                                                                   action:@selector(signUpButtonWasTapped:)];
-    [self addFormElement:signUpButton];
+    [self setEditing:NO];
 }
-
-
-
-
-#pragma mark - Actions
-
-- (void)signUpButtonWasTapped:(id)sender
-{
-    NSLog(@"sign up button was tapped");
-}
-
 
 @end

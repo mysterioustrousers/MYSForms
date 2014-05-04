@@ -13,7 +13,3 @@
 @property (weak, nonatomic) IBOutlet UILabel *footnoteLabel;
 @end
 
-
-@interface MYSFormFootnoteCellData : NSObject <MYSFormCellDataProtocol>
-@property (nonatomic, copy) NSString *footnote;
-@end

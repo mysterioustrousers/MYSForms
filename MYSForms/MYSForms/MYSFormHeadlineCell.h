@@ -12,9 +12,3 @@
 @interface MYSFormHeadlineCell : MYSFormCell
 @property (weak, nonatomic) IBOutlet UILabel *headlineLabel;
 @end
-
-
-@interface MYSFormHeadlineCellData : NSObject <MYSFormCellDataProtocol>
-@property (nonatomic, copy) NSString *headline;
-@end
-

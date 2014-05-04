@@ -7,29 +7,15 @@
 //
 
 #import "MYSFormButtonCell.h"
-
-
-@interface MYSFormButtonCell ()
-@property (nonatomic, strong) MYSFormButtonCellData *cellData;
-@end
+#import "MYSFormButtonElement.h"
 
 
 @implementation MYSFormButtonCell
 
-- (void)populateWithCellData:(MYSFormButtonCellData *)cellData
+- (void)populateWithElement:(MYSFormButtonElement *)element
 {
-    [self.button setTitle:cellData.title forState:UIControlStateNormal];
-    [self.button addTarget:cellData.target action:cellData.action forControlEvents:UIControlEventTouchUpInside];
-}
-
-@end
-
-
-@implementation MYSFormButtonCellData
-
-- (Class)cellClass
-{
-    return [MYSFormButtonCell class];
+    [self.button setTitle:element.title forState:UIControlStateNormal];
+    [self.button addTarget:element.target action:element.action forControlEvents:UIControlEventTouchUpInside];
 }
 
 @end

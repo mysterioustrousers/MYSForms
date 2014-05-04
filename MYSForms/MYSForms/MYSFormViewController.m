@@ -7,22 +7,18 @@
 //
 
 #import "MYSFormViewController.h"
+#import "MYSFormElement.h"
 #import "MYSSpringyCollectionViewFlowLayout.h"
 #import "MYSFormHeadlineCell.h"
 #import "MYSFormFootnoteCell.h"
-#import "MYSFormTextInputCell.h"
+#import "MYSFormTextFieldCell.h"
 #import "MYSFormButtonCell.h"
-#import "MYSInputAccessoryView.h"
 
 
-@interface MYSFormViewController () <UICollectionViewDelegateFlowLayout, MYSInputAccessoryViewDelegate>
-@property (nonatomic, strong) NSMutableArray        *rows;
-@property (nonatomic, strong) NSMutableDictionary   *cells;
-@property (nonatomic, strong) MYSInputAccessoryView *inputAccessoryView;
-
-// caches
+@interface MYSFormViewController () <UICollectionViewDelegateFlowLayout, UITextFieldDelegate>
+@property (nonatomic, strong) NSMutableArray      *rows;
+@property (nonatomic, strong) NSMutableDictionary *cells;
 @property (nonatomic, strong) NSMutableDictionary *cachedCellSizes;
-@property (nonatomic, strong) NSArray             *cachedSortedTextInputs;
 @end
 
 
@@ -32,6 +28,7 @@
 {
     self.rows   = [NSMutableArray new];
     self.cells  = [NSMutableDictionary new];
+    [self setupDefaults];
     [self configureForm];
 }
 
@@ -67,15 +64,14 @@
     [super viewDidLoad];
 
     self.collectionView.backgroundColor         = [UIColor groupTableViewBackgroundColor];
-    self.view.backgroundColor         = [UIColor groupTableViewBackgroundColor];
+    self.view.backgroundColor                   = [UIColor groupTableViewBackgroundColor];
     self.collectionView.alwaysBounceVertical    = YES;
 
     [self setupKeyboardNotifications];
-    self.inputAccessoryView = [MYSInputAccessoryView accessoryViewWithDelegate:self];
 
     [MYSFormHeadlineCell registerForReuseWithCollectionView:self.collectionView];
     [MYSFormFootnoteCell registerForReuseWithCollectionView:self.collectionView];
-    [MYSFormTextInputCell registerForReuseWithCollectionView:self.collectionView];
+    [MYSFormTextFieldCell registerForReuseWithCollectionView:self.collectionView];
     [MYSFormButtonCell registerForReuseWithCollectionView:self.collectionView];
 }
 
@@ -83,20 +79,21 @@
 {
     [super viewWillAppear:animated];
     UIEdgeInsets insets = self.collectionView.contentInset;
-    insets.bottom = self.collectionView.bounds.size.height;
+    insets.top += self.collectionView.frame.size.height;
     self.collectionView.contentInset = insets;
-    self.collectionView.hidden = YES;
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    [self.collectionView scrollRectToVisible:CGRectMake(0, self.collectionView.bounds.size.height, 1, 1) animated:NO];
-    self.collectionView.hidden = NO;
     [super viewDidAppear:animated];
     UIEdgeInsets insets = self.collectionView.contentInset;
-    insets.bottom = 0;
+    insets.top -= self.collectionView.frame.size.height;
     [UIView animateWithDuration:0.5 animations:^{
         self.collectionView.contentInset = insets;
+    } completion:^(BOOL finished) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [[[self sortedTextInputs] firstObject] becomeFirstResponder];
+        });
     }];
 }
 
@@ -108,49 +105,10 @@
     // overriden by subclasses
 }
 
-- (MYSFormHeadlineCellData *)addHeadlineElementWithString:(NSString *)headline
+- (void)addFormElement:(MYSFormElement *)element
 {
-    MYSFormHeadlineCellData *cellData   = [MYSFormHeadlineCellData new];
-    cellData.headline                   = headline;
-    [self.rows addObject:cellData];
-    return cellData;
+    [self.rows addObject:element];
 }
-
-- (MYSFormFootnoteCellData *)addFootnoteElementWithString:(NSString *)footnote
-{
-    MYSFormFootnoteCellData *cellData   = [MYSFormFootnoteCellData new];
-    cellData.footnote                   = footnote;
-    [self.rows addObject:cellData];
-    return cellData;
-}
-
-- (MYSFormTextInputCellData *)addTextInputElementWithModelKeyPath:(NSString *)keyPath
-                                                            label:(NSString *)label
-                                                     keyboardType:(UIKeyboardType)keyboardType
-                                                           secure:(BOOL)secure
-{
-    MYSFormTextInputCellData *cellData  = [MYSFormTextInputCellData new];
-    cellData.modelKeyPath               = keyPath;
-    cellData.label                      = label;
-    cellData.keyboardType               = keyboardType;
-    cellData.secureTextEntry            = secure;
-    [self.rows addObject:cellData];
-    return cellData;
-}
-
-- (MYSFormButtonCellData *)addButtonElementWithTitle:(NSString *)title target:(id)target action:(SEL)action
-{
-    MYSFormButtonCellData *cellData = [MYSFormButtonCellData new];
-    cellData.title                  = title;
-    cellData.target                 = target;
-    cellData.action                 = action;
-    [self.rows addObject:cellData];
-    return cellData;
-}
-
-
-
-
 
 
 #pragma mark - DATASOURCE collection view
@@ -162,9 +120,15 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    id<MYSFormCellDataProtocol> cellData = self.rows[indexPath.row];
-    MYSFormCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([cellData cellClass]) forIndexPath:indexPath];
-    [cell populateWithCellData:cellData];
+    MYSFormElement *element = self.rows[indexPath.row];
+    MYSFormCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([element cellClass]) forIndexPath:indexPath];
+    [cell populateWithElement:element];
+
+    if ([cell availableTextInput]) {
+        UITextField *textInput = (UITextField *)[cell availableTextInput];
+        textInput.delegate = self;
+    }
+
     return cell;
 }
 
@@ -177,8 +141,8 @@
 {
     NSValue *cachedSize = self.cachedCellSizes[indexPath];
     if (!cachedSize) {
-        id<MYSFormCellDataProtocol> cellData = self.rows[indexPath.row];
-        CGSize size = [[cellData cellClass] sizeRequiredForCellData:cellData width:collectionView.frame.size.width];
+        MYSFormElement *element = self.rows[indexPath.row];
+        CGSize size = [[element cellClass] sizeRequiredForElement:element width:collectionView.frame.size.width];
         size.width = collectionView.frame.size.width;
         cachedSize = [NSValue valueWithCGSize:size];
         self.cachedCellSizes[indexPath] = cachedSize;
@@ -187,23 +151,29 @@
 }
 
 
-#pragma mark - DELEGATE input accessory view
+#pragma mark - DELEGATE text field
 
-- (void)accessoryInputView:(MYSInputAccessoryView *)view didPressPreviousButton:(UIButton *)button
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    [[self previousTextInput] becomeFirstResponder];
-    [self updatePrevAndNextButtons];
+    UIView *nextTextInput = [self textInputAfter:textField];
+    if (nextTextInput) {
+        [nextTextInput becomeFirstResponder];
+    }
+    else {
+        [self.formDelegate formViewControllerReturnKeyPressedOnLastField:self];
+    }
+    return YES;
 }
 
-- (void)accessoryInputView:(MYSInputAccessoryView *)view didPressNextButton:(UIButton *)button
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
-    [[self nextTextInput] becomeFirstResponder];
-    [self updatePrevAndNextButtons];
-}
-
-- (void)accessoryInputView:(MYSInputAccessoryView *)view didPressDismissButton:(UIButton *)button
-{
-    [self.view endEditing:YES];
+    if ([self textInputAfter:textField]) {
+        textField.returnKeyType = UIReturnKeyNext;
+    }
+    else {
+        textField.returnKeyType = self.lastFieldReturnKeyType;
+    }
+    return YES;
 }
 
 
@@ -220,12 +190,10 @@
         CGFloat animationDuration   = [note.userInfo[UIKeyboardAnimationDurationUserInfoKey] floatValue];
         UIViewAnimationCurve curve  = [note.userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue];
         UIEdgeInsets insets         = self.collectionView.contentInset;
-        insets.bottom               = (self.collectionView.bounds.size.height - endFrame.size.height) + self.inputAccessoryView.frame.size.height;
+        insets.bottom               = self.collectionView.bounds.size.height - endFrame.size.height;
         [UIView animateWithDuration:animationDuration delay:0 options:(curve << 16) animations:^{
             self.collectionView.contentInset = insets;
-        } completion:^(BOOL finished) {
-            [self updatePrevAndNextButtons];
-        }];
+        } completion:nil];
     }];
 
     [[NSNotificationCenter defaultCenter] addObserverForName:UIKeyboardWillHideNotification
@@ -243,47 +211,31 @@
     }];
 }
 
-- (UIView *)nextTextInput
+- (void)setupDefaults
 {
-    self.cachedSortedTextInputs = nil;
-    UIView *currentFirstResponder   = [self currentFirstResponder];
-    NSArray *sortedTextInputs       = [self sortedTextInputs];
-    if (currentFirstResponder) {
-        NSInteger index = [sortedTextInputs indexOfObject:currentFirstResponder];
-        if (index < [sortedTextInputs count] - 1) {
-            return sortedTextInputs[index + 1];
-        }
+    self.lastFieldReturnKeyType = UIReturnKeyDone;
+}
+
+#pragma mark (text input)
+
+- (UIView *)textInputAfter:(UIView *)textInput
+{
+    NSArray *textInputs = [self sortedTextInputs];
+    NSInteger index     = [textInputs indexOfObject:textInput];
+    if (index < [textInputs count] - 1) {
+        return textInputs[index + 1];
     }
     return nil;
 }
 
-- (UIView *)previousTextInput
+- (UIView *)textInputBefore:(UIView *)textInput
 {
-    self.cachedSortedTextInputs = nil;
-    UIView *currentFirstResponder   = [self currentFirstResponder];
-    NSArray *sortedTextInputs       = [self sortedTextInputs];
-    if (currentFirstResponder) {
-        NSInteger index = [sortedTextInputs indexOfObject:currentFirstResponder];
-        if (index > 0) {
-            return sortedTextInputs[index - 1];
-        }
+    NSArray *textInputs = [self sortedTextInputs];
+    NSInteger index     = [textInputs indexOfObject:textInput];
+    if (index > 0) {
+        return textInputs[index - 1];
     }
     return nil;
-}
-
-- (void)updatePrevAndNextButtons
-{
-    self.inputAccessoryView.previousButton.enabled  = NO;
-    self.inputAccessoryView.nextButton.enabled      = NO;
-    UIView *currentFirstResponder                   = [self currentFirstResponder];
-    NSArray *sortedTextInputs                       = [self sortedTextInputs];
-    NSInteger index                                 = [sortedTextInputs indexOfObject:currentFirstResponder];
-    if ([[self sortedTextInputs] indexOfObject:currentFirstResponder] > 0) {
-        self.inputAccessoryView.previousButton.enabled = YES;
-    }
-    if (index < [sortedTextInputs count] - 1) {
-        self.inputAccessoryView.nextButton.enabled = YES;
-    }
 }
 
 - (UIView *)currentFirstResponder
@@ -298,26 +250,37 @@
 
 - (NSArray *)sortedTextInputs
 {
-    if (!self.cachedSortedTextInputs) {
-        NSMutableArray *queue           = [NSMutableArray arrayWithObject:[UIApplication sharedApplication].keyWindow];
-        NSMutableArray *allTextInputs   = [NSMutableArray new];
-        while ([queue count] > 0) {
-            UIView *view = queue[0];
-            [queue removeObjectAtIndex:0];
-            if ([view isKindOfClass:[UITextField class]] || [view isKindOfClass:[UITextView class]]) {
-                [allTextInputs addObject:view];
-            }
-            for (UIView *subview in view.subviews) {
-                [queue addObject:subview];
-            }
+    NSArray *visibleCells           = [self.collectionView visibleCells];
+    NSMutableArray *textInputs      = [NSMutableArray new];
+    for (MYSFormCell *cell in visibleCells) {
+        UIView *textInput = [cell availableTextInput];
+        if (textInput) {
+            [textInputs addObject:textInput];
         }
-        self.cachedSortedTextInputs = [allTextInputs sortedArrayUsingComparator:^NSComparisonResult(UIView *v1, UIView *v2) {
-            CGRect rectInWindow1 = [v1.superview convertRect:v1.frame toView:nil];
-            CGRect rectInWindow2 = [v2.superview convertRect:v2.frame toView:nil];
-            return rectInWindow1.origin.y < rectInWindow2.origin.y ? NSOrderedAscending : NSOrderedDescending;
-        }];
     }
-    return self.cachedSortedTextInputs;
+    return [textInputs sortedArrayUsingComparator:^NSComparisonResult(UIView *v1, UIView *v2) {
+        CGRect rectInWindow1 = [v1.superview convertRect:v1.frame toView:nil];
+        CGRect rectInWindow2 = [v2.superview convertRect:v2.frame toView:nil];
+        return rectInWindow1.origin.y < rectInWindow2.origin.y ? NSOrderedAscending : NSOrderedDescending;
+    }];
 }
+
+//- (NSArray *)viewsThatCanBeDisabled
+//{
+//    return [[self allViewsOfForm] filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(UIView *view, NSDictionary *bindings) {
+//        return [view respondsToSelector:@selector(setEnabled:)];
+//    }]];
+//}
+//
+//- (NSArray *)allViewsOfForm
+//{
+//    NSMutableOrderedSet *allViews   = [NSMutableOrderedSet orderedSetWithObject:self.collectionView];
+//    NSInteger index                 = 0;
+//    while (index < [allViews count]) {
+//        UIView *view = allViews[index++];
+//        [allViews addObjectsFromArray:view.subviews];
+//    }
+//    return [allViews array];
+//}
 
 @end

@@ -7,7 +7,7 @@
 //
 
 
-@interface MYSFakeUser : NSObject
+@interface MYSExampleUser : NSObject
 @property (nonatomic, copy) NSString *firstName;
 @property (nonatomic, copy) NSString *lastName;
 @property (nonatomic, copy) NSString *email;

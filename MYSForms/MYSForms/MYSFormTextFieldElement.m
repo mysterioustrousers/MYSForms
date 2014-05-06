@@ -20,4 +20,9 @@
     return element;
 }
 
+- (BOOL)isTextInput
+{
+    return YES;
+}
+
 @end

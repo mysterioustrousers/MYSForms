@@ -21,6 +21,7 @@
                                                             NSFontAttributeName : [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote]
                                                             }
                                                   context:nil].size;
+    size.height = ceil(size.height);
     return size;
 }
 

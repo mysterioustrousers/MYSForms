@@ -59,7 +59,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="View/Edit Mode Form" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="idP-i7-8pN">
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Validations Example" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="idP-i7-8pN">
                                                     <rect key="frame" x="15" y="0.0" width="270" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
@@ -84,13 +84,13 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bjq-JU-yoS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="869" y="208"/>
+            <point key="canvasLocation" x="841" y="191"/>
         </scene>
-        <!--Edit Form View Controller-->
+        <!--Validation Form View Controller-->
         <scene sceneID="NvU-Mx-AC7">
             <objects>
-                <collectionViewController autoresizesArchivedViewToFullSize="NO" id="hq5-fe-Yjr" customClass="MYSEditFormViewController" sceneMemberID="viewController">
-                    <collectionView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="BuO-n9-a5I">
+                <collectionViewController autoresizesArchivedViewToFullSize="NO" id="hq5-fe-Yjr" customClass="MYSValidationFormViewController" sceneMemberID="viewController">
+                    <collectionView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" keyboardDismissMode="interactive" dataMode="prototypes" id="BuO-n9-a5I">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -114,15 +114,16 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EoV-RS-6yz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1405" y="-161"/>
+            <point key="canvasLocation" x="1377" y="-178"/>
         </scene>
         <!--Sign Up Form View Controller-->
         <scene sceneID="GjZ-5J-VZL">
             <objects>
                 <collectionViewController autoresizesArchivedViewToFullSize="NO" id="UjM-iF-C9J" customClass="MYSSignUpFormViewController" sceneMemberID="viewController">
-                    <collectionView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="Ei7-CF-cal">
+                    <collectionView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" keyboardDismissMode="interactive" dataMode="prototypes" id="Ei7-CF-cal">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="XE8-U4-VVs" customClass="MYSSpringyCollectionViewFlowLayout">
                             <size key="itemSize" width="316" height="50"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -139,7 +140,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zbp-5w-YmE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1405" y="686"/>
+            <point key="canvasLocation" x="1377" y="669"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Rdf-Y2-AD0">
@@ -157,7 +158,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Yo-BY-4YP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="343" y="208"/>
+            <point key="canvasLocation" x="315" y="191"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

@@ -7,6 +7,8 @@
 //
 
 #import "MYSFormElement.h"
+#import "MYSFormButtonCell.h"
+
 
 @interface MYSFormButtonElement : MYSFormElement
 @property (nonatomic, copy  ) NSString *title;

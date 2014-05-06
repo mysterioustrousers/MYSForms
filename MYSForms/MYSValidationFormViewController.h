@@ -8,6 +8,6 @@
 
 #import "MYSFormViewController.h"
 
-@interface MYSEditFormViewController : MYSFormViewController
+@interface MYSValidationFormViewController : MYSFormViewController
 
 @end

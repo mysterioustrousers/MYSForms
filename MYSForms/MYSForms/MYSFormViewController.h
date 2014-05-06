@@ -31,6 +31,12 @@
 @property (nonatomic, weak) id<MYSFormViewControllerDelegate> formDelegate;
 
 /**
+ If you create your own custom form elements, this is where you need to register their cell xibs with the collection view.
+ You must call super as part of your implementation.
+ */
+- (void)registerElementCellsForReuse;
+
+/**
  If your method of choice is to subclass `MYSFormCollectionView`, override this method in your subclass to configure your form.
  */
 - (void)configureForm;
@@ -41,17 +47,18 @@
  */
 - (void)addFormElement:(MYSFormElement *)element;
 
+- (void)addFormElement:(MYSFormElement *)element atIndex:(NSInteger)index;
+
 /**
- All fields that have a field below them have a return key type of "Next" and when pressed, the cursor is moved to the next field. By
- default, the return key of the last field is "Done" but you can customize it. When the return key is pressed when the last field is
- first responder, you'll be notified by the delegate method.
+ Runs all the validations on the model and adds validation errors by the elements that failed their validations.
+ Returns YES if there were no errors and NO if there were validation errors.
  */
-@property (nonatomic, assign) UIReturnKeyType lastFieldReturnKeyType;
+- (BOOL)validate;
 
 
 @end
 
 
 @protocol MYSFormViewControllerDelegate <NSObject>
-- (void)formViewControllerReturnKeyPressedOnLastField:(MYSFormViewController *)controller;
+- (void)formViewControllerDidSubmit:(MYSFormViewController *)controller;
 @end

@@ -7,6 +7,8 @@
 //
 
 #import "MYSFormElement.h"
+#import "MYSFormTextFieldCell.h"
+
 
 @interface MYSFormTextFieldElement : MYSFormElement
 @property (nonatomic, copy                   ) NSString       *label;

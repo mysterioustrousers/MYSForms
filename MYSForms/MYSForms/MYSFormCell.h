@@ -8,10 +8,29 @@
 
 @class MYSFormElement;
 
+
+@protocol MYSFormCellDelegate;
+
+
 @interface MYSFormCell : UICollectionViewCell
+
+@property (nonatomic, weak) id<MYSFormCellDelegate> delegate;
+
 + (void)registerForReuseWithCollectionView:(UICollectionView *)collectionView;
+
 + (CGSize)sizeRequiredForElement:(MYSFormElement *)element width:(CGFloat)width;
+
 + (UIEdgeInsets)cellContentInset;
+
+- (NSString *)valueKeyPath;
+
 - (void)populateWithElement:(MYSFormElement *)element;
-- (UIView *)availableTextInput;
+
+- (UIView *)textInput;
+
+@end
+
+
+@protocol MYSFormCellDelegate <NSObject>
+- (void)formCell:(MYSFormCell *)cell valueDidChange:(id)value;
 @end

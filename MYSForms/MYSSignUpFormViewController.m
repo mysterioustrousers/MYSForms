@@ -7,14 +7,16 @@
 //
 
 #import "MYSSignUpFormViewController.h"
-#import "MYSFakeUser.h"
-
-
-@interface MYSSignUpFormViewController ()
-@end
+#import "MYSExampleUser.h"
 
 
 @implementation MYSSignUpFormViewController
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    self.model = [MYSExampleUser new];
+}
 
 - (void)configureForm
 {
@@ -24,7 +26,7 @@
     [self addFormElement:title];
 
     MYSFormFootnoteElement *description = [MYSFormFootnoteElement new];
-    description.footnote = @"A table view displays a list of items in a single column. UITableView is a subclass of UIScrollView.";
+    description.footnote = @"Example of a subclassed form view controller where a blank model is created in its viewDidLoad.";
     [self addFormElement:description];
 
     MYSFormTextFieldElement *firstNameField = [MYSFormTextFieldElement textFieldFormElementWithLabel:@"First Name" modelKeyPath:@"firstName"];
@@ -41,10 +43,15 @@
     passwordField.secure = YES;
     [self addFormElement:passwordField];
 
-    MYSFormButtonElement *signUpButton = [MYSFormButtonElement buttonFormElementWithTitle:@"Sign Up"
+    MYSFormButtonElement *logButton = [MYSFormButtonElement buttonFormElementWithTitle:@"Log Current Model"
                                                                                    target:self
                                                                                    action:@selector(signUpButtonWasTapped:)];
-    [self addFormElement:signUpButton];
+    [self addFormElement:logButton];
+
+    MYSFormButtonElement *randomButton = [MYSFormButtonElement buttonFormElementWithTitle:@"Set Random Data On Model"
+                                                                                   target:self
+                                                                                   action:@selector(setRandomWasTapped:)];
+    [self addFormElement:randomButton];
 }
 
 
@@ -54,7 +61,34 @@
 
 - (void)signUpButtonWasTapped:(id)sender
 {
-    NSLog(@"sign up button was tapped");
+    NSLog(@"Current Model: %@", self.model);
+}
+
+- (void)setRandomWasTapped:(id)sender
+{
+    MYSExampleUser *user = self.model;
+    user.firstName  = [self randomStringWithLength:10];
+    user.lastName   = [self randomStringWithLength:10];
+    user.email      = [self randomStringWithLength:10];
+    user.password   = [self randomStringWithLength:10];
+}
+
+
+
+
+#pragma mark - Private
+
+NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+- (NSString *)randomStringWithLength:(int)len
+{
+    NSMutableString *randomString = [NSMutableString stringWithCapacity: len];
+
+    for (int i = 0; i < len; i++) {
+        [randomString appendFormat: @"%C", [letters characterAtIndex: arc4random() % [letters length]]];
+    }
+
+    return randomString;
 }
 
 

@@ -7,6 +7,8 @@
 //
 
 #import "MYSFormElement.h"
+#import "MYSFormHeadlineCell.h"
+
 
 @interface MYSFormHeadlineElement : MYSFormElement
 @property (nonatomic, copy) NSString *headline;

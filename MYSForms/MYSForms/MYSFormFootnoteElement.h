@@ -7,6 +7,8 @@
 //
 
 #import "MYSFormElement.h"
+#import "MYSFormFootnoteCell.h"
+
 
 @interface MYSFormFootnoteElement : MYSFormElement
 @property (nonatomic, copy) NSString *footnote;

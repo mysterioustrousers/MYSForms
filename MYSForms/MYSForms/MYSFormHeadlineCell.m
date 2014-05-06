@@ -21,8 +21,7 @@
                                                            NSFontAttributeName : [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline]
                                                            }
                                                  context:nil].size;
-    size.height += 20;
-
+    size.height = ceil(size.height) + 20;
     return size;
 }
 
@@ -32,4 +31,3 @@
 }
 
 @end
-

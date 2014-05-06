@@ -6,31 +6,32 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MYSFormFootnoteCell" id="yfO-RC-nQI" customClass="MYSFormFootnoteCell">
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MYSFormErrorCell" id="Fnp-Ov-g7J" customClass="MYSFormErrorCell">
             <rect key="frame" x="0.0" y="0.0" width="320" height="120"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                 <rect key="frame" x="0.0" y="0.0" width="320" height="120"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="oct-jY-ccu">
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="tOW-tl-IXS">
                         <rect key="frame" x="20" y="12" width="280" height="95"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <string key="text">A collection view is a way to present an ordered set of data items using a flexible and changeable layout. The most common use for collection views is to present items in a grid-like arrangement, but collection views in iOS are capable of more than just rows and columns.</string>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                        <color key="textColor" red="0.84313725490000002" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="oct-jY-ccu" secondAttribute="trailing" constant="20" id="dmA-5b-JDX"/>
-                <constraint firstAttribute="centerY" secondItem="oct-jY-ccu" secondAttribute="centerY" id="eoD-EE-cNn"/>
-                <constraint firstItem="oct-jY-ccu" firstAttribute="leading" secondItem="yfO-RC-nQI" secondAttribute="leading" constant="20" id="q9C-YX-2Bo"/>
+                <constraint firstAttribute="trailing" secondItem="tOW-tl-IXS" secondAttribute="trailing" constant="20" id="Aey-ch-bLS"/>
+                <constraint firstItem="tOW-tl-IXS" firstAttribute="leading" secondItem="Fnp-Ov-g7J" secondAttribute="leading" constant="20" id="Hn0-3B-moE"/>
+                <constraint firstAttribute="centerY" secondItem="tOW-tl-IXS" secondAttribute="centerY" id="v9u-9a-QWf"/>
             </constraints>
             <size key="customSize" width="319" height="120"/>
             <connections>
-                <outlet property="footnoteLabel" destination="oct-jY-ccu" id="2xt-Yn-gNL"/>
+                <outlet property="errorLabel" destination="tOW-tl-IXS" id="2ki-p0-QnB"/>
             </connections>
         </collectionViewCell>
     </objects>

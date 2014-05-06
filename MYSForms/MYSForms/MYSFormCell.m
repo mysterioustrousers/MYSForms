@@ -28,12 +28,17 @@
     return UIEdgeInsetsMake(0, 20, 0, 20);
 }
 
-- (void)populateWithElement:(MYSFormElement *)element
+- (NSString *)valueKeyPath
 {
-    // used by subclasses
+    return nil;
 }
 
-- (UIView *)availableTextInput
+- (void)populateWithElement:(MYSFormElement *)element
+{
+    NSAssert(NO, @"This class MUST be subclassed and this method overriden without calling super.");
+}
+
+- (UIView *)textInput
 {
     return nil;
 }

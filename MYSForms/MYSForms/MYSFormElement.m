@@ -7,8 +7,35 @@
 //
 
 #import "MYSFormElement.h"
+#import "MYSFormCell.h"
+
+
+@interface MYSFormElement () <MYSFormCellDelegate>
+@property (nonatomic, strong) NSMutableSet *formValidations;
+@end
+
 
 @implementation MYSFormElement
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        _formValidations = [NSMutableSet new];
+    }
+    return self;
+}
+
+
+
+
+#pragma mark - Public
+
+- (void)setCell:(MYSFormCell *)cell
+{
+    _cell = cell;
+    cell.delegate = self;
+}
 
 - (Class)cellClass
 {
@@ -16,5 +43,50 @@
     NSString *cellClassName = [className stringByReplacingOccurrencesOfString:@"Element" withString:@"Cell"];
     return NSClassFromString(cellClassName);
 }
+
+- (void)updateCell
+{
+    [self.cell populateWithElement:self];
+    if ([self.modelKeyPath length] > 0 && [[self.cell valueKeyPath] length] > 0) {
+        id modelValue = [self.dataSource modelValueForFormElement:self];
+        [self.cell setValue:modelValue forKeyPath:[self.cell valueKeyPath]];
+    }
+}
+
+- (BOOL)isTextInput
+{
+    return NO;
+}
+
+- (void)addFormValidation:(MYSFormValidation *)formValidation
+{
+    [self.formValidations addObject:formValidation];
+}
+
+- (NSArray *)validationErrors
+{
+    NSMutableArray *validationErrors = [NSMutableArray new];
+    if ([self.modelKeyPath length] > 0) {
+        id value = [self.dataSource modelValueForFormElement:self];
+        for (MYSFormValidation *formValidation in self.formValidations) {
+            NSError *error = [formValidation errorFromValidatingValue:value];
+            if (error) {
+                [validationErrors addObject:error];
+            }
+        }
+    }
+    return validationErrors;
+}
+
+
+
+
+#pragma mark - DELEGATE cell
+
+- (void)formCell:(MYSFormCell *)cell valueDidChange:(id)value
+{
+    [self.delegate formElement:self valueDidChange:value];
+}
+
 
 @end

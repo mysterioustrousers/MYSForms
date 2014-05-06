@@ -11,7 +11,12 @@
 #import "MYSSignUpFormViewController.h"
 
 // test models
-#import "MYSFakeUser.h"
+#import "MYSExampleUser.h"
+
+
+@interface MYSTableViewController () <MYSFormViewControllerDelegate>
+@property (nonatomic, strong) MYSExampleUser *fakeUser;
+@end
 
 
 @implementation MYSTableViewController
@@ -19,23 +24,39 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.clearsSelectionOnViewWillAppear = NO;
+    self.fakeUser = [MYSExampleUser new];
 }
+
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-//    if ([segue.identifier isEqualToString:@"SignUpFormSegue"]) {
-//        MYSSignUpFormViewController *signUpFormViewController = [segue destinationViewController];
-//    }
+    if ([segue.identifier isEqualToString:@"SignUpFormSegue"]) {
+        MYSSignUpFormViewController *signUpFormViewController = [segue destinationViewController];
+        signUpFormViewController.formDelegate = self;
+        // model is created in viewDidLoad of sign up vc
+    }
 }
+
+
 
 
 #pragma mark - Actions
 
-- (void)logInButtonWasTapped:(id)sender
+- (void)logModelValues:(id)sender
 {
-    NSLog(@"Log in button was tapped");
+    NSLog(@"Current Model: %@", self.fakeUser);
 }
+
+
+
+
+#pragma mark - DELEGATE form view controller
+
+- (void)formViewControllerDidSubmit:(MYSFormViewController *)controller
+{
+    [self logModelValues:nil];
+}
+
 
 
 
@@ -45,15 +66,17 @@
 {
     // log in form
     if (indexPath.row == 0) {
-        MYSFakeUser *user = [MYSFakeUser new];
         MYSFormViewController *formViewController = [MYSFormViewController new];
+
+        // setting the model before configuration
+        formViewController.model = self.fakeUser;
 
         MYSFormHeadlineElement *headline = [MYSFormHeadlineElement headlineFormElementWithHeadline:@"Log In"];
         [formViewController addFormElement:headline];
 
 
         MYSFormFootnoteElement *footnote = [MYSFormFootnoteElement new];
-        footnote.footnote = @"This is good for descriptions of what a form element is and what it means.";
+        footnote.footnote = @"An example form that does not subclass the form view controller. It just creates one, configures and displays it.";
         [formViewController addFormElement:footnote];
 
         MYSFormTextFieldElement *emailField = [MYSFormTextFieldElement textFieldFormElementWithLabel:@"E-mail" modelKeyPath:@"email"];
@@ -64,19 +87,16 @@
         passwordField.secure = YES;
         [formViewController addFormElement:passwordField];
 
-        MYSFormButtonElement *logInButton = [MYSFormButtonElement buttonFormElementWithTitle:@"Log In"
+        MYSFormButtonElement *logInButton = [MYSFormButtonElement buttonFormElementWithTitle:@"Log Model Values"
                                                                                    target:self
-                                                                                   action:@selector(logInButtonWasTapped:)];
+                                                                                   action:@selector(logModelValues:)];
         [formViewController addFormElement:logInButton];
 
+        formViewController.formDelegate = self;
+        
         [self.navigationController pushViewController:formViewController animated:YES];
     }
-
 }
-
-
-
-
 
 
 @end

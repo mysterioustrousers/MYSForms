@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C213D8D919182D5000F5086B /* MYSFormErrorElement.m in Sources */ = {isa = PBXBuildFile; fileRef = C213D8D819182D5000F5086B /* MYSFormErrorElement.m */; };
+		C213D8DC19182D6B00F5086B /* MYSFormErrorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C213D8DB19182D6B00F5086B /* MYSFormErrorCell.m */; };
+		C213D8DE19182D7E00F5086B /* MYSFormErrorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C213D8DD19182D7E00F5086B /* MYSFormErrorCell.xib */; };
+		C213D8E219182FA700F5086B /* MYSFormPresenceValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = C213D8E119182FA700F5086B /* MYSFormPresenceValidation.m */; };
+		C213D8E519182FC900F5086B /* MYSFormValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = C213D8E419182FC900F5086B /* MYSFormValidation.m */; };
+		C23CB39F191941A100C5C0B7 /* MYSFormRegexValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = C23CB39E191941A100C5C0B7 /* MYSFormRegexValidation.m */; };
 		C26614DB191533B80073DAD8 /* MYSSignUpFormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C26614DA191533B80073DAD8 /* MYSSignUpFormViewController.m */; };
 		C26614DD19153CD40073DAD8 /* MYSFormHeadlineCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C26614DC19153CD40073DAD8 /* MYSFormHeadlineCell.xib */; };
 		C26614E0191544880073DAD8 /* MYSFormCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C26614DF191544880073DAD8 /* MYSFormCell.m */; };
@@ -34,14 +40,14 @@
 		C289A29A1913D7660047D0CF /* MYSFormTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C289A2991913D7660047D0CF /* MYSFormTextFieldCell.m */; };
 		C289A29E1913DAD30047D0CF /* MYSSpringyCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = C289A29D1913DAD30047D0CF /* MYSSpringyCollectionViewFlowLayout.m */; };
 		C289A2A11913DC1B0047D0CF /* MYSTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C289A2A01913DC1B0047D0CF /* MYSTableViewController.m */; };
-		C2AAD8D519140BFB00FDF78E /* MYSFakeUser.m in Sources */ = {isa = PBXBuildFile; fileRef = C2AAD8D419140BFB00FDF78E /* MYSFakeUser.m */; };
+		C2AAD8D519140BFB00FDF78E /* MYSExampleUser.m in Sources */ = {isa = PBXBuildFile; fileRef = C2AAD8D419140BFB00FDF78E /* MYSExampleUser.m */; };
 		C2AAD8DD191414C400FDF78E /* MYSFormsMedia.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C2AAD8DC191414C400FDF78E /* MYSFormsMedia.xcassets */; };
 		C2B1BE0E1915A05B00F4E8BB /* MYSFormElement.m in Sources */ = {isa = PBXBuildFile; fileRef = C2B1BE0D1915A05B00F4E8BB /* MYSFormElement.m */; };
 		C2B1BE111915A07900F4E8BB /* MYSFormHeadlineElement.m in Sources */ = {isa = PBXBuildFile; fileRef = C2B1BE101915A07900F4E8BB /* MYSFormHeadlineElement.m */; };
 		C2B1BE141915A08F00F4E8BB /* MYSFormFootnoteElement.m in Sources */ = {isa = PBXBuildFile; fileRef = C2B1BE131915A08F00F4E8BB /* MYSFormFootnoteElement.m */; };
 		C2B1BE171915A0AA00F4E8BB /* MYSFormTextFieldElement.m in Sources */ = {isa = PBXBuildFile; fileRef = C2B1BE161915A0AA00F4E8BB /* MYSFormTextFieldElement.m */; };
 		C2B1BE1A1915A0BE00F4E8BB /* MYSFormButtonElement.m in Sources */ = {isa = PBXBuildFile; fileRef = C2B1BE191915A0BE00F4E8BB /* MYSFormButtonElement.m */; };
-		C2B1BE1E1915ECED00F4E8BB /* MYSEditFormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2B1BE1D1915ECED00F4E8BB /* MYSEditFormViewController.m */; };
+		C2B1BE1E1915ECED00F4E8BB /* MYSValidationFormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2B1BE1D1915ECED00F4E8BB /* MYSValidationFormViewController.m */; };
 		C2FE303F19149E5500C291A2 /* MYSFormButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C2FE303E19149E5500C291A2 /* MYSFormButton.m */; };
 /* End PBXBuildFile section */
 
@@ -56,6 +62,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C213D8D719182D5000F5086B /* MYSFormErrorElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYSFormErrorElement.h; sourceTree = "<group>"; };
+		C213D8D819182D5000F5086B /* MYSFormErrorElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYSFormErrorElement.m; sourceTree = "<group>"; };
+		C213D8DA19182D6B00F5086B /* MYSFormErrorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYSFormErrorCell.h; sourceTree = "<group>"; };
+		C213D8DB19182D6B00F5086B /* MYSFormErrorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYSFormErrorCell.m; sourceTree = "<group>"; };
+		C213D8DD19182D7E00F5086B /* MYSFormErrorCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MYSFormErrorCell.xib; sourceTree = "<group>"; };
+		C213D8E019182FA700F5086B /* MYSFormPresenceValidation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYSFormPresenceValidation.h; sourceTree = "<group>"; };
+		C213D8E119182FA700F5086B /* MYSFormPresenceValidation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYSFormPresenceValidation.m; sourceTree = "<group>"; };
+		C213D8E319182FC900F5086B /* MYSFormValidation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYSFormValidation.h; sourceTree = "<group>"; };
+		C213D8E419182FC900F5086B /* MYSFormValidation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYSFormValidation.m; sourceTree = "<group>"; };
+		C23CB39D191941A100C5C0B7 /* MYSFormRegexValidation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYSFormRegexValidation.h; sourceTree = "<group>"; };
+		C23CB39E191941A100C5C0B7 /* MYSFormRegexValidation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYSFormRegexValidation.m; sourceTree = "<group>"; };
 		C26614D9191533B80073DAD8 /* MYSSignUpFormViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYSSignUpFormViewController.h; sourceTree = "<group>"; };
 		C26614DA191533B80073DAD8 /* MYSSignUpFormViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYSSignUpFormViewController.m; sourceTree = "<group>"; };
 		C26614DC19153CD40073DAD8 /* MYSFormHeadlineCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MYSFormHeadlineCell.xib; sourceTree = "<group>"; };
@@ -96,8 +113,8 @@
 		C289A29D1913DAD30047D0CF /* MYSSpringyCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYSSpringyCollectionViewFlowLayout.m; sourceTree = "<group>"; };
 		C289A29F1913DC1B0047D0CF /* MYSTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYSTableViewController.h; sourceTree = "<group>"; };
 		C289A2A01913DC1B0047D0CF /* MYSTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYSTableViewController.m; sourceTree = "<group>"; };
-		C2AAD8D319140BFB00FDF78E /* MYSFakeUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYSFakeUser.h; sourceTree = "<group>"; };
-		C2AAD8D419140BFB00FDF78E /* MYSFakeUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYSFakeUser.m; sourceTree = "<group>"; };
+		C2AAD8D319140BFB00FDF78E /* MYSExampleUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYSExampleUser.h; sourceTree = "<group>"; };
+		C2AAD8D419140BFB00FDF78E /* MYSExampleUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYSExampleUser.m; sourceTree = "<group>"; };
 		C2AAD8DC191414C400FDF78E /* MYSFormsMedia.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = MYSFormsMedia.xcassets; sourceTree = "<group>"; };
 		C2B1BE0C1915A05B00F4E8BB /* MYSFormElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYSFormElement.h; sourceTree = "<group>"; };
 		C2B1BE0D1915A05B00F4E8BB /* MYSFormElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYSFormElement.m; sourceTree = "<group>"; };
@@ -109,8 +126,8 @@
 		C2B1BE161915A0AA00F4E8BB /* MYSFormTextFieldElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYSFormTextFieldElement.m; sourceTree = "<group>"; };
 		C2B1BE181915A0BE00F4E8BB /* MYSFormButtonElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYSFormButtonElement.h; sourceTree = "<group>"; };
 		C2B1BE191915A0BE00F4E8BB /* MYSFormButtonElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYSFormButtonElement.m; sourceTree = "<group>"; };
-		C2B1BE1C1915ECED00F4E8BB /* MYSEditFormViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYSEditFormViewController.h; sourceTree = "<group>"; };
-		C2B1BE1D1915ECED00F4E8BB /* MYSEditFormViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYSEditFormViewController.m; sourceTree = "<group>"; };
+		C2B1BE1C1915ECED00F4E8BB /* MYSValidationFormViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYSValidationFormViewController.h; sourceTree = "<group>"; };
+		C2B1BE1D1915ECED00F4E8BB /* MYSValidationFormViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYSValidationFormViewController.m; sourceTree = "<group>"; };
 		C2FE303D19149E5500C291A2 /* MYSFormButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYSFormButton.h; sourceTree = "<group>"; };
 		C2FE303E19149E5500C291A2 /* MYSFormButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYSFormButton.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -139,6 +156,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C213D8DF19182F2500F5086B /* Form Validations */ = {
+			isa = PBXGroup;
+			children = (
+				C213D8E319182FC900F5086B /* MYSFormValidation.h */,
+				C213D8E419182FC900F5086B /* MYSFormValidation.m */,
+				C213D8E019182FA700F5086B /* MYSFormPresenceValidation.h */,
+				C213D8E119182FA700F5086B /* MYSFormPresenceValidation.m */,
+				C23CB39D191941A100C5C0B7 /* MYSFormRegexValidation.h */,
+				C23CB39E191941A100C5C0B7 /* MYSFormRegexValidation.m */,
+			);
+			name = "Form Validations";
+			sourceTree = "<group>";
+		};
 		C289A2451913440A0047D0CF = {
 			isa = PBXGroup;
 			children = (
@@ -178,11 +208,8 @@
 				C289A2661913440A0047D0CF /* Main_iPad.storyboard */,
 				C289A29F1913DC1B0047D0CF /* MYSTableViewController.h */,
 				C289A2A01913DC1B0047D0CF /* MYSTableViewController.m */,
-				C26614D9191533B80073DAD8 /* MYSSignUpFormViewController.h */,
-				C26614DA191533B80073DAD8 /* MYSSignUpFormViewController.m */,
-				C2B1BE1C1915ECED00F4E8BB /* MYSEditFormViewController.h */,
-				C2B1BE1D1915ECED00F4E8BB /* MYSEditFormViewController.m */,
-				C2AAD8D219140BE500FDF78E /* Models */,
+				C2CA1AF61917DD23009786FC /* Example Forms */,
+				C2AAD8D219140BE500FDF78E /* Example Models */,
 				C289A2891913443C0047D0CF /* MYSForms */,
 				C289A26C1913440A0047D0CF /* Images.xcassets */,
 				C289A2581913440A0047D0CF /* Supporting Files */,
@@ -227,6 +254,7 @@
 				C2B1BE1B1915C68C00F4E8BB /* Collection View Layout */,
 				C2B1BE0B1915A03400F4E8BB /* Form Elements */,
 				C289A29B1913D7740047D0CF /* Form Element Cells */,
+				C213D8DF19182F2500F5086B /* Form Validations */,
 				C2AAD8D61914142100FDF78E /* Custom Views */,
 				C2AAD8DC191414C400FDF78E /* MYSFormsMedia.xcassets */,
 			);
@@ -250,17 +278,20 @@
 				C289A28F1913D6890047D0CF /* MYSFormButtonCell.h */,
 				C289A2901913D6890047D0CF /* MYSFormButtonCell.m */,
 				C26614EB19155A9D0073DAD8 /* MYSFormButtonCell.xib */,
+				C213D8DA19182D6B00F5086B /* MYSFormErrorCell.h */,
+				C213D8DB19182D6B00F5086B /* MYSFormErrorCell.m */,
+				C213D8DD19182D7E00F5086B /* MYSFormErrorCell.xib */,
 			);
 			name = "Form Element Cells";
 			sourceTree = "<group>";
 		};
-		C2AAD8D219140BE500FDF78E /* Models */ = {
+		C2AAD8D219140BE500FDF78E /* Example Models */ = {
 			isa = PBXGroup;
 			children = (
-				C2AAD8D319140BFB00FDF78E /* MYSFakeUser.h */,
-				C2AAD8D419140BFB00FDF78E /* MYSFakeUser.m */,
+				C2AAD8D319140BFB00FDF78E /* MYSExampleUser.h */,
+				C2AAD8D419140BFB00FDF78E /* MYSExampleUser.m */,
 			);
-			name = Models;
+			name = "Example Models";
 			sourceTree = "<group>";
 		};
 		C2AAD8D61914142100FDF78E /* Custom Views */ = {
@@ -285,6 +316,8 @@
 				C2B1BE161915A0AA00F4E8BB /* MYSFormTextFieldElement.m */,
 				C2B1BE181915A0BE00F4E8BB /* MYSFormButtonElement.h */,
 				C2B1BE191915A0BE00F4E8BB /* MYSFormButtonElement.m */,
+				C213D8D719182D5000F5086B /* MYSFormErrorElement.h */,
+				C213D8D819182D5000F5086B /* MYSFormErrorElement.m */,
 			);
 			name = "Form Elements";
 			sourceTree = "<group>";
@@ -296,6 +329,17 @@
 				C289A29D1913DAD30047D0CF /* MYSSpringyCollectionViewFlowLayout.m */,
 			);
 			name = "Collection View Layout";
+			sourceTree = "<group>";
+		};
+		C2CA1AF61917DD23009786FC /* Example Forms */ = {
+			isa = PBXGroup;
+			children = (
+				C26614D9191533B80073DAD8 /* MYSSignUpFormViewController.h */,
+				C26614DA191533B80073DAD8 /* MYSSignUpFormViewController.m */,
+				C2B1BE1C1915ECED00F4E8BB /* MYSValidationFormViewController.h */,
+				C2B1BE1D1915ECED00F4E8BB /* MYSValidationFormViewController.m */,
+			);
+			name = "Example Forms";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -378,6 +422,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C213D8DE19182D7E00F5086B /* MYSFormErrorCell.xib in Resources */,
 				C289A2681913440A0047D0CF /* Main_iPad.storyboard in Resources */,
 				C2AAD8DD191414C400FDF78E /* MYSFormsMedia.xcassets in Resources */,
 				C289A26D1913440A0047D0CF /* Images.xcassets in Resources */,
@@ -405,17 +450,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C2B1BE1E1915ECED00F4E8BB /* MYSEditFormViewController.m in Sources */,
+				C2B1BE1E1915ECED00F4E8BB /* MYSValidationFormViewController.m in Sources */,
 				C289A29A1913D7660047D0CF /* MYSFormTextFieldCell.m in Sources */,
-				C2AAD8D519140BFB00FDF78E /* MYSFakeUser.m in Sources */,
+				C213D8E519182FC900F5086B /* MYSFormValidation.m in Sources */,
+				C2AAD8D519140BFB00FDF78E /* MYSExampleUser.m in Sources */,
 				C2FE303F19149E5500C291A2 /* MYSFormButton.m in Sources */,
 				C2B1BE171915A0AA00F4E8BB /* MYSFormTextFieldElement.m in Sources */,
+				C213D8D919182D5000F5086B /* MYSFormErrorElement.m in Sources */,
+				C213D8DC19182D6B00F5086B /* MYSFormErrorCell.m in Sources */,
 				C2B1BE111915A07900F4E8BB /* MYSFormHeadlineElement.m in Sources */,
 				C289A2621913440A0047D0CF /* MYSAppDelegate.m in Sources */,
 				C2B1BE141915A08F00F4E8BB /* MYSFormFootnoteElement.m in Sources */,
 				C26614E0191544880073DAD8 /* MYSFormCell.m in Sources */,
 				C289A2971913D74E0047D0CF /* MYSFormFootnoteCell.m in Sources */,
 				C289A2941913D73E0047D0CF /* MYSFormHeadlineCell.m in Sources */,
+				C23CB39F191941A100C5C0B7 /* MYSFormRegexValidation.m in Sources */,
 				C289A2A11913DC1B0047D0CF /* MYSTableViewController.m in Sources */,
 				C2B1BE0E1915A05B00F4E8BB /* MYSFormElement.m in Sources */,
 				C289A28E191344DC0047D0CF /* MYSFormViewController.m in Sources */,
@@ -424,6 +473,7 @@
 				C289A25E1913440A0047D0CF /* main.m in Sources */,
 				C26614DB191533B80073DAD8 /* MYSSignUpFormViewController.m in Sources */,
 				C289A29E1913DAD30047D0CF /* MYSSpringyCollectionViewFlowLayout.m in Sources */,
+				C213D8E219182FA700F5086B /* MYSFormPresenceValidation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

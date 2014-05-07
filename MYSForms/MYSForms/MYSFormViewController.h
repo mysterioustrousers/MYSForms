@@ -15,6 +15,13 @@
 @protocol MYSFormViewControllerDelegate;
 
 
+
+/**
+ This view controller can be used to manage a collection view, using it to display a form with a wealth of features. You simply
+ create one of these form view controllers and configure it by adding form elements to it. You can also subclass it, making it
+ compatible with storyboards. Drag a Collection View Controller onto your storyboard and assign your subclass to it. When it is 
+ instantiated, your implementation of `configureForm` will be called where you can add form elements.
+ */
 @interface MYSFormViewController : UICollectionViewController
 
 /**
@@ -24,11 +31,15 @@
  */
 @property (nonatomic, strong) id model;
 
-
 /**
  The delegate for the form controller that lets you know of interesting events.
  */
 @property (nonatomic, weak) id<MYSFormViewControllerDelegate> formDelegate;
+
+/**
+ If your method of choice is to subclass `MYSFormCollectionView`, override this method in your subclass to configure your form.
+ */
+- (void)configureForm;
 
 /**
  If you create your own custom form elements, this is where you need to register their cell xibs with the collection view.
@@ -37,16 +48,14 @@
 - (void)registerElementCellsForReuse;
 
 /**
- If your method of choice is to subclass `MYSFormCollectionView`, override this method in your subclass to configure your form.
- */
-- (void)configureForm;
-
-/**
  Create subclasses of `MYSFormElement` and use this method to add them to the form. Elements will be displayed in the order they were
  added with this method.
  */
 - (void)addFormElement:(MYSFormElement *)element;
 
+/**
+ Allows you to add an element at a specific index;
+ */
 - (void)addFormElement:(MYSFormElement *)element atIndex:(NSInteger)index;
 
 /**
@@ -55,10 +64,34 @@
  */
 - (BOOL)validate;
 
+/**
+ Provided an element has a non-nil value for `loadingMessage`, a loading form element will be displayed below each element passed in.
+ If `nil` is passed in as `elements`, all elements with a loading message will display a loading element below them.
+ */
+- (void)showLoadingForElements:(NSArray *)elements;
+
+/**
+ If any element passed into this method is currently displaying loading element below it, it will be hid.
+ If `nil` is passed in as `elements`, all elements currently display a loading element will have the loading element hid.
+ */
+- (void)hideLoadingForElements:(NSArray *)elements;
 
 @end
 
 
+
+
+/**
+ Allows you to be informed of interesting events that happen with the form.
+ */
 @protocol MYSFormViewControllerDelegate <NSObject>
+
+/**
+ On every text input before the last, the return key on the iOS keyboard will be "Next", moving them to the next text input field.
+ On the last text input field, the return key will be a "Done" button and when pressed, this delegate method will be called, indicating
+ the user is done filling out the form. You can call `validate` in this method to make sure all forms are filled out correctly and if
+ `validate` returns YES, proceed with processing the model the form populated.
+ */
 - (void)formViewControllerDidSubmit:(MYSFormViewController *)controller;
+
 @end

@@ -6,10 +6,11 @@
 //  Copyright (c) 2014 Mysterious Trousers. All rights reserved.
 //
 
+#import "private.h"
 #import "MYSFormViewController.h"
 #import "MYSFormCollectionViewSpringyLayout.h"
-#import "MYSFormElement.h"
 #import "MYSFormErrorElement.h"
+#import "MYSFormLoadingElement.h"
 
 
 @interface MYSFormViewController () <UICollectionViewDelegateFlowLayout,
@@ -19,7 +20,6 @@
 @property (nonatomic, strong) NSMutableArray      *elements;
 @property (nonatomic, strong) NSMutableDictionary *cachedCellSizes;
 @property (nonatomic, assign) NSUInteger          outstandingValidationErrorCount;
-@property (nonatomic, weak)   UIView              *preInterfaceOrientationChangeFirstResponder;
 @end
 
 
@@ -99,24 +99,36 @@
     [self removeAllModelObservers];
 }
 
-- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-{
-    [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
-//    self.preInterfaceOrientationChangeFirstResponder = [self currentFirstResponder];
-}
-
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
     [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
     [self.cachedCellSizes removeAllObjects];
-//    [self.collectionView reloadData];
-//    [self.preInterfaceOrientationChangeFirstResponder becomeFirstResponder];
 }
 
 
 
 
 #pragma mark - Public
+
+- (void)setModel:(id)model
+{
+    [self removeAllModelObservers];
+    _model = model;
+    for (MYSFormElement *element in self.elements) {
+        if (element.modelKeyPath && ![element.modelKeyPath isEqualToString:@""]) {
+            [self.model addObserver:self
+                         forKeyPath:element.modelKeyPath
+                            options:0
+                            context:NULL];
+        }
+        [element updateCell];
+    }
+}
+
+- (void)configureForm
+{
+    // overriden by subclasses
+}
 
 - (void)registerElementCellsForReuse
 {
@@ -125,11 +137,7 @@
     [MYSFormTextFieldCell registerForReuseWithCollectionView:self.collectionView];
     [MYSFormButtonCell registerForReuseWithCollectionView:self.collectionView];
     [MYSFormErrorCell registerForReuseWithCollectionView:self.collectionView];
-}
-
-- (void)configureForm
-{
-    // overriden by subclasses
+    [MYSFormLoadingCell registerForReuseWithCollectionView:self.collectionView];
 }
 
 - (void)addFormElement:(MYSFormElement *)element
@@ -201,21 +209,42 @@
     return valid;
 }
 
-
-#pragma mark (properties)
-
-- (void)setModel:(id)model
+- (void)showLoadingForElements:(NSArray *)elements
 {
-    [self removeAllModelObservers];
-    _model = model;
-    for (MYSFormElement *element in self.elements) {
-        if (element.modelKeyPath && ![element.modelKeyPath isEqualToString:@""]) {
-            [self.model addObserver:self
-                         forKeyPath:element.modelKeyPath
-                            options:0
-                            context:NULL];
+    NSMutableArray *indexPathsToInsert = [NSMutableArray new];
+    for (MYSFormElement *element in [self.elements copy]) {
+        if (!elements || [elements containsObject:element]) {
+            if ([element.loadingMessage length] > 0) {
+                MYSFormLoadingElement *loadingElement = [MYSFormLoadingElement loadingFormElementWithParentFormElement:element];
+                NSInteger idx = [self.elements indexOfObject:element];
+                [self addFormElement:loadingElement atIndex:idx];
+                [indexPathsToInsert addObject:[NSIndexPath indexPathForItem:idx inSection:0]];
+            }
         }
-        [element updateCell];
+    }
+
+    if ([indexPathsToInsert count] > 0) {
+        [self.collectionView insertItemsAtIndexPaths:indexPathsToInsert];
+    }
+}
+
+- (void)hideLoadingForElements:(NSArray *)elements
+{
+    NSMutableArray *indexPathsToRemove = [NSMutableArray new];
+    NSArray *elementsCopy = [self.elements copy];
+    for (MYSFormElement *element in elementsCopy) {
+        if ([element isKindOfClass:[MYSFormLoadingElement class]]) {
+            MYSFormLoadingElement *loadingElement = (MYSFormLoadingElement *)element;
+            if (!elements || [elements containsObject:loadingElement.parentFormElement]) {
+                [self.elements removeObject:loadingElement];
+                NSInteger idx = [elementsCopy indexOfObject:loadingElement];
+                [indexPathsToRemove addObject:[NSIndexPath indexPathForItem:idx inSection:0]];
+            }
+        }
+    }
+
+    if ([indexPathsToRemove count] > 0) {
+        [self.collectionView deleteItemsAtIndexPaths:indexPathsToRemove];
     }
 }
 

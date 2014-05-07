@@ -7,7 +7,7 @@
 //
 
 #import "MYSFormViewController.h"
-#import "MYSSpringyCollectionViewFlowLayout.h"
+#import "MYSFormCollectionViewSpringyLayout.h"
 #import "MYSFormElement.h"
 #import "MYSFormErrorElement.h"
 
@@ -19,6 +19,7 @@
 @property (nonatomic, strong) NSMutableArray      *elements;
 @property (nonatomic, strong) NSMutableDictionary *cachedCellSizes;
 @property (nonatomic, assign) NSUInteger          outstandingValidationErrorCount;
+@property (nonatomic, weak)   UIView              *preInterfaceOrientationChangeFirstResponder;
 @end
 
 
@@ -32,7 +33,7 @@
 
 - (instancetype)init
 {
-    self = [super initWithCollectionViewLayout:[MYSSpringyCollectionViewFlowLayout new]];
+    self = [super initWithCollectionViewLayout:[MYSFormCollectionViewSpringyLayout new]];
     if (self) {
         [self commonInit];
     }
@@ -98,10 +99,18 @@
     [self removeAllModelObservers];
 }
 
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+//    self.preInterfaceOrientationChangeFirstResponder = [self currentFirstResponder];
+}
+
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
+    [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
     [self.cachedCellSizes removeAllObjects];
-    [self.collectionView reloadData];
+//    [self.collectionView reloadData];
+//    [self.preInterfaceOrientationChangeFirstResponder becomeFirstResponder];
 }
 
 
@@ -178,19 +187,16 @@
     }
 
     self.outstandingValidationErrorCount = [indexPathsToInsert count];
+    [self.cachedCellSizes removeAllObjects];
 
-    if ([indexPathsToRemove count] > 0) {
-        [self.cachedCellSizes removeAllObjects];
-        [self.collectionView performBatchUpdates:^{
+    [self.collectionView performBatchUpdates:^{
+        if ([indexPathsToRemove count] > 0) {
             [self.collectionView deleteItemsAtIndexPaths:indexPathsToRemove];
-            if ([indexPathsToInsert count] > 0) {
-                [self.collectionView insertItemsAtIndexPaths:indexPathsToInsert];
-            }
-        } completion:nil];
-    } else if ([indexPathsToInsert count] > 0) {
-        [self.collectionView insertItemsAtIndexPaths:indexPathsToInsert];
-        [self.cachedCellSizes removeAllObjects];
-    }
+        }
+        if ([indexPathsToInsert count] > 0) {
+            [self.collectionView insertItemsAtIndexPaths:indexPathsToInsert];
+        }
+    } completion:nil];
 
     return valid;
 }
@@ -251,7 +257,6 @@
         MYSFormElement *element = self.elements[indexPath.row];
         CGSize size = [[element cellClass] sizeRequiredForElement:element width:collectionView.frame.size.width];
         size.width = collectionView.frame.size.width;
-//    return size;
         cachedSize = [NSValue valueWithCGSize:size];
         self.cachedCellSizes[indexPath] = cachedSize;
     }
@@ -311,7 +316,13 @@
         CGFloat animationDuration   = [note.userInfo[UIKeyboardAnimationDurationUserInfoKey] floatValue];
         UIViewAnimationCurve curve  = [note.userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue];
         UIEdgeInsets insets         = self.collectionView.contentInset;
-        insets.bottom               = self.collectionView.bounds.size.height - endFrame.size.height;
+        if (self.interfaceOrientation == UIInterfaceOrientationPortrait ||
+            self.interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
+            insets.bottom = endFrame.size.height;
+        }
+        else {
+            insets.bottom = endFrame.size.width;
+        }
         [UIView animateWithDuration:animationDuration delay:0 options:(curve << 16) animations:^{
             self.collectionView.contentInset = insets;
         } completion:nil];
@@ -402,27 +413,14 @@
 
 - (UIView *)textInputAfter:(UIView *)textInput
 {
-    NSArray *visibleTextInputs = [self visibleTextInputs];
-    for (UIView *input in visibleTextInputs) {
-        if (input == textInput) {
-            NSInteger index = [visibleTextInputs indexOfObject:textInput];
-            if (index < [visibleTextInputs count] - 1) {
-                return visibleTextInputs[index + 1];
-            }
+    BOOL textInputFound = NO;
+    for (MYSFormElement *element in self.elements) {
+        if ([element.cell textInput] == textInput) {
+            textInputFound = YES;
+            continue;
         }
-    }
-    return nil;
-}
-
-- (UIView *)textInputBefore:(UIView *)textInput
-{
-    NSArray *visibleTextInputs = [self visibleTextInputs];
-    for (UIView *input in visibleTextInputs) {
-        if (input == textInput) {
-            NSInteger index = [visibleTextInputs indexOfObject:textInput];
-            if (index > 0) {
-                return visibleTextInputs[index - 1];
-            }
+        if (textInputFound && [element.cell textInput].window) {
+            return [element.cell textInput];
         }
     }
     return nil;
@@ -430,19 +428,14 @@
 
 - (NSArray *)visibleTextInputs
 {
-    NSArray *visibleCells = [self.collectionView visibleCells];
     NSMutableArray *visibleTextInputs = [NSMutableArray new];
-    for (MYSFormCell *cell in visibleCells) {
-        id textInput = [cell textInput];
-        if (textInput) {
+    for (MYSFormElement *element in self.elements) {
+        UIView * textInput = [element.cell textInput];
+        if (textInput.window) {
             [visibleTextInputs addObject:textInput];
         }
     }
-    return [visibleTextInputs sortedArrayUsingComparator:^NSComparisonResult(UIView *v1, UIView *v2) {
-        CGRect rectInWindow1 = [v1.superview convertRect:v1.frame toView:nil];
-        CGRect rectInWindow2 = [v2.superview convertRect:v2.frame toView:nil];
-        return rectInWindow1.origin.y < rectInWindow2.origin.y ? NSOrderedAscending : NSOrderedDescending;
-    }];
+    return visibleTextInputs;
 }
 
 // TODO: if the next text input is off screen, we need to scroll to it first, then give it first responder status.
@@ -457,33 +450,15 @@
     return textInputs;
 }
 
-//- (UIView *)currentFirstResponder
-//{
-//    NSArray *visibleTextInputs = [self visibleTextInputs];
-//    for (UIView *textInput in visibleTextInputs) {
-//        if ([textInput isFirstResponder]) {
-//            return textInput;
-//        }
-//    }
-//    return nil;
-//}
-
-//- (NSArray *)viewsThatCanBeDisabled
-//{
-//    return [[self allViewsOfForm] filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(UIView *view, NSDictionary *bindings) {
-//        return [view respondsToSelector:@selector(setEnabled:)];
-//    }]];
-//}
-//
-//- (NSArray *)allViewsOfForm
-//{
-//    NSMutableOrderedSet *allViews   = [NSMutableOrderedSet orderedSetWithObject:self.collectionView];
-//    NSInteger index                 = 0;
-//    while (index < [allViews count]) {
-//        UIView *view = allViews[index++];
-//        [allViews addObjectsFromArray:view.subviews];
-//    }
-//    return [allViews array];
-//}
+- (UIView *)currentFirstResponder
+{
+    NSArray *visibleTextInputs = [self visibleTextInputs];
+    for (UIView *textInput in visibleTextInputs) {
+        if ([textInput isFirstResponder]) {
+            return textInput;
+        }
+    }
+    return nil;
+}
 
 @end

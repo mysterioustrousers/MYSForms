@@ -12,6 +12,12 @@
 
 @implementation MYSFormErrorCell
 
+//- (void)awakeFromNib
+//{
+//    [super awakeFromNib];
+//    self.backgroundColor = [UIColor darkGrayColor];
+//}
+
 + (CGSize)sizeRequiredForElement:(MYSFormErrorElement *)element width:(CGFloat)width
 {
     width -= [self cellContentInset].left + [self cellContentInset].right;

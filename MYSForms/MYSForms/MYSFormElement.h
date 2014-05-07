@@ -26,6 +26,7 @@
 @property (nonatomic, weak  ) id<MYSFormElementDataSource> dataSource;
 @property (nonatomic, copy  ) NSString                     *modelKeyPath;
 @property (nonatomic, strong) MYSFormCell                  *cell;
+@property (nonatomic, assign) UIEdgeInsets                 edgeInsets;
 
 - (Class)cellClass;
 

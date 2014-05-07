@@ -7,5 +7,5 @@
 //
 
 
-@interface MYSSpringyCollectionViewFlowLayout : UICollectionViewFlowLayout
+@interface MYSFormCollectionViewSpringyLayout : UICollectionViewFlowLayout
 @end

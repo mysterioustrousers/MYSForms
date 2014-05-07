@@ -10,6 +10,7 @@
 #import "MYSFormFootnoteElement.h"
 #import "MYSFormTextFieldElement.h"
 #import "MYSFormButtonElement.h"
+#import "MYSFormLabelAndButtonElement.h"
 
 
 @protocol MYSFormViewControllerDelegate;

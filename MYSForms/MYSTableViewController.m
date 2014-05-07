@@ -47,6 +47,11 @@
     NSLog(@"Current Model: %@", self.fakeUser);
 }
 
+- (IBAction)labelAndButtonWasTapped:(id)sender
+{
+    NSLog(@"Label and button was tapped");
+}
+
 
 
 
@@ -79,13 +84,23 @@
         footnote.footnote = @"An example form that does not subclass the form view controller. It just creates one, configures and displays it.";
         [formViewController addFormElement:footnote];
 
+
         MYSFormTextFieldElement *emailField = [MYSFormTextFieldElement textFieldFormElementWithLabel:@"E-mail" modelKeyPath:@"email"];
         emailField.keyboardType = UIKeyboardTypeEmailAddress;
         [formViewController addFormElement:emailField];
 
+
         MYSFormTextFieldElement *passwordField = [MYSFormTextFieldElement textFieldFormElementWithLabel:@"Password" modelKeyPath:@"password"];
         passwordField.secure = YES;
         [formViewController addFormElement:passwordField];
+
+
+        MYSFormLabelAndButtonElement *labelAndButton = [MYSFormLabelAndButtonElement formElementWithLabel:@"A label"
+                                                                                              buttonTitle:@"A button"
+                                                                                                   target:self
+                                                                                                   action:@selector(labelAndButtonWasTapped:)];
+        [formViewController addFormElement:labelAndButton];
+
 
         MYSFormButtonElement *logInButton = [MYSFormButtonElement buttonFormElementWithTitle:@"Log Model Values"
                                                                                    target:self

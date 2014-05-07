@@ -27,7 +27,7 @@ static CGFloat standardSpacing  = 8;
     CGSize size = [element.parentFormElement.loadingMessage boundingRectWithSize:CGSizeMake(width, FLT_MAX)
                                                                          options:NSStringDrawingUsesLineFragmentOrigin
                                                                       attributes:@{
-                                                                                   NSFontAttributeName : [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote]
+                                                                                   NSFontAttributeName : [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline]
                                                                                    }
                                                                          context:nil].size;
     size.height = ceil(size.height);

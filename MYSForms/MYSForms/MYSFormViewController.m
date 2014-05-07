@@ -136,6 +136,7 @@
     [MYSFormFootnoteCell registerForReuseWithCollectionView:self.collectionView];
     [MYSFormTextFieldCell registerForReuseWithCollectionView:self.collectionView];
     [MYSFormButtonCell registerForReuseWithCollectionView:self.collectionView];
+    [MYSFormLabelAndButtonCell registerForReuseWithCollectionView:self.collectionView];
     [MYSFormErrorCell registerForReuseWithCollectionView:self.collectionView];
     [MYSFormLoadingCell registerForReuseWithCollectionView:self.collectionView];
 }
@@ -267,6 +268,7 @@
         cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([element cellClass]) forIndexPath:indexPath];
         [cell populateWithElement:element];
         element.cell = cell;
+        [element updateCell];
     }
 
     return cell;

@@ -30,6 +30,12 @@
     self.textField.delegate = nil;
 }
 
+- (void)didMoveToWindow
+{
+    [super didMoveToWindow];
+    [self layoutLabelAndTextFieldWithText:self.textField.text];
+}
+
 
 
 #pragma mark - Public
@@ -60,9 +66,23 @@
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     NSString *text = [textField.text stringByReplacingCharactersInRange:range withString:string];;
-
     [self.delegate formCell:self valueDidChange:text];
+    [self layoutLabelAndTextFieldWithText:text];
+    return YES;
+}
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:MYSFormTextFieldCellDidHitReturnKey object:textField];
+    return YES;
+}
+
+
+
+#pragma mark - Private
+
+- (void)layoutLabelAndTextFieldWithText:(NSString *)text
+{
     if (![text isEqualToString:@""] && self.labelCenterYConstraint.constant == 0) {
         [UIView animateWithDuration:0.25 animations:^{
             self.label.alpha                            = 1;
@@ -79,16 +99,7 @@
             [self layoutIfNeeded];
         }];
     }
-
-    return YES;
 }
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    [[NSNotificationCenter defaultCenter] postNotificationName:MYSFormTextFieldCellDidHitReturnKey object:textField];
-    return YES;
-}
-
 
 @end
 

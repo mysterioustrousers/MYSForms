@@ -10,9 +10,18 @@
 #import "MYSFormButtonCell.h"
 
 
+@class MYSFormButtonElement;
+
+
+typedef void(^MYSFormButtonActionBlock)(MYSFormButtonElement *element);
+
+
 @interface MYSFormButtonElement : MYSFormElement
-@property (nonatomic, copy  ) NSString *title;
-@property (nonatomic, strong) id       target;
-@property (nonatomic, assign) SEL      action;
-+ (instancetype)buttonFormElementWithTitle:(NSString *)title target:(id)target action:(SEL)action;
+
+@property (nonatomic, copy) NSString *title;
+
+@property (nonatomic, copy) MYSFormButtonActionBlock block;
+
++ (instancetype)buttonElementWithTitle:(NSString *)title block:(MYSFormButtonActionBlock)block;
+
 @end

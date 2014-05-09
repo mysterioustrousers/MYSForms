@@ -9,10 +9,13 @@
 #import "MYSFormCell.h"
 
 
-extern NSString * const MYSFormTextFieldCellDidHitReturnKey;
-
-
 @interface MYSFormTextFieldCell : MYSFormCell
-@property (nonatomic, weak) IBOutlet UILabel     *label;
+
+@property (nonatomic, weak) IBOutlet UILabel *label;
+
 @property (nonatomic, weak) IBOutlet UITextField *textField;
+
 @end
+
+
+extern NSString * const MYSFormTextFieldCellDidHitReturnKey;

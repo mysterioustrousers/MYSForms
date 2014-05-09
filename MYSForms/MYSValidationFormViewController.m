@@ -22,46 +22,32 @@
 {
     [super configureForm];
 
-    MYSFormHeadlineElement *title = [MYSFormHeadlineElement headlineFormElementWithHeadline:@"Edit User"];
-    [self addFormElement:title];
+    [self addFormElement:[MYSFormHeadlineElement headlineElementWithHeadline:@"Edit User"]];
 
-    MYSFormFootnoteElement *description = [MYSFormFootnoteElement new];
-    description.footnote = @"Example of a form that utilizes validations.";
-    [self addFormElement:description];
+    [self addFormElement:[MYSFormFootnoteElement footnoteElementWithFootnote:@"Example of a form that utilizes validations."]];
 
-    MYSFormTextFieldElement *firstNameField = [MYSFormTextFieldElement textFieldFormElementWithLabel:@"First Name" modelKeyPath:@"firstName"];
+    MYSFormTextFieldElement *firstNameField = [MYSFormTextFieldElement textFieldElementWithLabel:@"First Name" modelKeyPath:@"firstName"];
     [firstNameField addFormValidation:[MYSFormPresenceValidation new]];
     [self addFormElement:firstNameField];
 
-    MYSFormTextFieldElement *lastNameField = [MYSFormTextFieldElement textFieldFormElementWithLabel:@"Last Name" modelKeyPath:@"lastName"];
+    MYSFormTextFieldElement *lastNameField = [MYSFormTextFieldElement textFieldElementWithLabel:@"Last Name" modelKeyPath:@"lastName"];
     [lastNameField addFormValidation:[MYSFormPresenceValidation new]];
     [self addFormElement:lastNameField];
 
-    MYSFormTextFieldElement *emailField = [MYSFormTextFieldElement textFieldFormElementWithLabel:@"E-mail" modelKeyPath:@"email"];
+    MYSFormTextFieldElement *emailField = [MYSFormTextFieldElement textFieldElementWithLabel:@"E-mail" modelKeyPath:@"email"];
     emailField.keyboardType = UIKeyboardTypeEmailAddress;
     [emailField addFormValidation:[MYSFormPresenceValidation new]];
     [emailField addFormValidation:[MYSFormRegexValidation regexValidationWithName:MYSFormRegexValidationPatternEmail]];
     [self addFormElement:emailField];
 
-    MYSFormButtonElement *validateButton = [MYSFormButtonElement buttonFormElementWithTitle:@"Validate"
-                                                                                     target:self
-                                                                                     action:@selector(validateForm:)];
-    [self addFormElement:validateButton];
-}
-
-
-
-
-#pragma mark - Actions
-
-- (void)validateForm:(id)sender
-{
-    if ([self validate]) {
-        NSLog(@"Valid!");
-    }
-    else {
-        NSLog(@"Not Valid!");
-    }
+    [self addFormElement:[MYSFormButtonElement buttonElementWithTitle:@"Validate" block:^(MYSFormButtonElement *element) {
+        if ([self validate]) {
+            NSLog(@"Valid!");
+        }
+        else {
+            NSLog(@"Not Valid!");
+        }
+    }]];
 }
 
 @end

@@ -8,15 +8,15 @@
 
 #import "MYSFormLabelAndButtonElement.h"
 
+
 @implementation MYSFormLabelAndButtonElement
 
-+ (instancetype)formElementWithLabel:(NSString *)label buttonTitle:(NSString *)buttonTitle target:(id)target action:(SEL)action
++ (instancetype)buttonElementWithLabel:(NSString *)label title:(NSString *)title block:(MYSFormButtonActionBlock)block
 {
     MYSFormLabelAndButtonElement *element = [MYSFormLabelAndButtonElement new];
-    element.label       = label;
-    element.buttonTitle = buttonTitle;
-    element.target      = target;
-    element.action      = action;
+    element.label   = label;
+    element.title   = title;
+    element.block   = block;
     return element;
 }
 

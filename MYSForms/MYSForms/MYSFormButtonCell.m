@@ -8,6 +8,7 @@
 
 #import "MYSFormButtonCell.h"
 #import "MYSFormButtonElement.h"
+#import "private.h"
 
 
 @implementation MYSFormButtonCell
@@ -15,7 +16,16 @@
 - (void)populateWithElement:(MYSFormButtonElement *)element
 {
     [self.button setTitle:element.title forState:UIControlStateNormal];
-    [self.button addTarget:element.target action:element.action forControlEvents:UIControlEventTouchUpInside];
+}
+
+
+
+
+#pragma mark - Actions
+
+- (IBAction)buttonWasTapped:(id)sender
+{
+    [self.buttonCellDelegate formButtonCell:self didTapButton:sender];
 }
 
 @end

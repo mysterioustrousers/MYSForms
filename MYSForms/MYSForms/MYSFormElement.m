@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Mysterious Trousers. All rights reserved.
 //
 
-#import "private.h"
 #import "MYSFormElement.h"
 #import "MYSFormCell.h"
+#import "private.h"
 
 
 @interface MYSFormElement () <MYSFormCellDelegate>

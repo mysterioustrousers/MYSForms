@@ -11,8 +11,13 @@
 
 
 @interface MYSFormTextFieldElement : MYSFormElement
-@property (nonatomic, copy                   ) NSString       *label;
-@property (nonatomic, assign, getter=isSecure) BOOL           secure;
-@property (nonatomic, assign                 ) UIKeyboardType keyboardType;
-+ (instancetype)textFieldFormElementWithLabel:(NSString *)label modelKeyPath:(NSString *)modelKeyPath;
+
+@property (nonatomic, copy) NSString *label;
+
+@property (nonatomic, assign, getter=isSecure) BOOL secure;
+
+@property (nonatomic, assign) UIKeyboardType keyboardType;
+
++ (instancetype)textFieldElementWithLabel:(NSString *)label modelKeyPath:(NSString *)modelKeyPath;
+
 @end

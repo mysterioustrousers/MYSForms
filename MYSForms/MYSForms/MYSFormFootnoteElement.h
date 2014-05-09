@@ -11,6 +11,9 @@
 
 
 @interface MYSFormFootnoteElement : MYSFormElement
+
 @property (nonatomic, copy) NSString *footnote;
-+ (instancetype)footnoteFormElementWithFootnote:(NSString *)footnote;
+
++ (instancetype)footnoteElementWithFootnote:(NSString *)footnote;
+
 @end

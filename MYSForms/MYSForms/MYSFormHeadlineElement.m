@@ -11,7 +11,7 @@
 
 @implementation MYSFormHeadlineElement
 
-+ (instancetype)headlineFormElementWithHeadline:(NSString *)headline
++ (instancetype)headlineElementWithHeadline:(NSString *)headline
 {
     MYSFormHeadlineElement *element = [MYSFormHeadlineElement new];
     element.headline = headline;

@@ -7,16 +7,38 @@
 //
 
 #import "MYSFormButtonElement.h"
+#import "MYSFormButtonCell.h"
+#import "private.h"
+
+
+@interface MYSFormButtonElement () <MYSFormButtonCellDelegate>
+@end
+
 
 @implementation MYSFormButtonElement
 
-+ (instancetype)buttonFormElementWithTitle:(NSString *)title target:(id)target action:(SEL)action
++ (instancetype)buttonElementWithTitle:(NSString *)title block:(MYSFormButtonActionBlock)block
 {
     MYSFormButtonElement *element   = [MYSFormButtonElement new];
     element.title                   = title;
-    element.target                  = target;
-    element.action                  = action;
+    element.block                   = block;
     return element;
+}
+
+- (void)setCell:(MYSFormButtonCell *)cell
+{
+    [super setCell:cell];
+    cell.buttonCellDelegate = self;
+}
+
+
+
+
+#pragma mark - DELEGATE button cell
+
+- (void)formButtonCell:(MYSFormButtonCell *)cell didTapButton:(UIButton *)button
+{
+    if (self.block) self.block(self);
 }
 
 @end

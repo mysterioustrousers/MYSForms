@@ -8,6 +8,7 @@
 
 #import "MYSFormTextFieldCell.h"
 #import "MYSFormTextFieldElement.h"
+#import "private.h"
 
 
 @interface MYSFormTextFieldCell () <UITextFieldDelegate>
@@ -35,6 +36,7 @@
     [super didMoveToWindow];
     [self layoutLabelAndTextFieldWithText:self.textField.text];
 }
+
 
 
 

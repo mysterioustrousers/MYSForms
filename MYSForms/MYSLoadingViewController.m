@@ -21,67 +21,49 @@
 {
     [super configureForm];
 
-    MYSFormHeadlineElement *title = [MYSFormHeadlineElement headlineFormElementWithHeadline:@"Edit User"];
-    [self addFormElement:title];
 
-    MYSFormFootnoteElement *description = [MYSFormFootnoteElement new];
-    description.footnote = @"Example of a form that utilizes the built-in loading mechanism on form elements. Dismisses after 4 seconds.";
-    [self addFormElement:description];
-
-    MYSFormTextFieldElement *firstNameField = [MYSFormTextFieldElement textFieldFormElementWithLabel:@"First Name" modelKeyPath:@"firstName"];
-    firstNameField.loadingMessage = @"Loading for a specific form element.";
-    [self addFormElement:firstNameField];
-    self.firstNameElement = firstNameField;
-
-    MYSFormButtonElement *loadButton = [MYSFormButtonElement buttonFormElementWithTitle:@"Show Loading"
-                                                                                     target:self
-                                                                                     action:@selector(startLoading:)];
-    loadButton.loadingMessage = @"This is a loading message added to Show Loading button";
-    [self addFormElement:loadButton];
-    self.loadButtonElement = loadButton;
-
-    MYSFormButtonElement *loadSpecificElement = [MYSFormButtonElement buttonFormElementWithTitle:@"Show Loading Specific"
-                                                                                     target:self
-                                                                                     action:@selector(showLoadingByFirstName:)];
-    [self addFormElement:loadSpecificElement];
-
-    MYSFormButtonElement *hideSpecificElement = [MYSFormButtonElement buttonFormElementWithTitle:@"Hide Loading Specific"
-                                                                                     target:self
-                                                                                     action:@selector(loadAllAndStopOne:)];
-    hideSpecificElement.loadingMessage = @"This will show loading for all elements that have a loadingMessage value set, but stop all but one element after 4 seconds. And then all after 6 seconds.";
-    [self addFormElement:hideSpecificElement];
-}
+    [self addFormElement:[MYSFormHeadlineElement headlineElementWithHeadline:@"Edit User"]];
 
 
+    [self addFormElement:[MYSFormFootnoteElement footnoteElementWithFootnote:@"Example of a form that utilizes the built-in loading mechanism on form elements. Dismisses after 4 seconds."]];
 
 
-#pragma mark - Actions
+    self.firstNameElement = [MYSFormTextFieldElement textFieldElementWithLabel:@"First Name" modelKeyPath:@"firstName"];
+    self.firstNameElement.loadingMessage = @"Loading for a specific form element.";
+    [self addFormElement:self.firstNameElement];
 
-- (void)startLoading:(id)sender
-{
-    [self showLoadingForElements:@[self.loadButtonElement]];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self hideLoadingForElements:nil];
-    });
-}
 
-- (void)showLoadingByFirstName:(id)sender
-{
-    [self showLoadingForElements:@[self.firstNameElement]];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self hideLoadingForElements:nil];
-    });
-}
-
-- (void)loadAllAndStopOne:(id)sender
-{
-    [self showLoadingForElements:nil];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self hideLoadingForElements:@[self.firstNameElement, self.loadButtonElement]];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    self.loadButtonElement = [MYSFormButtonElement buttonElementWithTitle:@"Show Loading" block:^(MYSFormElement *element) {
+        [self showLoadingForElements:@[self.loadButtonElement]];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [self hideLoadingForElements:nil];
         });
-    });
+    }];
+    self.loadButtonElement.loadingMessage = @"This is a loading message added to Show Loading button";
+    [self addFormElement:self.loadButtonElement];
+
+
+    [self addFormElement:[MYSFormButtonElement buttonElementWithTitle:@"Show Loading Specific" block:^(MYSFormElement *element) {
+        [self showLoadingForElements:@[self.firstNameElement]];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self hideLoadingForElements:nil];
+        });
+    }]];
+
+
+    MYSFormButtonElement *button =
+    [MYSFormButtonElement buttonElementWithTitle:@"Hide Loading Specific" block:^(MYSFormElement *element) {
+        [self showLoadingForElements:nil];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self hideLoadingForElements:@[self.firstNameElement, self.loadButtonElement]];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self hideLoadingForElements:nil];
+            });
+        });
+    }];
+    button.loadingMessage = @"This will show loading for all elements that have a loadingMessage value set, but stop all but one element after 4 seconds. And then all after 6 seconds.";
+    [self addFormElement:button];
 }
+
 
 @end

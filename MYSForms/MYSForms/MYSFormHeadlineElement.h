@@ -11,6 +11,9 @@
 
 
 @interface MYSFormHeadlineElement : MYSFormElement
+
 @property (nonatomic, copy) NSString *headline;
-+ (instancetype)headlineFormElementWithHeadline:(NSString *)headline;
+
++ (instancetype)headlineElementWithHeadline:(NSString *)headline;
+
 @end

@@ -8,6 +8,7 @@
 
 #import "MYSFormHeadlineCell.h"
 #import "MYSFormHeadlineElement.h"
+#import "private.h"
 
 
 @implementation MYSFormHeadlineCell

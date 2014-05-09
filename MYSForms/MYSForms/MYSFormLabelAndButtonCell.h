@@ -6,9 +6,10 @@
 //  Copyright (c) 2014 Mysterious Trousers. All rights reserved.
 //
 
-#import "MYSFormCell.h"
+#import "MYSFormButtonCell.h"
 
-@interface MYSFormLabelAndButtonCell : MYSFormCell
-@property (nonatomic, weak) IBOutlet UIButton *button;
-@property (nonatomic, weak) IBOutlet UILabel  *label;
+@interface MYSFormLabelAndButtonCell : MYSFormButtonCell
+
+@property (nonatomic, weak) IBOutlet UILabel *label;
+
 @end

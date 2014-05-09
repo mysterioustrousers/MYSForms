@@ -10,7 +10,7 @@
 
 @implementation MYSFormTextFieldElement
 
-+ (instancetype)textFieldFormElementWithLabel:(NSString *)label modelKeyPath:(NSString *)modelKeyPath
++ (instancetype)textFieldElementWithLabel:(NSString *)label modelKeyPath:(NSString *)modelKeyPath
 {
     MYSFormTextFieldElement *element    = [MYSFormTextFieldElement new];
     element.label                       = label;

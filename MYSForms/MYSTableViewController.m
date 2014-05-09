@@ -40,26 +40,11 @@
 
 
 
-#pragma mark - Actions
-
-- (void)logModelValues:(id)sender
-{
-    NSLog(@"Current Model: %@", self.fakeUser);
-}
-
-- (IBAction)labelAndButtonWasTapped:(id)sender
-{
-    NSLog(@"Label and button was tapped");
-}
-
-
-
-
 #pragma mark - DELEGATE form view controller
 
 - (void)formViewControllerDidSubmit:(MYSFormViewController *)controller
 {
-    [self logModelValues:nil];
+    NSLog(@"Current Model: %@", self.fakeUser);
 }
 
 
@@ -76,7 +61,7 @@
         // setting the model before configuration
         formViewController.model = self.fakeUser;
 
-        MYSFormHeadlineElement *headline = [MYSFormHeadlineElement headlineFormElementWithHeadline:@"Log In"];
+        MYSFormHeadlineElement *headline = [MYSFormHeadlineElement headlineElementWithHeadline:@"Log In"];
         [formViewController addFormElement:headline];
 
 
@@ -85,27 +70,25 @@
         [formViewController addFormElement:footnote];
 
 
-        MYSFormTextFieldElement *emailField = [MYSFormTextFieldElement textFieldFormElementWithLabel:@"E-mail" modelKeyPath:@"email"];
+        MYSFormTextFieldElement *emailField = [MYSFormTextFieldElement textFieldElementWithLabel:@"E-mail" modelKeyPath:@"email"];
         emailField.keyboardType = UIKeyboardTypeEmailAddress;
         [formViewController addFormElement:emailField];
 
 
-        MYSFormTextFieldElement *passwordField = [MYSFormTextFieldElement textFieldFormElementWithLabel:@"Password" modelKeyPath:@"password"];
+        MYSFormTextFieldElement *passwordField = [MYSFormTextFieldElement textFieldElementWithLabel:@"Password" modelKeyPath:@"password"];
         passwordField.secure = YES;
         [formViewController addFormElement:passwordField];
 
 
-        MYSFormLabelAndButtonElement *labelAndButton = [MYSFormLabelAndButtonElement formElementWithLabel:@"A label"
-                                                                                              buttonTitle:@"A button"
-                                                                                                   target:self
-                                                                                                   action:@selector(labelAndButtonWasTapped:)];
-        [formViewController addFormElement:labelAndButton];
+        [formViewController addFormElement:[MYSFormLabelAndButtonElement buttonElementWithLabel:@"A label" title:@"A button" block:^(MYSFormButtonElement *element) {
+            NSLog(@"Label and button was tapped");
+        }]];
 
 
-        MYSFormButtonElement *logInButton = [MYSFormButtonElement buttonFormElementWithTitle:@"Log Model Values"
-                                                                                   target:self
-                                                                                   action:@selector(logModelValues:)];
-        [formViewController addFormElement:logInButton];
+        [formViewController addFormElement:[MYSFormButtonElement buttonElementWithTitle:@"Log Model Values" block:^(MYSFormButtonElement *element) {
+            NSLog(@"Current Model: %@", self.fakeUser);
+        }]];
+
 
         formViewController.formDelegate = self;
         

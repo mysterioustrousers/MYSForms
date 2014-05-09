@@ -13,9 +13,8 @@
 
 - (void)populateWithElement:(MYSFormLabelAndButtonElement *)element
 {
+    [super populateWithElement:element];
     self.label.text = element.label;
-    [self.button setTitle:element.buttonTitle forState:UIControlStateNormal];
-    [self.button addTarget:element.target action:element.action forControlEvents:UIControlEventTouchUpInside];
 }
 
 @end

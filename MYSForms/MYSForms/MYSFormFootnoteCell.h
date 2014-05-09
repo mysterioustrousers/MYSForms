@@ -10,6 +10,8 @@
 
 
 @interface MYSFormFootnoteCell : MYSFormCell
+
 @property (weak, nonatomic) IBOutlet UILabel *footnoteLabel;
+
 @end
 

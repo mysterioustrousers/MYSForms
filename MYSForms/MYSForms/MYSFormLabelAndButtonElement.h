@@ -6,13 +6,14 @@
 //  Copyright (c) 2014 Mysterious Trousers. All rights reserved.
 //
 
-#import "MYSFormElement.h"
+#import "MYSFormButtonElement.h"
 #import "MYSFormLabelAndButtonCell.h"
 
-@interface MYSFormLabelAndButtonElement : MYSFormElement
-@property (nonatomic, copy  ) NSString *label;
-@property (nonatomic, copy  ) NSString *buttonTitle;
-@property (nonatomic, strong) id       target;
-@property (nonatomic, assign) SEL      action;
-+ (instancetype)formElementWithLabel:(NSString *)label buttonTitle:(NSString *)buttonTitle target:(id)target action:(SEL)action;
+
+@interface MYSFormLabelAndButtonElement : MYSFormButtonElement
+
+@property (nonatomic, copy) NSString *label;
+
++ (instancetype)buttonElementWithLabel:(NSString *)label title:(NSString *)title block:(MYSFormButtonActionBlock)block;
+
 @end

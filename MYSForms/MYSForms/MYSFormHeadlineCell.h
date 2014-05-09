@@ -10,5 +10,7 @@
 
 
 @interface MYSFormHeadlineCell : MYSFormCell
+
 @property (weak, nonatomic) IBOutlet UILabel *headlineLabel;
+
 @end

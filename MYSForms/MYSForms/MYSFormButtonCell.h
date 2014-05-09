@@ -9,6 +9,18 @@
 #import "MYSFormCell.h"
 
 
+@protocol MYSFormButtonCellDelegate;
+
+
 @interface MYSFormButtonCell : MYSFormCell
+
+@property (nonatomic, weak) id<MYSFormButtonCellDelegate> buttonCellDelegate;
+
 @property (nonatomic, weak) IBOutlet UIButton *button;
+
+@end
+
+
+@protocol MYSFormButtonCellDelegate <NSObject>
+- (void)formButtonCell:(MYSFormButtonCell *)cell didTapButton:(UIButton *)button;
 @end

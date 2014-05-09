@@ -10,6 +10,7 @@
 #import "MYSFormRegexValidation.h"
 
 
+@class MYSFormElement;
 @class MYSFormCell;
 
 

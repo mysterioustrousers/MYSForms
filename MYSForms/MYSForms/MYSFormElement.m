@@ -8,10 +8,9 @@
 
 #import "MYSFormElement.h"
 #import "MYSFormCell.h"
-#import "private.h"
 
 
-@interface MYSFormElement () <MYSFormCellDelegate>
+@interface MYSFormElement ()
 @property (nonatomic, strong) NSMutableSet *formValidations;
 @end
 
@@ -31,12 +30,6 @@
 
 
 #pragma mark - Public
-
-- (void)setCell:(MYSFormCell *)cell
-{
-    _cell = cell;
-    cell.delegate = self;
-}
 
 - (Class)cellClass
 {
@@ -78,16 +71,5 @@
     }
     return validationErrors;
 }
-
-
-
-
-#pragma mark - DELEGATE cell
-
-- (void)formCell:(MYSFormCell *)cell valueDidChange:(id)value
-{
-    [self.delegate formElement:self valueDidChange:value];
-}
-
 
 @end

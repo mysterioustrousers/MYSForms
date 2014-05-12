@@ -8,7 +8,6 @@
 
 #import "MYSFormHeadlineCell.h"
 #import "MYSFormHeadlineElement.h"
-#import "private.h"
 
 
 @implementation MYSFormHeadlineCell
@@ -29,6 +28,7 @@
 - (void)populateWithElement:(MYSFormHeadlineElement *)element
 {
     self.headlineLabel.text = element.headline;
+    [super populateWithElement:element];
 }
 
 @end

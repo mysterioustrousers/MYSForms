@@ -9,12 +9,7 @@
 @class MYSFormElement;
 
 
-@protocol MYSFormCellDelegate;
-
-
 @interface MYSFormCell : UICollectionViewCell
-
-@property (nonatomic, weak) id<MYSFormCellDelegate> delegate;
 
 + (void)registerForReuseWithCollectionView:(UICollectionView *)collectionView;
 
@@ -28,9 +23,4 @@
 
 - (UIView *)textInput;
 
-@end
-
-
-@protocol MYSFormCellDelegate <NSObject>
-- (void)formCell:(MYSFormCell *)cell valueDidChange:(id)value;
 @end

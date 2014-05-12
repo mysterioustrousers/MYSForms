@@ -8,7 +8,6 @@
 
 #import "MYSFormButtonElement.h"
 #import "MYSFormButtonCell.h"
-#import "private.h"
 
 
 @interface MYSFormButtonElement () <MYSFormButtonCellDelegate>

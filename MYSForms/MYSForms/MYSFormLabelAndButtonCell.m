@@ -13,8 +13,8 @@
 
 - (void)populateWithElement:(MYSFormLabelAndButtonElement *)element
 {
-    [super populateWithElement:element];
     self.label.text = element.label;
+    [super populateWithElement:element];
 }
 
 @end

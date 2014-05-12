@@ -35,7 +35,7 @@
 
 - (void)populateWithElement:(MYSFormElement *)element
 {
-    NSAssert(NO, @"This class MUST be subclassed and this method overriden without calling super.");
+    [self setNeedsLayout];
 }
 
 - (UIView *)textInput

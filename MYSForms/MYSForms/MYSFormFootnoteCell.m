@@ -28,6 +28,7 @@
 - (void)populateWithElement:(MYSFormFootnoteElement *)element
 {
     self.footnoteLabel.text = element.footnote;
+    [super populateWithElement:element];
 }
 
 @end

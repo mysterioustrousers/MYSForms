@@ -8,7 +8,7 @@
 
 #import "MYSFormTextFieldCell.h"
 #import "MYSFormTextFieldElement.h"
-#import "private.h"
+#import "MYSFormTextFieldCell-Private.h"
 
 
 @interface MYSFormTextFieldCell () <UITextFieldDelegate>
@@ -69,7 +69,7 @@
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     NSString *text = [textField.text stringByReplacingCharactersInRange:range withString:string];;
-    [self.delegate formCell:self valueDidChange:text];
+    [self.textFieldCellDelegate textFormCell:self textDidChange:text];
     [self layoutLabelAndTextFieldWithText:text];
     return YES;
 }

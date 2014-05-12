@@ -8,10 +8,7 @@
 
 #import "MYSFormImagePickerCell.h"
 #import "MYSFormImagePickerElement.h"
-
-
-NSString * const MYSFormImagePickerCellActionSheetButtonTakePhoto           = @"Take Photo";
-NSString * const MYSFormImagePickerCellActionSheetButtonChooseFromLibrary   = @"Choose From Library";
+#import "MYSFormImagePickerCell-Private.h"
 
 
 @interface MYSFormImagePickerCell () <UIActionSheetDelegate>
@@ -29,7 +26,8 @@ NSString * const MYSFormImagePickerCellActionSheetButtonChooseFromLibrary   = @"
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    self.imageView.layer.cornerRadius = self.imageView.bounds.size.width / 2.0;
+    self.imageView.layer.cornerRadius   = self.imageView.bounds.size.width / 2.0;
+    self.imageView.layer.masksToBounds  = YES;
 }
 
 + (CGSize)sizeRequiredForElement:(MYSFormImagePickerElement *)element width:(CGFloat)width
@@ -51,6 +49,7 @@ NSString * const MYSFormImagePickerCellActionSheetButtonChooseFromLibrary   = @"
 {
     self.imageView.image    = element.image;
     self.label.text         = element.label;
+    [super populateWithElement:element];
 }
 
 
@@ -60,39 +59,8 @@ NSString * const MYSFormImagePickerCellActionSheetButtonChooseFromLibrary   = @"
 
 - (IBAction)cellWasTapped:(id)sender
 {
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil
-                                                             delegate:self
-                                                    cancelButtonTitle:@"Cancel"
-                                               destructiveButtonTitle:(self.imageView.image ? @"Remove Image" : nil)
-                                                    otherButtonTitles:
-                                  MYSFormImagePickerCellActionSheetButtonTakePhoto,
-                                  MYSFormImagePickerCellActionSheetButtonChooseFromLibrary,
-                                  nil];
-    [actionSheet showInView:self.window];
+    [self.imagePickerCellDelegate formImagePickerCellWasTapped:self];
 }
-
-
-
-
-#pragma mark - DELEGATE action sheet
-
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-//    UIImagePickerController *imagePickerController = [UIImagePickerController new];
-//    imagePickerController.delegate = self;
-//
-//    NSString *buttonTitle = [actionSheet buttonTitleAtIndex:buttonIndex];
-//    if ([buttonTitle isEqualToString:@"Take Photo"]) {
-//        imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
-//    }
-//    if ([buttonTitle isEqualToString:@"Choose From Library"]) {
-//        imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-//    }
-}
-
-
-
-
 
 
 @end

@@ -7,6 +7,12 @@
 //
 
 #import "MYSFormTextFieldElement.h"
+#import "MYSFormTextFieldCell-Private.h"
+
+
+@interface MYSFormTextFieldElement () <MYSFormTextFieldCellDelegate>
+@end
+
 
 @implementation MYSFormTextFieldElement
 
@@ -23,6 +29,22 @@
 - (BOOL)isTextInput
 {
     return YES;
+}
+
+- (void)setCell:(MYSFormTextFieldCell *)cell
+{
+    [super setCell:cell];
+    cell.textFieldCellDelegate = self;
+}
+
+
+
+
+#pragma mark - DELEGATE text field cell
+
+- (void)textFormCell:(MYSFormTextFieldCell *)cell textDidChange:(NSString *)text
+{
+    [self.delegate formElement:self valueDidChange:text];
 }
 
 @end

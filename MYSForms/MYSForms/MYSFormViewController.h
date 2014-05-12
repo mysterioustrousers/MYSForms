@@ -108,7 +108,7 @@
  Allows you to be informed of interesting events that happen with the form.
  */
 @protocol MYSFormViewControllerDelegate <NSObject>
-
+@optional
 /**
  On every text input before the last, the return key on the iOS keyboard will be "Next", moving them to the next text input field.
  On the last text input field, the return key will be a "Done" button and when pressed, this delegate method will be called, indicating
@@ -116,5 +116,14 @@
  `validate` returns YES, proceed with processing the model the form populated.
  */
 - (void)formViewControllerDidSubmit:(MYSFormViewController *)controller;
+
+/**
+ When a change is made and it can't be associated with a model's property (because no `modelKeyPath` was given, or no model is associated
+ with the form, this method is called to give you a chance to deal with the value change manually. This is
+ useful if you can't associate a model's property with a form element easily and a lot of special case work has to be done to
+ get the changed value into a form the model is designed for. This is also useful if you are not using a model with your form, meaning
+ the form has no model.
+ */
+- (void)formViewController:(MYSFormViewController *)controller failedToUpdateModelWithElement:(MYSFormElement *)element;
 
 @end

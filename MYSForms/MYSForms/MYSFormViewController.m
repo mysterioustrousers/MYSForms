@@ -6,7 +6,6 @@
 //  Copyright (c) 2014 Mysterious Trousers. All rights reserved.
 //
 
-#import "private.h"
 #import "MYSForms.h"
 #import "MYSFormMessageElement.h"
 #import "MYSFormLoadingCell.h"
@@ -25,6 +24,7 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
 @property (nonatomic, strong) NSMutableArray      *elements;
 @property (nonatomic, strong) NSMutableDictionary *cachedCellSizes;
 @property (nonatomic, assign) NSUInteger          outstandingValidationErrorCount;
+@property (nonatomic, assign) BOOL                appearedFirstTime;
 @end
 
 
@@ -33,6 +33,7 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
 - (void)commonInit
 {
     self.elements = [NSMutableArray new];
+    self.appearedFirstTime = NO;
     [self configureForm];
 }
 
@@ -79,23 +80,30 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    UIEdgeInsets insets = self.collectionView.contentInset;
-    insets.top += self.collectionView.bounds.size.height;
-    self.collectionView.contentInset = insets;
+    if (!self.appearedFirstTime) {
+        UIEdgeInsets insets = self.collectionView.contentInset;
+        insets.top += self.collectionView.bounds.size.height;
+        self.collectionView.contentInset = insets;
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    UIEdgeInsets insets = self.collectionView.contentInset;
-    insets.top -= self.collectionView.bounds.size.height;
-    [UIView animateWithDuration:0.5 animations:^{
-        self.collectionView.contentInset = insets;
-    } completion:^(BOOL finished) {
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [[[self visibleTextInputs] firstObject] becomeFirstResponder];
-        });
-    }];
+    if (!self.appearedFirstTime) {
+        self.appearedFirstTime = YES;
+        UIEdgeInsets insets = self.collectionView.contentInset;
+        insets.top -= self.collectionView.bounds.size.height;
+        [UIView animateWithDuration:0.5 animations:^{
+            self.collectionView.contentInset = insets;
+        } completion:^(BOOL finished) {
+            if (self.isEditing) {
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [[[self visibleTextInputs] firstObject] becomeFirstResponder];
+                });
+            }
+        }];
+    }
 }
 
 - (void)dealloc
@@ -309,7 +317,26 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
 
 - (void)formElement:(MYSFormElement *)formElement valueDidChange:(id)value
 {
-    [self.model setValue:value forKeyPath:formElement.modelKeyPath];
+    if (self.model && [formElement.modelKeyPath length] > 0) {
+        [self.model setValue:value forKeyPath:formElement.modelKeyPath];
+    }
+    else {
+        if ([self.formDelegate respondsToSelector:@selector(formViewController:failedToUpdateModelWithElement:)]) {
+            [self.formDelegate formViewController:self failedToUpdateModelWithElement:formElement];
+        }
+    }
+}
+
+- (void)formElement:(MYSFormElement *)formElement didRequestPresentationOfActionSheet:(UIActionSheet *)actionSheet
+{
+    [actionSheet showInView:self.view];
+}
+
+- (void)formElement:(MYSFormElement *)formElement didRequestPresentationOfViewController:(UIViewController *)viewController
+           animated:(BOOL)animated
+         completion:(void (^)(void))completion
+{
+    [self presentViewController:viewController animated:animated completion:completion];
 }
 
 
@@ -494,7 +521,9 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
                 [nextTextInput becomeFirstResponder];
             }
             else {
-                [self.formDelegate formViewControllerDidSubmit:self];
+                if ([self.formDelegate respondsToSelector:@selector(formViewControllerDidSubmit:)]) {
+                    [self.formDelegate formViewControllerDidSubmit:self];
+                }
             }
         }
     }];

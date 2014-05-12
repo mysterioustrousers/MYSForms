@@ -14,10 +14,26 @@
 @class MYSFormCell;
 
 
+@protocol MYSFormElementDataSource;
+@protocol MYSFormElementDelegate;
+
+
 /**
  Do not create direct instances of this class. It is meant to be subclassed.
  */
 @interface MYSFormElement : NSObject
+
+/**
+ When creating custom form elements, you this will be set up for you and you can use the delegate methods to instruct
+ the form view controller to do a variety of things for you.
+ */
+@property (nonatomic, weak) id<MYSFormElementDelegate> delegate;
+
+/**
+ When creating custom form elements, you can use this to get information about the form's model.
+ */
+@property (nonatomic, weak) id<MYSFormElementDataSource> dataSource;
+
 
 /**
  The key path to the property on the forms model that this element should be bound to.
@@ -61,3 +77,19 @@
 @property (nonatomic, assign, getter = isEnabled) BOOL enabled;
 
 @end
+
+
+@protocol MYSFormElementDataSource <NSObject>
+- (id)modelValueForFormElement:(MYSFormElement *)formElement;
+@end
+
+
+@protocol MYSFormElementDelegate <NSObject>
+- (void)formElement:(MYSFormElement *)formElement valueDidChange:(id)value;
+- (void)formElement:(MYSFormElement *)formElement didRequestPresentationOfActionSheet:(UIActionSheet *)actionSheet;
+- (void)formElement:(MYSFormElement *)formElement didRequestPresentationOfViewController:(UIViewController *)viewController
+           animated:(BOOL)animated
+         completion:(void (^)(void))completion;
+@end
+
+

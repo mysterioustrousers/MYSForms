@@ -22,22 +22,14 @@
 {
     [super configureForm];
 
+    [self addFormElement:[MYSFormHeadlineElement headlineElementWithHeadline:@"Sign Up"]];
 
-    MYSFormHeadlineElement *title = [MYSFormHeadlineElement headlineElementWithHeadline:@"Sign Up"];
-    [self addFormElement:title];
+    [self addFormElement:[MYSFormFootnoteElement footnoteElementWithFootnote:
+                          @"Example of a subclassed form view controller where a blank model is created in its viewDidLoad."]];
 
+    [self addFormElement:[MYSFormTextFieldElement textFieldElementWithLabel:@"First Name" modelKeyPath:@"firstName"]];
 
-    MYSFormFootnoteElement *description = [MYSFormFootnoteElement new];
-    description.footnote = @"Example of a subclassed form view controller where a blank model is created in its viewDidLoad.";
-    [self addFormElement:description];
-
-
-    MYSFormTextFieldElement *firstNameField = [MYSFormTextFieldElement textFieldElementWithLabel:@"First Name" modelKeyPath:@"firstName"];
-    [self addFormElement:firstNameField];
-
-
-    MYSFormTextFieldElement *lastNameField = [MYSFormTextFieldElement textFieldElementWithLabel:@"Last Name" modelKeyPath:@"lastName"];
-    [self addFormElement:lastNameField];
+    [self addFormElement:[MYSFormTextFieldElement textFieldElementWithLabel:@"Last Name" modelKeyPath:@"lastName"]];
 
 
     MYSFormTextFieldElement *emailField = [MYSFormTextFieldElement textFieldElementWithLabel:@"E-mail" modelKeyPath:@"email"];

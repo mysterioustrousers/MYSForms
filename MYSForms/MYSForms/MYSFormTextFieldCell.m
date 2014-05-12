@@ -53,6 +53,7 @@
     self.textField.placeholder      = element.label;
     self.textField.secureTextEntry  = element.isSecure;
     self.textField.keyboardType     = element.keyboardType;
+    [self layoutIfNeeded];
 }
 
 - (UIView *)textInput

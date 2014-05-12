@@ -7,6 +7,7 @@
 //
 
 #import "MYSFormElement.h"
+#import "MYSFormMessageElement.h"
 
 
 @protocol MYSFormElementDataSource;
@@ -27,3 +28,5 @@
 @protocol MYSFormElementDelegate <NSObject>
 - (void)formElement:(MYSFormElement *)formElement valueDidChange:(id)value;
 @end
+
+

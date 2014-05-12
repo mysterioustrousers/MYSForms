@@ -80,7 +80,7 @@
         [formViewController addFormElement:passwordField];
 
 
-        [formViewController addFormElement:[MYSFormLabelAndButtonElement buttonElementWithLabel:@"A label" title:@"A button" block:^(MYSFormButtonElement *element) {
+        [formViewController addFormElement:[MYSFormLabelAndButtonElement buttonElementWithLabel:@"A label" title:@"A button title" block:^(MYSFormButtonElement *element) {
             NSLog(@"Label and button was tapped");
         }]];
 

@@ -7,10 +7,15 @@
 //
 
 #import "private.h"
-#import "MYSFormViewController.h"
-#import "MYSFormCollectionViewSpringyLayout.h"
-#import "MYSFormErrorElement.h"
-#import "MYSFormLoadingElement.h"
+#import "MYSForms.h"
+#import "MYSFormMessageElement.h"
+#import "MYSFormLoadingCell.h"
+
+
+typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
+    MYSFormMessagePositionAbove,
+    MYSFormMessagePositionBelow
+};
 
 
 @interface MYSFormViewController () <UICollectionViewDelegateFlowLayout,
@@ -137,7 +142,9 @@
     [MYSFormTextFieldCell registerForReuseWithCollectionView:self.collectionView];
     [MYSFormButtonCell registerForReuseWithCollectionView:self.collectionView];
     [MYSFormLabelAndButtonCell registerForReuseWithCollectionView:self.collectionView];
-    [MYSFormErrorCell registerForReuseWithCollectionView:self.collectionView];
+    [MYSFormImagePickerCell registerForReuseWithCollectionView:self.collectionView];
+
+    [MYSFormMessageCell registerForReuseWithCollectionView:self.collectionView];
     [MYSFormLoadingCell registerForReuseWithCollectionView:self.collectionView];
 }
 
@@ -162,91 +169,82 @@
 
 - (BOOL)validate
 {
-    NSArray *elementsCopy = [self.elements copy];
-
-    // remove all existing error elements
-    NSMutableArray *indexPathsToRemove = [NSMutableArray new];
-    for (MYSFormElement *element in elementsCopy) {
-        if ([element isKindOfClass:[MYSFormErrorElement class]]) {
-            NSIndexPath *ip = [self.collectionView indexPathForCell:element.cell];
-            if (ip) {
-                [indexPathsToRemove addObject:ip];
-            }
-            [self.elements removeObject:element];
-        }
-    }
+    if (!self.collectionView.window) return YES;
 
     // validate and add any needed form error elements
     BOOL valid = YES;
-    NSMutableArray *indexPathsToInsert = [NSMutableArray new];
-    for (MYSFormElement *element in elementsCopy) {
+    NSMutableArray *errorElementsToShow = [NSMutableArray new];
+    for (MYSFormElement *element in self.elements) {
         NSArray *validationErrors = [element validationErrors];
         if ([validationErrors count] > 0) {
             valid = NO;
-            NSInteger indexOffset = 1;
             for (NSError *error in validationErrors) {
-                MYSFormErrorElement *errorFormElement = [MYSFormErrorElement errorFormElementWithError:[error localizedDescription]];
-                NSInteger index = [self.elements indexOfObject:element];
-                [self addFormElement:errorFormElement atIndex:index + indexOffset];
-                NSIndexPath *ip = [NSIndexPath indexPathForItem:index + indexOffset inSection:0];
-                [indexPathsToInsert addObject:ip];
-                indexOffset++;
+                MYSFormMessageElement *errorFormElement = [MYSFormMessageElement messageElementWithMessage:[error localizedDescription]
+                                                                                                      type:MYSFormMessageTypeValidationError
+                                                                                             parentElement:element];
+                [errorElementsToShow addObject:errorFormElement];
             }
         }
     }
+    self.outstandingValidationErrorCount = [errorElementsToShow count];
 
-    self.outstandingValidationErrorCount = [indexPathsToInsert count];
-    [self.cachedCellSizes removeAllObjects];
-
-    [self.collectionView performBatchUpdates:^{
-        if ([indexPathsToRemove count] > 0) {
-            [self.collectionView deleteItemsAtIndexPaths:indexPathsToRemove];
-        }
-        if ([indexPathsToInsert count] > 0) {
-            [self.collectionView insertItemsAtIndexPaths:indexPathsToInsert];
-        }
-    } completion:nil];
+    // remove all existing error elements
+    [self hideChildrenOfElement:nil type:MYSFormMessageTypeValidationError completion:^{
+        [self showChildElements:errorElementsToShow position:MYSFormMessagePositionBelow duration:0 completion:nil];
+    }];
 
     return valid;
 }
 
-- (void)showLoadingForElements:(NSArray *)elements
+- (void)showLoadingMessage:(NSString *)message aboveElement:(MYSFormElement *)element completion:(void (^)(void))completion
 {
-    NSMutableArray *indexPathsToInsert = [NSMutableArray new];
-    for (MYSFormElement *element in [self.elements copy]) {
-        if (!elements || [elements containsObject:element]) {
-            if ([element.loadingMessage length] > 0) {
-                MYSFormLoadingElement *loadingElement = [MYSFormLoadingElement loadingFormElementWithParentFormElement:element];
-                NSInteger idx = [self.elements indexOfObject:element];
-                [self addFormElement:loadingElement atIndex:idx];
-                [indexPathsToInsert addObject:[NSIndexPath indexPathForItem:idx inSection:0]];
-            }
-        }
-    }
-
-    if ([indexPathsToInsert count] > 0) {
-        [self.collectionView insertItemsAtIndexPaths:indexPathsToInsert];
-    }
+    if (!self.collectionView.window) return;
+    MYSFormMessageElement *loadingElement = [MYSFormMessageElement messageElementWithMessage:message type:MYSFormMessageTypeLoading parentElement:element];
+    [self showChildElements:@[loadingElement] position:MYSFormMessagePositionAbove duration:0 completion:completion];
 }
 
-- (void)hideLoadingForElements:(NSArray *)elements
+- (void)hideLoadingAboveElement:(MYSFormElement *)element completion:(void (^)(void))completion
 {
-    NSMutableArray *indexPathsToRemove = [NSMutableArray new];
-    NSArray *elementsCopy = [self.elements copy];
-    for (MYSFormElement *element in elementsCopy) {
-        if ([element isKindOfClass:[MYSFormLoadingElement class]]) {
-            MYSFormLoadingElement *loadingElement = (MYSFormLoadingElement *)element;
-            if (!elements || [elements containsObject:loadingElement.parentFormElement]) {
-                [self.elements removeObject:loadingElement];
-                NSInteger idx = [elementsCopy indexOfObject:loadingElement];
-                [indexPathsToRemove addObject:[NSIndexPath indexPathForItem:idx inSection:0]];
-            }
-        }
-    }
+    if (!self.collectionView.window) return;
+    [self hideChildrenOfElement:element type:MYSFormMessageTypeLoading completion:completion];
+}
 
-    if ([indexPathsToRemove count] > 0) {
-        [self.collectionView deleteItemsAtIndexPaths:indexPathsToRemove];
-    }
+- (void)showErrorMessage:(NSString *)message
+            belowElement:(MYSFormElement *)element
+                duration:(NSTimeInterval)duration
+              completion:(void (^)(void))completion
+{
+    MYSFormMessageElement *errorMessage = [MYSFormMessageElement messageElementWithMessage:message
+                                                                                      type:MYSFormMessageTypeError
+                                                                             parentElement:element];
+    [self showChildElements:@[errorMessage]
+                   position:MYSFormMessagePositionBelow
+                   duration:duration
+                 completion:completion];
+}
+
+- (void)hideErrorMessageBelowElement:(MYSFormElement *)element completion:(void (^)(void))completion
+{
+    [self hideChildrenOfElement:element type:MYSFormMessageTypeError completion:completion];
+}
+
+- (void)showSuccessMessage:(NSString *)message
+              belowElement:(MYSFormElement *)element
+                  duration:(NSTimeInterval)duration
+                completion:(void (^)(void))completion
+{
+    MYSFormMessageElement *successMessage = [MYSFormMessageElement messageElementWithMessage:message
+                                                                                        type:MYSFormMessageTypeSuccess
+                                                                               parentElement:element];
+    [self showChildElements:@[successMessage]
+                   position:MYSFormMessagePositionBelow
+                   duration:duration
+                 completion:completion];
+}
+
+- (void)hideSuccessMessageBelowElement:(MYSFormElement *)element completion:(void (^)(void))completion
+{
+    [self hideChildrenOfElement:element type:MYSFormMessageTypeSuccess completion:completion];
 }
 
 
@@ -336,6 +334,88 @@
 
 #pragma mark - Private
 
+#pragma mark (showing/hiding child elements)
+
+- (void)showChildElements:(NSArray *)childElements position:(MYSFormMessagePosition)position duration:(NSTimeInterval)duration completion:(void (^)(void))completion
+{
+    if (!self.collectionView.window) return;
+
+
+    NSMutableArray *indexPathsToInsert  = [NSMutableArray new];
+
+    for (MYSFormElement *element in [self.elements copy]) {
+        NSInteger indexOffset       = position == MYSFormMessagePositionBelow ? 1 : 0;
+        NSInteger indexMultiplier   = position == MYSFormMessagePositionBelow ? 1 : -1;
+        for (MYSFormMessageElement *childElement in childElements) {
+            if ([element isEqual:childElement.parentElement]) {
+                NSInteger index = [self.elements indexOfObject:childElement.parentElement];
+                NSAssert(index != NSNotFound, @"element must be added to the form.");
+
+                NSInteger newIndex = index + (indexOffset++ * indexMultiplier);
+                [self addFormElement:childElement atIndex:newIndex];
+                [indexPathsToInsert addObject:[NSIndexPath indexPathForItem:newIndex inSection:0]];
+
+                if (duration > 0) {
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(duration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                        [self hideChildrenOfElement:childElement.parentElement type:childElement.type completion:nil];
+                    });
+                }
+            }
+        }
+    }
+
+    if ([indexPathsToInsert count] > 0) {
+        [self.cachedCellSizes removeAllObjects];
+        [self.collectionView performBatchUpdates:^{
+            [self.collectionView insertItemsAtIndexPaths:indexPathsToInsert];
+        } completion:^(BOOL finished) {
+            if (completion) completion();
+        }];
+    }
+    else {
+        if (completion) completion();
+    }
+
+}
+
+- (void)hideChildrenOfElement:(MYSFormElement *)parentElement type:(MYSFormMessageType)type completion:(void (^)(void))completion
+{
+    if (!self.collectionView.window) return;
+
+    NSArray *childElements = [self.elements filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(MYSFormElement *element, NSDictionary *bindings) {
+        return ([element isKindOfClass:[MYSFormMessageElement class]] &&
+                [(MYSFormMessageElement *)element type] == type);
+    }]];
+
+    NSMutableArray *indexPathsToRemove = [NSMutableArray new];
+    for (MYSFormMessageElement *childElement in childElements) {
+        if (!parentElement || [childElement.parentElement isEqual:parentElement]) {
+            NSIndexPath *ip = [self.collectionView indexPathForCell:childElement.cell];
+            if (ip) {
+                [self.elements removeObject:childElement];
+                [indexPathsToRemove addObject:ip];
+            }
+        }
+    }
+
+    if ([indexPathsToRemove count] > 0) {
+        [self.cachedCellSizes removeAllObjects];
+        [self.collectionView performBatchUpdates:^{
+            [self.collectionView deleteItemsAtIndexPaths:indexPathsToRemove];
+        } completion:^(BOOL finished) {
+            if (completion) completion();
+        }];
+    }
+    else {
+        if (completion) completion();
+    }
+}
+
+
+
+
+#pragma mark (keyboard)
+
 - (void)setupKeyboardNotifications
 {
     [[NSNotificationCenter defaultCenter] addObserverForName:UIKeyboardWillShowNotification
@@ -421,9 +501,7 @@
 }
 
 
-
-
-#pragma mark - (KVO helpers)
+#pragma mark (KVO helpers)
 
 - (void)removeAllModelObservers
 {

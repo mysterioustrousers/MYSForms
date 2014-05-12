@@ -15,7 +15,10 @@
 
 - (void)populateWithElement:(MYSFormButtonElement *)element
 {
-    [self.button setTitle:element.title forState:UIControlStateNormal];
+    [UIView animateWithDuration:0.25 animations:^{
+        [self.button setTitle:element.title forState:UIControlStateNormal];
+        [self.button layoutIfNeeded];
+    }];
 }
 
 

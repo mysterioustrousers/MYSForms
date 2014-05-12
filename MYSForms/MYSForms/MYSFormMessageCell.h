@@ -2,13 +2,14 @@
 //  MYSFormErrorCell.h
 //  MYSForms
 //
-//  Created by Adam Kirk on 5/5/14.
+//  Created by Adam Kirk on 5/9/14.
 //  Copyright (c) 2014 Mysterious Trousers. All rights reserved.
 //
 
 #import "MYSFormCell.h"
 
+@interface MYSFormMessageCell : MYSFormCell
 
-@interface MYSFormErrorCell : MYSFormCell
-@property (weak, nonatomic) IBOutlet UILabel *errorLabel;
+@property (weak, nonatomic) IBOutlet UILabel *messageLabel;
+
 @end

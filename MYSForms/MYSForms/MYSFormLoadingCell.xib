@@ -35,7 +35,7 @@
             </constraints>
             <size key="customSize" width="319" height="40"/>
             <connections>
-                <outlet property="loadingLabel" destination="IBS-6e-jFL" id="khN-gW-h4t"/>
+                <outlet property="messageLabel" destination="IBS-6e-jFL" id="W0D-uS-21N"/>
             </connections>
         </collectionViewCell>
     </objects>

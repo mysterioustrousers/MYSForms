@@ -6,8 +6,9 @@
 //  Copyright (c) 2014 Mysterious Trousers. All rights reserved.
 //
 
-#import "MYSFormCell.h"
+#import "MYSFormMessageCell.h"
 
-@interface MYSFormLoadingCell : MYSFormCell
-@property (weak, nonatomic) IBOutlet UILabel *loadingLabel;
+
+@interface MYSFormLoadingCell : MYSFormMessageCell
+
 @end

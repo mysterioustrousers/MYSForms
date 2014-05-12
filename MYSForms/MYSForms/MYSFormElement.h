@@ -30,12 +30,6 @@
 @property (nonatomic, strong) MYSFormCell *cell;
 
 /**
- If this is set, when `showLoadingForElements:` is sent to the from view controller, a loading form element will be displayed above
- this element with a spinner and the contents of this property as the label.
- */
-@property (nonatomic, strong) NSString *loadingMessage;
-
-/**
  The class of the cell to be used to display this form element.
  */
 - (Class)cellClass;
@@ -60,5 +54,10 @@
  Will return either an empty array or an arry of NSError objects that contain `localizedDescription`s of the failure reason.
  */
 - (NSArray *)validationErrors;
+
+/**
+ This will enable/disable all input views in the cell of the form element.
+ */
+@property (nonatomic, assign, getter = isEnabled) BOOL enabled;
 
 @end

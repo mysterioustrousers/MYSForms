@@ -6,11 +6,8 @@
 //  Copyright (c) 2014 Mysterious Trousers. All rights reserved.
 //
 
-#import "MYSFormHeadlineElement.h"
-#import "MYSFormFootnoteElement.h"
-#import "MYSFormTextFieldElement.h"
-#import "MYSFormButtonElement.h"
-#import "MYSFormLabelAndButtonElement.h"
+
+@class MYSFormElement;
 
 
 @protocol MYSFormViewControllerDelegate;
@@ -66,16 +63,41 @@
 - (BOOL)validate;
 
 /**
- Provided an element has a non-nil value for `loadingMessage`, a loading form element will be displayed below each element passed in.
- If `nil` is passed in as `elements`, all elements with a loading message will display a loading element below them.
+ A loading spinner with `message` will be displayed above the element specified. If nil is passed in for the element, the loading message
+ will be displayed above the topmost element of the form.
  */
-- (void)showLoadingForElements:(NSArray *)elements;
+- (void)showLoadingMessage:(NSString *)message aboveElement:(MYSFormElement *)element completion:(void (^)(void))completion;
 
 /**
- If any element passed into this method is currently displaying loading element below it, it will be hid.
- If `nil` is passed in as `elements`, all elements currently display a loading element will have the loading element hid.
+ If an element is passed in, the loading messages above it will be dismissed. If nil is passed in, all loading messages will be dismissed.
  */
-- (void)hideLoadingForElements:(NSArray *)elements;
+- (void)hideLoadingAboveElement:(MYSFormElement *)element completion:(void (^)(void))completion;
+
+/**
+ Displays an error message above `element` for the specified duration. `element` cannot be nil.
+ */
+- (void)showErrorMessage:(NSString *)message
+            belowElement:(MYSFormElement *)element
+                duration:(NSTimeInterval)duration
+              completion:(void (^)(void))completion;
+
+/**
+ For manually hiding an error message if you didn't provide a duration when showing it, or you want to hide it early.
+ */
+- (void)hideErrorMessageBelowElement:(MYSFormElement *)element completion:(void (^)(void))completion;
+
+/**
+ Displays a success message below a form element.
+ */
+- (void)showSuccessMessage:(NSString *)message
+              belowElement:(MYSFormElement *)element
+                  duration:(NSTimeInterval)duration
+                completion:(void (^)(void))completion;
+
+/**
+ For manually hiding a success message if you didn't provide a duration when showing it, or you want to hide it early.
+ */
+- (void)hideSuccessMessageBelowElement:(MYSFormElement *)element completion:(void (^)(void))completion;
 
 @end
 

@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Mysterious Trousers. All rights reserved.
 //
 
-#import "MYSFormViewController.h"
+#import "MYSForms.h"
 
 
 @interface MYSSignUpFormViewController : MYSFormViewController

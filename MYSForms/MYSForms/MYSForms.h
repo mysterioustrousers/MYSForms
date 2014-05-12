@@ -14,7 +14,11 @@
 #import "MYSFormTextFieldElement.h"
 #import "MYSFormButtonElement.h"
 #import "MYSFormLabelAndButtonElement.h"
+#import "MYSFormImagePickerElement.h"
 
 // form validators
 #import "MYSFormPresenceValidation.h"
 #import "MYSFormRegexValidation.h"
+
+// layouts
+#import "MYSFormCollectionViewSpringyLayout.h"

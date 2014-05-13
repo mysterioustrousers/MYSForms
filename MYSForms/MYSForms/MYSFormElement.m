@@ -12,6 +12,7 @@
 
 @interface MYSFormElement ()
 @property (nonatomic, strong) NSMutableSet *formValidations;
+@property (nonatomic, strong) NSMutableSet *valueTransformers;
 @end
 
 
@@ -41,7 +42,7 @@
 - (void)updateCell
 {
     [self.cell populateWithElement:self];
-    if ([self.modelKeyPath length] > 0 && [[self.cell valueKeyPath] length] > 0) {
+    if ([self isModelKeyPathValid]) {
         id modelValue = [self.dataSource modelValueForFormElement:self];
         [self.cell setValue:modelValue forKeyPath:[self.cell valueKeyPath]];
     }
@@ -50,6 +51,13 @@
 - (BOOL)isTextInput
 {
     return NO;
+}
+
+- (BOOL)isModelKeyPathValid
+{
+    BOOL hasKeyPath     = [self.modelKeyPath length] > 0;
+    BOOL isNotExcluded  = ![self.modelKeyPath hasPrefix:@"x-"];
+    return hasKeyPath && isNotExcluded;
 }
 
 - (void)addFormValidation:(MYSFormValidation *)formValidation

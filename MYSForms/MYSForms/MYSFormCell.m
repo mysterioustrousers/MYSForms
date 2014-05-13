@@ -36,6 +36,7 @@
 - (void)populateWithElement:(MYSFormElement *)element
 {
     [self setNeedsLayout];
+    [self setNeedsDisplay];
 }
 
 - (UIView *)textInput

@@ -12,10 +12,8 @@
 
 @interface MYSFormImagePickerElement : MYSFormElement
 
-@property (nonatomic, strong) UIImage *image;
-
 @property (nonatomic, copy) NSString *label;
 
-+ (instancetype)imagePickerElementWithImage:(UIImage *)image label:(NSString *)label modelKeyPath:(NSString *)modelKeyPath;
++ (instancetype)imagePickerElementWithLabel:(NSString *)label modelKeyPath:(NSString *)modelKeyPath;
 
 @end

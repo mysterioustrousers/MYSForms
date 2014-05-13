@@ -128,7 +128,7 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
     [self removeAllModelObservers];
     _model = model;
     for (MYSFormElement *element in self.elements) {
-        if (element.modelKeyPath && ![element.modelKeyPath isEqualToString:@""]) {
+        if ([self elementHasValidKeyPath:element]) {
             [self.model addObserver:self
                          forKeyPath:element.modelKeyPath
                             options:0
@@ -166,13 +166,12 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
     element.dataSource  = self;
     element.delegate    = self;
     [self.elements insertObject:element atIndex:index];
-    if (self.model && element.modelKeyPath && ![element.modelKeyPath isEqualToString:@""]) {
+    if ([self elementHasValidKeyPath:element]) {
         [self addObserver:self.model
                forKeyPath:element.modelKeyPath
                   options:0
                   context:NULL];
     }
-    [element updateCell];
 }
 
 - (BOOL)validate
@@ -274,8 +273,8 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
         cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([element cellClass]) forIndexPath:indexPath];
         [cell populateWithElement:element];
         element.cell = cell;
-        [element updateCell];
     }
+    [element updateCell];
 
     return cell;
 }
@@ -307,7 +306,17 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
 
 - (id)modelValueForFormElement:(MYSFormElement *)formElement
 {
-    return [self.model valueForKeyPath:formElement.modelKeyPath];
+    if ([self elementHasValidKeyPath:formElement]) {
+        id value = [self.model valueForKeyPath:formElement.modelKeyPath];
+
+        // transform the value if needed
+        if (formElement.valueTransformer && [[formElement.valueTransformer class] allowsReverseTransformation]) {
+            value = [formElement.valueTransformer transformedValue:value];
+        }
+
+        return value;
+    }
+    return nil;
 }
 
 
@@ -317,12 +326,17 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
 
 - (void)formElement:(MYSFormElement *)formElement valueDidChange:(id)value
 {
-    if (self.model && [formElement.modelKeyPath length] > 0) {
+    // transform the value if needed
+    if (formElement.valueTransformer && [[formElement.valueTransformer class] allowsReverseTransformation]) {
+        value = [formElement.valueTransformer reverseTransformedValue:value];
+    }
+
+    if ([self elementHasValidKeyPath:formElement]) {
         [self.model setValue:value forKeyPath:formElement.modelKeyPath];
     }
     else {
-        if ([self.formDelegate respondsToSelector:@selector(formViewController:failedToUpdateModelWithElement:)]) {
-            [self.formDelegate formViewController:self failedToUpdateModelWithElement:formElement];
+        if ([self.formDelegate respondsToSelector:@selector(formViewController:failedToUpdateModelWithValue:element:)]) {
+            [self.formDelegate formViewController:self failedToUpdateModelWithValue:value element:formElement];
         }
     }
 }
@@ -536,7 +550,7 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
 {
     if (self.model) {
         for (MYSFormElement *element in self.elements) {
-            if (element.modelKeyPath && ![element.modelKeyPath isEqualToString:@""]) {
+            if ([self elementHasValidKeyPath:element]) {
                 @try {
                     [self.model removeObserver:self forKeyPath:element.modelKeyPath];
                 }
@@ -544,6 +558,13 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
             }
         }
     }
+}
+
+- (BOOL)elementHasValidKeyPath:(MYSFormElement *)element
+{
+    BOOL hasModel   = self.model != nil;
+    BOOL isValid    = [element isModelKeyPathValid];
+    return hasModel && isValid;
 }
 
 

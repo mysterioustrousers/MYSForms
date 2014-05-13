@@ -38,7 +38,7 @@
         [self showErrorMessage:@"An error message." belowElement:element duration:3 completion:nil];
     }]];
 
-    [self addFormElement:[MYSFormImagePickerElement imagePickerElementWithImage:nil label:@"Selfie" modelKeyPath:nil]];
+    [self addFormElement:[MYSFormImagePickerElement imagePickerElementWithLabel:@"Selfie" modelKeyPath:nil]];
 }
 
 @end

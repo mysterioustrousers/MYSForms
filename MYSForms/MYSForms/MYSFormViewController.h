@@ -118,12 +118,17 @@
 - (void)formViewControllerDidSubmit:(MYSFormViewController *)controller;
 
 /**
- When a change is made and it can't be associated with a model's property (because no `modelKeyPath` was given, or no model is associated
- with the form, this method is called to give you a chance to deal with the value change manually. This is
+ When the user interacts with the form and changes a value that is successfully updated on the form's model.
+ */
+- (void)formViewController:(MYSFormViewController *)controller didUpdateModelWithValue:(id)value element:(MYSFormElement *)element;
+
+/**
+ When a change is made and it can't be associated with a model's property (because no `modelKeyPath` was given, or the `modelKeyPath
+ was prefixed with "x-" or no model is associated with the form) this method is called to give you a chance to deal with the value change manually. This is
  useful if you can't associate a model's property with a form element easily and a lot of special case work has to be done to
  get the changed value into a form the model is designed for. This is also useful if you are not using a model with your form, meaning
  the form has no model.
  */
-- (void)formViewController:(MYSFormViewController *)controller failedToUpdateModelWithElement:(MYSFormElement *)element;
+- (void)formViewController:(MYSFormViewController *)controller failedToUpdateModelWithValue:(id)value element:(MYSFormElement *)element;
 
 @end

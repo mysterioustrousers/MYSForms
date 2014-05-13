@@ -61,6 +61,12 @@
 - (BOOL)isTextInput;
 
 /**
+ Returns YES if the `modelKeyPath` is valid for use setting and getting values on the model. An attempt to do so with an invalid
+ `modelKeyPath` will result in an exception, so always use this to check first.
+ */
+- (BOOL)isModelKeyPathValid;
+
+/**
  Add a validation for this element so that when `validationErrors` is called, the validation will be run against the value of
  the form element and generate an error if a validation fails.
  */
@@ -70,6 +76,12 @@
  Will return either an empty array or an arry of NSError objects that contain `localizedDescription`s of the failure reason.
  */
 - (NSArray *)validationErrors;
+
+/**
+ Add a value transformer that takes the value at `modelKeyPath` and transforms it to what the element cell expects. You can also
+ provide a reverse transform that will transform the cell value back to type of value the model expects.
+ */
+@property (nonatomic, retain) NSValueTransformer *valueTransformer;
 
 /**
  This will enable/disable all input views in the cell of the form element.

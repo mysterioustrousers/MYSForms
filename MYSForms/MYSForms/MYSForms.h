@@ -20,5 +20,8 @@
 #import "MYSFormPresenceValidation.h"
 #import "MYSFormRegexValidation.h"
 
+// value transformers
+#import "MYSFormDataToImageValueTransformer.h"
+
 // layouts
 #import "MYSFormCollectionViewSpringyLayout.h"

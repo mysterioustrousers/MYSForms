@@ -47,8 +47,7 @@
 
 - (void)populateWithElement:(MYSFormImagePickerElement *)element
 {
-    self.imageView.image    = element.image;
-    self.label.text         = element.label;
+    self.label.text = element.label;
     [super populateWithElement:element];
 }
 

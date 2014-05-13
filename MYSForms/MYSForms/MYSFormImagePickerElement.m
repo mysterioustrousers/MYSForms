@@ -25,10 +25,9 @@ NSString * const MYSFormImagePickerCellActionSheetButtonRemovePhoto         = @"
 
 @implementation MYSFormImagePickerElement
 
-+ (instancetype)imagePickerElementWithImage:(UIImage *)image label:(NSString *)label modelKeyPath:(NSString *)modelKeyPath
++ (instancetype)imagePickerElementWithLabel:(NSString *)label modelKeyPath:(NSString *)modelKeyPath
 {
     MYSFormImagePickerElement *element  = [MYSFormImagePickerElement new];
-    element.image                       = image;
     element.label                       = label;
     element.modelKeyPath                = modelKeyPath;
     return element;
@@ -88,7 +87,6 @@ NSString * const MYSFormImagePickerCellActionSheetButtonRemovePhoto         = @"
         imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     }
     else if ([buttonTitle isEqualToString:MYSFormImagePickerCellActionSheetButtonRemovePhoto]) {
-        self.image = nil;
         [self updateCell];
         [self.delegate formElement:self valueDidChange:nil];
         return;
@@ -112,9 +110,9 @@ NSString * const MYSFormImagePickerCellActionSheetButtonRemovePhoto         = @"
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-    self.image = info[UIImagePickerControllerEditedImage] ?: info[UIImagePickerControllerOriginalImage];
+    UIImage *image = info[UIImagePickerControllerEditedImage] ?: info[UIImagePickerControllerOriginalImage];
     [self updateCell];
-    [self.delegate formElement:self valueDidChange:self.image];
+    [self.delegate formElement:self valueDidChange:image];
     [picker.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 

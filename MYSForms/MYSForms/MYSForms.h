@@ -15,6 +15,7 @@
 #import "MYSFormButtonElement.h"
 #import "MYSFormLabelAndButtonElement.h"
 #import "MYSFormImagePickerElement.h"
+#import "MYSFormPickerElement.h"
 
 // form validators
 #import "MYSFormPresenceValidation.h"
@@ -22,6 +23,7 @@
 
 // value transformers
 #import "MYSFormDataToImageValueTransformer.h"
+#import "MYSFormNumberToStringValueTransformer.h"
 
 // layouts
 #import "MYSFormCollectionViewSpringyLayout.h"

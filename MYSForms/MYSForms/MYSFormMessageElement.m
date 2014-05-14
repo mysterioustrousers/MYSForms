@@ -8,11 +8,11 @@
 
 #import "MYSFormMessageElement.h"
 #import "MYSFormLoadingCell.h"
+#import "MYSFormMessageElement-Private.h"
 
 
 @interface MYSFormMessageElement ()
 @property (nonatomic, copy,   readwrite) NSString           *message;
-@property (nonatomic, weak,   readwrite) MYSFormElement     *parentElement;
 @property (nonatomic, assign, readwrite) MYSFormMessageType type;
 @end
 

@@ -7,6 +7,7 @@
 //
 
 #import "MYSCatalogViewController.h"
+#import "MYSExampleUser.h"
 
 
 @interface MYSCatalogViewController ()
@@ -14,6 +15,14 @@
 
 
 @implementation MYSCatalogViewController
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    self.model = [MYSExampleUser new];
+    MYSExampleUser *exampleUser = self.model;
+    exampleUser.yearsOld = 10;
+}
 
 - (void)configureForm
 {
@@ -32,6 +41,7 @@
 
     [self addFormElement:[MYSFormButtonElement buttonElementWithTitle:@"Button" block:^(MYSFormElement *element) {
         [self showSuccessMessage:@"A success message." belowElement:element duration:3 completion:nil];
+        [self logModel];
     }]];
 
     [self addFormElement:[MYSFormLabelAndButtonElement buttonElementWithLabel:@"A label" title:@"And button" block:^(MYSFormButtonElement *element) {
@@ -39,6 +49,23 @@
     }]];
 
     [self addFormElement:[MYSFormImagePickerElement imagePickerElementWithLabel:@"Selfie" modelKeyPath:nil]];
+
+    MYSFormPickerElement *pickerElement = [MYSFormPickerElement pickerElementWithLabel:@"Age" modelKeyPath:@"yearsOld"];
+    pickerElement.valueTransformer = [MYSFormNumberToStringValueTransformer new];
+    for (NSInteger i = 0; i < 120; i++) {
+        [pickerElement addValue:@(i)];
+    }
+    [self addFormElement:pickerElement];
+}
+
+
+
+
+#pragma mark - Actions
+
+- (void)logModel
+{
+    NSLog(@"%@", self.model);
 }
 
 @end

@@ -102,6 +102,7 @@
 - (void)formElement:(MYSFormElement *)formElement didRequestPresentationOfViewController:(UIViewController *)viewController
            animated:(BOOL)animated
          completion:(void (^)(void))completion;
+- (void)formElement:(MYSFormElement *)formElement didRequestPresentationOfPickerView:(UIPickerView *)pickerView;
 @end
 
 

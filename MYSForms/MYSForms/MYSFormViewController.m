@@ -9,6 +9,7 @@
 #import "MYSForms.h"
 #import "MYSFormMessageElement.h"
 #import "MYSFormLoadingCell.h"
+#import "MYSFormMessageElement-Private.h"
 
 
 typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
@@ -25,6 +26,12 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
 @property (nonatomic, strong) NSMutableDictionary *cachedCellSizes;
 @property (nonatomic, assign) NSUInteger          outstandingValidationErrorCount;
 @property (nonatomic, assign) BOOL                appearedFirstTime;
+
+// picker view presentation
+@property (nonatomic, strong) NSLayoutConstraint  *pickerViewYConstraint;
+@property (nonatomic, strong) UIPickerView        *pickerView;
+@property (nonatomic, strong) UIButton            *pickerViewButton;
+
 @end
 
 
@@ -151,9 +158,13 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
     [MYSFormButtonCell registerForReuseWithCollectionView:self.collectionView];
     [MYSFormLabelAndButtonCell registerForReuseWithCollectionView:self.collectionView];
     [MYSFormImagePickerCell registerForReuseWithCollectionView:self.collectionView];
+    [MYSFormPickerCell registerForReuseWithCollectionView:self.collectionView];
 
     [MYSFormMessageCell registerForReuseWithCollectionView:self.collectionView];
     [MYSFormLoadingCell registerForReuseWithCollectionView:self.collectionView];
+
+    // register an invisble footer cell
+    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"InvisibleCell"];
 }
 
 - (void)addFormElement:(MYSFormElement *)element
@@ -261,21 +272,28 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return [self.elements count];
+    return [self.elements count] + 1;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    MYSFormElement *element = self.elements[indexPath.row];
+    if (indexPath.item < [self.elements count]) {
+        MYSFormElement *element = self.elements[indexPath.row];
+        MYSFormCell *cell = element.cell;
+        if (!cell) {
+            cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([element cellClass]) forIndexPath:indexPath];
+            [cell populateWithElement:element];
+            element.cell = cell;
+        }
+        [element updateCell];
 
-    MYSFormCell *cell = element.cell;
-    if (!cell) {
-        cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([element cellClass]) forIndexPath:indexPath];
-        [cell populateWithElement:element];
-        element.cell = cell;
+        return cell;
     }
-    [element updateCell];
 
+    // have to do this because there's some bug I can't figure out that causes the last cell in a collection view to jump/stutter
+    // when rows are inserted.
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"InvisibleCell" forIndexPath:indexPath];
+    cell.backgroundColor = [UIColor clearColor];
     return cell;
 }
 
@@ -288,15 +306,18 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
                   layout:(UICollectionViewLayout *)collectionViewLayout
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSValue *cachedSize = self.cachedCellSizes[indexPath];
-    if (!cachedSize) {
-        MYSFormElement *element = self.elements[indexPath.row];
-        CGSize size = [[element cellClass] sizeRequiredForElement:element width:collectionView.frame.size.width];
-        size.width = collectionView.frame.size.width;
-        cachedSize = [NSValue valueWithCGSize:size];
-        self.cachedCellSizes[indexPath] = cachedSize;
+    if (indexPath.item < [self.elements count]) {
+        NSValue *cachedSize = self.cachedCellSizes[indexPath];
+        if (!cachedSize) {
+            MYSFormElement *element = self.elements[indexPath.row];
+            CGSize size = [[element cellClass] sizeRequiredForElement:element width:collectionView.frame.size.width];
+            size.width = collectionView.frame.size.width;
+            cachedSize = [NSValue valueWithCGSize:size];
+            self.cachedCellSizes[indexPath] = cachedSize;
+        }
+        return [cachedSize CGSizeValue];
     }
-    return [cachedSize CGSizeValue];
+    return CGSizeMake(self.collectionView.frame.size.width, 50);
 }
 
 
@@ -333,6 +354,9 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
 
     if ([self elementHasValidKeyPath:formElement]) {
         [self.model setValue:value forKeyPath:formElement.modelKeyPath];
+        if ([self.formDelegate respondsToSelector:@selector(formViewController:didUpdateModelWithValue:element:)]) {
+            [self.formDelegate formViewController:self didUpdateModelWithValue:value element:formElement];
+        }
     }
     else {
         if ([self.formDelegate respondsToSelector:@selector(formViewController:failedToUpdateModelWithValue:element:)]) {
@@ -352,6 +376,12 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
 {
     [self presentViewController:viewController animated:animated completion:completion];
 }
+
+- (void)formElement:(MYSFormElement *)formElement didRequestPresentationOfPickerView:(UIPickerView *)pickerView
+{
+    [self displayPickerView:pickerView];
+}
+
 
 
 
@@ -381,6 +411,11 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
 {
     if (!self.collectionView.window) return;
 
+    for (MYSFormMessageElement *childElement in childElements) {
+        if (!childElement.parentElement) {
+            childElement.parentElement = (MYSFormElement *)[self.elements firstObject];
+        }
+    }
 
     NSMutableArray *indexPathsToInsert  = [NSMutableArray new];
 
@@ -618,6 +653,114 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
         }
     }
     return nil;
+}
+
+
+#pragma mark (ui)
+
+- (void)displayPickerView:(UIPickerView *)pickerView
+{
+    self.pickerView = pickerView;
+
+    UIView *wrapperView = [self.view superview];
+
+    // set up constraints for picker view
+    [pickerView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [wrapperView addSubview:pickerView];
+
+    [wrapperView addConstraint:[NSLayoutConstraint constraintWithItem:wrapperView
+                                                            attribute:NSLayoutAttributeRight
+                                                            relatedBy:NSLayoutRelationEqual
+                                                               toItem:pickerView
+                                                            attribute:NSLayoutAttributeRight
+                                                           multiplier:1
+                                                             constant:0]];
+
+    [wrapperView addConstraint:[NSLayoutConstraint constraintWithItem:wrapperView
+                                                            attribute:NSLayoutAttributeLeft
+                                                            relatedBy:NSLayoutRelationEqual
+                                                               toItem:pickerView
+                                                            attribute:NSLayoutAttributeLeft
+                                                           multiplier:1
+                                                             constant:0]];
+
+    NSLayoutConstraint *yConstraint =
+    [NSLayoutConstraint constraintWithItem:wrapperView
+                                 attribute:NSLayoutAttributeBottom
+                                 relatedBy:NSLayoutRelationEqual
+                                    toItem:pickerView
+                                 attribute:NSLayoutAttributeBottom
+                                multiplier:1
+                                  constant:-(pickerView.frame.size.height + 44)];
+    [wrapperView addConstraint:yConstraint];
+
+
+    // create and set up constrains for done label
+    UIButton *doneButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    [doneButton setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [doneButton setTitle:@"Done" forState:UIControlStateNormal];
+    [doneButton.titleLabel setFont:[UIFont boldSystemFontOfSize:[UIFont systemFontSize]]];
+    [doneButton setBackgroundColor:[UIColor whiteColor]];
+    [doneButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
+    [doneButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 20)];
+    [doneButton addTarget:self
+                   action:@selector(pickerViewDoneButtonWasTapped:)
+         forControlEvents:UIControlEventTouchUpInside];
+    [wrapperView addSubview:doneButton];
+
+    [wrapperView addConstraint:[NSLayoutConstraint constraintWithItem:doneButton
+                                                            attribute:NSLayoutAttributeRight
+                                                            relatedBy:NSLayoutRelationEqual
+                                                               toItem:pickerView
+                                                            attribute:NSLayoutAttributeRight
+                                                           multiplier:1
+                                                             constant:0]];
+
+    [wrapperView addConstraint:[NSLayoutConstraint constraintWithItem:doneButton
+                                                            attribute:NSLayoutAttributeLeft
+                                                            relatedBy:NSLayoutRelationEqual
+                                                               toItem:pickerView
+                                                            attribute:NSLayoutAttributeLeft
+                                                           multiplier:1
+                                                             constant:0]];
+
+    [wrapperView addConstraint:[NSLayoutConstraint constraintWithItem:doneButton
+                                                            attribute:NSLayoutAttributeBottom
+                                                            relatedBy:NSLayoutRelationEqual
+                                                               toItem:pickerView
+                                                            attribute:NSLayoutAttributeTop
+                                                           multiplier:1
+                                                             constant:0]];
+
+    [doneButton addConstraint:[NSLayoutConstraint constraintWithItem:doneButton
+                                                           attribute:NSLayoutAttributeHeight
+                                                           relatedBy:NSLayoutRelationEqual
+                                                              toItem:nil
+                                                           attribute:NSLayoutAttributeNotAnAttribute
+                                                          multiplier:1
+                                                            constant:44]];
+
+    [wrapperView layoutIfNeeded];
+    [UIView animateWithDuration:0.25 animations:^{
+        yConstraint.constant = 0;
+        [wrapperView layoutIfNeeded];
+    }];
+
+    self.pickerView             = pickerView;
+    self.pickerViewButton       = doneButton;
+    self.pickerViewYConstraint  = yConstraint;
+}
+
+- (IBAction)pickerViewDoneButtonWasTapped:(id)sender
+{
+    UIView *wrapperView = [self.view superview];
+    [UIView animateWithDuration:0.25 animations:^{
+        self.pickerViewYConstraint.constant = -(self.pickerView.frame.size.height + 44);
+        [wrapperView layoutIfNeeded];
+    } completion:^(BOOL finished) {
+        [self.pickerView removeFromSuperview];
+        [self.pickerViewButton removeFromSuperview];
+    }];
 }
 
 @end

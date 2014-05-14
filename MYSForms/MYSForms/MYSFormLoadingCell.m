@@ -32,6 +32,7 @@ static CGFloat standardSpacing  = 8;
                                                 context:nil].size;
     size.height = ceil(size.height);
     size.height = size.height >= spinnerSize ? size.height : spinnerSize;
+    size.height += 20;
     return size;
 }
 

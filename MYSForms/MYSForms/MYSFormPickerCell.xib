@@ -6,32 +6,32 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MYSFormLabelAndButtonCell" id="mz9-Oa-E3C" customClass="MYSFormLabelAndButtonCell">
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MYSFormPickerCell" id="p3W-hN-cwK" customClass="MYSFormPickerCell">
             <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                 <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AxG-Lz-i3A">
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vgr-42-tvG">
                         <rect key="frame" x="20" y="15" width="280" height="20"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A7L-QZ-za1">
+                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SC6-wz-kTN">
                         <rect key="frame" x="20" y="5" width="280" height="40"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="40" id="A7s-nx-sKj"/>
-                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="wEQ-tf-ukv"/>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="HQj-Jz-0MM"/>
+                            <constraint firstAttribute="height" constant="40" id="Yol-bJ-Sfr"/>
                         </constraints>
                         <state key="normal" title="Button">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                         <connections>
-                            <action selector="buttonWasTapped:" destination="mz9-Oa-E3C" eventType="touchUpInside" id="W0y-ee-Rlb"/>
+                            <action selector="buttonWasTapped:" destination="p3W-hN-cwK" eventType="touchUpInside" id="64N-nd-UNw"/>
                         </connections>
                     </button>
                 </subviews>
@@ -39,16 +39,16 @@
             </view>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="centerY" secondItem="A7L-QZ-za1" secondAttribute="centerY" id="T2u-pU-Wx7"/>
-                <constraint firstItem="A7L-QZ-za1" firstAttribute="leading" secondItem="mz9-Oa-E3C" secondAttribute="leading" constant="20" id="awQ-LL-sC5"/>
-                <constraint firstAttribute="trailing" secondItem="A7L-QZ-za1" secondAttribute="trailing" constant="20" id="f6j-KI-Per"/>
-                <constraint firstItem="AxG-Lz-i3A" firstAttribute="leading" secondItem="mz9-Oa-E3C" secondAttribute="leading" constant="20" id="g4A-AJ-WgG"/>
-                <constraint firstAttribute="centerY" secondItem="AxG-Lz-i3A" secondAttribute="centerY" id="oj6-0D-Jmf"/>
-                <constraint firstAttribute="trailing" secondItem="AxG-Lz-i3A" secondAttribute="trailing" constant="20" id="xv9-pX-gUu"/>
+                <constraint firstAttribute="centerY" secondItem="SC6-wz-kTN" secondAttribute="centerY" id="B0W-G0-jsY"/>
+                <constraint firstAttribute="trailing" secondItem="SC6-wz-kTN" secondAttribute="trailing" constant="20" id="EKm-da-GV9"/>
+                <constraint firstAttribute="centerY" secondItem="Vgr-42-tvG" secondAttribute="centerY" id="Gar-Kf-eLr"/>
+                <constraint firstItem="Vgr-42-tvG" firstAttribute="leading" secondItem="p3W-hN-cwK" secondAttribute="leading" constant="20" id="PgO-wB-z8V"/>
+                <constraint firstItem="SC6-wz-kTN" firstAttribute="leading" secondItem="p3W-hN-cwK" secondAttribute="leading" constant="20" id="eS0-Ix-dSM"/>
+                <constraint firstAttribute="trailing" secondItem="Vgr-42-tvG" secondAttribute="trailing" constant="20" id="leX-mP-bcA"/>
             </constraints>
             <connections>
-                <outlet property="button" destination="A7L-QZ-za1" id="vBz-T4-3fF"/>
-                <outlet property="label" destination="AxG-Lz-i3A" id="oQq-3P-ccC"/>
+                <outlet property="button" destination="SC6-wz-kTN" id="Mcc-3X-ExB"/>
+                <outlet property="label" destination="Vgr-42-tvG" id="ixm-ED-k2p"/>
             </connections>
         </collectionViewCell>
     </objects>

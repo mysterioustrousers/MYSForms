@@ -6,8 +6,7 @@
 //  Copyright (c) 2014 Mysterious Trousers. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 
-@interface MYSFormNumberToStringValueTransformer : NSValueTransformer
+@interface MYSFormStringFromNumberValueTransformer : NSValueTransformer
 
 @end

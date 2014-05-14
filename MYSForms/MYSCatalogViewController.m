@@ -22,6 +22,7 @@
     self.model = [MYSExampleUser new];
     MYSExampleUser *exampleUser = self.model;
     exampleUser.yearsOld = 10;
+    exampleUser.isLegalAdult = YES;
 }
 
 - (void)configureForm
@@ -51,11 +52,13 @@
     [self addFormElement:[MYSFormImagePickerElement imagePickerElementWithLabel:@"Selfie" modelKeyPath:nil]];
 
     MYSFormPickerElement *pickerElement = [MYSFormPickerElement pickerElementWithLabel:@"Age" modelKeyPath:@"yearsOld"];
-    pickerElement.valueTransformer = [MYSFormNumberToStringValueTransformer new];
+    pickerElement.valueTransformer = [MYSFormStringFromNumberValueTransformer new];
     for (NSInteger i = 0; i < 120; i++) {
         [pickerElement addValue:@(i)];
     }
     [self addFormElement:pickerElement];
+
+    [self addFormElement:[MYSFormToggleElement toggleElementWithLabel:@"A toggle switch" modelKeyPath:@"isLegalAdult"]];
 }
 
 

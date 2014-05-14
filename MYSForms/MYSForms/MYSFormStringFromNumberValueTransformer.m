@@ -6,13 +6,13 @@
 //  Copyright (c) 2014 Mysterious Trousers. All rights reserved.
 //
 
-#import "MYSFormNumberToStringValueTransformer.h"
+#import "MYSFormStringFromNumberValueTransformer.h"
 
-@implementation MYSFormNumberToStringValueTransformer
+@implementation MYSFormStringFromNumberValueTransformer
 
 + (Class)transformedValueClass
 {
-    return [UIImage class];
+    return [NSString class];
 }
 
 + (BOOL)allowsReverseTransformation

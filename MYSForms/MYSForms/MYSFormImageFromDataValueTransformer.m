@@ -1,18 +1,18 @@
 //
-//  MYSFormDataToImageValueTransformer.m
+//  MYSFormImageFromDataValueTransformer.m
 //  MYSForms
 //
 //  Created by Adam Kirk on 5/13/14.
 //  Copyright (c) 2014 Mysterious Trousers. All rights reserved.
 //
 
-#import "MYSFormDataToImageValueTransformer.h"
+#import "MYSFormImageFromDataValueTransformer.h"
 
-@implementation MYSFormDataToImageValueTransformer
+@implementation MYSFormImageFromDataValueTransformer
 
-+ (instancetype)valueTransformerWithReverseImageType:(MYSFormDataToImageValueTransformerReverseImageType)type
++ (instancetype)valueTransformerWithReverseImageType:(MYSFormImageFromDataValueTransformerReverseImageType)type
 {
-    MYSFormDataToImageValueTransformer *transformer = [MYSFormDataToImageValueTransformer new];
+    MYSFormImageFromDataValueTransformer *transformer = [MYSFormImageFromDataValueTransformer new];
     transformer.reverseTransformImageType = type;
     return transformer;
 }
@@ -34,10 +34,10 @@
 
 - (NSData *)reverseTransformedValue:(UIImage *)value
 {
-    if (self.reverseTransformImageType == MYSFormDataToImageValueTransformerReverseImageTypePNG) {
+    if (self.reverseTransformImageType == MYSFormImageFromDataValueTransformerReverseImageTypePNG) {
         return UIImagePNGRepresentation(value);
     }
-    else if (self.reverseTransformImageType == MYSFormDataToImageValueTransformerReverseImageTypeJPEG) {
+    else if (self.reverseTransformImageType == MYSFormImageFromDataValueTransformerReverseImageTypeJPEG) {
         return UIImageJPEGRepresentation(value, 0.9);
     }
     return nil;

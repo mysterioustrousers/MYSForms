@@ -159,6 +159,7 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
     [MYSFormLabelAndButtonCell registerForReuseWithCollectionView:self.collectionView];
     [MYSFormImagePickerCell registerForReuseWithCollectionView:self.collectionView];
     [MYSFormPickerCell registerForReuseWithCollectionView:self.collectionView];
+    [MYSFormToggleCell registerForReuseWithCollectionView:self.collectionView];
 
     [MYSFormMessageCell registerForReuseWithCollectionView:self.collectionView];
     [MYSFormLoadingCell registerForReuseWithCollectionView:self.collectionView];

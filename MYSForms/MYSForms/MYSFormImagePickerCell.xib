@@ -45,7 +45,7 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="ITk-Xu-mZH" secondAttribute="trailing" id="1IL-ls-jEP"/>
-                <constraint firstAttribute="bottom" secondItem="ITk-Xu-mZH" secondAttribute="bottom" id="3h8-Uy-Ia8"/>
+                <constraint firstAttribute="bottom" secondItem="ITk-Xu-mZH" secondAttribute="bottom" priority="999" id="3h8-Uy-Ia8"/>
                 <constraint firstItem="bFx-Yl-TWA" firstAttribute="leading" secondItem="viI-Ce-Dvn" secondAttribute="leading" constant="10" id="VIG-T1-pHO"/>
                 <constraint firstItem="9ex-e5-RyH" firstAttribute="leading" secondItem="bFx-Yl-TWA" secondAttribute="trailing" constant="14" id="WPE-kf-z67"/>
                 <constraint firstAttribute="centerY" secondItem="bFx-Yl-TWA" secondAttribute="centerY" id="X3F-x8-Lt3"/>
@@ -53,7 +53,7 @@
                 <constraint firstAttribute="bottom" secondItem="9ex-e5-RyH" secondAttribute="bottom" constant="20" id="ju4-Rw-3O2"/>
                 <constraint firstItem="ITk-Xu-mZH" firstAttribute="leading" secondItem="viI-Ce-Dvn" secondAttribute="leading" id="lHe-ib-blg"/>
                 <constraint firstAttribute="trailing" secondItem="9ex-e5-RyH" secondAttribute="trailing" constant="20" id="mvh-jy-6ga"/>
-                <constraint firstItem="9ex-e5-RyH" firstAttribute="top" secondItem="viI-Ce-Dvn" secondAttribute="top" constant="20" id="s5P-Iv-SnV"/>
+                <constraint firstItem="9ex-e5-RyH" firstAttribute="top" secondItem="viI-Ce-Dvn" secondAttribute="top" priority="999" constant="20" id="s5P-Iv-SnV"/>
             </constraints>
             <size key="customSize" width="320" height="99"/>
             <connections>

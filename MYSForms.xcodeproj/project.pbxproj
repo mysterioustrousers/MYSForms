@@ -115,6 +115,7 @@
 		C26C4FEC192398AB00D6ADBB /* MYSFormPickerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MYSFormPickerCell.xib; sourceTree = "<group>"; };
 		C271805D192294D300FD2229 /* MYSFormImageFromDataValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYSFormImageFromDataValueTransformer.h; sourceTree = "<group>"; };
 		C271805E192294D300FD2229 /* MYSFormImageFromDataValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYSFormImageFromDataValueTransformer.m; sourceTree = "<group>"; };
+		C2815CBC19270E31004A72BA /* MYSFormCollectionViewLayoutProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MYSFormCollectionViewLayoutProtocol.h; sourceTree = "<group>"; };
 		C289A24E1913440A0047D0CF /* MYSForms.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MYSForms.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C289A2511913440A0047D0CF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C289A2531913440A0047D0CF /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -448,6 +449,7 @@
 		C2B1BE1B1915C68C00F4E8BB /* Collection View Layouts */ = {
 			isa = PBXGroup;
 			children = (
+				C2815CBC19270E31004A72BA /* MYSFormCollectionViewLayoutProtocol.h */,
 				C289A29C1913DAD30047D0CF /* MYSFormCollectionViewSpringyLayout.h */,
 				C289A29D1913DAD30047D0CF /* MYSFormCollectionViewSpringyLayout.m */,
 			);

@@ -6,6 +6,8 @@
 //  Copyright (c) 2013 Ash Furrow. All rights reserved.
 //
 
+#import "MYSFormCollectionViewLayoutProtocol.h"
 
-@interface MYSFormCollectionViewSpringyLayout : UICollectionViewFlowLayout
+
+@interface MYSFormCollectionViewSpringyLayout : UICollectionViewFlowLayout <MYSFormCollectionViewLayoutProtocol>
 @end

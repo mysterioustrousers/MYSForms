@@ -10,6 +10,7 @@
 #import "MYSFormMessageElement.h"
 #import "MYSFormLoadingCell.h"
 #import "MYSFormMessageElement-Private.h"
+#import "MYSFormCollectionViewLayoutProtocol.h"
 
 
 typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
@@ -280,14 +281,10 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
 {
     if (indexPath.item < [self.elements count]) {
         MYSFormElement *element = self.elements[indexPath.row];
-        MYSFormCell *cell = element.cell;
-        if (!cell) {
-            cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([element cellClass]) forIndexPath:indexPath];
-            [cell populateWithElement:element];
-            element.cell = cell;
-        }
+        MYSFormCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([element cellClass]) forIndexPath:indexPath];
+        [cell populateWithElement:element];
+        element.cell = cell;
         [element updateCell];
-
         return cell;
     }
 
@@ -443,9 +440,11 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
 
     if ([indexPathsToInsert count] > 0) {
         [self.cachedCellSizes removeAllObjects];
+        [self setDynamicsEnabledOnLayout:NO];
         [self.collectionView performBatchUpdates:^{
             [self.collectionView insertItemsAtIndexPaths:indexPathsToInsert];
         } completion:^(BOOL finished) {
+            [self setDynamicsEnabledOnLayout:YES];
             if (completion) completion();
         }];
     }
@@ -477,9 +476,11 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
 
     if ([indexPathsToRemove count] > 0) {
         [self.cachedCellSizes removeAllObjects];
+        [self setDynamicsEnabledOnLayout:NO];
         [self.collectionView performBatchUpdates:^{
             [self.collectionView deleteItemsAtIndexPaths:indexPathsToRemove];
         } completion:^(BOOL finished) {
+            [self setDynamicsEnabledOnLayout:YES];
             if (completion) completion();
         }];
     }
@@ -762,6 +763,13 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
         [self.pickerView removeFromSuperview];
         [self.pickerViewButton removeFromSuperview];
     }];
+}
+
+- (void)setDynamicsEnabledOnLayout:(BOOL)dynamicsEnabled
+{
+    if ([self.collectionView.collectionViewLayout respondsToSelector:@selector(setIsDynamicsEnabled:)]) {
+        [(id<MYSFormCollectionViewLayoutProtocol>)self.collectionView.collectionViewLayout setIsDynamicsEnabled:dynamicsEnabled];
+    }
 }
 
 @end

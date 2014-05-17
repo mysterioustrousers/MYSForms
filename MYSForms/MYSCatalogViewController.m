@@ -59,6 +59,75 @@
     [self addFormElement:pickerElement];
 
     [self addFormElement:[MYSFormToggleElement toggleElementWithLabel:@"A toggle switch" modelKeyPath:@"isLegalAdult"]];
+
+
+
+
+    // just to make it long
+
+    [self addFormElement:[MYSFormHeadlineElement headlineElementWithHeadline:@"A Headline"]];
+
+
+    [self addFormElement:[MYSFormFootnoteElement footnoteElementWithFootnote:
+                          @"A footnote/description element for offering a more detailed explanation in your form."]];
+
+
+    [self addFormElement:[MYSFormTextFieldElement textFieldElementWithLabel:@"Text Field" modelKeyPath:nil]];
+
+
+    [self addFormElement:[MYSFormButtonElement buttonElementWithTitle:@"Button" block:^(MYSFormElement *element) {
+        [self showSuccessMessage:@"A success message." belowElement:element duration:3 completion:nil];
+        [self logModel];
+    }]];
+
+    [self addFormElement:[MYSFormLabelAndButtonElement buttonElementWithLabel:@"A label" title:@"And button" block:^(MYSFormButtonElement *element) {
+        [self showErrorMessage:@"An error message." belowElement:element duration:3 completion:nil];
+    }]];
+
+    [self addFormElement:[MYSFormImagePickerElement imagePickerElementWithLabel:@"Selfie" modelKeyPath:nil]];
+
+    pickerElement = [MYSFormPickerElement pickerElementWithLabel:@"Age" modelKeyPath:@"yearsOld"];
+    pickerElement.valueTransformer = [MYSFormStringFromNumberValueTransformer new];
+    for (NSInteger i = 0; i < 120; i++) {
+        [pickerElement addValue:@(i)];
+    }
+    [self addFormElement:pickerElement];
+
+    [self addFormElement:[MYSFormToggleElement toggleElementWithLabel:@"A toggle switch" modelKeyPath:@"isLegalAdult"]];
+
+
+
+    [self addFormElement:[MYSFormHeadlineElement headlineElementWithHeadline:@"A Headline"]];
+
+
+    [self addFormElement:[MYSFormFootnoteElement footnoteElementWithFootnote:
+                          @"A footnote/description element for offering a more detailed explanation in your form."]];
+
+
+    [self addFormElement:[MYSFormTextFieldElement textFieldElementWithLabel:@"Text Field" modelKeyPath:@"firstName"]];
+
+
+    [self addFormElement:[MYSFormButtonElement buttonElementWithTitle:@"Button" block:^(MYSFormElement *element) {
+        [self showSuccessMessage:@"A success message." belowElement:element duration:3 completion:nil];
+        [self logModel];
+    }]];
+
+    [self addFormElement:[MYSFormLabelAndButtonElement buttonElementWithLabel:@"A label" title:@"And button" block:^(MYSFormButtonElement *element) {
+        [self showErrorMessage:@"An error message." belowElement:element duration:3 completion:nil];
+    }]];
+
+    [self addFormElement:[MYSFormImagePickerElement imagePickerElementWithLabel:@"Selfie" modelKeyPath:nil]];
+
+    pickerElement = [MYSFormPickerElement pickerElementWithLabel:@"Age" modelKeyPath:@"yearsOld"];
+    pickerElement.valueTransformer = [MYSFormStringFromNumberValueTransformer new];
+    for (NSInteger i = 0; i < 120; i++) {
+        [pickerElement addValue:@(i)];
+    }
+    [self addFormElement:pickerElement];
+
+    [self addFormElement:[MYSFormToggleElement toggleElementWithLabel:@"A toggle switch" modelKeyPath:@"isLegalAdult"]];
+
+
 }
 
 

@@ -25,12 +25,15 @@
 
 @implementation MYSFormCollectionViewSpringyLayout
 
+@synthesize isDynamicsEnabled = _isDynamicsEnabled;
+
 - (void)commonInit
 {
     self.minimumInteritemSpacing    = 0;
     self.minimumLineSpacing         = 5;
     self.dynamicAnimator            = [[UIDynamicAnimator alloc] initWithCollectionViewLayout:self];
     self.visibleIndexPathsSet       = [NSMutableSet new];
+    self.isDynamicsEnabled          = YES;
 }
 
 - (instancetype)init
@@ -63,19 +66,18 @@
     NSArray *itemsInVisibleRectArray = [super layoutAttributesForElementsInRect:visibleRect];
 
     // update dynamic animator items and behaviors on insert/delete
-    [self.dynamicAnimator.behaviors enumerateObjectsUsingBlock:^(UIAttachmentBehavior *springBehaviour, NSUInteger idx, BOOL *stop) {
-        UICollectionViewLayoutAttributes *item = [springBehaviour.items firstObject];
-        for (UICollectionViewLayoutAttributes *attributes in itemsInVisibleRectArray) {
-            if ([attributes.indexPath isEqual:item.indexPath]) {
-                if ([itemsInVisibleRectArray count] != [self.dynamicAnimator.behaviors count] ||
-                    item.frame.size.width != self.collectionView.bounds.size.width) {
+    if (!self.isDynamicsEnabled) {
+        [self.dynamicAnimator.behaviors enumerateObjectsUsingBlock:^(UIAttachmentBehavior *springBehaviour, NSUInteger idx, BOOL *stop) {
+            UICollectionViewLayoutAttributes *item = [springBehaviour.items firstObject];
+            for (UICollectionViewLayoutAttributes *attributes in itemsInVisibleRectArray) {
+                if ([attributes.indexPath isEqual:item.indexPath]) {
                     item.frame = attributes.frame;
                     [self.dynamicAnimator updateItemUsingCurrentState:item];
+                    springBehaviour.anchorPoint = attributes.center;
                 }
-                springBehaviour.anchorPoint = attributes.center;
             }
-        }
-    }];
+        }];
+    }
 
     NSSet *itemsIndexPathsInVisibleRectSet = [NSSet setWithArray:[itemsInVisibleRectArray valueForKey:@"indexPath"]];
     
@@ -104,13 +106,13 @@
         UIAttachmentBehavior *springBehaviour = [[UIAttachmentBehavior alloc] initWithItem:item attachedToAnchor:center];
 
         springBehaviour.length      = 0.0f;
-        springBehaviour.damping     = 0.7f;
-        springBehaviour.frequency   = 0.7f;
+        springBehaviour.damping     = 0.8f;
+        springBehaviour.frequency   = 1.0f;
 
         // If our touchLocation is not (0,0), we'll need to adjust our item's center "in flight"
         if (!CGPointEqualToPoint(CGPointZero, touchLocation)) {
             CGFloat yDistanceFromTouch = fabsf(touchLocation.y - springBehaviour.anchorPoint.y);
-            CGFloat scrollResistance = yDistanceFromTouch / 1000.0f;
+            CGFloat scrollResistance = yDistanceFromTouch / 1500.0f;
 
             if (self.latestDelta < 0) {
                 center.y += MAX(self.latestDelta, self.latestDelta * scrollResistance);
@@ -142,7 +144,7 @@
     
     [self.dynamicAnimator.behaviors enumerateObjectsUsingBlock:^(UIAttachmentBehavior *springBehaviour, NSUInteger idx, BOOL *stop) {
         CGFloat yDistanceFromTouch = fabsf(touchLocation.y - springBehaviour.anchorPoint.y);
-        CGFloat scrollResistance = yDistanceFromTouch / 800.0f;
+        CGFloat scrollResistance = yDistanceFromTouch / 1500.0f;
         
         UICollectionViewLayoutAttributes *item = [springBehaviour.items firstObject];
         CGPoint center = item.center;
@@ -159,6 +161,5 @@
 
     return NO;
 }
-
 
 @end

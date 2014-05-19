@@ -10,7 +10,8 @@
 #import "MYSFormMessageElement.h"
 #import "MYSFormLoadingCell.h"
 #import "MYSFormMessageElement-Private.h"
-#import "MYSFormCollectionViewLayoutProtocol.h"
+#import "MYSCollectionViewSpringyLayout.h"
+#import "MYSCollectionView.h"
 
 
 typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
@@ -47,7 +48,7 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
 
 - (instancetype)init
 {
-    self = [super initWithCollectionViewLayout:[MYSFormCollectionViewSpringyLayout new]];
+    self = [super initWithCollectionViewLayout:[MYSCollectionViewSpringyLayout new]];
     if (self) {
         [self commonInit];
     }
@@ -76,9 +77,9 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
 {
     [super viewDidLoad];
 
-    self.collectionView.backgroundColor         = [UIColor groupTableViewBackgroundColor];
-    self.view.backgroundColor                   = [UIColor groupTableViewBackgroundColor];
-    self.collectionView.alwaysBounceVertical    = YES;
+    self.collectionView.backgroundColor      = [UIColor groupTableViewBackgroundColor];
+    self.view.backgroundColor                = [UIColor groupTableViewBackgroundColor];
+    self.collectionView.alwaysBounceVertical = YES;
 
     [self registerElementCellsForReuse];
     [self setupKeyboardNotifications];
@@ -440,11 +441,9 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
 
     if ([indexPathsToInsert count] > 0) {
         [self.cachedCellSizes removeAllObjects];
-        [self setDynamicsEnabledOnLayout:NO];
         [self.collectionView performBatchUpdates:^{
             [self.collectionView insertItemsAtIndexPaths:indexPathsToInsert];
         } completion:^(BOOL finished) {
-            [self setDynamicsEnabledOnLayout:YES];
             if (completion) completion();
         }];
     }
@@ -476,11 +475,9 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
 
     if ([indexPathsToRemove count] > 0) {
         [self.cachedCellSizes removeAllObjects];
-        [self setDynamicsEnabledOnLayout:NO];
         [self.collectionView performBatchUpdates:^{
             [self.collectionView deleteItemsAtIndexPaths:indexPathsToRemove];
         } completion:^(BOOL finished) {
-            [self setDynamicsEnabledOnLayout:YES];
             if (completion) completion();
         }];
     }
@@ -763,13 +760,6 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
         [self.pickerView removeFromSuperview];
         [self.pickerViewButton removeFromSuperview];
     }];
-}
-
-- (void)setDynamicsEnabledOnLayout:(BOOL)dynamicsEnabled
-{
-    if ([self.collectionView.collectionViewLayout respondsToSelector:@selector(setIsDynamicsEnabled:)]) {
-        [(id<MYSFormCollectionViewLayoutProtocol>)self.collectionView.collectionViewLayout setIsDynamicsEnabled:dynamicsEnabled];
-    }
 }
 
 @end

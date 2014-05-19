@@ -26,6 +26,3 @@
 #import "MYSFormImageFromDataValueTransformer.h"
 #import "MYSFormStringFromNumberValueTransformer.h"
 #import "MYSFormStringFromTimeZoneValueTransformer.h"
-
-// layouts
-#import "MYSFormCollectionViewSpringyLayout.h"

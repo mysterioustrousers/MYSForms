@@ -45,7 +45,7 @@
     CGSize size = [currentModelValue boundingRectWithSize:CGSizeMake(width, FLT_MAX)
                                              options:NSStringDrawingUsesLineFragmentOrigin
                                           attributes:@{
-                                                       NSFontAttributeName : [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline]
+                                                       NSFontAttributeName : element.font
                                                        }
                                              context:nil].size;
     size.height = ceil(size.height);
@@ -63,6 +63,7 @@
 
 - (void)populateWithElement:(MYSFormTextViewElement *)element
 {
+    self.textView.font     = element.font;
     self.textView.editable = element.isEditable;
 }
 

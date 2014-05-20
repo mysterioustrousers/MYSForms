@@ -31,6 +31,10 @@
                                                           }
                                                 context:nil].size;
     size.height = ceil(size.height);
+
+    // some padding
+    size.height += 20;
+
     return size;
 }
 

@@ -54,6 +54,7 @@
 		C292C0C1191EEEE6000567FC /* MYSFormImagePickerElement.m in Sources */ = {isa = PBXBuildFile; fileRef = C292C0C0191EEEE6000567FC /* MYSFormImagePickerElement.m */; };
 		C292C0C4191EEF8B000567FC /* MYSFormImagePickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C292C0C3191EEF8B000567FC /* MYSFormImagePickerCell.m */; };
 		C292C0C6191EEFA4000567FC /* MYSFormImagePickerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C292C0C5191EEFA4000567FC /* MYSFormImagePickerCell.xib */; };
+		C29F0818192C0E63003956FE /* MYSFormStringFromURLValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = C29F0817192C0E63003956FE /* MYSFormStringFromURLValueTransformer.m */; };
 		C2AAD8D519140BFB00FDF78E /* MYSExampleUser.m in Sources */ = {isa = PBXBuildFile; fileRef = C2AAD8D419140BFB00FDF78E /* MYSExampleUser.m */; };
 		C2AAD8DD191414C400FDF78E /* MYSFormsMedia.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C2AAD8DC191414C400FDF78E /* MYSFormsMedia.xcassets */; };
 		C2B1BE0E1915A05B00F4E8BB /* MYSFormElement.m in Sources */ = {isa = PBXBuildFile; fileRef = C2B1BE0D1915A05B00F4E8BB /* MYSFormElement.m */; };
@@ -168,6 +169,8 @@
 		C292C0C2191EEF8B000567FC /* MYSFormImagePickerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYSFormImagePickerCell.h; sourceTree = "<group>"; };
 		C292C0C3191EEF8B000567FC /* MYSFormImagePickerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYSFormImagePickerCell.m; sourceTree = "<group>"; };
 		C292C0C5191EEFA4000567FC /* MYSFormImagePickerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MYSFormImagePickerCell.xib; sourceTree = "<group>"; };
+		C29F0816192C0E63003956FE /* MYSFormStringFromURLValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYSFormStringFromURLValueTransformer.h; sourceTree = "<group>"; };
+		C29F0817192C0E63003956FE /* MYSFormStringFromURLValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYSFormStringFromURLValueTransformer.m; sourceTree = "<group>"; };
 		C2AAD8D319140BFB00FDF78E /* MYSExampleUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYSExampleUser.h; sourceTree = "<group>"; };
 		C2AAD8D419140BFB00FDF78E /* MYSExampleUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYSExampleUser.m; sourceTree = "<group>"; };
 		C2AAD8DC191414C400FDF78E /* MYSFormsMedia.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = MYSFormsMedia.xcassets; sourceTree = "<group>"; };
@@ -292,6 +295,8 @@
 				C2F15E2D1923E3EA00E55FDA /* MYSFormStringFromNumberValueTransformer.m */,
 				C2F15E341924263500E55FDA /* MYSFormStringFromTimeZoneValueTransformer.h */,
 				C2F15E351924263500E55FDA /* MYSFormStringFromTimeZoneValueTransformer.m */,
+				C29F0816192C0E63003956FE /* MYSFormStringFromURLValueTransformer.h */,
+				C29F0817192C0E63003956FE /* MYSFormStringFromURLValueTransformer.m */,
 			);
 			name = "Form Value Transformers";
 			sourceTree = "<group>";
@@ -659,6 +664,7 @@
 				C2F15E3919242C0800E55FDA /* MYSFormToggleElement.m in Sources */,
 				C292C0B3191DE0AA000567FC /* MYSFormMessageElement.m in Sources */,
 				C2F15E3C19242C1D00E55FDA /* MYSFormToggleCell.m in Sources */,
+				C29F0818192C0E63003956FE /* MYSFormStringFromURLValueTransformer.m in Sources */,
 				C271805F192294D300FD2229 /* MYSFormImageFromDataValueTransformer.m in Sources */,
 				C24F1B88191A9E6600356D9A /* MYSLoadingViewController.m in Sources */,
 				C2D718BD192A5E9000A94F24 /* MYSCollectionViewSpringyLayout.m in Sources */,

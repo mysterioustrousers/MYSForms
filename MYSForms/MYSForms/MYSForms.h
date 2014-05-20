@@ -27,3 +27,4 @@
 #import "MYSFormImageFromDataValueTransformer.h"
 #import "MYSFormStringFromNumberValueTransformer.h"
 #import "MYSFormStringFromTimeZoneValueTransformer.h"
+#import "MYSFormStringFromURLValueTransformer.h"

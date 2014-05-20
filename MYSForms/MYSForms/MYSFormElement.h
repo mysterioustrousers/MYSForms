@@ -34,7 +34,6 @@
  */
 @property (nonatomic, weak) id<MYSFormElementDataSource> dataSource;
 
-
 /**
  The key path to the property on the forms model that this element should be bound to.
  */
@@ -46,6 +45,11 @@
 @property (nonatomic, strong) MYSFormCell *cell;
 
 /**
+ This calls the delegate (the form) to get the current model value for this element's key path.
+ */
+- (id)currentModelValue;
+
+/**
  The class of the cell to be used to display this form element.
  */
 - (Class)cellClass;
@@ -54,6 +58,12 @@
  If any data on this element has changed, call this method to update the cell so it's displayed to the user.
  */
 - (void)updateCell;
+
+/**
+ Called after the cell of this element has been created and assinged to the element, giving you a chance to fully customize
+ the look of the cell that will visually represent this element.
+ */
+- (void)configureCellBlock:(void (^)(MYSFormCell *cell))block;
 
 /**
  Returns YES if this is the type of form element that accepts text input.

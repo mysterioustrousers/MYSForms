@@ -12,6 +12,7 @@
 #import "MYSFormHeadlineElement.h"
 #import "MYSFormFootnoteElement.h"
 #import "MYSFormTextFieldElement.h"
+#import "MYSFormTextViewElement.h"
 #import "MYSFormButtonElement.h"
 #import "MYSFormLabelAndButtonElement.h"
 #import "MYSFormImagePickerElement.h"

@@ -13,6 +13,7 @@
 @interface MYSFormElement ()
 @property (nonatomic, strong) NSMutableSet *formValidations;
 @property (nonatomic, strong) NSMutableSet *valueTransformers;
+@property (nonatomic, copy  ) void         (^cellConfigurationBlock)(MYSFormCell *cell);
 @end
 
 
@@ -32,6 +33,17 @@
 
 #pragma mark - Public
 
+- (id)currentModelValue
+{
+    return [self.dataSource modelValueForFormElement:self];
+}
+
+- (void)setCell:(MYSFormCell *)cell
+{
+    _cell = cell;
+    if (self.cellConfigurationBlock) self.cellConfigurationBlock(cell);
+}
+
 - (Class)cellClass
 {
     NSString *className     = NSStringFromClass([self class]);
@@ -46,6 +58,11 @@
         id modelValue = [self.dataSource modelValueForFormElement:self];
         [self.cell setValue:modelValue forKeyPath:[self.cell valueKeyPath]];
     }
+}
+
+- (void)configureCellBlock:(void (^)(MYSFormCell *))block
+{
+    self.cellConfigurationBlock = block;
 }
 
 - (BOOL)isTextInput

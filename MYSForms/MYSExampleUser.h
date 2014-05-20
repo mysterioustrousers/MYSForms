@@ -14,4 +14,5 @@
 @property (nonatomic, copy  ) NSString   *password;
 @property (nonatomic, assign) NSUInteger yearsOld;
 @property (nonatomic, assign) BOOL       isLegalAdult;
+@property (nonatomic, copy  ) NSString   *biography;
 @end

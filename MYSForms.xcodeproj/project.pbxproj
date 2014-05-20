@@ -73,6 +73,9 @@
 		C2F15E3919242C0800E55FDA /* MYSFormToggleElement.m in Sources */ = {isa = PBXBuildFile; fileRef = C2F15E3819242C0800E55FDA /* MYSFormToggleElement.m */; };
 		C2F15E3C19242C1D00E55FDA /* MYSFormToggleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C2F15E3B19242C1D00E55FDA /* MYSFormToggleCell.m */; };
 		C2F15E3E19242C3000E55FDA /* MYSFormToggleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2F15E3D19242C3000E55FDA /* MYSFormToggleCell.xib */; };
+		C2F89CE0192B97C300198706 /* MYSFormTextViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C2F89CDF192B97C300198706 /* MYSFormTextViewCell.m */; };
+		C2F89CE2192B97E900198706 /* MYSFormTextViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2F89CE1192B97E900198706 /* MYSFormTextViewCell.xib */; };
+		C2F89CE5192B97FB00198706 /* MYSFormTextViewElement.m in Sources */ = {isa = PBXBuildFile; fileRef = C2F89CE4192B97FB00198706 /* MYSFormTextViewElement.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -200,6 +203,12 @@
 		C2F15E3B19242C1D00E55FDA /* MYSFormToggleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYSFormToggleCell.m; sourceTree = "<group>"; };
 		C2F15E3D19242C3000E55FDA /* MYSFormToggleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MYSFormToggleCell.xib; sourceTree = "<group>"; };
 		C2F15E3F19242D6400E55FDA /* MYSFormToggleCell-Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MYSFormToggleCell-Private.h"; sourceTree = "<group>"; };
+		C2F89CDE192B97C300198706 /* MYSFormTextViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYSFormTextViewCell.h; sourceTree = "<group>"; };
+		C2F89CDF192B97C300198706 /* MYSFormTextViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYSFormTextViewCell.m; sourceTree = "<group>"; };
+		C2F89CE1192B97E900198706 /* MYSFormTextViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MYSFormTextViewCell.xib; sourceTree = "<group>"; };
+		C2F89CE3192B97FB00198706 /* MYSFormTextViewElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYSFormTextViewElement.h; sourceTree = "<group>"; };
+		C2F89CE4192B97FB00198706 /* MYSFormTextViewElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYSFormTextViewElement.m; sourceTree = "<group>"; };
+		C2F89CE6192B987800198706 /* MYSFormTextViewCell-Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MYSFormTextViewCell-Private.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -245,6 +254,7 @@
 				C243F39C192157FC00FB86D6 /* MYSFormImagePickerCell-Private.h */,
 				C2F15E3F19242D6400E55FDA /* MYSFormToggleCell-Private.h */,
 				C243F3A01921613900FB86D6 /* MYSFormTextFieldCell-Private.h */,
+				C2F89CE6192B987800198706 /* MYSFormTextViewCell-Private.h */,
 				C26C4FE41922E90000D6ADBB /* MYSFormMessageElement-Private.h */,
 				C2F15E2F1923EE7D00E55FDA /* MYSFormPickerCell-Private.h */,
 			);
@@ -394,6 +404,9 @@
 				C289A2981913D7660047D0CF /* MYSFormTextFieldCell.h */,
 				C289A2991913D7660047D0CF /* MYSFormTextFieldCell.m */,
 				C26614E919155A900073DAD8 /* MYSFormTextFieldCell.xib */,
+				C2F89CDE192B97C300198706 /* MYSFormTextViewCell.h */,
+				C2F89CDF192B97C300198706 /* MYSFormTextViewCell.m */,
+				C2F89CE1192B97E900198706 /* MYSFormTextViewCell.xib */,
 				C289A28F1913D6890047D0CF /* MYSFormButtonCell.h */,
 				C289A2901913D6890047D0CF /* MYSFormButtonCell.m */,
 				C26614EB19155A9D0073DAD8 /* MYSFormButtonCell.xib */,
@@ -407,8 +420,8 @@
 				C26C4FEA1923989C00D6ADBB /* MYSFormPickerCell.m */,
 				C26C4FEC192398AB00D6ADBB /* MYSFormPickerCell.xib */,
 				C2F15E3A19242C1D00E55FDA /* MYSFormToggleCell.h */,
-				C2F15E3B19242C1D00E55FDA /* MYSFormToggleCell.m */,
 				C2F15E3D19242C3000E55FDA /* MYSFormToggleCell.xib */,
+				C2F15E3B19242C1D00E55FDA /* MYSFormToggleCell.m */,
 			);
 			name = "Form Element Cells";
 			sourceTree = "<group>";
@@ -443,6 +456,8 @@
 				C2B1BE131915A08F00F4E8BB /* MYSFormFootnoteElement.m */,
 				C2B1BE151915A0AA00F4E8BB /* MYSFormTextFieldElement.h */,
 				C2B1BE161915A0AA00F4E8BB /* MYSFormTextFieldElement.m */,
+				C2F89CE3192B97FB00198706 /* MYSFormTextViewElement.h */,
+				C2F89CE4192B97FB00198706 /* MYSFormTextViewElement.m */,
 				C2B1BE181915A0BE00F4E8BB /* MYSFormButtonElement.h */,
 				C2B1BE191915A0BE00F4E8BB /* MYSFormButtonElement.m */,
 				C24F1B96191AD8C500356D9A /* MYSFormLabelAndButtonElement.h */,
@@ -585,6 +600,7 @@
 				C292C0C6191EEFA4000567FC /* MYSFormImagePickerCell.xib in Resources */,
 				C289A25C1913440A0047D0CF /* InfoPlist.strings in Resources */,
 				C26614E819155A810073DAD8 /* MYSFormFootnoteCell.xib in Resources */,
+				C2F89CE2192B97E900198706 /* MYSFormTextViewCell.xib in Resources */,
 				C26614DD19153CD40073DAD8 /* MYSFormHeadlineCell.xib in Resources */,
 				C26614EC19155A9D0073DAD8 /* MYSFormButtonCell.xib in Resources */,
 				C24F1B9D191AD90300356D9A /* MYSFormLabelAndButtonCell.xib in Resources */,
@@ -615,6 +631,7 @@
 				C213D8E519182FC900F5086B /* MYSFormValidation.m in Sources */,
 				C2AAD8D519140BFB00FDF78E /* MYSExampleUser.m in Sources */,
 				C2B1BE171915A0AA00F4E8BB /* MYSFormTextFieldElement.m in Sources */,
+				C2F89CE5192B97FB00198706 /* MYSFormTextViewElement.m in Sources */,
 				C2B1BE111915A07900F4E8BB /* MYSFormHeadlineElement.m in Sources */,
 				C289A2621913440A0047D0CF /* MYSAppDelegate.m in Sources */,
 				C2B1BE141915A08F00F4E8BB /* MYSFormFootnoteElement.m in Sources */,
@@ -646,6 +663,7 @@
 				C24F1B88191A9E6600356D9A /* MYSLoadingViewController.m in Sources */,
 				C2D718BD192A5E9000A94F24 /* MYSCollectionViewSpringyLayout.m in Sources */,
 				C213D8E219182FA700F5086B /* MYSFormPresenceValidation.m in Sources */,
+				C2F89CE0192B97C300198706 /* MYSFormTextViewCell.m in Sources */,
 				C24F1B98191AD8C500356D9A /* MYSFormLabelAndButtonElement.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -466,11 +466,10 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
     NSMutableArray *indexPathsToRemove = [NSMutableArray new];
     for (MYSFormMessageElement *childElement in childElements) {
         if (!parentElement || [childElement.parentElement isEqual:parentElement]) {
-            NSIndexPath *ip = [self.collectionView indexPathForCell:childElement.cell];
-            if (ip) {
-                [self.elements removeObject:childElement];
-                [indexPathsToRemove addObject:ip];
-            }
+            NSInteger index = [self.elements indexOfObject:childElement];
+            NSIndexPath *ip = [NSIndexPath indexPathForItem:index inSection:0];
+            [self.elements removeObject:childElement];
+            [indexPathsToRemove addObject:ip];
         }
     }
 

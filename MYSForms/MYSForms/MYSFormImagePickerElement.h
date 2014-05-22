@@ -14,6 +14,8 @@
 
 @property (nonatomic, copy) NSString *label;
 
+@property (nonatomic, strong) UIImagePickerController *imagePickerController;
+
 + (instancetype)imagePickerElementWithLabel:(NSString *)label modelKeyPath:(NSString *)modelKeyPath;
 
 @end

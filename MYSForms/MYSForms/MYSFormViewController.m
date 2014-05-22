@@ -178,6 +178,12 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
 
 - (void)addFormElement:(MYSFormElement *)element atIndex:(NSInteger)index
 {
+    if ([element isKindOfClass:[MYSFormImagePickerElement class]] &&
+        [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+    {
+        return;
+    }
+
     element.dataSource  = self;
     element.delegate    = self;
     [self.elements insertObject:element atIndex:index];

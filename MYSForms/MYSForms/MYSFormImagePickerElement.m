@@ -39,6 +39,17 @@ NSString * const MYSFormImagePickerCellActionSheetButtonRemovePhoto         = @"
     cell.imagePickerCellDelegate = self;
 }
 
+- (UIImagePickerController *)imagePickerController
+{
+    if (!_imagePickerController) {
+        self.imagePickerController                    = [UIImagePickerController new];
+        _imagePickerController.modalPresentationStyle = UIModalPresentationCurrentContext;
+        _imagePickerController.delegate               = self;
+        _imagePickerController.allowsEditing          = YES;
+    }
+    return _imagePickerController;
+}
+
 
 
 
@@ -75,16 +86,12 @@ NSString * const MYSFormImagePickerCellActionSheetButtonRemovePhoto         = @"
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    UIImagePickerController *imagePickerController = [UIImagePickerController new];
-    imagePickerController.modalPresentationStyle = UIModalPresentationCurrentContext;
-    imagePickerController.delegate = self;
-
     NSString *buttonTitle = [actionSheet buttonTitleAtIndex:buttonIndex];
     if ([buttonTitle isEqualToString:MYSFormImagePickerCellActionSheetButtonTakePhoto]) {
-        imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+        self.imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
     }
     else if ([buttonTitle isEqualToString:MYSFormImagePickerCellActionSheetButtonChooseFromLibrary]) {
-        imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        self.imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     }
     else if ([buttonTitle isEqualToString:MYSFormImagePickerCellActionSheetButtonRemovePhoto]) {
         [self updateCell];
@@ -95,7 +102,7 @@ NSString * const MYSFormImagePickerCellActionSheetButtonRemovePhoto         = @"
         return;
     }
 
-    [self.delegate formElement:self didRequestPresentationOfViewController:imagePickerController animated:YES completion:nil];
+    [self.delegate formElement:self didRequestPresentationOfViewController:self.imagePickerController animated:YES completion:nil];
 }
 
 

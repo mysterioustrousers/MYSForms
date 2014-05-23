@@ -12,12 +12,6 @@
 
 @implementation MYSFormCell
 
-+ (void)registerForReuseWithCollectionView:(UICollectionView *)collectionView
-{
-    UINib *nib = [UINib nibWithNibName:NSStringFromClass(self) bundle:nil];
-    [collectionView registerNib:nib forCellWithReuseIdentifier:NSStringFromClass(self)];
-}
-
 + (CGSize)sizeRequiredForElement:(MYSFormElement *)element width:(CGFloat)width
 {
     return CGSizeMake(width, 50);

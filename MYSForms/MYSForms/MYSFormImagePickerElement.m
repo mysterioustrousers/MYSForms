@@ -33,6 +33,11 @@ NSString * const MYSFormImagePickerCellActionSheetButtonRemovePhoto         = @"
     return element;
 }
 
+- (BOOL)canAddElement
+{
+    return [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
+}
+
 - (void)setCell:(MYSFormImagePickerCell *)cell
 {
     [super setCell:cell];

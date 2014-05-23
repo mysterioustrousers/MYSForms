@@ -11,8 +11,6 @@
 
 @interface MYSFormCell : UICollectionViewCell
 
-+ (void)registerForReuseWithCollectionView:(UICollectionView *)collectionView;
-
 + (CGSize)sizeRequiredForElement:(MYSFormElement *)element width:(CGFloat)width;
 
 + (UIEdgeInsets)cellContentInset;

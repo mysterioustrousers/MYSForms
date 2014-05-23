@@ -45,6 +45,12 @@
 @property (nonatomic, strong) MYSFormCell *cell;
 
 /**
+ Is asked of the element to make sure this element can be added for this form/device/orientation/whatever.
+ For example, the image picker element can't be added on a device with no cameras and no library.
+ */
+- (BOOL)canAddElement;
+
+/**
  This calls the delegate (the form) to get the current model value for this element's key path.
  */
 - (id)currentModelValue;

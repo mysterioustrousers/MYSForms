@@ -46,11 +46,14 @@
         [self logModel];
     }]];
 
+
     [self addFormElement:[MYSFormLabelAndButtonElement buttonElementWithLabel:@"A label" title:@"And button" block:^(MYSFormButtonElement *element) {
         [self showErrorMessage:@"An error message." belowElement:element duration:3 completion:nil];
     }]];
 
+
     [self addFormElement:[MYSFormImagePickerElement imagePickerElementWithLabel:@"Selfie" modelKeyPath:nil]];
+
 
     MYSFormPickerElement *pickerElement = [MYSFormPickerElement pickerElementWithLabel:@"Age" modelKeyPath:@"yearsOld"];
     pickerElement.valueTransformer = [MYSFormStringFromNumberValueTransformer new];
@@ -59,7 +62,9 @@
     }
     [self addFormElement:pickerElement];
 
+
     [self addFormElement:[MYSFormToggleElement toggleElementWithLabel:@"A toggle switch" modelKeyPath:@"isLegalAdult"]];
+
 
     MYSFormTextViewElement *textViewElement = [MYSFormTextViewElement textViewElementWithModelKeyPath:@"biography"];
     [textViewElement configureCellBlock:^(MYSFormCell *cell) {

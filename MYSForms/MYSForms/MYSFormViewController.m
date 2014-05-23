@@ -154,18 +154,13 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
 
 - (void)registerElementCellsForReuse
 {
-    [MYSFormHeadlineCell registerForReuseWithCollectionView:self.collectionView];
-    [MYSFormFootnoteCell registerForReuseWithCollectionView:self.collectionView];
-    [MYSFormTextFieldCell registerForReuseWithCollectionView:self.collectionView];
-    [MYSFormButtonCell registerForReuseWithCollectionView:self.collectionView];
-    [MYSFormLabelAndButtonCell registerForReuseWithCollectionView:self.collectionView];
-    [MYSFormImagePickerCell registerForReuseWithCollectionView:self.collectionView];
-    [MYSFormPickerCell registerForReuseWithCollectionView:self.collectionView];
-    [MYSFormToggleCell registerForReuseWithCollectionView:self.collectionView];
-    [MYSFormTextViewCell registerForReuseWithCollectionView:self.collectionView];
+    for (MYSFormElement *element in self.elements) {
+        [self registerCellForElement:element];
+    }
 
-    [MYSFormMessageCell registerForReuseWithCollectionView:self.collectionView];
-    [MYSFormLoadingCell registerForReuseWithCollectionView:self.collectionView];
+    // register metadata cells
+    [self.collectionView registerClass:[MYSFormMessageCell class] forCellWithReuseIdentifier:NSStringFromClass([MYSFormMessageCell class])];
+    [self.collectionView registerClass:[MYSFormLoadingCell class] forCellWithReuseIdentifier:NSStringFromClass([MYSFormLoadingCell class])];
 
     // register an invisble footer cell
     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"InvisibleCell"];
@@ -178,15 +173,14 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
 
 - (void)addFormElement:(MYSFormElement *)element atIndex:(NSInteger)index
 {
-    if ([element isKindOfClass:[MYSFormImagePickerElement class]] &&
-        [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
-    {
-        return;
-    }
+    if (![element canAddElement]) return;
+
 
     element.dataSource  = self;
     element.delegate    = self;
+
     [self.elements insertObject:element atIndex:index];
+
     if ([self elementHasValidKeyPath:element]) {
         [self addObserver:self.model
                forKeyPath:element.modelKeyPath
@@ -766,6 +760,12 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
         [self.pickerView removeFromSuperview];
         [self.pickerViewButton removeFromSuperview];
     }];
+}
+
+- (void)registerCellForElement:(MYSFormElement *)element
+{
+    UINib *nib = [UINib nibWithNibName:NSStringFromClass([element cellClass]) bundle:nil];
+    [self.collectionView registerNib:nib forCellWithReuseIdentifier:NSStringFromClass([element cellClass])];
 }
 
 @end

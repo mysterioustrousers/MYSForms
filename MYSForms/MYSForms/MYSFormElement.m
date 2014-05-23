@@ -33,6 +33,11 @@
 
 #pragma mark - Public
 
+- (BOOL)canAddElement
+{
+    return YES;
+}
+
 - (id)currentModelValue
 {
     return [self.dataSource modelValueForFormElement:self];

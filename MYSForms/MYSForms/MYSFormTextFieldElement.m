@@ -18,7 +18,7 @@
 
 + (instancetype)textFieldElementWithLabel:(NSString *)label modelKeyPath:(NSString *)modelKeyPath
 {
-    MYSFormTextFieldElement *element    = [MYSFormTextFieldElement new];
+    MYSFormTextFieldElement *element    = [self new];
     element.label                       = label;
     element.modelKeyPath                = modelKeyPath;
     element.secure                      = NO;

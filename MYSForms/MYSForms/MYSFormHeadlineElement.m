@@ -13,7 +13,7 @@
 
 + (instancetype)headlineElementWithHeadline:(NSString *)headline
 {
-    MYSFormHeadlineElement *element = [MYSFormHeadlineElement new];
+    MYSFormHeadlineElement *element = [self new];
     element.headline = headline;
     return element;
 }

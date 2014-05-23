@@ -18,7 +18,7 @@
 
 + (instancetype)toggleElementWithLabel:(NSString *)label modelKeyPath:(NSString *)modelKeyPath;
 {
-    MYSFormToggleElement *element   = [MYSFormToggleElement new];
+    MYSFormToggleElement *element   = [self new];
     element.label                   = label;
     element.modelKeyPath            = modelKeyPath;
     return element;

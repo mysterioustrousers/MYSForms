@@ -28,7 +28,7 @@
 
 + (instancetype)textViewElementWithModelKeyPath:(NSString *)modelKeyPath
 {
-    MYSFormTextViewElement *element = [MYSFormTextViewElement new];
+    MYSFormTextViewElement *element = [self new];
     element.modelKeyPath            = modelKeyPath;
     return element;
 }

@@ -12,7 +12,7 @@
 
 + (instancetype)footnoteElementWithFootnote:(NSString *)footnote
 {
-    MYSFormFootnoteElement *element = [MYSFormFootnoteElement new];
+    MYSFormFootnoteElement *element = [self new];
     element.footnote = footnote;
     return element;
 }

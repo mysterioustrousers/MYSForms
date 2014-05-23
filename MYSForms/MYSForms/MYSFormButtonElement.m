@@ -18,7 +18,7 @@
 
 + (instancetype)buttonElementWithTitle:(NSString *)title block:(MYSFormButtonActionBlock)block
 {
-    MYSFormButtonElement *element   = [MYSFormButtonElement new];
+    MYSFormButtonElement *element   = [self new];
     element.title                   = title;
     element.block                   = block;
     return element;

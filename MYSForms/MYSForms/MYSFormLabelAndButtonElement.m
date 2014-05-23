@@ -13,7 +13,7 @@
 
 + (instancetype)buttonElementWithLabel:(NSString *)label title:(NSString *)title block:(MYSFormButtonActionBlock)block
 {
-    MYSFormLabelAndButtonElement *element = [MYSFormLabelAndButtonElement new];
+    MYSFormLabelAndButtonElement *element = [self new];
     element.label   = label;
     element.title   = title;
     element.block   = block;

@@ -27,7 +27,7 @@ NSString * const MYSFormImagePickerCellActionSheetButtonRemovePhoto         = @"
 
 + (instancetype)imagePickerElementWithLabel:(NSString *)label modelKeyPath:(NSString *)modelKeyPath
 {
-    MYSFormImagePickerElement *element  = [MYSFormImagePickerElement new];
+    MYSFormImagePickerElement *element  = [self new];
     element.label                       = label;
     element.modelKeyPath                = modelKeyPath;
     return element;

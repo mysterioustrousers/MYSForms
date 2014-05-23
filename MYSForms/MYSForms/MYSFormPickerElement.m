@@ -39,7 +39,7 @@
 
 + (instancetype)pickerElementWithLabel:(NSString *)label modelKeyPath:(NSString *)modelKeyPath
 {
-    MYSFormPickerElement *element   = [MYSFormPickerElement new];
+    MYSFormPickerElement *element   = [self new];
     element.label                   = label;
     element.modelKeyPath            = modelKeyPath;
     return element;

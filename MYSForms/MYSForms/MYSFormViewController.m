@@ -121,10 +121,21 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
     [self removeAllModelObservers];
 }
 
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    [(MYSCollectionView *)self.collectionView prepareForInterfaceOrientationChange];
+    [self.cachedCellSizes removeAllObjects];
+    [self.collectionView reloadData];
+    [self.collectionView.collectionViewLayout invalidateLayout];
+}
+
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
     [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+    [(MYSCollectionView *)self.collectionView finishInterfaceOrientationChange];
     [self.cachedCellSizes removeAllObjects];
+    [self.collectionView reloadData];
 }
 
 
@@ -216,6 +227,11 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
     }];
 
     return valid;
+}
+
+- (void)attemptToDismissKeyboard
+{
+    [[self currentFirstResponder] resignFirstResponder];
 }
 
 - (void)showLoadingMessage:(NSString *)message aboveElement:(MYSFormElement *)element completion:(void (^)(void))completion
@@ -407,7 +423,10 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
 
 #pragma mark (showing/hiding child elements)
 
-- (void)showChildElements:(NSArray *)childElements position:(MYSFormMessagePosition)position duration:(NSTimeInterval)duration completion:(void (^)(void))completion
+- (void)showChildElements:(NSArray *)childElements
+                 position:(MYSFormMessagePosition)position
+                 duration:(NSTimeInterval)duration
+               completion:(void (^)(void))completion
 {
     if (!self.collectionView.window) return;
 
@@ -445,6 +464,8 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
         [self.collectionView performBatchUpdates:^{
             [self.collectionView insertItemsAtIndexPaths:indexPathsToInsert];
         } completion:^(BOOL finished) {
+            NSIndexPath *ip = [indexPathsToInsert firstObject];
+            if (ip) [self.collectionView scrollToItemAtIndexPath:ip atScrollPosition:UICollectionViewScrollPositionTop animated:YES];
             if (completion) completion();
         }];
     }

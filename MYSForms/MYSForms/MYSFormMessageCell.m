@@ -33,7 +33,9 @@
     size.height = ceil(size.height);
 
     // some padding
-    size.height += 20;
+    if (element.type != MYSFormMessageTypeValidationError) {
+        size.height += 20;
+    }
 
     return size;
 }

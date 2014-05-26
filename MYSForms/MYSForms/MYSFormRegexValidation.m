@@ -22,7 +22,7 @@
 
 - (NSString *)failedString
 {
-    return [super failedString] ?: [NSString stringWithFormat:@"Must match %@.", self.matchPattern];
+    return [super failedString] ?: @"Invalid Format.";
 }
 
 - (NSError *)errorFromValidatingValue:(id)value;

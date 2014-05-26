@@ -63,6 +63,11 @@
 - (BOOL)validate;
 
 /**
+ Whatever text input in the form has first responder status will be asked to resign it.
+ */
+- (void)attemptToDismissKeyboard;
+
+/**
  A loading spinner with `message` will be displayed above the element specified. If nil is passed in for the element, the loading message
  will be displayed above the topmost element of the form.
  */

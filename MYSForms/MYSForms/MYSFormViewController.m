@@ -155,12 +155,12 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
 - (void)registerElementCellsForReuse
 {
     for (MYSFormElement *element in self.elements) {
-        [self registerCellForElement:element];
+        [self registerCellForClass:[element cellClass]];
     }
 
     // register metadata cells
-    [self.collectionView registerClass:[MYSFormMessageCell class] forCellWithReuseIdentifier:NSStringFromClass([MYSFormMessageCell class])];
-    [self.collectionView registerClass:[MYSFormLoadingCell class] forCellWithReuseIdentifier:NSStringFromClass([MYSFormLoadingCell class])];
+    [self registerCellForClass:[MYSFormMessageCell class]];
+    [self registerCellForClass:[MYSFormLoadingCell class]];
 
     // register an invisble footer cell
     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"InvisibleCell"];
@@ -762,10 +762,11 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
     }];
 }
 
-- (void)registerCellForElement:(MYSFormElement *)element
+- (void)registerCellForClass:(Class)cellClass
 {
-    UINib *nib = [UINib nibWithNibName:NSStringFromClass([element cellClass]) bundle:nil];
-    [self.collectionView registerNib:nib forCellWithReuseIdentifier:NSStringFromClass([element cellClass])];
+    UINib *nib = [UINib nibWithNibName:NSStringFromClass(cellClass) bundle:nil];
+    [self.collectionView registerNib:nib forCellWithReuseIdentifier:NSStringFromClass(cellClass)];
 }
+
 
 @end

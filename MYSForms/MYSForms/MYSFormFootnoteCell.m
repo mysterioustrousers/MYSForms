@@ -22,6 +22,9 @@
                                                             }
                                                   context:nil].size;
     size.height = ceil(size.height);
+
+    size.height += 10;
+
     return size;
 }
 

@@ -77,8 +77,8 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
 {
     [super viewDidLoad];
 
-    self.collectionView.backgroundColor      = [UIColor groupTableViewBackgroundColor];
-    self.view.backgroundColor                = [UIColor groupTableViewBackgroundColor];
+    self.collectionView.backgroundColor      = [UIColor whiteColor];
+    self.view.backgroundColor                = [UIColor whiteColor];
     self.collectionView.alwaysBounceVertical = YES;
 
     [self registerElementCellsForReuse];

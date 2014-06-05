@@ -70,10 +70,10 @@
 {
     [super drawRect:rect];
     if (self.element.type == MYSFormMessageTypeError) {
-        CGPoint point1 = CGPointMake(10, (self.frame.size.height / 2.0) - 5);
-        CGPoint point2 = CGPointMake(20, (self.frame.size.height / 2.0) + 5);
-        CGPoint point3 = CGPointMake(10, (self.frame.size.height / 2.0) + 5);
-        CGPoint point4 = CGPointMake(20, (self.frame.size.height / 2.0) - 5);
+        CGPoint point1 = CGPointMake(20, (self.frame.size.height / 2.0) - 5);
+        CGPoint point2 = CGPointMake(30, (self.frame.size.height / 2.0) + 5);
+        CGPoint point3 = CGPointMake(20, (self.frame.size.height / 2.0) + 5);
+        CGPoint point4 = CGPointMake(30, (self.frame.size.height / 2.0) - 5);
         UIBezierPath *path = [UIBezierPath bezierPath];
         [path moveToPoint:point1];
         [path addLineToPoint:point2];
@@ -83,8 +83,8 @@
         [path stroke];
     }
     else if (self.element.type == MYSFormMessageTypeValidationError) {
-        CGPoint point1 = CGPointMake(15, self.frame.size.height / 2.0);
-        CGPoint point2 = CGPointMake(10, point1.y);
+        CGPoint point1 = CGPointMake(25, self.frame.size.height / 2.0);
+        CGPoint point2 = CGPointMake(20, point1.y);
         CGPoint point3 = CGPointMake(point2.x, 0);
         UIBezierPath *path = [UIBezierPath bezierPath];
         [path moveToPoint:point1];
@@ -94,7 +94,7 @@
         [path stroke];
     }
     else if (self.element.type == MYSFormMessageTypeSuccess) {
-        CGPoint point1 = CGPointMake(12, (self.frame.size.height / 2.0));
+        CGPoint point1 = CGPointMake(22, (self.frame.size.height / 2.0));
         CGPoint point2 = CGPointMake(point1.x + 4, point1.y + 5);
         CGPoint point3 = CGPointMake(point2.x + 4, point2.y - 12);
         UIBezierPath *path = [UIBezierPath bezierPath];

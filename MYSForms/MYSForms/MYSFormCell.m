@@ -38,5 +38,9 @@
     return nil;
 }
 
+- (void)didChangeValueAtValueKeyPath
+{
+
+}
 
 @end

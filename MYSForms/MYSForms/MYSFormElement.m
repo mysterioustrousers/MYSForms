@@ -62,6 +62,7 @@
     if ([self isModelKeyPathValid]) {
         id modelValue = [self.dataSource modelValueForFormElement:self];
         [self.cell setValue:modelValue forKeyPath:[self.cell valueKeyPath]];
+        [self.cell didChangeValueAtValueKeyPath];
     }
 }
 

@@ -8,9 +8,40 @@
 
 
 @class MYSFormElement;
+@class MYSFormViewController;
 
 
-@protocol MYSFormViewControllerDelegate;
+
+
+/**
+ Allows you to be informed of interesting events that happen with the form.
+ */
+@protocol MYSFormViewControllerDelegate <NSObject>
+@optional
+/**
+ On every text input before the last, the return key on the iOS keyboard will be "Next", moving them to the next text input field.
+ On the last text input field, the return key will be a "Done" button and when pressed, this delegate method will be called, indicating
+ the user is done filling out the form. You can call `validate` in this method to make sure all forms are filled out correctly and if
+ `validate` returns YES, proceed with processing the model the form populated.
+ */
+- (void)formViewControllerDidSubmit:(MYSFormViewController *)controller;
+
+/**
+ When the user interacts with the form and changes a value that is successfully updated on the form's model.
+ */
+- (void)formViewController:(MYSFormViewController *)controller didUpdateModelWithValue:(id)value element:(MYSFormElement *)element;
+
+/**
+ When a change is made and it can't be associated with a model's property (because no `modelKeyPath` was given, or the `modelKeyPath
+ was prefixed with "x-" or no model is associated with the form) this method is called to give you a chance to deal with the value change manually. This is
+ useful if you can't associate a model's property with a form element easily and a lot of special case work has to be done to
+ get the changed value into a form the model is designed for. This is also useful if you are not using a model with your form, meaning
+ the form has no model.
+ */
+- (void)formViewController:(MYSFormViewController *)controller failedToUpdateModelWithValue:(id)value element:(MYSFormElement *)element;
+
+@end
+
 
 
 
@@ -20,7 +51,7 @@
  compatible with storyboards. Drag a Collection View Controller onto your storyboard and assign your subclass to it. When it is 
  instantiated, your implementation of `configureForm` will be called where you can add form elements.
  */
-@interface MYSFormViewController : UICollectionViewController
+@interface MYSFormViewController : UICollectionViewController <MYSFormViewControllerDelegate>
 
 /**
  Set the model for this form. As you add form elements, you will associated those elements with key paths on the model and they will
@@ -107,33 +138,3 @@
 @end
 
 
-
-
-/**
- Allows you to be informed of interesting events that happen with the form.
- */
-@protocol MYSFormViewControllerDelegate <NSObject>
-@optional
-/**
- On every text input before the last, the return key on the iOS keyboard will be "Next", moving them to the next text input field.
- On the last text input field, the return key will be a "Done" button and when pressed, this delegate method will be called, indicating
- the user is done filling out the form. You can call `validate` in this method to make sure all forms are filled out correctly and if
- `validate` returns YES, proceed with processing the model the form populated.
- */
-- (void)formViewControllerDidSubmit:(MYSFormViewController *)controller;
-
-/**
- When the user interacts with the form and changes a value that is successfully updated on the form's model.
- */
-- (void)formViewController:(MYSFormViewController *)controller didUpdateModelWithValue:(id)value element:(MYSFormElement *)element;
-
-/**
- When a change is made and it can't be associated with a model's property (because no `modelKeyPath` was given, or the `modelKeyPath
- was prefixed with "x-" or no model is associated with the form) this method is called to give you a chance to deal with the value change manually. This is
- useful if you can't associate a model's property with a form element easily and a lot of special case work has to be done to
- get the changed value into a form the model is designed for. This is also useful if you are not using a model with your form, meaning
- the form has no model.
- */
-- (void)formViewController:(MYSFormViewController *)controller failedToUpdateModelWithValue:(id)value element:(MYSFormElement *)element;
-
-@end

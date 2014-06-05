@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -13,8 +13,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="120"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="275" translatesAutoresizingMaskIntoConstraints="NO" id="7sY-dS-Fgb">
-                        <rect key="frame" x="25" y="12" width="275" height="95"/>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="260" translatesAutoresizingMaskIntoConstraints="NO" id="7sY-dS-Fgb">
+                        <rect key="frame" x="40" y="4" width="260" height="111"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <string key="text">A collection view is a way to present an ordered set of data items using a flexible and changeable layout. The most common use for collection views is to present items in a grid-like arrangement, but collection views in iOS are capable of more than just rows and columns.</string>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
@@ -26,7 +26,7 @@
             </view>
             <constraints>
                 <constraint firstAttribute="centerY" secondItem="7sY-dS-Fgb" secondAttribute="centerY" id="6Y1-tk-RBz"/>
-                <constraint firstItem="7sY-dS-Fgb" firstAttribute="leading" secondItem="s4f-wL-ZWQ" secondAttribute="leading" constant="25" id="Uo0-T0-abz"/>
+                <constraint firstItem="7sY-dS-Fgb" firstAttribute="leading" secondItem="s4f-wL-ZWQ" secondAttribute="leading" constant="40" id="Uo0-T0-abz"/>
                 <constraint firstAttribute="trailing" secondItem="7sY-dS-Fgb" secondAttribute="trailing" constant="20" id="jdW-HI-CxP"/>
             </constraints>
             <size key="customSize" width="319" height="120"/>

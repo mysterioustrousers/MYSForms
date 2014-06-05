@@ -21,4 +21,6 @@
 
 - (UIView *)textInput;
 
+- (void)didChangeValueAtValueKeyPath;
+
 @end

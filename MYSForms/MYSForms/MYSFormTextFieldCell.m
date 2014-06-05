@@ -24,6 +24,7 @@
     [super awakeFromNib];
     self.label.alpha = 0;
     self.textField.delegate = self;
+    [self registerForNotifications];
 }
 
 - (void)dealloc
@@ -35,6 +36,20 @@
 {
     [super didMoveToWindow];
     [self layoutLabelAndTextFieldWithText:self.textField.text];
+}
+
+- (void)drawRect:(CGRect)rect
+{
+    [super drawRect:rect];
+
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetShouldAntialias(context, NO);
+
+    UIBezierPath *path = [UIBezierPath bezierPath];
+    [path moveToPoint:CGPointMake([[self class] cellContentInset].left, self.bounds.size.height - 5)];
+    [path addLineToPoint:CGPointMake(self.frame.size.width - [[self class] cellContentInset].right, self.bounds.size.height - 5)];
+    [[UIColor lightGrayColor] setStroke];
+    [path stroke];
 }
 
 
@@ -61,24 +76,42 @@
     return self.textField;
 }
 
+- (void)didChangeValueAtValueKeyPath
+{
+    [self layoutLabelAndTextFieldWithText:self.textField.text];
+}
+
 
 
 
 #pragma mark - DELEGATE text field
 
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
-{
-    NSString *text = [textField.text stringByReplacingCharactersInRange:range withString:string];;
-    [self.textFieldCellDelegate textFormCell:self textDidChange:text];
-    [self layoutLabelAndTextFieldWithText:text];
-    return YES;
-}
+//- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+//{
+//    NSString *text = [textField.text stringByReplacingCharactersInRange:range withString:string];;
+//    [self.textFieldCellDelegate textFormCell:self textDidChange:text];
+//    [self layoutLabelAndTextFieldWithText:text];
+//    return YES;
+//}
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:MYSFormTextFieldCellDidHitReturnKey object:textField];
     return YES;
 }
+
+
+
+
+#pragma mark - Notifications
+
+- (void)textFieldDidChange:(NSNotification *)note
+{
+    NSString *text = self.textField.text;
+    [self.textFieldCellDelegate textFormCell:self textDidChange:text];
+    [self layoutLabelAndTextFieldWithText:text];
+}
+
 
 
 
@@ -102,6 +135,14 @@
             [self layoutIfNeeded];
         }];
     }
+}
+
+- (void)registerForNotifications
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(textFieldDidChange:)
+                                                 name:UITextFieldTextDidChangeNotification
+                                               object:self.textField];
 }
 
 @end

@@ -21,6 +21,7 @@
     [super viewDidLoad];
     self.model = [MYSExampleUser new];
     MYSExampleUser *exampleUser = self.model;
+    exampleUser.firstName = @"Adam";
     exampleUser.yearsOld = 10;
     exampleUser.isLegalAdult = YES;
     exampleUser.biography = @"Gozer the Traveler. He will come in one of the pre-chosen forms. During the rectification of the Vuldrini, the traveler came as a large and moving Torg! Then, during the third reconciliation of the last of the McKetrick supplicants, they chose a new form for him: that of a giant Slor! Many Shuvs and Zuuls knew what it was to be roasted in the depths of the Slor that day, I can tell you!";
@@ -39,6 +40,8 @@
 
 
     [self addFormElement:[MYSFormTextFieldElement textFieldElementWithLabel:@"Text Field" modelKeyPath:@"firstName"]];
+
+    [self addFormElement:[MYSFormTextFieldElement textFieldElementWithLabel:@"Text Field" modelKeyPath:@"lastName"]];
 
 
     [self addFormElement:[MYSFormButtonElement buttonElementWithTitle:@"Button" block:^(MYSFormElement *element) {

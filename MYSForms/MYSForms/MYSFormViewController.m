@@ -401,7 +401,6 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
 
 
 
-
 #pragma mark - KVO (the model changed)
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context

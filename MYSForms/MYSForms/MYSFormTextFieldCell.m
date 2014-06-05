@@ -78,7 +78,9 @@
 
 - (void)didChangeValueAtValueKeyPath
 {
-    [self layoutLabelAndTextFieldWithText:self.textField.text];
+    if (self.window) {
+        [self layoutLabelAndTextFieldWithText:self.textField.text];
+    }
 }
 
 

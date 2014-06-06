@@ -14,6 +14,8 @@
 
 @property (nonatomic, copy) NSString *footnote;
 
+@property (nonatomic, strong) UIFont *font;
+
 + (instancetype)footnoteElementWithFootnote:(NSString *)footnote;
 
 @end

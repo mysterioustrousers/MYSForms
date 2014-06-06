@@ -18,7 +18,7 @@
     CGSize size = [element.footnote boundingRectWithSize:CGSizeMake(width, FLT_MAX)
                                                   options:NSStringDrawingUsesLineFragmentOrigin
                                                attributes:@{
-                                                            NSFontAttributeName : [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote]
+                                                            NSFontAttributeName : element.font ?: [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote]
                                                             }
                                                   context:nil].size;
     size.height = ceil(size.height);
@@ -31,6 +31,7 @@
 - (void)populateWithElement:(MYSFormFootnoteElement *)element
 {
     self.footnoteLabel.text = element.footnote;
+    self.footnoteLabel.font = element.font ?: [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
     [super populateWithElement:element];
 }
 

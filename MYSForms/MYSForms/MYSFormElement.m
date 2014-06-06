@@ -66,7 +66,7 @@
     }
 }
 
-- (void)configureCellBlock:(void (^)(MYSFormCell *))block
+- (void)configureCellBlock:(void (^)(id))block
 {
     self.cellConfigurationBlock = block;
 }

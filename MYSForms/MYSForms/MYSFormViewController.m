@@ -43,6 +43,7 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
 {
     self.elements = [NSMutableArray new];
     self.appearedFirstTime = NO;
+    self.fixedWidth = 0;
     [self configureForm];
 }
 
@@ -326,8 +327,9 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
         NSValue *cachedSize = self.cachedCellSizes[indexPath];
         if (!cachedSize) {
             MYSFormElement *element = self.elements[indexPath.row];
-            CGSize size = [[element cellClass] sizeRequiredForElement:element width:collectionView.frame.size.width];
-            size.width = collectionView.frame.size.width;
+            CGFloat width = self.fixedWidth > 0 && self.fixedWidth < collectionView.frame.size.width ? self.fixedWidth : collectionView.frame.size.width;
+            CGSize size = [[element cellClass] sizeRequiredForElement:element width:width];
+            size.width = width;
             cachedSize = [NSValue valueWithCGSize:size];
             self.cachedCellSizes[indexPath] = cachedSize;
         }

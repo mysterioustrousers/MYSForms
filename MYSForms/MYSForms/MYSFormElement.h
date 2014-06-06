@@ -69,7 +69,7 @@
  Called after the cell of this element has been created and assinged to the element, giving you a chance to fully customize
  the look of the cell that will visually represent this element.
  */
-- (void)configureCellBlock:(void (^)(MYSFormCell *cell))block;
+- (void)configureCellBlock:(void (^)(id))block;
 
 /**
  Returns YES if this is the type of form element that accepts text input.

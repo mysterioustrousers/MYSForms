@@ -135,6 +135,19 @@
  */
 - (void)hideSuccessMessageBelowElement:(MYSFormElement *)element completion:(void (^)(void))completion;
 
+
+
+
+/*******************************************
+ Appearance
+ ******************************************/
+
+/**
+ Sets the width of the form so no matter how big the container, the form will stay a certain width. Setting it to 0 will use the
+ width of the container. If the value is bigger than the width of the container, the value of the container will be used.
+ */
+@property (nonatomic, assign) CGFloat fixedWidth;
+
 @end
 
 

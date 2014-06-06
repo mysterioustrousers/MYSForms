@@ -46,8 +46,8 @@
     CGContextSetShouldAntialias(context, NO);
 
     UIBezierPath *path = [UIBezierPath bezierPath];
-    [path moveToPoint:CGPointMake([[self class] cellContentInset].left, self.bounds.size.height - 5)];
-    [path addLineToPoint:CGPointMake(self.frame.size.width - [[self class] cellContentInset].right, self.bounds.size.height - 5)];
+    [path moveToPoint:CGPointMake([[self class] cellContentInset].left, ceil(self.bounds.size.height - 5))];
+    [path addLineToPoint:CGPointMake(self.frame.size.width - [[self class] cellContentInset].right, ceil(self.bounds.size.height - 5))];
     [[UIColor lightGrayColor] setStroke];
     [path stroke];
 }

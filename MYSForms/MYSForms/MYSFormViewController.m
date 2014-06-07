@@ -42,7 +42,6 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
 {
     self.elements = [NSMutableArray new];
     self.fixedWidth = 0;
-    [self configureForm];
 }
 
 - (instancetype)init
@@ -79,6 +78,8 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
     self.collectionView.backgroundColor      = [UIColor whiteColor];
     self.view.backgroundColor                = [UIColor whiteColor];
     self.collectionView.alwaysBounceVertical = YES;
+
+    [self configureForm];
 
     [self registerElementCellsForReuse];
     [self setupKeyboardNotifications];

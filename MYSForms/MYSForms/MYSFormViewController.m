@@ -27,7 +27,6 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
 @property (nonatomic, strong) NSMutableArray      *elements;
 @property (nonatomic, strong) NSMutableDictionary *cachedCellSizes;
 @property (nonatomic, assign) NSUInteger          outstandingValidationErrorCount;
-@property (nonatomic, assign) BOOL                appearedFirstTime;
 
 // picker view presentation
 @property (nonatomic, strong) NSLayoutConstraint  *pickerViewYConstraint;
@@ -39,10 +38,9 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
 
 @implementation MYSFormViewController
 
-- (void)commonInit
+- (void)formInit;
 {
     self.elements = [NSMutableArray new];
-    self.appearedFirstTime = NO;
     self.fixedWidth = 0;
     [self configureForm];
 }
@@ -51,7 +49,7 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
 {
     self = [super initWithCollectionViewLayout:[MYSCollectionViewSpringyLayout new]];
     if (self) {
-        [self commonInit];
+        [self formInit];
     }
     return self;
 }
@@ -60,7 +58,7 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
 {
     self = [super initWithCollectionViewLayout:layout];
     if (self) {
-        [self commonInit];
+        [self formInit];
     }
     return self;
 }
@@ -69,7 +67,7 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
 {
     self = [super initWithCoder:coder];
     if (self) {
-        [self commonInit];
+        [self formInit];
     }
     return self;
 }
@@ -84,36 +82,6 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
 
     [self registerElementCellsForReuse];
     [self setupKeyboardNotifications];
-
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    if (!self.appearedFirstTime) {
-        UIEdgeInsets insets = self.collectionView.contentInset;
-        insets.top += self.collectionView.bounds.size.height;
-        self.collectionView.contentInset = insets;
-    }
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    if (!self.appearedFirstTime) {
-        self.appearedFirstTime = YES;
-        UIEdgeInsets insets = self.collectionView.contentInset;
-        insets.top -= self.collectionView.bounds.size.height;
-        [UIView animateWithDuration:0.5 animations:^{
-            self.collectionView.contentInset = insets;
-        } completion:^(BOOL finished) {
-            if (self.isEditing) {
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [[[self visibleTextInputs] firstObject] becomeFirstResponder];
-                });
-            }
-        }];
-    }
 }
 
 - (void)dealloc
@@ -233,6 +201,18 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
 - (void)attemptToDismissKeyboard
 {
     [[self currentFirstResponder] resignFirstResponder];
+}
+
+- (NSArray *)visibleTextInputs
+{
+    NSMutableArray *visibleTextInputs = [NSMutableArray new];
+    for (MYSFormElement *element in self.elements) {
+        UIView * textInput = [element.cell textInput];
+        if (textInput.window) {
+            [visibleTextInputs addObject:textInput];
+        }
+    }
+    return visibleTextInputs;
 }
 
 - (void)showLoadingMessage:(NSString *)message aboveElement:(MYSFormElement *)element completion:(void (^)(void))completion
@@ -639,18 +619,6 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
         }
     }
     return nil;
-}
-
-- (NSArray *)visibleTextInputs
-{
-    NSMutableArray *visibleTextInputs = [NSMutableArray new];
-    for (MYSFormElement *element in self.elements) {
-        UIView * textInput = [element.cell textInput];
-        if (textInput.window) {
-            [visibleTextInputs addObject:textInput];
-        }
-    }
-    return visibleTextInputs;
 }
 
 // TODO: if the next text input is off screen, we need to scroll to it first, then give it first responder status.

@@ -66,6 +66,11 @@
 @property (nonatomic, weak) id<MYSFormViewControllerDelegate> formDelegate;
 
 /**
+ For subclasses to override. This will get called no matter how the object was created (code/storyboard/etc).
+ */
+- (void)formInit;
+
+/**
  If your method of choice is to subclass `MYSFormCollectionView`, override this method in your subclass to configure your form.
  */
 - (void)configureForm;
@@ -97,6 +102,12 @@
  Whatever text input in the form has first responder status will be asked to resign it.
  */
 - (void)attemptToDismissKeyboard;
+
+/**
+ All visible text inputs in the form. Ordered from top to bottom.
+ */
+- (NSArray *)visibleTextInputs;
+
 
 /**
  A loading spinner with `message` will be displayed above the element specified. If nil is passed in for the element, the loading message

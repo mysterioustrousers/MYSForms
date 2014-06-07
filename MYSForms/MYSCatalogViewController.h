@@ -8,6 +8,6 @@
 
 #import "MYSForms.h"
 
-@interface MYSCatalogViewController : MYSFormViewController
+@interface MYSCatalogViewController : MYSSlideFormViewController
 
 @end

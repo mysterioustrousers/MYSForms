@@ -69,6 +69,7 @@
 		C2D718BB192A5E9000A94F24 /* MYSCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2D718B6192A5E9000A94F24 /* MYSCollectionView.m */; };
 		C2D718BC192A5E9000A94F24 /* MYSCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = C2D718B8192A5E9000A94F24 /* MYSCollectionViewFlowLayout.m */; };
 		C2D718BD192A5E9000A94F24 /* MYSCollectionViewSpringyLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = C2D718BA192A5E9000A94F24 /* MYSCollectionViewSpringyLayout.m */; };
+		C2E435591942252F00F0DDC6 /* MYSSlideFormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2E435581942252F00F0DDC6 /* MYSSlideFormViewController.m */; };
 		C2F15E2E1923E3EA00E55FDA /* MYSFormStringFromNumberValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = C2F15E2D1923E3EA00E55FDA /* MYSFormStringFromNumberValueTransformer.m */; };
 		C2F15E361924263500E55FDA /* MYSFormStringFromTimeZoneValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = C2F15E351924263500E55FDA /* MYSFormStringFromTimeZoneValueTransformer.m */; };
 		C2F15E3919242C0800E55FDA /* MYSFormToggleElement.m in Sources */ = {isa = PBXBuildFile; fileRef = C2F15E3819242C0800E55FDA /* MYSFormToggleElement.m */; };
@@ -195,6 +196,8 @@
 		C2D718B8192A5E9000A94F24 /* MYSCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MYSCollectionViewFlowLayout.m; path = Classes/MYSCollectionViewFlowLayout.m; sourceTree = "<group>"; };
 		C2D718B9192A5E9000A94F24 /* MYSCollectionViewSpringyLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MYSCollectionViewSpringyLayout.h; path = Classes/MYSCollectionViewSpringyLayout.h; sourceTree = "<group>"; };
 		C2D718BA192A5E9000A94F24 /* MYSCollectionViewSpringyLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MYSCollectionViewSpringyLayout.m; path = Classes/MYSCollectionViewSpringyLayout.m; sourceTree = "<group>"; };
+		C2E435571942252F00F0DDC6 /* MYSSlideFormViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYSSlideFormViewController.h; sourceTree = "<group>"; };
+		C2E435581942252F00F0DDC6 /* MYSSlideFormViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYSSlideFormViewController.m; sourceTree = "<group>"; };
 		C2F15E2C1923E3EA00E55FDA /* MYSFormStringFromNumberValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYSFormStringFromNumberValueTransformer.h; sourceTree = "<group>"; };
 		C2F15E2D1923E3EA00E55FDA /* MYSFormStringFromNumberValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYSFormStringFromNumberValueTransformer.m; sourceTree = "<group>"; };
 		C2F15E2F1923EE7D00E55FDA /* MYSFormPickerCell-Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MYSFormPickerCell-Private.h"; sourceTree = "<group>"; };
@@ -390,6 +393,7 @@
 				C213D8DF19182F2500F5086B /* Form Validations */,
 				C271805C1922914F00FD2229 /* Form Value Transformers */,
 				C28D68EE191D941900CF3356 /* Internal */,
+				C2E43556194224E600F0DDC6 /* Subclasses */,
 				C2AAD8DC191414C400FDF78E /* MYSFormsMedia.xcassets */,
 			);
 			path = MYSForms;
@@ -510,6 +514,15 @@
 			name = MYSCollectionView;
 			path = libs/MYSCollectionView;
 			sourceTree = SOURCE_ROOT;
+		};
+		C2E43556194224E600F0DDC6 /* Subclasses */ = {
+			isa = PBXGroup;
+			children = (
+				C2E435571942252F00F0DDC6 /* MYSSlideFormViewController.h */,
+				C2E435581942252F00F0DDC6 /* MYSSlideFormViewController.m */,
+			);
+			name = Subclasses;
+			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
@@ -652,6 +665,7 @@
 				C289A2971913D74E0047D0CF /* MYSFormFootnoteCell.m in Sources */,
 				C26C4FE81923964100D6ADBB /* MYSFormPickerElement.m in Sources */,
 				C289A2941913D73E0047D0CF /* MYSFormHeadlineCell.m in Sources */,
+				C2E435591942252F00F0DDC6 /* MYSSlideFormViewController.m in Sources */,
 				C23CB39F191941A100C5C0B7 /* MYSFormRegexValidation.m in Sources */,
 				C289A2A11913DC1B0047D0CF /* MYSTableViewController.m in Sources */,
 				C2B1BE0E1915A05B00F4E8BB /* MYSFormElement.m in Sources */,

@@ -7,6 +7,7 @@
 //
 
 #import "MYSFormViewController.h"
+#import "MYSSlideFormViewController.h"
 
 // form elements
 #import "MYSFormHeadlineElement.h"

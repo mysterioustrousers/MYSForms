@@ -7,7 +7,7 @@
 //
 
 #import "MYSTableViewController.h"
-#import "MYSFormViewController.h"
+#import "MYSForms.h"
 #import "MYSSignUpFormViewController.h"
 
 // test models
@@ -56,7 +56,7 @@
 {
     // log in form
     if (indexPath.row == 0) {
-        MYSFormViewController *formViewController = [MYSFormViewController new];
+        MYSSlideFormViewController *formViewController = [MYSSlideFormViewController new];
 
         // setting the model before configuration
         formViewController.model = self.fakeUser;

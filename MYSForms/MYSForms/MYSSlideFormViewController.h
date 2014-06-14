@@ -11,6 +11,8 @@
 
 @interface MYSSlideFormViewController : MYSFormViewController
 
+@property (nonatomic, assign, readonly) BOOL appearedFirstTime;
+
 - (BOOL)shouldSlideInAutomatically;
 
 - (void)slideInWithCompletion:(void (^)(void))completion;

@@ -10,7 +10,7 @@
 
 
 @interface MYSSlideFormViewController ()
-@property (nonatomic, assign) BOOL appearedFirstTime;
+@property (nonatomic, assign, readwrite) BOOL appearedFirstTime;
 @end
 
 
@@ -58,6 +58,7 @@
 
 - (void)slideInWithCompletion:(void (^)(void))completion;
 {
+    if (self.appearedFirstTime) return;
     self.appearedFirstTime = YES;
     UIEdgeInsets insets = self.collectionView.contentInset;
     insets.top -= self.collectionView.bounds.size.height;

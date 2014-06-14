@@ -94,7 +94,7 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
     [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
-    [(MYSCollectionView *)self.collectionView prepareForInterfaceOrientationChange];
+    [(MYSCollectionView *)self.collectionView disableDynamics];
     [self.cachedCellSizes removeAllObjects];
     [self.collectionView reloadData];
     [self.collectionView.collectionViewLayout invalidateLayout];
@@ -103,7 +103,7 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
     [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
-    [(MYSCollectionView *)self.collectionView finishInterfaceOrientationChange];
+    [(MYSCollectionView *)self.collectionView enableDynamics];
     [self.cachedCellSizes removeAllObjects];
     [self.collectionView reloadData];
 }

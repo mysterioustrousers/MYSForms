@@ -20,7 +20,7 @@
 {
     self = [super init];
     if (self) {
-        _isEditable = YES;
+        _editable = YES;
         _font = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline];
     }
     return self;

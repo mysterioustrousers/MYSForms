@@ -51,7 +51,7 @@
     size.height = ceil(size.height);
 
     // the top and bottom padding between the edges of the cell and text view
-    size.height += 10 + 18;
+    size.height += 18 + 18;
 
     return size;
 }

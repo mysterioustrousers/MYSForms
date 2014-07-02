@@ -302,7 +302,7 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
 
 - (void)collectionView:(UICollectionView *)collectionView didEndDisplayingCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.item < [self.elements count]) {
+    if (indexPath.item < [self.elements count] && [self.formDelegate respondsToSelector:@selector(formViewController:willRemoveElement:cell:)]) {
         MYSFormElement *element = self.elements[indexPath.item];
         [self.formDelegate formViewController:self willRemoveElement:element cell:cell];
     }

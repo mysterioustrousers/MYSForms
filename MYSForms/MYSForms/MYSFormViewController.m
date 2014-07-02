@@ -298,6 +298,19 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
 
 
 
+#pragma mark - DELEGATE collection view
+
+- (void)collectionView:(UICollectionView *)collectionView didEndDisplayingCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.item < [self.elements count]) {
+        MYSFormElement *element = self.elements[indexPath.item];
+        [self.formDelegate formViewController:self willRemoveElement:element cell:cell];
+    }
+}
+
+
+
+
 #pragma mark - DELEGATE flow layout
 
 - (CGSize)collectionView:(UICollectionView *)collectionView

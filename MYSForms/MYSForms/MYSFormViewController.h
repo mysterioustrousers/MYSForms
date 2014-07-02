@@ -9,6 +9,7 @@
 
 @class MYSFormElement;
 @class MYSFormViewController;
+@class MYSFormCell;
 
 
 
@@ -39,6 +40,11 @@
  the form has no model.
  */
 - (void)formViewController:(MYSFormViewController *)controller failedToUpdateModelWithValue:(id)value element:(MYSFormElement *)element;
+
+/**
+ Called when the collection view is about to remove (for reuse) an element and the element's cell.
+ */
+- (void)formViewController:(MYSFormViewController *)controller willRemoveElement:(id)element cell:(id)cell;
 
 @end
 

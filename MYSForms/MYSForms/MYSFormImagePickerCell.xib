@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -14,15 +14,15 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="196" translatesAutoresizingMaskIntoConstraints="NO" id="9ex-e5-RyH">
-                        <rect key="frame" x="104" y="20" width="196" height="60"/>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="186" translatesAutoresizingMaskIntoConstraints="NO" id="9ex-e5-RyH">
+                        <rect key="frame" x="114" y="20" width="186" height="60"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bFx-Yl-TWA">
-                        <rect key="frame" x="10" y="10" width="80" height="80"/>
+                        <rect key="frame" x="20" y="10" width="80" height="80"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="bFx-Yl-TWA" secondAttribute="height" multiplier="1:1" id="fLW-EJ-H52"/>
@@ -46,7 +46,7 @@
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="ITk-Xu-mZH" secondAttribute="trailing" id="1IL-ls-jEP"/>
                 <constraint firstAttribute="bottom" secondItem="ITk-Xu-mZH" secondAttribute="bottom" priority="999" id="3h8-Uy-Ia8"/>
-                <constraint firstItem="bFx-Yl-TWA" firstAttribute="leading" secondItem="viI-Ce-Dvn" secondAttribute="leading" constant="10" id="VIG-T1-pHO"/>
+                <constraint firstItem="bFx-Yl-TWA" firstAttribute="leading" secondItem="viI-Ce-Dvn" secondAttribute="leading" constant="20" id="VIG-T1-pHO"/>
                 <constraint firstItem="9ex-e5-RyH" firstAttribute="leading" secondItem="bFx-Yl-TWA" secondAttribute="trailing" constant="14" id="WPE-kf-z67"/>
                 <constraint firstAttribute="centerY" secondItem="bFx-Yl-TWA" secondAttribute="centerY" id="X3F-x8-Lt3"/>
                 <constraint firstItem="ITk-Xu-mZH" firstAttribute="top" secondItem="viI-Ce-Dvn" secondAttribute="top" id="hzQ-V7-BdB"/>

@@ -429,8 +429,8 @@
 				C26C4FEA1923989C00D6ADBB /* MYSFormPickerCell.m */,
 				C26C4FEC192398AB00D6ADBB /* MYSFormPickerCell.xib */,
 				C2F15E3A19242C1D00E55FDA /* MYSFormToggleCell.h */,
-				C2F15E3D19242C3000E55FDA /* MYSFormToggleCell.xib */,
 				C2F15E3B19242C1D00E55FDA /* MYSFormToggleCell.m */,
+				C2F15E3D19242C3000E55FDA /* MYSFormToggleCell.xib */,
 			);
 			name = "Form Element Cells";
 			sourceTree = "<group>";

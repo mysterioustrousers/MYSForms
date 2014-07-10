@@ -72,6 +72,11 @@
 @property (nonatomic, weak) id<MYSFormViewControllerDelegate> formDelegate;
 
 /**
+ If set to NO, all editable, tapable, actionable elements in the from will be disabled.
+ */
+@property (nonatomic, assign, getter = isEnabled) BOOL enabled;
+
+/**
  For subclasses to override. This will get called no matter how the object was created (code/storyboard/etc).
  */
 - (void)formInit;

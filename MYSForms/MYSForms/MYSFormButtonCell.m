@@ -18,6 +18,7 @@
         [self.button setTitle:element.title forState:UIControlStateNormal];
         [self.button layoutIfNeeded];
     }];
+    self.button.enabled = element.isEnabled;
 }
 
 

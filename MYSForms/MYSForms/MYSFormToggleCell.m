@@ -15,7 +15,8 @@
 
 - (void)populateWithElement:(MYSFormToggleElement *)element
 {
-    self.label.text = element.label;
+    self.label.text           = element.label;
+    self.toggleSwitch.enabled = element.isEnabled;
     [super populateWithElement:element];
 }
 

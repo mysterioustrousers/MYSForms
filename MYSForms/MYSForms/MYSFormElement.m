@@ -23,6 +23,7 @@
 {
     self = [super init];
     if (self) {
+        _enabled         = YES;
         _formValidations = [NSMutableSet new];
     }
     return self;
@@ -101,6 +102,15 @@
         }
     }
     return validationErrors;
+}
+
+
+#pragma mark (properties)
+
+- (void)setEnabled:(BOOL)enabled
+{
+    _enabled = enabled;
+    [self.cell populateWithElement:self];
 }
 
 @end

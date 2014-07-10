@@ -64,7 +64,7 @@
 - (void)populateWithElement:(MYSFormTextViewElement *)element
 {
     self.textView.font     = element.font;
-    self.textView.editable = element.isEditable;
+    self.textView.editable = element.isEditable && element.isEnabled;
 }
 
 - (UIView *)textInput

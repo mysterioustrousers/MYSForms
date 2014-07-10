@@ -45,6 +45,11 @@
 @property (nonatomic, strong) MYSFormCell *cell;
 
 /**
+ Controls whether any actionable UIViews are enabled in this form element.
+ */
+@property (nonatomic, assign, getter = isEnabled) BOOL enabled;
+
+/**
  Is asked of the element to make sure this element can be added for this form/device/orientation/whatever.
  For example, the image picker element can't be added on a device with no cameras and no library.
  */

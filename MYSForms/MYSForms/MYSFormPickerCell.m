@@ -17,6 +17,7 @@
 {
     self.label.text = element.label;
     [super populateWithElement:element];
+    self.button.enabled = element.isEnabled;
 }
 
 - (void)setButtonTitle:(NSString *)buttonTitle

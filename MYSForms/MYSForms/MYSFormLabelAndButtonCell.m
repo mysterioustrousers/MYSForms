@@ -14,7 +14,8 @@
 
 - (void)populateWithElement:(MYSFormLabelAndButtonElement *)element
 {
-    self.label.text = element.label;
+    self.label.text     = element.label;
+    self.button.enabled = element.isEnabled;
     [super populateWithElement:element];
 }
 

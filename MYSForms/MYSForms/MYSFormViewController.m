@@ -268,6 +268,17 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
 }
 
 
+#pragma mark (properties)
+
+- (void)setEnabled:(BOOL)enabled
+{
+    _enabled = enabled;
+    for (MYSFormElement *element in self.elements) {
+        element.enabled = enabled;
+    }
+}
+
+
 
 
 #pragma mark - DATASOURCE collection view

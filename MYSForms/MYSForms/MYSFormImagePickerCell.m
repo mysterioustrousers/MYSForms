@@ -47,7 +47,8 @@
 
 - (void)populateWithElement:(MYSFormImagePickerElement *)element
 {
-    self.label.text = element.label;
+    self.label.text             = element.label;
+    self.userInteractionEnabled = element.isEnabled;
     [super populateWithElement:element];
 }
 

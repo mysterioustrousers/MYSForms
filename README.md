@@ -36,6 +36,8 @@ MYSForms is available through [CocoaPods](http://cocoapods.org), to install it s
 
     pod "MYSCollectionView"
 
+To try it out, clone this repo with `--recursive` and open the demo application which showcases a few different types of forms and form elements.
+
 ## Requirements
 
 iOS 7+
@@ -66,34 +68,34 @@ There are two ways to create a form:
 
 #### Storyboards
 
-If you're using storyboards, the subclassing method is best. Just drage a `UICollectionViewController` onto your storyboard and set the class of the view controller to your custom subclass. When your applications segues to that scene (subclassed `MYSFormViewController`) the form will appear and "just work."
+If you're using storyboards, the subclassing method is best. Just drage a `UICollectionViewController` onto your storyboard and set the class of the view controller to your custom subclass. When your application segues to that scene (subclassed `MYSFormViewController`) the form will appear and "just work."
 
 
 ### Form Elements
 
-An `MYSForm` is `MYSFormViewController` with an array of `MYSFormElement` subclass objects. Each `MYSFormElement` subclass represents a different type of form element like a header, descriptive text, a text field, a text view, a picker, a toggle button, an image picker, etc.
+A form is an `MYSFormViewController` with an array of `MYSFormElement` subclass objects. Each `MYSFormElement` subclass represents a different type of form element like a header, descriptive text, a text field, a text view, a picker, a toggle button, an image picker, etc.
 
 MYSForms comes with a large selection of `MSYFormElement` subclasses that are ready to use, but you can also create your own or further subclass what's already available to tweak their appearance and behavior.
 
 #### Validations
 
-Validations are objects you can add to form elements that will make sure the values of those elements are valid. If they are not valid, it will display a validation error automatically next to that form element explaining the problem so the user can fix it. MSYForms comes with some standard validation classes for making sure a value is not blank and also making sure a value conforms to a certain format. Validation objects are subclasses of `MYSFormValidation`.
+Validations are objects you can add to form elements that will make sure the values of those elements are valid. If they are not valid, it will display a validation error automatically next to that form element explaining the problem so the user can fix it. MSYForms comes with some standard validation classes like making sure a value is not blank or making sure a value conforms to a certain format. Validation objects are subclasses of `MYSFormValidation`.
 
 #### Value Transformers
 
-Because each editable form element will likely be bound to a property on the model, you may want to add a transformer to the element so that as the model value is read from the model, it can be transformed to type fit for visual display. Likewise, when a user changes a value, your transformer can convert the visual form to a type that your model expects. Transformers are subclasses of `NSValueTransformer`.
+Because each editable form element will likely be bound to a property on the model, you may want to add a transformer to the element so that as the model value is read from the model, it can be transformed to a type fit for visual display. Likewise, when a user changes a value, your transformer can convert the visual form to a type that your model expects. Transformers are subclasses of `NSValueTransformer`.
 
 ## Examples
 
 ### Creating Forms
 
-Let's say we want to create a form by creating an instance of `MYSFormViewController` and adding some for elements to it:
+Let's say we want to create a form by creating an instance of `MYSFormViewController` and adding some form elements to it:
 
 ```
 // create an instance of MYSFormViewController
 MYSFormViewController *formViewController = [MYSFormViewController new];
 
-// setting the model before configuration
+// setting the model
 formViewController.model = self.fakeUser;
 
 // add a header element
@@ -109,14 +111,14 @@ emailField.keyboardType = UIKeyboardTypeEmailAddress;
 [self.navigationController pushViewController:formViewController animated:YES];
 ```
 
-Second, the more popular approach, you can subclass `MYSFormViewController` like so:
+Second, the more robust approach, you can subclass `MYSFormViewController` like so:
 
 **MYSSignUpFormViewController.h**
 
 ```
 #import "MYSForms.h"
 
-@interface MYSSignUpFormViewController : MYSSlideFormViewController
+@interface MYSSignUpFormViewController : MYSFormViewController
 @end
 ```
 
@@ -182,7 +184,7 @@ for (NSInteger i = 0; i < 120; i++) {
 }
 [self addFormElement:pickerElement];
  ```
- 
+
 ### Showing Error, Success and Loading Messages
 
 Show an error message below a specific form element:
@@ -272,31 +274,23 @@ The trick is to make sure that you hook up the outlets of the views in your xibs
 
 ## Screenshots
 
-A basic log in form:
+A log in form and sign up form:
 
-![Basic Example Screenshot](http://d.pr/i/RLOk/3NtdmBml+)
+![Basic Example Screenshot](http://d.pr/i/RLOk/3NtdmBml+ =x500) ![Sign up form example](http://d.pr/i/TTeZ/ihh9alMz+ =x500)
 
-A sign up form:
+Validation errors and loading message:
 
-![Sign up form example](http://d.pr/i/TTeZ/ihh9alMz+)
+![Example of validation errors](http://d.pr/i/W0Wh/30akIyEt+ =x500) ![Example of a loading message](http://d.pr/i/kGj5/3HGxUAtk+ =x500)
 
-Validation errors:
+Misc element examples:
 
-![Example of validation errors](http://d.pr/i/W0Wh/30akIyEt+)
-
-Loading example:
-
-![Example of a loading message](http://d.pr/i/kGj5/3HGxUAtk+)
-
-Misc element example:
-
-![Example of misc form elements](http://d.pr/i/qabo/5A3GGWo9+)
+![Example catalog elements](http://d.pr/i/tyfJ/5lL6qHh0+ =x500) ![Example of misc form elements](http://d.pr/i/qabo/5A3GGWo9+ =x500)
 
 ## Extras
 
 There is also a subclass of `MYSFormViewController` that comes with MYSForms called `MYSFormSlideViewController` that slides your form up from the bottom when it is displayed.
 
-If you use [MYSCollectionView](https://github.com/mysterioustrousers/MYSCollectionView) and have it use the `MYSCollectionViewSpringyLayout`, you'll get a cool springy affect between the elements in your form.
+If you use [MYSCollectionView](https://github.com/mysterioustrousers/MYSCollectionView) and have it use the `MYSCollectionViewSpringyLayout`, you'll get a cool springy effect between the elements in your form.
 
 ## Contributing
 
@@ -308,4 +302,4 @@ Please update and run the tests before submitting a pull request. Thanks.
 
 [Adam Kirk](https://github.com/atomkirk) ([@atomkirk](https://twitter.com/atomkirk))
 
-Check out [Firehose Chat](https://firehosechat.com) and add a free chat box to your website so you can chat with your visitors. You'll receive push notifications, even when offline, when a visitor wants to chat. You can respond immediately on your mobile.
+Check out [Firehose Chat](https://firehosechat.com) and add a free chat box to your website so you can chat with your visitors. You'll receive push notifications, even when offline, when a visitor wants to chat. You can respond immediately with the iOS app or Mac app.

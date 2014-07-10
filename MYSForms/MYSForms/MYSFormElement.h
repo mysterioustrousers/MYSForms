@@ -104,11 +104,6 @@
  */
 @property (nonatomic, retain) NSValueTransformer *valueTransformer;
 
-/**
- This will enable/disable all input views in the cell of the form element.
- */
-@property (nonatomic, assign, getter = isEnabled) BOOL enabled;
-
 @end
 
 

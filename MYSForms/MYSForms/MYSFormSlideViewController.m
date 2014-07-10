@@ -6,15 +6,15 @@
 //  Copyright (c) 2014 Mysterious Trousers. All rights reserved.
 //
 
-#import "MYSSlideFormViewController.h"
+#import "MYSFormSlideViewController.h"
 
 
-@interface MYSSlideFormViewController ()
+@interface MYSFormSlideViewController ()
 @property (nonatomic, assign, readwrite) BOOL appearedFirstTime;
 @end
 
 
-@implementation MYSSlideFormViewController
+@implementation MYSFormSlideViewController
 
 - (void)formInit
 {

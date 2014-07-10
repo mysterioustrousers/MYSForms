@@ -9,5 +9,5 @@
 #import "MYSForms.h"
 
 
-@interface MYSSignUpFormViewController : MYSSlideFormViewController
+@interface MYSSignUpFormViewController : MYSFormSlideViewController
 @end

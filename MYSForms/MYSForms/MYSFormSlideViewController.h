@@ -9,7 +9,7 @@
 #import "MYSFormViewController.h"
 
 
-@interface MYSSlideFormViewController : MYSFormViewController
+@interface MYSFormSlideViewController : MYSFormViewController
 
 @property (nonatomic, assign, readonly) BOOL appearedFirstTime;
 

@@ -56,7 +56,7 @@
 {
     // log in form
     if (indexPath.row == 0) {
-        MYSSlideFormViewController *formViewController = [MYSSlideFormViewController new];
+        MYSFormSlideViewController *formViewController = [MYSFormSlideViewController new];
 
         // setting the model before configuration
         formViewController.model = self.fakeUser;

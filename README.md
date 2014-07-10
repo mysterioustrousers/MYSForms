@@ -65,6 +65,7 @@ There are two ways to create a form:
 1. Create an instance of `MYSFormViewController` and add form elements to it.
 2. Create a subclass of `MYSFormViewController` and override `configureForm`, where you add form elements.
 
+Read the [API docs for MYSFormViewController](http://cocoadocs.org/docsets/MYSForms/0.0.1/Classes/MYSFormViewController.html)
 
 #### Storyboards
 

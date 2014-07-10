@@ -6,17 +6,17 @@
 //  Copyright (c) 2014 Mysterious Trousers. All rights reserved.
 //
 
-#import "MYSFormLoadingCell.h"
-#import "MYSFormMessageElement.h"
+#import "MYSFormLoadingChildCell.h"
+#import "MYSFormMessageChildElement.h"
 
 
 static CGFloat spinnerSize      = 20;
 static CGFloat standardSpacing  = 8;
 
 
-@implementation MYSFormLoadingCell
+@implementation MYSFormLoadingChildCell
 
-+ (CGSize)sizeRequiredForElement:(MYSFormMessageElement *)element width:(CGFloat)width
++ (CGSize)sizeRequiredForElement:(MYSFormMessageChildElement *)element width:(CGFloat)width
 {
     // subtract the cell margins
     width -= [self cellContentInset].left + [self cellContentInset].right;

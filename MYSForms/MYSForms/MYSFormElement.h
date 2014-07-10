@@ -118,7 +118,8 @@
 - (void)formElement:(MYSFormElement *)formElement didRequestPresentationOfViewController:(UIViewController *)viewController
            animated:(BOOL)animated
          completion:(void (^)(void))completion;
-- (void)formElement:(MYSFormElement *)formElement didRequestPresentationOfPickerView:(UIPickerView *)pickerView;
+- (void)formElement:(MYSFormElement *)formElement didRequestPresentationOfChildView:(UIView *)childView;
+- (void)formElement:(MYSFormElement *)formElement didRequestDismissalOfChildView:(UIView *)childView;
 @end
 
 

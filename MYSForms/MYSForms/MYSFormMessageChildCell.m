@@ -6,22 +6,22 @@
 //  Copyright (c) 2014 Mysterious Trousers. All rights reserved.
 //
 
-#import "MYSFormMessageCell.h"
-#import "MYSFormMessageElement.h"
+#import "MYSFormMessageChildCell.h"
+#import "MYSFormMessageChildElement.h"
 
 
 #define RED     [UIColor colorWithRed:(215.0/255.0) green:0 blue:0 alpha:1]
 #define GREEN   [UIColor colorWithRed:0 green:(215.0/255.0) blue:0 alpha:1]
 
 
-@interface MYSFormMessageCell ()
-@property (nonatomic, weak) MYSFormMessageElement *element;
+@interface MYSFormMessageChildCell ()
+@property (nonatomic, weak) MYSFormMessageChildElement *element;
 @end
 
 
-@implementation MYSFormMessageCell
+@implementation MYSFormMessageChildCell
 
-+ (CGSize)sizeRequiredForElement:(MYSFormMessageElement *)element width:(CGFloat)width
++ (CGSize)sizeRequiredForElement:(MYSFormMessageChildElement *)element width:(CGFloat)width
 {
     width -= [self cellContentInset].left + [self cellContentInset].right - 5;
     CGSize size = [element.message boundingRectWithSize:CGSizeMake(width, FLT_MAX)
@@ -33,14 +33,14 @@
     size.height = ceil(size.height);
 
     // some padding
-    if (element.type != MYSFormMessageTypeValidationError) {
+    if (element.type != MYSFormChildElementTypeValidationError) {
         size.height += 20;
     }
 
     return size;
 }
 
-- (void)populateWithElement:(MYSFormMessageElement *)element
+- (void)populateWithElement:(MYSFormMessageChildElement *)element
 {
     self.element = element;
     self.messageLabel.text = element.message;
@@ -52,13 +52,13 @@
 {
     [super layoutSubviews];
 
-    if (self.element.type == MYSFormMessageTypeError) {
+    if (self.element.type == MYSFormChildElementTypeError) {
         self.messageLabel.textColor = RED;
     }
-    else if (self.element.type == MYSFormMessageTypeValidationError) {
+    else if (self.element.type == MYSFormChildElementTypeValidationError) {
         self.messageLabel.textColor = RED;
     }
-    else if (self.element.type == MYSFormMessageTypeSuccess) {
+    else if (self.element.type == MYSFormChildElementTypeSuccess) {
         self.messageLabel.textColor = GREEN;
     }
     else {
@@ -69,7 +69,7 @@
 - (void)drawRect:(CGRect)rect
 {
     [super drawRect:rect];
-    if (self.element.type == MYSFormMessageTypeError) {
+    if (self.element.type == MYSFormChildElementTypeError) {
         CGPoint point1 = CGPointMake(20, (self.frame.size.height / 2.0) - 5);
         CGPoint point2 = CGPointMake(30, (self.frame.size.height / 2.0) + 5);
         CGPoint point3 = CGPointMake(20, (self.frame.size.height / 2.0) + 5);
@@ -82,7 +82,7 @@
         [RED setStroke];
         [path stroke];
     }
-    else if (self.element.type == MYSFormMessageTypeValidationError) {
+    else if (self.element.type == MYSFormChildElementTypeValidationError) {
         CGPoint point1 = CGPointMake(25, self.frame.size.height / 2.0);
         CGPoint point2 = CGPointMake(20, point1.y);
         CGPoint point3 = CGPointMake(point2.x, 0);
@@ -93,7 +93,7 @@
         [RED setStroke];
         [path stroke];
     }
-    else if (self.element.type == MYSFormMessageTypeSuccess) {
+    else if (self.element.type == MYSFormChildElementTypeSuccess) {
         CGPoint point1 = CGPointMake(22, (self.frame.size.height / 2.0));
         CGPoint point2 = CGPointMake(point1.x + 4, point1.y + 5);
         CGPoint point3 = CGPointMake(point2.x + 4, point2.y - 12);

@@ -9,6 +9,7 @@
 #import "MYSFormPickerElement.h"
 #import "MYSFormPickerCell.h"
 #import "MYSFormPickerCell-Private.h"
+#import "MYSFormPickerElement-Private.h"
 
 
 @interface MYSFormPickerElement () <MYSFormPickerCellDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
@@ -23,7 +24,8 @@
 {
     self = [super init];
     if (self) {
-        _data = [NSMutableArray new];
+        _visible                    = NO;
+        _data                       = [NSMutableArray new];
         _pickerView                 = [UIPickerView new];
         _pickerView.dataSource      = self;
         _pickerView.delegate        = self;
@@ -90,7 +92,14 @@
     if (index != NSNotFound) {
         [self.pickerView selectRow:index inComponent:0 animated:YES];
     }
-    [self.delegate formElement:self didRequestPresentationOfPickerView:self.pickerView];
+    if (!self.isVisible) {
+        self.visible = YES;
+        [self.delegate formElement:self didRequestPresentationOfChildView:self.pickerView];
+    }
+    else {
+        self.visible = NO;
+        [self.delegate formElement:self didRequestDismissalOfChildView:self.pickerView];
+    }
 }
 
 

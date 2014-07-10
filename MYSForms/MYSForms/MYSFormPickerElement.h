@@ -38,26 +38,10 @@
 @property (nonatomic, weak) id<UIPickerViewDataSource> pickerDataSource;
 @property (nonatomic, weak) id<UIPickerViewDelegate> pickerDelegate;
 
+/**
+ `YES` if the picker has currently been toggled visible in the form.
+ */
+@property (nonatomic, assign, readonly, getter = isVisible) BOOL visible;
+
 
 @end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/**
- This can be a one or two dimensional array. If it's a one dimensional array, the items in the
- array will be displayed by one UIPicker component. If it's a multidimensional array, each first
- level array will be considered a component and each element in the second level arrays
- will be the rows of the components.
- */

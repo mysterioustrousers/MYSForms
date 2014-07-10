@@ -7,9 +7,11 @@
 //
 
 #import "MYSForms.h"
-#import "MYSFormMessageElement.h"
-#import "MYSFormLoadingCell.h"
-#import "MYSFormMessageElement-Private.h"
+#import "MYSFormMessageChildElement.h"
+#import "MYSFormLoadingChildCell.h"
+#import "MYSFormMessageChildElement-Private.h"
+#import "MYSFormViewChildElement.h"
+#import "MYSFormViewChildCell.h"
 #import "MYSCollectionViewSpringyLayout.h"
 #import "MYSCollectionView.h"
 
@@ -27,12 +29,6 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
 @property (nonatomic, strong) NSMutableArray      *elements;
 @property (nonatomic, strong) NSMutableDictionary *cachedCellSizes;
 @property (nonatomic, assign) NSUInteger          outstandingValidationErrorCount;
-
-// picker view presentation
-@property (nonatomic, strong) NSLayoutConstraint  *pickerViewYConstraint;
-@property (nonatomic, strong) UIPickerView        *pickerView;
-@property (nonatomic, strong) UIButton            *pickerViewButton;
-
 @end
 
 
@@ -140,8 +136,11 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
     }
 
     // register metadata cells
-    [self registerCellForClass:[MYSFormMessageCell class]];
-    [self registerCellForClass:[MYSFormLoadingCell class]];
+    [self registerCellForClass:[MYSFormMessageChildCell class]];
+    [self registerCellForClass:[MYSFormLoadingChildCell class]];
+
+    // register view child cell
+    [self.collectionView registerClass:[MYSFormViewChildCell class] forCellWithReuseIdentifier:NSStringFromClass([MYSFormViewChildCell class])];
 
     // register an invisble footer cell
     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"InvisibleCell"];
@@ -182,8 +181,8 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
         if ([validationErrors count] > 0) {
             valid = NO;
             for (NSError *error in validationErrors) {
-                MYSFormMessageElement *errorFormElement = [MYSFormMessageElement messageElementWithMessage:[error localizedDescription]
-                                                                                                      type:MYSFormMessageTypeValidationError
+                MYSFormMessageChildElement *errorFormElement = [MYSFormMessageChildElement messageElementWithMessage:[error localizedDescription]
+                                                                                                      type:MYSFormChildElementTypeValidationError
                                                                                              parentElement:element];
                 [errorElementsToShow addObject:errorFormElement];
             }
@@ -192,7 +191,7 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
     self.outstandingValidationErrorCount = [errorElementsToShow count];
 
     // remove all existing error elements
-    [self hideChildrenOfElement:nil type:MYSFormMessageTypeValidationError completion:^{
+    [self hideChildrenOfElement:nil type:MYSFormChildElementTypeValidationError completion:^{
         [self showChildElements:errorElementsToShow position:MYSFormMessagePositionBelow duration:0 completion:nil];
     }];
 
@@ -219,14 +218,14 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
 - (void)showLoadingMessage:(NSString *)message aboveElement:(MYSFormElement *)element completion:(void (^)(void))completion
 {
     if (!self.collectionView.window) return;
-    MYSFormMessageElement *loadingElement = [MYSFormMessageElement messageElementWithMessage:message type:MYSFormMessageTypeLoading parentElement:element];
+    MYSFormMessageChildElement *loadingElement = [MYSFormMessageChildElement messageElementWithMessage:message type:MYSFormChildElementTypeLoading parentElement:element];
     [self showChildElements:@[loadingElement] position:MYSFormMessagePositionAbove duration:0 completion:completion];
 }
 
 - (void)hideLoadingAboveElement:(MYSFormElement *)element completion:(void (^)(void))completion
 {
     if (!self.collectionView.window) return;
-    [self hideChildrenOfElement:element type:MYSFormMessageTypeLoading completion:completion];
+    [self hideChildrenOfElement:element type:MYSFormChildElementTypeLoading completion:completion];
 }
 
 - (void)showErrorMessage:(NSString *)message
@@ -234,9 +233,9 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
                 duration:(NSTimeInterval)duration
               completion:(void (^)(void))completion
 {
-    MYSFormMessageElement *errorMessage = [MYSFormMessageElement messageElementWithMessage:message
-                                                                                      type:MYSFormMessageTypeError
-                                                                             parentElement:element];
+    MYSFormMessageChildElement *errorMessage = [MYSFormMessageChildElement messageElementWithMessage:message
+                                                                                                type:MYSFormChildElementTypeError
+                                                                                       parentElement:element];
     [self showChildElements:@[errorMessage]
                    position:MYSFormMessagePositionBelow
                    duration:duration
@@ -245,7 +244,7 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
 
 - (void)hideErrorMessageBelowElement:(MYSFormElement *)element completion:(void (^)(void))completion
 {
-    [self hideChildrenOfElement:element type:MYSFormMessageTypeError completion:completion];
+    [self hideChildrenOfElement:element type:MYSFormChildElementTypeError completion:completion];
 }
 
 - (void)showSuccessMessage:(NSString *)message
@@ -253,8 +252,8 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
                   duration:(NSTimeInterval)duration
                 completion:(void (^)(void))completion
 {
-    MYSFormMessageElement *successMessage = [MYSFormMessageElement messageElementWithMessage:message
-                                                                                        type:MYSFormMessageTypeSuccess
+    MYSFormMessageChildElement *successMessage = [MYSFormMessageChildElement messageElementWithMessage:message
+                                                                                        type:MYSFormChildElementTypeSuccess
                                                                                parentElement:element];
     [self showChildElements:@[successMessage]
                    position:MYSFormMessagePositionBelow
@@ -264,7 +263,7 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
 
 - (void)hideSuccessMessageBelowElement:(MYSFormElement *)element completion:(void (^)(void))completion
 {
-    [self hideChildrenOfElement:element type:MYSFormMessageTypeSuccess completion:completion];
+    [self hideChildrenOfElement:element type:MYSFormChildElementTypeSuccess completion:completion];
 }
 
 
@@ -400,9 +399,15 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
     [self presentViewController:viewController animated:animated completion:completion];
 }
 
-- (void)formElement:(MYSFormElement *)formElement didRequestPresentationOfPickerView:(UIPickerView *)pickerView
+- (void)formElement:(MYSFormElement *)formElement didRequestPresentationOfChildView:(UIView *)childView
 {
-    [self displayPickerView:pickerView];
+    MYSFormViewChildElement *viewChildElement = [MYSFormViewChildElement viewChildElementWithView:childView parentElement:formElement];
+    [self showChildElements:@[viewChildElement] position:MYSFormMessagePositionBelow duration:0 completion:nil];
+}
+
+- (void)formElement:(MYSFormElement *)formElement didRequestDismissalOfChildView:(UIView *)childView
+{
+    [self hideChildrenOfElement:formElement type:MYSFormChildElementTypeView completion:nil];
 }
 
 
@@ -436,7 +441,7 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
 {
     if (!self.collectionView.window) return;
 
-    for (MYSFormMessageElement *childElement in childElements) {
+    for (MYSFormMessageChildElement *childElement in childElements) {
         if (!childElement.parentElement) {
             childElement.parentElement = (MYSFormElement *)[self.elements firstObject];
         }
@@ -447,7 +452,7 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
     for (MYSFormElement *element in [self.elements copy]) {
         NSInteger indexOffset       = position == MYSFormMessagePositionBelow ? 1 : 0;
         NSInteger indexMultiplier   = position == MYSFormMessagePositionBelow ? 1 : -1;
-        for (MYSFormMessageElement *childElement in childElements) {
+        for (MYSFormMessageChildElement *childElement in childElements) {
             if ([element isEqual:childElement.parentElement]) {
                 NSInteger index = [self.elements indexOfObject:childElement.parentElement];
                 NSAssert(index != NSNotFound, @"element must be added to the form.");
@@ -471,7 +476,7 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
             [self.collectionView insertItemsAtIndexPaths:indexPathsToInsert];
         } completion:^(BOOL finished) {
             NSIndexPath *ip = [indexPathsToInsert firstObject];
-            if (ip) [self.collectionView scrollToItemAtIndexPath:ip atScrollPosition:UICollectionViewScrollPositionTop animated:YES];
+            if (ip) [self.collectionView scrollToItemAtIndexPath:ip atScrollPosition:UICollectionViewScrollPositionCenteredVertically animated:YES];
             if (completion) completion();
         }];
     }
@@ -481,17 +486,16 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
 
 }
 
-- (void)hideChildrenOfElement:(MYSFormElement *)parentElement type:(MYSFormMessageType)type completion:(void (^)(void))completion
+- (void)hideChildrenOfElement:(MYSFormElement *)parentElement type:(MYSFormChildElementType)type completion:(void (^)(void))completion
 {
     if (!self.collectionView.window) return;
 
     NSArray *childElements = [self.elements filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(MYSFormElement *element, NSDictionary *bindings) {
-        return ([element isKindOfClass:[MYSFormMessageElement class]] &&
-                [(MYSFormMessageElement *)element type] == type);
+        return ([element isKindOfClass:[MYSFormChildElement class]] && [(MYSFormChildElement *)element type] == type);
     }]];
 
     NSMutableArray *indexPathsToRemove = [NSMutableArray new];
-    for (MYSFormMessageElement *childElement in childElements) {
+    for (MYSFormMessageChildElement *childElement in childElements) {
         if (!parentElement || [childElement.parentElement isEqual:parentElement]) {
             NSIndexPath *ip = [self.collectionView indexPathForCell:childElement.cell];
             if (ip) {
@@ -673,114 +677,6 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
         }
     }
     return nil;
-}
-
-
-#pragma mark (ui)
-
-- (void)displayPickerView:(UIPickerView *)pickerView
-{
-    self.pickerView = pickerView;
-
-    UIView *wrapperView = [self.view superview];
-
-    // set up constraints for picker view
-    [pickerView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [wrapperView addSubview:pickerView];
-
-    [wrapperView addConstraint:[NSLayoutConstraint constraintWithItem:wrapperView
-                                                            attribute:NSLayoutAttributeRight
-                                                            relatedBy:NSLayoutRelationEqual
-                                                               toItem:pickerView
-                                                            attribute:NSLayoutAttributeRight
-                                                           multiplier:1
-                                                             constant:0]];
-
-    [wrapperView addConstraint:[NSLayoutConstraint constraintWithItem:wrapperView
-                                                            attribute:NSLayoutAttributeLeft
-                                                            relatedBy:NSLayoutRelationEqual
-                                                               toItem:pickerView
-                                                            attribute:NSLayoutAttributeLeft
-                                                           multiplier:1
-                                                             constant:0]];
-
-    NSLayoutConstraint *yConstraint =
-    [NSLayoutConstraint constraintWithItem:wrapperView
-                                 attribute:NSLayoutAttributeBottom
-                                 relatedBy:NSLayoutRelationEqual
-                                    toItem:pickerView
-                                 attribute:NSLayoutAttributeBottom
-                                multiplier:1
-                                  constant:-(pickerView.frame.size.height + 44)];
-    [wrapperView addConstraint:yConstraint];
-
-
-    // create and set up constrains for done label
-    UIButton *doneButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    [doneButton setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [doneButton setTitle:@"Done" forState:UIControlStateNormal];
-    [doneButton.titleLabel setFont:[UIFont boldSystemFontOfSize:[UIFont systemFontSize]]];
-    [doneButton setBackgroundColor:[UIColor whiteColor]];
-    [doneButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
-    [doneButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 20)];
-    [doneButton addTarget:self
-                   action:@selector(pickerViewDoneButtonWasTapped:)
-         forControlEvents:UIControlEventTouchUpInside];
-    [wrapperView addSubview:doneButton];
-
-    [wrapperView addConstraint:[NSLayoutConstraint constraintWithItem:doneButton
-                                                            attribute:NSLayoutAttributeRight
-                                                            relatedBy:NSLayoutRelationEqual
-                                                               toItem:pickerView
-                                                            attribute:NSLayoutAttributeRight
-                                                           multiplier:1
-                                                             constant:0]];
-
-    [wrapperView addConstraint:[NSLayoutConstraint constraintWithItem:doneButton
-                                                            attribute:NSLayoutAttributeLeft
-                                                            relatedBy:NSLayoutRelationEqual
-                                                               toItem:pickerView
-                                                            attribute:NSLayoutAttributeLeft
-                                                           multiplier:1
-                                                             constant:0]];
-
-    [wrapperView addConstraint:[NSLayoutConstraint constraintWithItem:doneButton
-                                                            attribute:NSLayoutAttributeBottom
-                                                            relatedBy:NSLayoutRelationEqual
-                                                               toItem:pickerView
-                                                            attribute:NSLayoutAttributeTop
-                                                           multiplier:1
-                                                             constant:0]];
-
-    [doneButton addConstraint:[NSLayoutConstraint constraintWithItem:doneButton
-                                                           attribute:NSLayoutAttributeHeight
-                                                           relatedBy:NSLayoutRelationEqual
-                                                              toItem:nil
-                                                           attribute:NSLayoutAttributeNotAnAttribute
-                                                          multiplier:1
-                                                            constant:44]];
-
-    [wrapperView layoutIfNeeded];
-    [UIView animateWithDuration:0.25 animations:^{
-        yConstraint.constant = 0;
-        [wrapperView layoutIfNeeded];
-    }];
-
-    self.pickerView             = pickerView;
-    self.pickerViewButton       = doneButton;
-    self.pickerViewYConstraint  = yConstraint;
-}
-
-- (IBAction)pickerViewDoneButtonWasTapped:(id)sender
-{
-    UIView *wrapperView = [self.view superview];
-    [UIView animateWithDuration:0.25 animations:^{
-        self.pickerViewYConstraint.constant = -(self.pickerView.frame.size.height + 44);
-        [wrapperView layoutIfNeeded];
-    } completion:^(BOOL finished) {
-        [self.pickerView removeFromSuperview];
-        [self.pickerViewButton removeFromSuperview];
-    }];
 }
 
 - (void)registerCellForClass:(Class)cellClass

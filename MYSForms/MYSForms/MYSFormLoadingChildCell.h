@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Mysterious Trousers. All rights reserved.
 //
 
-#import "MYSFormMessageCell.h"
+#import "MYSFormMessageChildCell.h"
 
 
-@interface MYSFormLoadingCell : MYSFormMessageCell
+@interface MYSFormLoadingChildCell : MYSFormMessageChildCell
 
 @end

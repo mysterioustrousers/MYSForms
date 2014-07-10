@@ -8,7 +8,7 @@
 
 #import "MYSFormCell.h"
 
-@interface MYSFormMessageCell : MYSFormCell
+@interface MYSFormMessageChildCell : MYSFormCell
 
 @property (weak, nonatomic) IBOutlet UILabel *messageLabel;
 

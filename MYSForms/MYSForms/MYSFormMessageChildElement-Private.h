@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 Mysterious Trousers. All rights reserved.
 //
 
-#import "MYSFormMessageElement.h"
+#import "MYSFormMessageChildElement.h"
 
-@interface MYSFormMessageElement ()
+@interface MYSFormMessageChildElement ()
 @property (nonatomic, weak, readwrite) MYSFormElement *parentElement;
 @end

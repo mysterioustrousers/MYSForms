@@ -1,5 +1,5 @@
 //
-//  MYSSlideFormViewController.m
+//  MYSFormSlideViewController.m
 //  MYSForms
 //
 //  Created by Adam Kirk on 6/6/14.

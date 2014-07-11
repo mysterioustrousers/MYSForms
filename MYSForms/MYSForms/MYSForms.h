@@ -19,6 +19,7 @@
 #import "MYSFormImagePickerElement.h"
 #import "MYSFormPickerElement.h"
 #import "MYSFormToggleElement.h"
+#import "MYSFormMapElement.h"
 
 // form validators
 #import "MYSFormPresenceValidation.h"

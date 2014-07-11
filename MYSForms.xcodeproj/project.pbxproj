@@ -26,6 +26,9 @@
 		C26C4FEB1923989C00D6ADBB /* MYSFormPickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C26C4FEA1923989C00D6ADBB /* MYSFormPickerCell.m */; };
 		C26C4FED192398AB00D6ADBB /* MYSFormPickerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C26C4FEC192398AB00D6ADBB /* MYSFormPickerCell.xib */; };
 		C271805F192294D300FD2229 /* MYSFormImageFromDataValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = C271805E192294D300FD2229 /* MYSFormImageFromDataValueTransformer.m */; };
+		C279707D197066240014036F /* MYSFormMapElement.m in Sources */ = {isa = PBXBuildFile; fileRef = C279707C197066240014036F /* MYSFormMapElement.m */; };
+		C2797080197066460014036F /* MYSFormMapCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C279707F197066460014036F /* MYSFormMapCell.m */; };
+		C27970821970665B0014036F /* MYSFormMapCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C27970811970665B0014036F /* MYSFormMapCell.xib */; };
 		C289A2521913440A0047D0CF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C289A2511913440A0047D0CF /* Foundation.framework */; };
 		C289A2541913440A0047D0CF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C289A2531913440A0047D0CF /* CoreGraphics.framework */; };
 		C289A2561913440A0047D0CF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C289A2551913440A0047D0CF /* UIKit.framework */; };
@@ -130,6 +133,11 @@
 		C26C4FEC192398AB00D6ADBB /* MYSFormPickerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MYSFormPickerCell.xib; sourceTree = "<group>"; };
 		C271805D192294D300FD2229 /* MYSFormImageFromDataValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYSFormImageFromDataValueTransformer.h; sourceTree = "<group>"; };
 		C271805E192294D300FD2229 /* MYSFormImageFromDataValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYSFormImageFromDataValueTransformer.m; sourceTree = "<group>"; };
+		C279707B197066240014036F /* MYSFormMapElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYSFormMapElement.h; sourceTree = "<group>"; };
+		C279707C197066240014036F /* MYSFormMapElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYSFormMapElement.m; sourceTree = "<group>"; };
+		C279707E197066460014036F /* MYSFormMapCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYSFormMapCell.h; sourceTree = "<group>"; };
+		C279707F197066460014036F /* MYSFormMapCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYSFormMapCell.m; sourceTree = "<group>"; };
+		C27970811970665B0014036F /* MYSFormMapCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MYSFormMapCell.xib; sourceTree = "<group>"; };
 		C289A24E1913440A0047D0CF /* MYSForms.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MYSForms.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C289A2511913440A0047D0CF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C289A2531913440A0047D0CF /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -450,6 +458,9 @@
 				C2F15E3A19242C1D00E55FDA /* MYSFormToggleCell.h */,
 				C2F15E3B19242C1D00E55FDA /* MYSFormToggleCell.m */,
 				C2F15E3D19242C3000E55FDA /* MYSFormToggleCell.xib */,
+				C279707E197066460014036F /* MYSFormMapCell.h */,
+				C279707F197066460014036F /* MYSFormMapCell.m */,
+				C27970811970665B0014036F /* MYSFormMapCell.xib */,
 			);
 			name = "Form Element Cells";
 			sourceTree = "<group>";
@@ -496,6 +507,8 @@
 				C26C4FE71923964100D6ADBB /* MYSFormPickerElement.m */,
 				C2F15E3719242C0800E55FDA /* MYSFormToggleElement.h */,
 				C2F15E3819242C0800E55FDA /* MYSFormToggleElement.m */,
+				C279707B197066240014036F /* MYSFormMapElement.h */,
+				C279707C197066240014036F /* MYSFormMapElement.m */,
 			);
 			name = "Form Elements";
 			sourceTree = "<group>";
@@ -641,6 +654,7 @@
 				C26614DD19153CD40073DAD8 /* MYSFormHeadlineCell.xib in Resources */,
 				C26614EC19155A9D0073DAD8 /* MYSFormButtonCell.xib in Resources */,
 				C24F1B9D191AD90300356D9A /* MYSFormLabelAndButtonCell.xib in Resources */,
+				C27970821970665B0014036F /* MYSFormMapCell.xib in Resources */,
 				C26614EA19155A900073DAD8 /* MYSFormTextFieldCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -679,6 +693,7 @@
 				C24F1B7E191A77E100356D9A /* MYSFormLoadingChildCell.m in Sources */,
 				C292C0BB191E48A6000567FC /* MYSErrorFormViewController.m in Sources */,
 				C292C0BE191EED0B000567FC /* MYSCatalogViewController.m in Sources */,
+				C279707D197066240014036F /* MYSFormMapElement.m in Sources */,
 				C24F1B9B191AD8E700356D9A /* MYSFormLabelAndButtonCell.m in Sources */,
 				C26C4FEB1923989C00D6ADBB /* MYSFormPickerCell.m in Sources */,
 				C2D718BB192A5E9000A94F24 /* MYSCollectionView.m in Sources */,
@@ -707,6 +722,7 @@
 				C213D8E219182FA700F5086B /* MYSFormPresenceValidation.m in Sources */,
 				C2F89CE0192B97C300198706 /* MYSFormTextViewCell.m in Sources */,
 				C24F1B98191AD8C500356D9A /* MYSFormLabelAndButtonElement.m in Sources */,
+				C2797080197066460014036F /* MYSFormMapCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

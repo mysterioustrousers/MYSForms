@@ -57,7 +57,6 @@
 
     [self addFormElement:[MYSFormImagePickerElement imagePickerElementWithLabel:@"Selfie" modelKeyPath:nil]];
 
-
     MYSFormPickerElement *pickerElement = [MYSFormPickerElement pickerElementWithLabel:@"Age" modelKeyPath:@"yearsOld"];
     pickerElement.valueTransformer = [MYSFormStringFromNumberValueTransformer new];
     for (NSInteger i = 0; i < 120; i++) {
@@ -67,6 +66,13 @@
 
 
     [self addFormElement:[MYSFormToggleElement toggleElementWithLabel:@"A toggle switch" modelKeyPath:@"isLegalAdult"]];
+
+
+    CLLocationCoordinate2D coord = CLLocationCoordinate2DMake(40.981178, -111.910858);
+    MKCoordinateSpan span        = MKCoordinateSpanMake([MYSFormMapElement coordinatesForMiles:200], [MYSFormMapElement coordinatesForMiles:200]);
+    MYSFormMapElement *mapElement = [MYSFormMapElement mapElementWithDisplayRegion:MKCoordinateRegionMake(coord, span)];
+    mapElement.droppedPinCoordinates = [NSValue valueWithMKCoordinate:coord];
+    [self addFormElement:mapElement];
 
 
     MYSFormTextViewElement *textViewElement = [MYSFormTextViewElement textViewElementWithModelKeyPath:@"biography"];

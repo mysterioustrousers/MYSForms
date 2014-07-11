@@ -277,15 +277,15 @@ The trick is to make sure that you hook up the outlets of the views in your xibs
 
 A log in form and sign up form:
 
-![Basic Example Screenshot](http://d.pr/i/RLOk/3NtdmBml+ =x500) ![Sign up form example](http://d.pr/i/TTeZ/ihh9alMz+ =x500)
+![Basic Example Screenshot](http://d.pr/i/RLOk/3NtdmBml+) ![Sign up form example](http://d.pr/i/TTeZ/ihh9alMz+)
 
 Validation errors and loading message:
 
-![Example of validation errors](http://d.pr/i/W0Wh/30akIyEt+ =x500) ![Example of a loading message](http://d.pr/i/kGj5/3HGxUAtk+ =x500)
+![Example of validation errors](http://d.pr/i/W0Wh/30akIyEt+) ![Example of a loading message](http://d.pr/i/kGj5/3HGxUAtk+)
 
 Misc element examples:
 
-![Example catalog elements](http://d.pr/i/tyfJ/5lL6qHh0+ =x500) ![Example of misc form elements](http://d.pr/i/qabo/5A3GGWo9+ =x500)
+![Example catalog elements](http://d.pr/i/tyfJ/5lL6qHh0+) ![Example of misc form elements](http://d.pr/i/qabo/5A3GGWo9+)
 
 ## Extras
 

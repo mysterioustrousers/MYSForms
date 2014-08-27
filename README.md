@@ -69,7 +69,7 @@ Read the [API docs for MYSFormViewController](http://cocoadocs.org/docsets/MYSFo
 
 #### Storyboards
 
-If you're using storyboards, the subclassing method is best. Just drage a `UICollectionViewController` onto your storyboard and set the class of the view controller to your custom subclass. When your application segues to that scene (subclassed `MYSFormViewController`) the form will appear and "just work."
+If you're using storyboards, the subclassing method is best. Just drag a `UICollectionViewController` onto your storyboard and set the class of the view controller to your custom subclass. When your application segues to that scene (subclassed `MYSFormViewController`) the form will appear and "just work."
 
 
 ### Form Elements

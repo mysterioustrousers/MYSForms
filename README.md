@@ -76,11 +76,11 @@ If you're using storyboards, the subclassing method is best. Just drage a `UICol
 
 A form is an `MYSFormViewController` with an array of `MYSFormElement` subclass objects. Each `MYSFormElement` subclass represents a different type of form element like a header, descriptive text, a text field, a text view, a picker, a toggle button, an image picker, etc.
 
-MYSForms comes with a large selection of `MSYFormElement` subclasses that are ready to use, but you can also create your own or further subclass what's already available to tweak their appearance and behavior.
+MYSForms comes with a large selection of `MYSFormElement` subclasses that are ready to use, but you can also create your own or further subclass what's already available to tweak their appearance and behavior.
 
 #### Validations
 
-Validations are objects you can add to form elements that will make sure the values of those elements are valid. If they are not valid, it will display a validation error automatically next to that form element explaining the problem so the user can fix it. MSYForms comes with some standard validation classes like making sure a value is not blank or making sure a value conforms to a certain format. Validation objects are subclasses of `MYSFormValidation`.
+Validations are objects you can add to form elements that will make sure the values of those elements are valid. If they are not valid, it will display a validation error automatically next to that form element explaining the problem so the user can fix it. MYSForms comes with some standard validation classes like making sure a value is not blank or making sure a value conforms to a certain format. Validation objects are subclasses of `MYSFormValidation`.
 
 #### Value Transformers
 

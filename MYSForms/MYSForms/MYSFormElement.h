@@ -47,7 +47,12 @@
 /**
  Controls whether any actionable UIViews are enabled in this form element.
  */
-@property (nonatomic, assign, getter = isEnabled) BOOL enabled;
+@property (nonatomic, getter = isEnabled) BOOL enabled;
+
+/**
+ The class of the cell to be used to display this form element. By default, this is the same name as this class with Cell replacing Element.
+ */
+@property (nonatomic) Class cellClass;
 
 /**
  Is asked of the element to make sure this element can be added for this form/device/orientation/whatever.
@@ -59,11 +64,6 @@
  This calls the delegate (the form) to get the current model value for this element's key path.
  */
 - (id)currentModelValue;
-
-/**
- The class of the cell to be used to display this form element.
- */
-- (Class)cellClass;
 
 /**
  If any data on this element has changed, call this method to update the cell so it's displayed to the user.
@@ -80,6 +80,16 @@
  Returns YES if this is the type of form element that accepts text input.
  */
 - (BOOL)isTextInput;
+
+/**
+ Returns YES if the element has a value that can be edited.
+ */
+- (BOOL)isEditable;
+
+/**
+ Make a text input first responder, or "tap" selection style input, or just dismiss the keyboard for inputs such as toggles.
+ */
+- (void)beginEditing;
 
 /**
  Returns YES if the `modelKeyPath` is valid for use setting and getting values on the model. An attempt to do so with an invalid
@@ -120,6 +130,7 @@
          completion:(void (^)(void))completion;
 - (void)formElement:(MYSFormElement *)formElement didRequestPresentationOfChildView:(UIView *)childView;
 - (void)formElement:(MYSFormElement *)formElement didRequestDismissalOfChildView:(UIView *)childView;
+- (void)formElementDidRequestResignationOfFirstResponder:(MYSFormElement *)formElement;
 @end
 
 

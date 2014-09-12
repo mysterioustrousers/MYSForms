@@ -55,7 +55,15 @@ NSString * const MYSFormImagePickerCellActionSheetButtonRemovePhoto         = @"
     return _imagePickerController;
 }
 
+- (BOOL)isEditable
+{
+    return YES;
+}
 
+- (void)beginEditing
+{
+    [self formImagePickerCellWasTapped:nil];
+}
 
 
 #pragma mark - DELEGATE image picker cell
@@ -85,8 +93,6 @@ NSString * const MYSFormImagePickerCellActionSheetButtonRemovePhoto         = @"
 }
 
 
-
-
 #pragma mark - DELEGATE action sheet
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -109,8 +115,6 @@ NSString * const MYSFormImagePickerCellActionSheetButtonRemovePhoto         = @"
 
     [self.delegate formElement:self didRequestPresentationOfViewController:self.imagePickerController animated:YES completion:nil];
 }
-
-
 
 
 #pragma mark - DELEGATE image picker

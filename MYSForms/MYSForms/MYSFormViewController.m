@@ -42,7 +42,9 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
 
 - (instancetype)init
 {
-    self = [super initWithCollectionViewLayout:[MYSCollectionViewSpringyLayout new]];
+    UICollectionViewFlowLayout *layout = [UICollectionViewFlowLayout new];
+    layout.minimumInteritemSpacing = CGFLOAT_MAX;
+    self = [super initWithCollectionViewLayout:layout];
     if (self) {
         [self formInit];
     }
@@ -90,7 +92,9 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
     [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
-    [(MYSCollectionView *)self.collectionView disableDynamics];
+    if ([self.collectionView respondsToSelector:@selector(disableDynamics)]) {
+        [(MYSCollectionView *)self.collectionView disableDynamics];
+    }
     [self.cachedCellSizes removeAllObjects];
     [self.collectionView reloadData];
     [self.collectionView.collectionViewLayout invalidateLayout];
@@ -99,7 +103,9 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
     [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
-    [(MYSCollectionView *)self.collectionView enableDynamics];
+    if ([self.collectionView respondsToSelector:@selector(enableDynamics)]) {
+        [(MYSCollectionView *)self.collectionView enableDynamics];
+    }
     [self.cachedCellSizes removeAllObjects];
     [self.collectionView reloadData];
 }
@@ -410,6 +416,10 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
     [self hideChildrenOfElement:formElement type:MYSFormChildElementTypeView completion:nil];
 }
 
+- (void)formElementDidRequestResignationOfFirstResponder:(MYSFormElement *)formElement
+{
+    [self attemptToDismissKeyboard];
+}
 
 
 
@@ -539,15 +549,20 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
         CGFloat animationDuration   = [note.userInfo[UIKeyboardAnimationDurationUserInfoKey] floatValue];
         UIViewAnimationCurve curve  = [note.userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue];
         UIEdgeInsets insets         = self.collectionView.contentInset;
-        if (self.interfaceOrientation == UIInterfaceOrientationPortrait ||
-            self.interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
+        CGPoint offset              = self.collectionView.contentOffset;
+        
+//        if (self.interfaceOrientation == UIInterfaceOrientationPortrait ||
+//            self.interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
             insets.bottom = endFrame.size.height;
-        }
-        else {
-            insets.bottom = endFrame.size.width;
-        }
+//        }
+//        else {
+//            insets.bottom = endFrame.size.width;
+//        }
+        offset.y += insets.bottom;
+        
         [UIView animateWithDuration:animationDuration delay:0 options:(curve << 16) animations:^{
             self.collectionView.contentInset = insets;
+//            self.collectionView.contentOffset = offset;
         } completion:nil];
     }];
 
@@ -571,8 +586,10 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
                                                   usingBlock:^(NSNotification *note)
     {
         UITextField *textField = note.object;
-        if ([[self visibleTextInputs] containsObject:textField]) {
-            if ([self textInputAfter:textField]) {
+        MYSFormElement *element = [self elementContainingView:textField];
+        if (element) {
+            MYSFormElement *nextElement = [self elementAfter:element];
+            if (nextElement) {
                 textField.returnKeyType = UIReturnKeyNext;
             }
             else {
@@ -599,11 +616,12 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
                                                        queue:[NSOperationQueue mainQueue]
                                                   usingBlock:^(NSNotification *note)
     {
-        UITextField *textField = note.object;
-        if ([[self visibleTextInputs] containsObject:textField]) {
-            UIView *nextTextInput = [self textInputAfter:textField];
-            if (nextTextInput) {
-                [nextTextInput becomeFirstResponder];
+        UITextField *textField = (UITextField *)[note.object textInput];
+        MYSFormElement *element = [self elementContainingView:textField];
+        if (element) {
+            MYSFormElement *nextElement = [self elementAfter:element];
+            if (nextElement) {
+                [nextElement beginEditing];
             }
             else {
                 if ([self.formDelegate respondsToSelector:@selector(formViewControllerDidSubmit:)]) {
@@ -641,31 +659,28 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
 
 #pragma mark (text input)
 
-- (UIView *)textInputAfter:(UIView *)textInput
+- (MYSFormElement *)elementAfter:(MYSFormElement *)anElement
 {
-    BOOL textInputFound = NO;
+    BOOL returnNext = NO;
     for (MYSFormElement *element in self.elements) {
-        if ([element.cell textInput] == textInput) {
-            textInputFound = YES;
-            continue;
+        if (returnNext) {
+            return element;
         }
-        if (textInputFound && [element.cell textInput].window) {
-            return [element.cell textInput];
+        if (element == anElement) {
+            returnNext = YES;
         }
     }
     return nil;
 }
 
-// TODO: if the next text input is off screen, we need to scroll to it first, then give it first responder status.
-- (NSArray *)textInputElements
+- (MYSFormElement *)elementContainingView:(UIView *)view
 {
-    NSMutableArray *textInputs = [NSMutableArray new];
     for (MYSFormElement *element in self.elements) {
-        if ([element isTextInput]) {
-            [textInputs addObject:element];
+        if ([view isDescendantOfView:element.cell]) {
+            return element;
         }
     }
-    return textInputs;
+    return nil;
 }
 
 - (UIView *)currentFirstResponder
@@ -684,6 +699,5 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
     UINib *nib = [UINib nibWithNibName:NSStringFromClass(cellClass) bundle:nil];
     [self.collectionView registerNib:nib forCellWithReuseIdentifier:NSStringFromClass(cellClass)];
 }
-
 
 @end

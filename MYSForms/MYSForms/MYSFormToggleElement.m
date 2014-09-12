@@ -30,6 +30,18 @@
     cell.toggleCellDelegate = self;
 }
 
+- (BOOL)isEditable
+{
+    return YES;
+}
+
+- (void)beginEditing
+{
+    [self.delegate formElementDidRequestResignationOfFirstResponder:self];
+}
+
+
+
 
 
 

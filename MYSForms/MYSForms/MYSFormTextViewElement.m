@@ -39,6 +39,11 @@
     cell.textViewCellDelegate = self;
 }
 
+- (void)beginEditing
+{
+    [[self.cell textInput] becomeFirstResponder];
+}
+
 
 
 

@@ -31,6 +31,16 @@
     return YES;
 }
 
+- (BOOL)isEditable
+{
+    return YES;
+}
+
+- (void)beginEditing
+{
+    [[self.cell textInput] becomeFirstResponder];
+}
+
 - (void)setCell:(MYSFormTextFieldCell *)cell
 {
     [super setCell:cell];

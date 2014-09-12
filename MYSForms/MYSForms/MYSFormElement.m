@@ -52,6 +52,9 @@
 
 - (Class)cellClass
 {
+    if (_cellClass) {
+        return _cellClass;
+    }
     NSString *className     = NSStringFromClass([self class]);
     NSString *cellClassName = [className stringByReplacingOccurrencesOfString:@"Element" withString:@"Cell"];
     return NSClassFromString(cellClassName);
@@ -75,6 +78,16 @@
 - (BOOL)isTextInput
 {
     return NO;
+}
+
+- (BOOL)isEditable
+{
+    return NO;
+}
+
+- (void)beginEditing
+{
+    
 }
 
 - (BOOL)isModelKeyPathValid

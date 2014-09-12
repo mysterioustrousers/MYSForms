@@ -53,6 +53,16 @@
     cell.pickerCellDelegate = self;
 }
 
+- (BOOL)isEditable
+{
+    return YES;
+}
+
+- (void)beginEditing
+{
+    [self.delegate formElementDidRequestResignationOfFirstResponder:self];
+}
+
 - (void)setValues:(NSArray *)values
 {
     NSMutableArray *newData = [NSMutableArray new];

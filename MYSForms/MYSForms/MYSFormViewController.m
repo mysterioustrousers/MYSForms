@@ -663,6 +663,9 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
 {
     BOOL returnNext = NO;
     for (MYSFormElement *element in self.elements) {
+        if (!element.isEditable || [element isKindOfClass:[MYSFormChildElement class]]) {
+            continue;
+        }
         if (returnNext) {
             return element;
         }

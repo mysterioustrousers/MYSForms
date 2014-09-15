@@ -23,6 +23,9 @@
     if ([value respondsToSelector:@selector(count)] && [value count] > 0) {
         return nil;
     }
+    if ([value isKindOfClass:[UIImage class]]) {
+        return nil;
+    }
     return [NSError errorWithDomain:MYSFormErrorDomain
                                code:1
                            userInfo:@{ NSLocalizedDescriptionKey : self.failedString,

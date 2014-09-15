@@ -12,6 +12,7 @@
 
 
 @interface MYSFormImagePickerCell () <UIActionSheetDelegate>
+@property (nonatomic, strong) UIImage *placeholderImage;
 @end
 
 
@@ -35,6 +36,13 @@
     return CGSizeMake(width, 100);
 }
 
+- (void)didChangeValueAtValueKeyPath
+{
+    if (!self.imageView.image) {
+        self.imageView.image = self.placeholderImage;
+    }
+}
+
 
 
 
@@ -49,6 +57,7 @@
 {
     self.label.text             = element.label;
     self.userInteractionEnabled = element.isEnabled;
+    self.placeholderImage       = element.placeholderImage;
     [super populateWithElement:element];
 }
 

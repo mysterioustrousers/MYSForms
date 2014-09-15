@@ -12,6 +12,13 @@
 @class MYSFormCell;
 
 
+/**
+ When requesting that a child element be presented next to a parent, an above or below position can sometimes be specified.
+ */
+typedef NS_ENUM(NSUInteger, MYSFormElementRelativePosition) {
+    MYSFormElementRelativePositionAbove,
+    MYSFormElementRelativePositionBelow
+};
 
 
 /**
@@ -157,7 +164,18 @@
  */
 - (void)hideSuccessMessageBelowElement:(MYSFormElement *)element completion:(void (^)(void))completion;
 
+/**
+ Show an arbitrary view below an element in the form.
+ */
+- (void)showView:(UIView *)view
+      relativeTo:(MYSFormElement *)element
+        position:(MYSFormElementRelativePosition)position
+      completion:(void (^)(void))completion;
 
+/**
+ Hide all arbitrary views that have been shown by a form element.
+ */
+- (void)hideViewRelativeToElement:(MYSFormElement *)element completion:(void (^)(void))completion;
 
 
 /*******************************************

@@ -16,12 +16,6 @@
 #import "MYSCollectionView.h"
 
 
-typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
-    MYSFormMessagePositionAbove,
-    MYSFormMessagePositionBelow
-};
-
-
 @interface MYSFormViewController () <UICollectionViewDelegateFlowLayout,
                                      UITextFieldDelegate,
                                      MYSFormElementDataSource,
@@ -198,7 +192,7 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
 
     // remove all existing error elements
     [self hideChildrenOfElement:nil type:MYSFormChildElementTypeValidationError completion:^{
-        [self showChildElements:errorElementsToShow position:MYSFormMessagePositionBelow duration:0 completion:nil];
+        [self showChildElements:errorElementsToShow position:MYSFormElementRelativePositionBelow duration:0 completion:nil];
     }];
 
     return valid;
@@ -225,7 +219,7 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
 {
     if (!self.collectionView.window) return;
     MYSFormMessageChildElement *loadingElement = [MYSFormMessageChildElement messageElementWithMessage:message type:MYSFormChildElementTypeLoading parentElement:element];
-    [self showChildElements:@[loadingElement] position:MYSFormMessagePositionAbove duration:0 completion:completion];
+    [self showChildElements:@[loadingElement] position:MYSFormElementRelativePositionAbove duration:0 completion:completion];
 }
 
 - (void)hideLoadingAboveElement:(MYSFormElement *)element completion:(void (^)(void))completion
@@ -243,7 +237,7 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
                                                                                                 type:MYSFormChildElementTypeError
                                                                                        parentElement:element];
     [self showChildElements:@[errorMessage]
-                   position:MYSFormMessagePositionBelow
+                   position:MYSFormElementRelativePositionBelow
                    duration:duration
                  completion:completion];
 }
@@ -262,7 +256,7 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
                                                                                         type:MYSFormChildElementTypeSuccess
                                                                                parentElement:element];
     [self showChildElements:@[successMessage]
-                   position:MYSFormMessagePositionBelow
+                   position:MYSFormElementRelativePositionBelow
                    duration:duration
                  completion:completion];
 }
@@ -271,6 +265,21 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
 {
     [self hideChildrenOfElement:element type:MYSFormChildElementTypeSuccess completion:completion];
 }
+
+- (void)showView:(UIView *)view
+      relativeTo:(MYSFormElement *)element
+        position:(MYSFormElementRelativePosition)position
+      completion:(void (^)(void))completion
+{
+    MYSFormViewChildElement *viewChildElement = [MYSFormViewChildElement viewChildElementWithView:view parentElement:element];
+    [self showChildElements:@[viewChildElement] position:position duration:0 completion:completion];
+}
+
+- (void)hideViewRelativeToElement:(MYSFormElement *)element completion:(void (^)(void))completion
+{
+    [self hideChildrenOfElement:element type:MYSFormChildElementTypeView completion:nil];
+}
+
 
 
 #pragma mark (properties)
@@ -408,7 +417,7 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
 - (void)formElement:(MYSFormElement *)formElement didRequestPresentationOfChildView:(UIView *)childView
 {
     MYSFormViewChildElement *viewChildElement = [MYSFormViewChildElement viewChildElementWithView:childView parentElement:formElement];
-    [self showChildElements:@[viewChildElement] position:MYSFormMessagePositionBelow duration:0 completion:nil];
+    [self showChildElements:@[viewChildElement] position:MYSFormElementRelativePositionBelow duration:0 completion:nil];
 }
 
 - (void)formElement:(MYSFormElement *)formElement didRequestDismissalOfChildView:(UIView *)childView
@@ -445,7 +454,7 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
 #pragma mark (showing/hiding child elements)
 
 - (void)showChildElements:(NSArray *)childElements
-                 position:(MYSFormMessagePosition)position
+                 position:(MYSFormElementRelativePosition)position
                  duration:(NSTimeInterval)duration
                completion:(void (^)(void))completion
 {
@@ -460,8 +469,8 @@ typedef NS_ENUM(NSUInteger, MYSFormMessagePosition) {
     NSMutableArray *indexPathsToInsert  = [NSMutableArray new];
 
     for (MYSFormElement *element in [self.elements copy]) {
-        NSInteger indexOffset       = position == MYSFormMessagePositionBelow ? 1 : 0;
-        NSInteger indexMultiplier   = position == MYSFormMessagePositionBelow ? 1 : -1;
+        NSInteger indexOffset       = position == MYSFormElementRelativePositionBelow ? 1 : 0;
+        NSInteger indexMultiplier   = position == MYSFormElementRelativePositionBelow ? 1 : -1;
         for (MYSFormMessageChildElement *childElement in childElements) {
             if ([element isEqual:childElement.parentElement]) {
                 NSInteger index = [self.elements indexOfObject:childElement.parentElement];

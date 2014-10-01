@@ -124,7 +124,7 @@
 {
     CGFloat labelHeight = self.label.frame.size.height;
     CGFloat textFieldHeight = self.textField.frame.size.height;
-    CGFloat totalHeight = (labelHeight + 5 + textFieldHeight);
+    CGFloat totalHeight = (labelHeight + 5 + textFieldHeight) - 4;
     CGFloat topAndBottomPadding = (self.bounds.size.height - totalHeight) / 2.0;
     CGFloat labelDeltaY = CGRectGetMidY(self.label.frame) - topAndBottomPadding - (self.label.frame.size.height / 2.0);
     CGFloat textFieldDeltaY = CGRectGetMidY(self.textField.frame) - topAndBottomPadding - (self.textField.frame.size.height / 2.0);

@@ -17,10 +17,9 @@ Pod::Spec.new do |s|
   s.platform     = :ios, "7.0"
   s.source       =  {
                       :git => "https://github.com/mysterioustrousers/MYSForms.git",
-                      :tag => "#{s.version}",
-                      :submodules => true
+                      :tag => "#{s.version}"
                     }
-  s.source_files  = "MYSForms/MYSForms/**/*.{h,m}", "libs/MYSCollectionView/**/*.{h,m}"
+  s.source_files  = "MYSForms/MYSForms/**/*.{h,m}"
   s.resource_bundles = { 'MYSForms' => "MYSForms/MYSForms/**/*.png" }
   s.resources = "MYSForms/MYSForms/**/*.xib"
   s.requires_arc = true

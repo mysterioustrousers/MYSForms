@@ -464,6 +464,13 @@
         NSInteger indexOffset       = position == MYSFormElementRelativePositionBelow ? 1 : 0;
         NSInteger indexMultiplier   = position == MYSFormElementRelativePositionBelow ? 1 : -1;
         for (MYSFormMessageChildElement *childElement in childElements) {
+            
+            // make sure this child isn't already showing
+            NSArray *visibleChildElements = [self childElementsOfType:childElement.type];
+            if ([visibleChildElements containsObject:childElement]) {
+                continue;
+            }
+            
             if ([element isEqual:childElement.parentElement]) {
                 NSInteger index = [self.elements indexOfObject:childElement.parentElement];
                 NSAssert(index != NSNotFound, @"element must be added to the form.");
@@ -501,9 +508,7 @@
 {
     if (!self.collectionView.window) return;
 
-    NSArray *childElements = [self.elements filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(MYSFormElement *element, NSDictionary *bindings) {
-        return ([element isKindOfClass:[MYSFormChildElement class]] && [(MYSFormChildElement *)element type] == type);
-    }]];
+    NSArray *childElements = [self childElementsOfType:type];
 
     NSMutableArray *indexPathsToRemove = [NSMutableArray new];
     for (MYSFormMessageChildElement *childElement in childElements) {
@@ -534,6 +539,12 @@
     }
 }
 
+- (NSArray *)childElementsOfType:(MYSFormChildElementType)type
+{
+    return [self.elements filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(MYSFormElement *element, NSDictionary *bindings) {
+        return ([element isKindOfClass:[MYSFormChildElement class]] && [(MYSFormChildElement *)element type] == type);
+    }]];
+}
 
 
 

@@ -36,4 +36,17 @@
     return [super cellClass];
 }
 
+- (BOOL)isEqual:(MYSFormMessageChildElement *)object
+{
+    return ([object isKindOfClass:[self class]] &&
+            object.parentElement == self.parentElement &&
+            object.type == self.type &&
+            [object.message isEqualToString:self.message]);
+}
+
+- (NSUInteger)hash
+{
+    return [self.parentElement hash] ^ self.type ^ [self.message hash];
+}
+
 @end

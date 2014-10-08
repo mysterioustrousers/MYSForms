@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="trO-dw-CwK">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="trO-dw-CwK">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <deployment defaultVersion="1792" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <scenes>
-        <!--Table View Controller - Demo Forms-->
+        <!--Demo Forms-->
         <scene sceneID="KWe-E7-c3I">
             <objects>
                 <tableViewController id="QWx-2a-IL3" customClass="MYSTableViewController" sceneMemberID="viewController">
@@ -146,15 +147,15 @@
             </objects>
             <point key="canvasLocation" x="841" y="191"/>
         </scene>
-        <!--Loading View Controller - Loading Example-->
+        <!--Loading Example-->
         <scene sceneID="ueQ-uu-Ui2">
             <objects>
                 <collectionViewController autoresizesArchivedViewToFullSize="NO" id="ukZ-6z-EeK" customClass="MYSLoadingViewController" sceneMemberID="viewController">
-                    <collectionView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" keyboardDismissMode="interactive" dataMode="prototypes" id="z6K-xR-kcr" customClass="MYSCollectionView">
+                    <collectionView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" keyboardDismissMode="interactive" dataMode="prototypes" id="z6K-xR-kcr">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ZJU-ST-Mbl" customClass="MYSCollectionViewSpringyLayout">
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ZJU-ST-Mbl">
                             <size key="itemSize" width="316" height="50"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -173,15 +174,15 @@
             </objects>
             <point key="canvasLocation" x="1387" y="542"/>
         </scene>
-        <!--Validation Form View Controller - Validations Example-->
+        <!--Validations Example-->
         <scene sceneID="NvU-Mx-AC7">
             <objects>
                 <collectionViewController autoresizesArchivedViewToFullSize="NO" id="hq5-fe-Yjr" customClass="MYSValidationFormViewController" sceneMemberID="viewController">
-                    <collectionView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" keyboardDismissMode="interactive" dataMode="prototypes" id="BuO-n9-a5I" customClass="MYSCollectionView">
+                    <collectionView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" keyboardDismissMode="interactive" dataMode="prototypes" id="BuO-n9-a5I">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="oil-9h-LpX" customClass="MYSCollectionViewSpringyLayout">
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="oil-9h-LpX">
                             <size key="itemSize" width="316" height="50"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -201,15 +202,15 @@
             </objects>
             <point key="canvasLocation" x="1387" y="-168"/>
         </scene>
-        <!--Catalog View Controller - For Element Catalog-->
+        <!--For Element Catalog-->
         <scene sceneID="Mj2-68-6BJ">
             <objects>
                 <collectionViewController autoresizesArchivedViewToFullSize="NO" id="4Pf-Yv-3Pt" customClass="MYSCatalogViewController" sceneMemberID="viewController">
-                    <collectionView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" keyboardDismissMode="interactive" dataMode="prototypes" id="w3H-8j-49G" customClass="MYSCollectionView">
+                    <collectionView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" keyboardDismissMode="interactive" dataMode="prototypes" id="w3H-8j-49G">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="4pS-Rx-yqO" customClass="MYSCollectionViewSpringyLayout">
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="4pS-Rx-yqO">
                             <size key="itemSize" width="50" height="50"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -228,15 +229,15 @@
             </objects>
             <point key="canvasLocation" x="1387" y="2009"/>
         </scene>
-        <!--Error Form View Controller - Error Example-->
+        <!--Error Example-->
         <scene sceneID="siT-pO-aEx">
             <objects>
                 <collectionViewController autoresizesArchivedViewToFullSize="NO" id="MUG-GZ-izI" customClass="MYSErrorFormViewController" sceneMemberID="viewController">
-                    <collectionView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" keyboardDismissMode="interactive" dataMode="prototypes" id="uhK-oX-pVG" customClass="MYSCollectionView">
+                    <collectionView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" keyboardDismissMode="interactive" dataMode="prototypes" id="uhK-oX-pVG">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Asf-Bu-LPN" customClass="MYSCollectionViewSpringyLayout">
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Asf-Bu-LPN">
                             <size key="itemSize" width="50" height="50"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -255,15 +256,15 @@
             </objects>
             <point key="canvasLocation" x="1387" y="1256"/>
         </scene>
-        <!--Sign Up Form View Controller - Form Bound To Model-->
+        <!--Form Bound To Model-->
         <scene sceneID="GjZ-5J-VZL">
             <objects>
                 <collectionViewController autoresizesArchivedViewToFullSize="NO" id="UjM-iF-C9J" customClass="MYSSignUpFormViewController" sceneMemberID="viewController">
-                    <collectionView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" keyboardDismissMode="interactive" dataMode="prototypes" id="Ei7-CF-cal" customClass="MYSCollectionView">
+                    <collectionView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" keyboardDismissMode="interactive" dataMode="prototypes" id="Ei7-CF-cal">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="XE8-U4-VVs" customClass="MYSCollectionViewSpringyLayout">
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="XE8-U4-VVs">
                             <size key="itemSize" width="316" height="50"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>

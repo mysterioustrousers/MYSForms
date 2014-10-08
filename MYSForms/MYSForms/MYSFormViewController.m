@@ -12,8 +12,6 @@
 #import "MYSFormMessageChildElement-Private.h"
 #import "MYSFormViewChildElement.h"
 #import "MYSFormViewChildCell.h"
-#import "MYSCollectionViewSpringyLayout.h"
-#import "MYSCollectionView.h"
 
 
 @interface MYSFormViewController () <UICollectionViewDelegateFlowLayout,
@@ -86,9 +84,6 @@
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
     [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
-    if ([self.collectionView respondsToSelector:@selector(disableDynamics)]) {
-        [(MYSCollectionView *)self.collectionView disableDynamics];
-    }
     [self.cachedCellSizes removeAllObjects];
     [self.collectionView reloadData];
     [self.collectionView.collectionViewLayout invalidateLayout];
@@ -97,9 +92,6 @@
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
     [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
-    if ([self.collectionView respondsToSelector:@selector(enableDynamics)]) {
-        [(MYSCollectionView *)self.collectionView enableDynamics];
-    }
     [self.cachedCellSizes removeAllObjects];
     [self.collectionView reloadData];
 }

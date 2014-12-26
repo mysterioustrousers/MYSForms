@@ -8,6 +8,7 @@
 
 #import "MYSFormToggleElement.h"
 #import "MYSFormToggleCell-Private.h"
+#import "MYSFormElement-Private.h"
 
 
 @interface MYSFormToggleElement () <MYSFormToggleCellDelegate>

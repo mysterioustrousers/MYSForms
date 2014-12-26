@@ -8,6 +8,7 @@
 
 #import "MYSFormImagePickerElement.h"
 #import "MYSFormImagePickerCell-Private.h"
+#import "MYSFormElement-Private.h"
 
 
 NSString * const MYSFormImagePickerCellActionSheetButtonTakePhoto           = @"Take Photo";

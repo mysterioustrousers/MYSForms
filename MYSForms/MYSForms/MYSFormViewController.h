@@ -96,12 +96,6 @@ typedef NS_ENUM(NSUInteger, MYSFormElementRelativePosition) {
 - (void)configureForm;
 
 /**
- If you create your own custom form elements, this is where you need to register their cell xibs with the collection view.
- You must call super as part of your implementation.
- */
-- (void)registerElementCellsForReuse;
-
-/**
  Create subclasses of `MYSFormElement` and use this method to add them to the form. Elements will be displayed in the order they were
  added with this method.
  */
@@ -127,7 +121,6 @@ typedef NS_ENUM(NSUInteger, MYSFormElementRelativePosition) {
  All visible text inputs in the form. Ordered from top to bottom.
  */
 - (NSArray *)visibleTextInputs;
-
 
 /**
  A loading spinner with `message` will be displayed above the element specified. If nil is passed in for the element, the loading message

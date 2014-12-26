@@ -10,6 +10,7 @@
 #import "MYSFormPickerCell.h"
 #import "MYSFormPickerCell-Private.h"
 #import "MYSFormPickerElement-Private.h"
+#import "MYSFormElement-Private.h"
 
 
 @interface MYSFormPickerElement () <MYSFormPickerCellDelegate, UIPickerViewDataSource, UIPickerViewDelegate>

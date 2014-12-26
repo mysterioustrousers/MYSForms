@@ -8,6 +8,7 @@
 
 #import "MYSFormTextViewElement.h"
 #import "MYSFormTextViewCell-Private.h"
+#import "MYSFormElement-Private.h"
 
 
 @interface MYSFormTextViewElement () <MYSFormTextViewCellDelegate>

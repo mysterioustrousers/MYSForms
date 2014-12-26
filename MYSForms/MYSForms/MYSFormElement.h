@@ -42,7 +42,7 @@
 /**
  The cell ued to display this form element. This is `nil` until the collection view that displays the form creates it.
  */
-@property (nonatomic, strong) MYSFormCell *cell;
+@property (nonatomic, strong, readonly) MYSFormCell *cell;
 
 /**
  Controls whether any actionable UIViews are enabled in this form element.

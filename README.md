@@ -217,28 +217,7 @@ Show a loading message above a specific form element:
 
 ## Customization
 
-Let's say you want to customize how the header element looks. You could subclass `MYSFormHeadlineElement.h` like this:
-
-**FCIFormHeaderElement.h**
-
-```
-#import <MYSForms.h>
-#import "FCIFormHeaderCell.h"
-
-@interface FCIFormHeaderElement : MYSFormHeadlineElement
-@end
-```
-
-**FCIFormHeaderElement.m**
-
-```
-#import "FCIFormHeaderElement.h"
-
-@implementation FCIFormHeaderElement
-@end
-```
-
-Then, the part you actually want to customize is the cell counterpart of this element, since it is the actual display of the element:
+Let's say you want to customize how the header element looks. You could subclass `MYSFormHeadlineCell.h` like this:
 
 **FCIFormHeaderCell.h**
 
@@ -272,6 +251,23 @@ Then, where you actually provide the UI:
 
 The trick is to make sure that you hook up the outlets of the views in your xibs to the properties on the `MYSFormHeadlineCell` superclass.
 
+**YourFormViewController.m**
+
+```
+- (void)configureForm
+{
+    [super configureForm];
+
+    MYSFormHeadlineElement *headlineElement = [MYSFormHeadlineElement headlineElementWithHeadline:@"Sign Up"];
+    headlineElement.cellClass = [FCIFormHeaderCell class];
+    [self addFormElement:headlineElement];
+}
+```
+
+That's it. To recap:
+1. Create a subclass of the cell you want to customize. In this example we created the `FCIFormHeaderCell` class that subclassed `MYSFormHeadlineCell`.
+2. Create a xib file that matches the name of your custom cell subclass. Customize the look of the cell in this xib and make sure all outlets are hooked up.
+3. When configuring the form, make sure you tell the element to use your custom cell class/xib.
 
 ## Screenshots
 

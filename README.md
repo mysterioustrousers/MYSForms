@@ -265,6 +265,7 @@ The trick is to make sure that you hook up the outlets of the views in your xibs
 ```
 
 That's it. To recap:
+	
 1. Create a subclass of the cell you want to customize. In this example we created the `FCIFormHeaderCell` class that subclassed `MYSFormHeadlineCell`.
 2. Create a xib file that matches the name of your custom cell subclass. Customize the look of the cell in this xib and make sure all outlets are hooked up.
 3. When configuring the form, make sure you tell the element to use your custom cell class/xib.

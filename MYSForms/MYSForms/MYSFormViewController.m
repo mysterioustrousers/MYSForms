@@ -361,7 +361,7 @@
         id value = [self.model valueForKeyPath:formElement.modelKeyPath];
 
         // transform the value if needed
-        if (formElement.valueTransformer && [[formElement.valueTransformer class] allowsReverseTransformation]) {
+        if (formElement.valueTransformer) {
             value = [formElement.valueTransformer transformedValue:value];
         }
 

@@ -29,8 +29,6 @@
 }
 
 
-
-
 #pragma mark - Overrides
 
 + (CGSize)sizeRequiredForElement:(MYSFormTextViewElement *)element width:(CGFloat)width

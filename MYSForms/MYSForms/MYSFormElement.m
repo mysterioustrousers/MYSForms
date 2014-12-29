@@ -12,7 +12,6 @@
 
 @interface MYSFormElement ()
 @property (nonatomic, strong) NSMutableSet *formValidations;
-@property (nonatomic, strong) NSMutableSet *valueTransformers;
 @property (nonatomic, copy  ) void         (^cellConfigurationBlock)(MYSFormCell *cell);
 @end
 

@@ -42,10 +42,6 @@
 }
 
 
-
-
-
-
 #pragma mark - DELEGATE toggle cell
 
 - (void)toggleCell:(MYSFormToggleCell *)cell didToggleOn:(BOOL)isOn

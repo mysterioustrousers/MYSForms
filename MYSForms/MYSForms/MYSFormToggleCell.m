@@ -21,16 +21,12 @@
 }
 
 
-
-
 #pragma mark - Public
 
 - (NSString *)valueKeyPath
 {
     return @"toggleSwitch.on";
 }
-
-
 
 
 #pragma mark - Actions

@@ -15,4 +15,5 @@
 @property (nonatomic, assign) NSUInteger yearsOld;
 @property (nonatomic, assign) BOOL       isLegalAdult;
 @property (nonatomic, copy  ) NSString   *biography;
+@property (nonatomic, copy  ) NSArray    *tags;
 @end

@@ -9,6 +9,7 @@
 #import "MYSFormCell.h"
 @import MapKit;
 
+
 @interface MYSFormMapCell : MYSFormCell
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;

@@ -20,12 +20,14 @@
 #import "MYSFormPickerElement.h"
 #import "MYSFormToggleElement.h"
 #import "MYSFormMapElement.h"
+#import "MYSFormTokenFieldElement.h"
 
 // form validators
 #import "MYSFormPresenceValidation.h"
 #import "MYSFormRegexValidation.h"
 
 // value transformers
+#import "MYSFormValueTransformer.h"
 #import "MYSFormImageFromDataValueTransformer.h"
 #import "MYSFormStringFromNumberValueTransformer.h"
 #import "MYSFormStringFromTimeZoneValueTransformer.h"

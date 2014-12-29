@@ -7,6 +7,7 @@
 //
 
 #import "MYSFormElement.h"
+#import "MYSFormMapCell.h"
 @import MapKit;
 
 @interface MYSFormMapElement : MYSFormElement

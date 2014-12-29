@@ -12,14 +12,15 @@
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"\nFirst Name: %@ \nLast Name: %@ \nE-mail: %@ \nPassword: %@ \nAge: %@ \nAdult: %@ \nBio: %@",
+    return [NSString stringWithFormat:@"\nFirst Name: %@ \nLast Name: %@ \nE-mail: %@ \nPassword: %@ \nAge: %@ \nAdult: %@ \nBio: %@ \nTags: %@",
             self.firstName,
             self.lastName,
             self.email,
             self.password,
             @(self.yearsOld),
             @(self.isLegalAdult),
-            self.biography];
+            self.biography,
+            self.tags];
 }
 
 @end

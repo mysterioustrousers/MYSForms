@@ -12,7 +12,6 @@
 #import "MYSFormMessageChildElement-Private.h"
 #import "MYSFormViewChildElement.h"
 #import "MYSFormViewChildCell.h"
-#import "MYSFormElement-Private.h"
 
 
 @interface MYSFormViewController () <UICollectionViewDelegateFlowLayout,

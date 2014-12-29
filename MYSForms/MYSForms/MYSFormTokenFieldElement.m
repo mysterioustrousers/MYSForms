@@ -8,7 +8,6 @@
 
 #import "MYSFormTokenFieldElement.h"
 #import "MYSFormTokenFieldCell-Private.h"
-#import "MYSFormElement-Private.h"
 #import "MYSFormValueTransformer.h"
 
 

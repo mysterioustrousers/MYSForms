@@ -1,21 +1,21 @@
 //
-//  MYSFormTokenFieldElement.m
+//  MYSFormTokenElement.m
 //  MYSForms
 //
 //  Created by Adam Kirk on 12/26/14.
 //  Copyright (c) 2014 Mysterious Trousers. All rights reserved.
 //
 
-#import "MYSFormTokenFieldElement.h"
-#import "MYSFormTokenFieldCell-Private.h"
+#import "MYSFormTokenElement.h"
+#import "MYSFormTokenCell-Private.h"
 #import "MYSFormValueTransformer.h"
 
 
-@interface MYSFormTokenFieldElement () <MYSFormTokenFieldCellDelegate>
+@interface MYSFormTokenElement () <MYSFormTokenCellDelegate>
 @end
 
 
-@implementation MYSFormTokenFieldElement
+@implementation MYSFormTokenElement
 
 @synthesize modelKeyPath=_modelKeyPath;
 @synthesize valueTransformer=_valueTransformer;
@@ -37,22 +37,22 @@ itemDisplayStringValueTransformerBlock:(NSString * (^)(id item))valueTransformer
     return self;
 }
 
-+ (instancetype)tokenFieldElementWithModelKeyPath:(NSString *)modelKeyPath
++ (instancetype)tokenElementWithModelKeyPath:(NSString *)modelKeyPath
            itemDisplayStringValueTransformerBlock:(NSString * (^)(id item))valueTransformerBlock
 {
     return [[self alloc] initWithModelKeyPath:modelKeyPath
        itemDisplayStringValueTransformerBlock:valueTransformerBlock];
 }
 
-- (void)setCell:(MYSFormTokenFieldCell *)cell
+- (void)setCell:(MYSFormTokenCell *)cell
 {
     [super setCell:cell];
-    cell.tokenFieldCellDelegate = self;
+    cell.tokenCellDelegate = self;
 }
 
 - (void)setValueTransformer:(NSValueTransformer *)valueTransformer
 {
-    [[NSException exceptionWithName:@"MYSFormTokenFieldElementValueTransformerException"
+    [[NSException exceptionWithName:@"MYSFormTokenElementValueTransformerException"
                             reason:(@"The value transformer passed into the initializer is required and the only "
                                     @"transformer allowed for this type of element.")
                           userInfo:nil] raise];
@@ -61,12 +61,12 @@ itemDisplayStringValueTransformerBlock:(NSString * (^)(id item))valueTransformer
 
 #pragma mark - DELEGATE token field cell
 
-- (void)tokenFieldCellDidTapAddToken:(MYSFormTokenFieldCell *)cell
+- (void)tokenCellDidTapAddToken:(MYSFormTokenCell *)cell
 {
     if (self.didTapAddTokenBlock) self.didTapAddTokenBlock(cell.addButton);
 }
 
-- (void)tokenFieldCell:(MYSFormTokenFieldCell *)cell didTapToken:(UIControl *)token index:(NSInteger)index
+- (void)tokenCell:(MYSFormTokenCell *)cell didTapToken:(UIControl *)token index:(NSInteger)index
 {
     if (self.didTapTokenBlock) self.didTapTokenBlock(token, index);
 }

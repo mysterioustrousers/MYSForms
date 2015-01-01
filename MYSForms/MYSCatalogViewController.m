@@ -83,20 +83,20 @@
     [self addFormElement:textViewElement];
 
 
-    MYSFormTokenFieldElement *tokenFieldElement = [MYSFormTokenFieldElement tokenFieldElementWithModelKeyPath:@"tags"
+    MYSFormTokenElement *tokenElement = [MYSFormTokenElement tokenElementWithModelKeyPath:@"tags"
                                                                        itemDisplayStringValueTransformerBlock:^NSString *(id item) {
                                                                            return item;
                                                                        }];
-    [tokenFieldElement setDidTapTokenBlock:^(UIControl *control, NSInteger index) {
+    [tokenElement setDidTapTokenBlock:^(UIControl *control, NSInteger index) {
         MYSExampleUser *exampleUser = self.model;
         NSMutableArray *mutableTags = [exampleUser.tags mutableCopy];
         [mutableTags removeObjectAtIndex:index];
         exampleUser.tags = mutableTags;
     }];
-    [tokenFieldElement setDidTapAddTokenBlock:^(UIControl *token) {
+    [tokenElement setDidTapAddTokenBlock:^(UIControl *token) {
         NSLog(@"Plus button was tapped");
     }];
-    [self addFormElement:tokenFieldElement];
+    [self addFormElement:tokenElement];
 }
 
 

@@ -1,5 +1,5 @@
 //
-//  MYSFormTokenFieldElement.h
+//  MYSFormTokenElement.h
 //  MYSForms
 //
 //  Created by Adam Kirk on 12/26/14.
@@ -7,10 +7,10 @@
 //
 
 #import "MYSFormElement.h"
-#import "MYSFormTokenFieldCell.h"
+#import "MYSFormTokenCell.h"
 
 
-@interface MYSFormTokenFieldElement : MYSFormElement
+@interface MYSFormTokenElement : MYSFormElement
 
 /**
  Set this block with the code you want to run when a token is tapped.
@@ -26,7 +26,7 @@
  Create a return a token field element with a custom transformer block that returns a display string
  when called on any item of the model's array.
  */
-+ (instancetype)tokenFieldElementWithModelKeyPath:(NSString *)modelKeyPath
-           itemDisplayStringValueTransformerBlock:(NSString * (^)(id item))valueTransformerBlock;
++ (instancetype)tokenElementWithModelKeyPath:(NSString *)modelKeyPath
+      itemDisplayStringValueTransformerBlock:(NSString * (^)(id item))valueTransformerBlock;
 
 @end

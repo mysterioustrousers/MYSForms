@@ -1,5 +1,5 @@
 //
-//  MYSFormTokenFieldCell.h
+//  MYSFormTokenCell.h
 //  MYSForms
 //
 //  Created by Adam Kirk on 12/26/14.
@@ -9,7 +9,7 @@
 #import "MYSFormCell.h"
 
 
-@interface MYSFormTokenFieldCell : MYSFormCell
+@interface MYSFormTokenCell : MYSFormCell
 
 
 @property (nonatomic, weak) IBOutlet UIButton *addButton;

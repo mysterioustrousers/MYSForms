@@ -1,27 +1,27 @@
 //
-//  MYSFormTokenFieldCell.m
+//  MYSFormTokenCell.m
 //  MYSForms
 //
 //  Created by Adam Kirk on 12/26/14.
 //  Copyright (c) 2014 Mysterious Trousers. All rights reserved.
 //
 
-#import "MYSFormTokenFieldCell.h"
-#import "MYSFormTokenFieldElement.h"
-#import "MYSFormTokenFieldCell-Private.h"
+#import "MYSFormTokenCell.h"
+#import "MYSFormTokenElement.h"
+#import "MYSFormTokenCell-Private.h"
 
 
 static CGFloat tokenSpacing = 8.0;
 
 
-@interface MYSFormTokenFieldCell ()
+@interface MYSFormTokenCell ()
 @property (nonatomic, copy) NSArray *tokenControls;
 @end
 
 
-@implementation MYSFormTokenFieldCell
+@implementation MYSFormTokenCell
 
-+ (CGSize)sizeRequiredForElement:(MYSFormTokenFieldElement *)element width:(CGFloat)width
++ (CGSize)sizeRequiredForElement:(MYSFormTokenElement *)element width:(CGFloat)width
 {
     return CGSizeMake(width, 150);
 }
@@ -101,12 +101,12 @@ static CGFloat tokenSpacing = 8.0;
 - (IBAction)tokenWasTapped:(id)sender
 {
     NSInteger index = [self.tokenControls indexOfObject:sender];
-    [self.tokenFieldCellDelegate tokenFieldCell:self didTapToken:sender index:index];
+    [self.tokenCellDelegate tokenCell:self didTapToken:sender index:index];
 }
 
 - (IBAction)addButtonWasTapped:(id)sender
 {
-    [self.tokenFieldCellDelegate tokenFieldCellDidTapAddToken:self];
+    [self.tokenCellDelegate tokenCellDidTapAddToken:self];
 }
 
 @end

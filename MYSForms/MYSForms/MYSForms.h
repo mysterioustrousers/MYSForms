@@ -20,7 +20,7 @@
 #import "MYSFormPickerElement.h"
 #import "MYSFormToggleElement.h"
 #import "MYSFormMapElement.h"
-#import "MYSFormTokenFieldElement.h"
+#import "MYSFormTokenElement.h"
 
 // form validators
 #import "MYSFormPresenceValidation.h"

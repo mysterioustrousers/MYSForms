@@ -37,7 +37,7 @@ static CGFloat tokenSpacing = 8.0;
             maxY = CGRectGetMaxY(frame);
         }
     }
-    return CGSizeMake(width, maxY + insets.bottom);
+    return CGSizeMake(width, insets.top + (maxY ?: 20) + insets.bottom);
 }
 
 + (UIEdgeInsets)cellContentInset

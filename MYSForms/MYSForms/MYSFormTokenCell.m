@@ -24,8 +24,11 @@ static CGFloat tokenSpacing = 8.0;
 + (CGSize)sizeRequiredForElement:(MYSFormTokenElement *)element width:(CGFloat)width
 {
     UIEdgeInsets insets = [self cellContentInset];
-    MYSFormTokenCell *measurementCell = [[MYSFormTokenCell alloc] initWithFrame:CGRectMake(0, 0, width, 150)];
-    [measurementCell setTokenDisplayStrings:[element currentModelValue]];
+    MYSFormTokenCell *measurementCell = (MYSFormTokenCell *)element.cell;
+    if (!measurementCell) {
+        measurementCell = [[MYSFormTokenCell alloc] initWithFrame:CGRectMake(0, 0, width, 150)];
+        [measurementCell setTokenDisplayStrings:[element currentModelValue]];
+    }
     NSArray *frames = [measurementCell tokenFrames];
     CGFloat maxY = 0;
     for (NSValue *frameValue in frames) {

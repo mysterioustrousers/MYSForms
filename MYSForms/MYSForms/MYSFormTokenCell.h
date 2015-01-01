@@ -12,7 +12,7 @@
 @interface MYSFormTokenCell : MYSFormCell
 
 
-@property (nonatomic, weak) IBOutlet UIButton *addButton;
+@property (nonatomic, strong) IBOutlet UIButton *addButton;
 
 @property (nonatomic, copy, readonly) NSArray *tokenControls;
 

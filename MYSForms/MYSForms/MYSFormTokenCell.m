@@ -58,6 +58,7 @@ static CGFloat tokenSpacing = 8.0;
     [[self tokenFrames] enumerateObjectsUsingBlock:^(NSValue *frameValue, NSUInteger idx, BOOL *stop) {
         if (idx < [self.tokenControls count]) {
             UIControl *token = self.tokenControls[idx];
+            token.backgroundColor = [self tintColor];
             token.frame = [frameValue CGRectValue];
         }
         else {
@@ -85,6 +86,9 @@ static CGFloat tokenSpacing = 8.0;
         [self addSubview:control];
     }
     self.tokenControls = tokenControls;
+
+    [self.addButton removeFromSuperview];
+    [self addSubview:self.addButton];
 
     [self setNeedsLayout];
 }
@@ -130,10 +134,9 @@ static CGFloat tokenSpacing = 8.0;
     CGFloat x = insets.left;
     CGFloat y = insets.top;
     for (UIControl *control in self.tokenControls) {
-        control.backgroundColor = [self tintColor];
         CGRect frame = control.frame;
         CGFloat nextX = x + CGRectGetWidth(frame) + tokenSpacing;
-        if (nextX > self.contentView.bounds.size.width - insets.right) {
+        if (nextX > self.bounds.size.width - insets.right) {
             x = insets.left;
             y += tokenSpacing + CGRectGetHeight(frame);
         }

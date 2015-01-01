@@ -97,8 +97,6 @@
 }
 
 
-
-
 #pragma mark - Public
 
 - (void)setModel:(id)model
@@ -146,7 +144,6 @@
 - (void)addFormElement:(MYSFormElement *)element atIndex:(NSInteger)index
 {
     if (![element canAddElement]) return;
-
 
     element.dataSource  = self;
     element.delegate    = self;
@@ -273,7 +270,6 @@
 }
 
 
-
 #pragma mark (properties)
 
 - (void)setEnabled:(BOOL)enabled
@@ -283,8 +279,6 @@
         element.enabled = enabled;
     }
 }
-
-
 
 
 #pragma mark - DATASOURCE collection view
@@ -313,8 +307,6 @@
 }
 
 
-
-
 #pragma mark - DELEGATE collection view
 
 - (void)collectionView:(UICollectionView *)collectionView didEndDisplayingCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
@@ -324,8 +316,6 @@
         [self.formDelegate formViewController:self willRemoveElement:element cell:cell];
     }
 }
-
-
 
 
 #pragma mark - DELEGATE flow layout
@@ -350,8 +340,6 @@
 }
 
 
-
-
 #pragma mark - DATASOURCE form element
 
 - (id)modelValueForFormElement:(MYSFormElement *)formElement
@@ -368,8 +356,6 @@
     }
     return nil;
 }
-
-
 
 
 #pragma mark - DELEGATE form element
@@ -391,6 +377,15 @@
         if ([self.formDelegate respondsToSelector:@selector(formViewController:failedToUpdateModelWithValue:element:)]) {
             [self.formDelegate formViewController:self failedToUpdateModelWithValue:value element:formElement];
         }
+    }
+}
+
+- (void)formElementNeedsLayout:(MYSFormElement *)formElement
+{
+    // if it's an element with a dynamic height, reload it
+    NSIndexPath *ip = [self indexPathOfElement:formElement];
+    if (ip) {
+        [self.collectionView reloadItemsAtIndexPaths:@[ip]];
     }
 }
 
@@ -423,7 +418,6 @@
 }
 
 
-
 #pragma mark - KVO (the model changed)
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
@@ -431,14 +425,15 @@
     for (MYSFormElement *element in self.elements) {
         if ([element.modelKeyPath isEqualToString:keyPath]) {
             if (![[element.cell textInput] isFirstResponder]) {
-                [element updateCell];
+                NSIndexPath *ip = [self indexPathOfElement:element];
+                if (ip.item < [self.collectionView numberOfItemsInSection:0]) {
+                    [self.collectionView reloadItemsAtIndexPaths:@[ip]];
+                }
             }
             return;
         }
     }
 }
-
-
 
 
 #pragma mark - Private
@@ -545,7 +540,6 @@
         return ([element isKindOfClass:[MYSFormChildElement class]] && [(MYSFormChildElement *)element type] == type);
     }]];
 }
-
 
 
 #pragma mark (keyboard)
@@ -713,6 +707,14 @@
 {
     UINib *nib = [UINib nibWithNibName:NSStringFromClass(cellClass) bundle:nil];
     [self.collectionView registerNib:nib forCellWithReuseIdentifier:NSStringFromClass(cellClass)];
+}
+
+#pragma mark (helpers)
+
+- (NSIndexPath *)indexPathOfElement:(MYSFormElement *)element
+{
+    NSInteger index = [self.elements indexOfObject:element];
+    return [NSIndexPath indexPathForItem:index inSection:0];
 }
 
 @end

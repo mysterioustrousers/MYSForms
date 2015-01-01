@@ -124,6 +124,7 @@
 
 @protocol MYSFormElementDelegate <NSObject>
 - (void)formElement:(MYSFormElement *)formElement valueDidChange:(id)value;
+- (void)formElementNeedsLayout:(MYSFormElement *)formElement;
 - (void)formElement:(MYSFormElement *)formElement didRequestPresentationOfActionSheet:(UIActionSheet *)actionSheet;
 - (void)formElement:(MYSFormElement *)formElement didRequestPresentationOfViewController:(UIViewController *)viewController
            animated:(BOOL)animated

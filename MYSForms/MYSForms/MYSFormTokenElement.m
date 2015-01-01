@@ -50,6 +50,9 @@ itemDisplayStringValueTransformerBlock:(NSString * (^)(id item))valueTransformer
     cell.tokenCellDelegate = self;
 }
 
+
+#pragma mark - MYSFormElement
+
 - (void)setValueTransformer:(NSValueTransformer *)valueTransformer
 {
     [[NSException exceptionWithName:@"MYSFormTokenElementValueTransformerException"

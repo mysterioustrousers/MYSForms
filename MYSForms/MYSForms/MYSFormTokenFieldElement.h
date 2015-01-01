@@ -13,6 +13,16 @@
 @interface MYSFormTokenFieldElement : MYSFormElement
 
 /**
+ Set this block with the code you want to run when a token is tapped.
+ */
+@property (nonatomic, copy) void (^didTapTokenBlock)(UIControl *token, NSInteger tokenIndex);
+
+/**
+ Set this block with the code you want to run when the add button is tapped.
+ */
+@property (nonatomic, copy) void (^didTapAddTokenBlock)(UIControl *addButton);
+
+/**
  Create a return a token field element with a custom transformer block that returns a display string
  when called on any item of the model's array.
  */

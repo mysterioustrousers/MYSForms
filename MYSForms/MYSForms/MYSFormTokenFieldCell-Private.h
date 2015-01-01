@@ -18,5 +18,5 @@
 
 @protocol MYSFormTokenFieldCellDelegate <NSObject>
 - (void)tokenFieldCellDidTapAddToken:(MYSFormTokenFieldCell *)cell;
-- (void)tokenFieldCell:(MYSFormTokenFieldCell *)cell didTapTokenAtIndex:(NSInteger)index;
+- (void)tokenFieldCell:(MYSFormTokenFieldCell *)cell didTapToken:(UIControl *)token index:(NSInteger)index;
 @end

@@ -11,6 +11,11 @@
 
 @interface MYSFormTokenFieldCell : MYSFormCell
 
+
+@property (nonatomic, weak) IBOutlet UIButton *addButton;
+
+@property (nonatomic, copy, readonly) NSArray *tokenControls;
+
 /**
  The value this view displays. For each string, an NSControl is created and
  added to the cell to display the string in a token/tag (bubble by default) form.

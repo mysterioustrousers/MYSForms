@@ -15,8 +15,7 @@ static CGFloat tokenSpacing = 8.0;
 
 
 @interface MYSFormTokenFieldCell ()
-@property (nonatomic, copy)          NSArray  *tokenControls;
-@property (nonatomic, weak) IBOutlet UIButton *addButton;
+@property (nonatomic, copy) NSArray *tokenControls;
 @end
 
 
@@ -38,17 +37,22 @@ static CGFloat tokenSpacing = 8.0;
     CGFloat x = tokenSpacing;
     CGFloat y = tokenSpacing;
     for (UIControl *control in self.tokenControls) {
+        control.backgroundColor = [self tintColor];
         CGRect frame = control.frame;
+        CGFloat nextX = x + CGRectGetWidth(frame) + tokenSpacing;
+        if (nextX > self.contentView.bounds.size.width - (tokenSpacing * 2.0)) {
+            x = tokenSpacing;
+            y += tokenSpacing + CGRectGetHeight(frame);
+        }
         frame.origin.x = x;
         frame.origin.y = y;
         control.frame = frame;
-        // increment x,y for next token bubble
         x = CGRectGetMaxX(frame) + tokenSpacing;
-        if (x > self.contentView.frame.size.width - tokenSpacing) {
-            x = tokenSpacing;
-            y += CGRectGetMaxY(frame) + tokenSpacing;
-        }
     }
+    CGRect frame = self.addButton.frame;
+    frame.origin.x = x;
+    frame.origin.y = y;
+    self.addButton.frame = frame;
 }
 
 
@@ -78,24 +82,31 @@ static CGFloat tokenSpacing = 8.0;
 {
     UIFont *font = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
     CGSize size = [text sizeWithAttributes:@{ NSFontAttributeName : font }];
-    size.height += 10;
-    size.width += 14;
+    size.height += tokenSpacing;
+    size.width += tokenSpacing * 3.0;
     UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
-    button.backgroundColor = [UIColor lightGrayColor];
+    [button setTitle:text forState:UIControlStateNormal];
     [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [button setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
     button.titleLabel.font = font;
     button.frame = CGRectMake(0, 0, size.width, size.height);
     button.layer.cornerRadius = size.height / 2.0;
+    [button addTarget:self action:@selector(tokenWasTapped:) forControlEvents:UIControlEventTouchUpInside];
     return button;
 }
 
 
 #pragma mark - Actions
 
+- (IBAction)tokenWasTapped:(id)sender
+{
+    NSInteger index = [self.tokenControls indexOfObject:sender];
+    [self.tokenFieldCellDelegate tokenFieldCell:self didTapToken:sender index:index];
+}
+
 - (IBAction)addButtonWasTapped:(id)sender
 {
-    
+    [self.tokenFieldCellDelegate tokenFieldCellDidTapAddToken:self];
 }
 
 @end

@@ -63,12 +63,12 @@ itemDisplayStringValueTransformerBlock:(NSString * (^)(id item))valueTransformer
 
 - (void)tokenFieldCellDidTapAddToken:(MYSFormTokenFieldCell *)cell
 {
-
+    if (self.didTapAddTokenBlock) self.didTapAddTokenBlock(cell.addButton);
 }
 
-- (void)tokenFieldCell:(MYSFormTokenFieldCell *)cell didTapTokenAtIndex:(NSInteger)index
+- (void)tokenFieldCell:(MYSFormTokenFieldCell *)cell didTapToken:(UIControl *)token index:(NSInteger)index
 {
-
+    if (self.didTapTokenBlock) self.didTapTokenBlock(token, index);
 }
 
 @end

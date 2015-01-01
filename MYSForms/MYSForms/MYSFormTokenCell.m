@@ -23,7 +23,25 @@ static CGFloat tokenSpacing = 8.0;
 
 + (CGSize)sizeRequiredForElement:(MYSFormTokenElement *)element width:(CGFloat)width
 {
-    return CGSizeMake(width, 150);
+    UIEdgeInsets insets = [self cellContentInset];
+    MYSFormTokenCell *measurementCell = [[MYSFormTokenCell alloc] initWithFrame:CGRectMake(0, 0, width, 150)];
+    [measurementCell setTokenDisplayStrings:[element currentModelValue]];
+    NSArray *frames = [measurementCell tokenFrames];
+    CGFloat maxY = 0;
+    for (NSValue *frameValue in frames) {
+        CGRect frame = [frameValue CGRectValue];
+        if (CGRectGetMaxY(frame) > maxY) {
+            maxY = CGRectGetMaxY(frame);
+        }
+    }
+    return CGSizeMake(width, maxY + insets.bottom);
+}
+
++ (UIEdgeInsets)cellContentInset
+{
+    UIEdgeInsets insets = [super cellContentInset];
+    insets.top = insets.bottom = insets.left;
+    return insets;
 }
 
 - (NSString *)valueKeyPath
@@ -34,25 +52,15 @@ static CGFloat tokenSpacing = 8.0;
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    CGFloat x = tokenSpacing;
-    CGFloat y = tokenSpacing;
-    for (UIControl *control in self.tokenControls) {
-        control.backgroundColor = [self tintColor];
-        CGRect frame = control.frame;
-        CGFloat nextX = x + CGRectGetWidth(frame) + tokenSpacing;
-        if (nextX > self.contentView.bounds.size.width - (tokenSpacing * 2.0)) {
-            x = tokenSpacing;
-            y += tokenSpacing + CGRectGetHeight(frame);
+    [[self tokenFrames] enumerateObjectsUsingBlock:^(NSValue *frameValue, NSUInteger idx, BOOL *stop) {
+        if (idx < [self.tokenControls count]) {
+            UIControl *token = self.tokenControls[idx];
+            token.frame = [frameValue CGRectValue];
         }
-        frame.origin.x = x;
-        frame.origin.y = y;
-        control.frame = frame;
-        x = CGRectGetMaxX(frame) + tokenSpacing;
-    }
-    CGRect frame = self.addButton.frame;
-    frame.origin.x = x;
-    frame.origin.y = y;
-    self.addButton.frame = frame;
+        else {
+            self.addButton.frame = [frameValue CGRectValue];
+        }
+    }];
 }
 
 
@@ -107,6 +115,35 @@ static CGFloat tokenSpacing = 8.0;
 - (IBAction)addButtonWasTapped:(id)sender
 {
     [self.tokenCellDelegate tokenCellDidTapAddToken:self];
+}
+
+
+#pragma mark - Private
+
+- (NSArray *)tokenFrames
+{
+    NSMutableArray *frames = [NSMutableArray new];
+    UIEdgeInsets insets = [[self class] cellContentInset];
+    CGFloat x = insets.left;
+    CGFloat y = insets.top;
+    for (UIControl *control in self.tokenControls) {
+        control.backgroundColor = [self tintColor];
+        CGRect frame = control.frame;
+        CGFloat nextX = x + CGRectGetWidth(frame) + tokenSpacing;
+        if (nextX > self.contentView.bounds.size.width - insets.right) {
+            x = insets.left;
+            y += tokenSpacing + CGRectGetHeight(frame);
+        }
+        frame.origin.x = x;
+        frame.origin.y = y;
+        [frames addObject:[NSValue valueWithCGRect:frame]];
+        x = CGRectGetMaxX(frame) + tokenSpacing;
+    }
+    CGRect frame = self.addButton.frame;
+    frame.origin.x = x;
+    frame.origin.y = y;
+    [frames addObject:[NSValue valueWithCGRect:frame]];
+    return [frames copy];
 }
 
 @end

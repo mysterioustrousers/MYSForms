@@ -33,6 +33,22 @@
     [super configureForm];
 
 
+    MYSFormTokenElement *tokenElement = [MYSFormTokenElement tokenElementWithModelKeyPath:@"tags"
+                                                                       itemDisplayStringValueTransformerBlock:^NSString *(id item) {
+                                                                           return item;
+                                                                       }];
+    [tokenElement setDidTapTokenBlock:^(UIControl *control, NSInteger index) {
+        MYSExampleUser *exampleUser = self.model;
+        NSMutableArray *mutableTags = [exampleUser.tags mutableCopy];
+        [mutableTags removeObjectAtIndex:index];
+        exampleUser.tags = mutableTags;
+    }];
+    [tokenElement setDidTapAddTokenBlock:^(UIControl *token) {
+        NSLog(@"Plus button was tapped");
+    }];
+    [self addFormElement:tokenElement];
+
+
     [self addFormElement:[MYSFormHeadlineElement headlineElementWithHeadline:@"A Headline"]];
 
 
@@ -81,22 +97,6 @@
         cell.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1];
     }];
     [self addFormElement:textViewElement];
-
-
-    MYSFormTokenElement *tokenElement = [MYSFormTokenElement tokenElementWithModelKeyPath:@"tags"
-                                                                       itemDisplayStringValueTransformerBlock:^NSString *(id item) {
-                                                                           return item;
-                                                                       }];
-    [tokenElement setDidTapTokenBlock:^(UIControl *control, NSInteger index) {
-        MYSExampleUser *exampleUser = self.model;
-        NSMutableArray *mutableTags = [exampleUser.tags mutableCopy];
-        [mutableTags removeObjectAtIndex:index];
-        exampleUser.tags = mutableTags;
-    }];
-    [tokenElement setDidTapAddTokenBlock:^(UIControl *token) {
-        NSLog(@"Plus button was tapped");
-    }];
-    [self addFormElement:tokenElement];
 }
 
 

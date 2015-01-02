@@ -80,14 +80,34 @@
         [formViewController addFormElement:passwordField];
 
 
-        [formViewController addFormElement:[MYSFormLabelAndButtonElement buttonElementWithLabel:@"A label" title:@"A button title" block:^(MYSFormButtonElement *element) {
+        [formViewController addFormElement:[MYSFormLabelAndButtonElement labelAndButtonElementWithLabel:@"A label" button:[MYSFormButton formButtonWithTitle:@"A button title" action:^(MYSFormElement *element) {
             NSLog(@"Label and button was tapped");
-        }]];
+        }]]];
+
+        MYSFormButton *leftButton = [MYSFormButton formButtonWithTitle:@"Left Button" action:^(MYSFormElement *element) {
+            NSLog(@"Left button pressed");
+        }];
+
+        MYSFormButton *rightButton = [MYSFormButton formButtonWithTitle:@"Right Button" action:^(MYSFormElement *element) {
+            NSLog(@"Rigth button pressed");
+        }];
+
+        [formViewController addFormElement:[MYSFormButtonElement buttonElementWithButtons:@[leftButton, rightButton]]];
 
 
-        [formViewController addFormElement:[MYSFormButtonElement buttonElementWithTitle:@"Log Model Values" block:^(MYSFormButtonElement *element) {
-            NSLog(@"Current Model: %@", self.fakeUser);
-        }]];
+        MYSFormButton *button1 = [MYSFormButton formButtonWithTitle:@"Button 1" action:^(MYSFormElement *element) {
+            NSLog(@"button 1 pressed");
+        }];
+
+        MYSFormButton *button2 = [MYSFormButton formButtonWithTitle:@"Button 2" action:^(MYSFormElement *element) {
+            NSLog(@"button 2 pressed");
+        }];
+
+        MYSFormButton *button3 = [MYSFormButton formButtonWithTitle:@"Button 3" action:^(MYSFormElement *element) {
+            NSLog(@"button 3 pressed");
+        }];
+
+        [formViewController addFormElement:[MYSFormButtonElement buttonElementWithButtons:@[button1, button2, button3]]];
 
 
         formViewController.formDelegate = self;

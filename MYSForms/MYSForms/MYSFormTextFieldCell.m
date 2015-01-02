@@ -68,6 +68,7 @@
     self.textField.keyboardType     = element.keyboardType;
     self.textField.enabled          = element.isEnabled;
     [self layoutIfNeeded];
+    [super populateWithElement:element];
 }
 
 - (UIView *)textInput

@@ -10,17 +10,29 @@
 #import "MYSFormButtonCell.h"
 
 
+@implementation MYSFormButton
+
++ (instancetype)formButtonWithTitle:(NSString *)title action:(MYSFormButtonActionBlock)action
+{
+    MYSFormButton *button = [self new];
+    button.action = action;
+    [button setTitle:title forState:UIControlStateNormal];
+    return button;
+}
+
+@end
+
+
 @interface MYSFormButtonElement () <MYSFormButtonCellDelegate>
 @end
 
 
 @implementation MYSFormButtonElement
 
-+ (instancetype)buttonElementWithTitle:(NSString *)title block:(MYSFormButtonActionBlock)block
++ (instancetype)buttonElementWithButtons:(NSArray *)buttons
 {
-    MYSFormButtonElement *element   = [self new];
-    element.title                   = title;
-    element.block                   = block;
+    MYSFormButtonElement *element = [self new];
+    element.buttons = buttons;
     return element;
 }
 
@@ -30,14 +42,18 @@
     cell.buttonCellDelegate = self;
 }
 
-
+- (void)setButtons:(NSArray *)buttons
+{
+    _buttons = [buttons copy];
+    [self.cell setNeedsLayout];
+}
 
 
 #pragma mark - DELEGATE button cell
 
-- (void)formButtonCell:(MYSFormButtonCell *)cell didTapButton:(UIButton *)button
+- (void)formButtonCell:(MYSFormButtonCell *)cell didTapButton:(MYSFormButton *)button
 {
-    if (self.block) self.block(self);
+    if (button.action) button.action(self);
 }
 
 @end

@@ -44,14 +44,14 @@
     [self addFormElement:emailField];
 
 
-    [self addFormElement:[MYSFormButtonElement buttonElementWithTitle:@"Validate" block:^(MYSFormButtonElement *element) {
+    [self addFormElement:[MYSFormButtonElement buttonElementWithButtons:@[[MYSFormButton formButtonWithTitle:@"Validate" action:^(MYSFormElement *element) {
         if ([self validate]) {
             NSLog(@"Valid!");
         }
         else {
             NSLog(@"Not Valid!");
         }
-    }]];
+    }]]]];
 }
 
 @end

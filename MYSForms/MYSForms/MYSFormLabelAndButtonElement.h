@@ -10,10 +10,12 @@
 #import "MYSFormLabelAndButtonCell.h"
 
 
-@interface MYSFormLabelAndButtonElement : MYSFormButtonElement
+@interface MYSFormLabelAndButtonElement : MYSFormElement
 
 @property (nonatomic, copy) NSString *label;
 
-+ (instancetype)buttonElementWithLabel:(NSString *)label title:(NSString *)title block:(MYSFormButtonActionBlock)block;
+@property (nonatomic, strong) MYSFormButton *button;
+
++ (instancetype)labelAndButtonElementWithLabel:(NSString *)label button:(MYSFormButton *)button;
 
 @end

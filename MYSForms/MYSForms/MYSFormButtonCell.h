@@ -9,6 +9,9 @@
 #import "MYSFormCell.h"
 
 
+@class MYSFormButton;
+
+
 @protocol MYSFormButtonCellDelegate;
 
 
@@ -16,11 +19,11 @@
 
 @property (nonatomic, weak) id<MYSFormButtonCellDelegate> buttonCellDelegate;
 
-@property (nonatomic, weak) IBOutlet UIButton *button;
+@property (nonatomic) CGFloat buttonSpacing;
 
 @end
 
 
 @protocol MYSFormButtonCellDelegate <NSObject>
-- (void)formButtonCell:(MYSFormButtonCell *)cell didTapButton:(UIButton *)button;
+- (void)formButtonCell:(MYSFormButtonCell *)cell didTapButton:(MYSFormButton *)button;
 @end

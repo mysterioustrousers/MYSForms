@@ -67,6 +67,8 @@
                                                             attribute:NSLayoutAttributeTrailing
                                                            multiplier:1
                                                              constant:0]];
+
+    [super populateWithElement:element];
 }
 
 @end

@@ -13,15 +13,22 @@
 @class MYSFormButtonElement;
 
 
-typedef void(^MYSFormButtonActionBlock)(MYSFormButtonElement *element);
+typedef void(^MYSFormButtonActionBlock)(MYSFormElement *element);
+
+
+@interface MYSFormButton : UIButton
+
+@property (nonatomic, copy) MYSFormButtonActionBlock action;
+
++ (instancetype)formButtonWithTitle:(NSString *)title action:(MYSFormButtonActionBlock)action;
+
+@end
 
 
 @interface MYSFormButtonElement : MYSFormElement
 
-@property (nonatomic, copy) NSString *title;
+@property (nonatomic, copy) NSArray *buttons;
 
-@property (nonatomic, copy) MYSFormButtonActionBlock block;
-
-+ (instancetype)buttonElementWithTitle:(NSString *)title block:(MYSFormButtonActionBlock)block;
++ (instancetype)buttonElementWithButtons:(NSArray *)buttons;
 
 @end

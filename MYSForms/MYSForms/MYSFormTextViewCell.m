@@ -63,6 +63,7 @@
 {
     self.textView.font     = element.font;
     self.textView.editable = element.isEditable && element.isEnabled;
+    [super populateWithElement:element];
 }
 
 - (UIView *)textInput

@@ -24,11 +24,8 @@ static CGFloat tokenSpacing = 8.0;
 + (CGSize)sizeRequiredForElement:(MYSFormTokenElement *)element width:(CGFloat)width
 {
     UIEdgeInsets insets = [self cellContentInset];
-    MYSFormTokenCell *measurementCell = (MYSFormTokenCell *)element.cell;
-    if (!measurementCell) {
-        measurementCell = [[MYSFormTokenCell alloc] initWithFrame:CGRectMake(0, 0, width, 150)];
-        [measurementCell setTokenDisplayStrings:[element currentModelValue]];
-    }
+    MYSFormTokenCell *measurementCell = [[MYSFormTokenCell alloc] initWithFrame:CGRectMake(0, 0, width, 150)];
+    [measurementCell setTokenDisplayStrings:[element currentModelValue]];
     NSArray *frames = [measurementCell tokenFrames];
     CGFloat maxY = 0;
     for (NSValue *frameValue in frames) {
@@ -37,7 +34,7 @@ static CGFloat tokenSpacing = 8.0;
             maxY = CGRectGetMaxY(frame);
         }
     }
-    return CGSizeMake(width, insets.top + (maxY ?: 20) + insets.bottom);
+    return CGSizeMake(width, (maxY ?: 20) + insets.bottom);
 }
 
 + (UIEdgeInsets)cellContentInset
@@ -148,6 +145,8 @@ static CGFloat tokenSpacing = 8.0;
     CGRect frame = self.addButton.frame;
     frame.origin.x = x;
     frame.origin.y = y;
+    frame.size.width = 22;
+    frame.size.height = 22;
     [frames addObject:[NSValue valueWithCGRect:frame]];
     return [frames copy];
 }

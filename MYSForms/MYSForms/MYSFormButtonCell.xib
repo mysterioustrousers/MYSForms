@@ -13,31 +13,9 @@
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                 <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
                 <autoresizingMask key="autoresizingMask"/>
-                <subviews>
-                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wda-oU-cEe">
-                        <rect key="frame" x="20" y="5" width="280" height="40"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="40" id="3Xc-QC-Dh0"/>
-                        </constraints>
-                        <state key="normal" title="Button">
-                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                        </state>
-                        <connections>
-                            <action selector="buttonWasTapped:" destination="XmX-mf-Je4" eventType="touchUpInside" id="zKb-ob-Z0T"/>
-                        </connections>
-                    </button>
-                </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-            <constraints>
-                <constraint firstAttribute="centerY" secondItem="wda-oU-cEe" secondAttribute="centerY" id="Tv4-Lj-7wh"/>
-                <constraint firstItem="wda-oU-cEe" firstAttribute="leading" secondItem="XmX-mf-Je4" secondAttribute="leading" constant="20" id="yVh-zd-pgV"/>
-                <constraint firstAttribute="trailing" secondItem="wda-oU-cEe" secondAttribute="trailing" constant="20" id="zHz-mD-ga8"/>
-            </constraints>
-            <connections>
-                <outlet property="button" destination="wda-oU-cEe" id="Gmm-s6-TqF"/>
-            </connections>
         </collectionViewCell>
     </objects>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

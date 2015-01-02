@@ -44,8 +44,7 @@
 {
     self.element = element;
     self.messageLabel.text = element.message;
-    [self setNeedsDisplay];
-    [self setNeedsLayout];
+    [super populateWithElement:element];
 }
 
 - (void)layoutSubviews

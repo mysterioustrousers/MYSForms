@@ -42,18 +42,18 @@
     [self addFormElement:passwordField];
 
 
-    [self addFormElement:[MYSFormButtonElement buttonElementWithTitle:@"Log Current Model" block:^(MYSFormButtonElement *element) {
+    [self addFormElement:[MYSFormButtonElement buttonElementWithButtons:@[[MYSFormButton formButtonWithTitle:@"Log Current Model" action:^(MYSFormElement *element) {
         NSLog(@"Current Model: %@", self.model);
-    }]];
+    }]]]];
 
 
-    [self addFormElement:[MYSFormButtonElement buttonElementWithTitle:@"Set Random Data On Model" block:^(MYSFormButtonElement *element) {
+    [self addFormElement:[MYSFormButtonElement buttonElementWithButtons:@[[MYSFormButton formButtonWithTitle:@"Set Random Data On Model" action:^(MYSFormElement *element) {
         MYSExampleUser *user = self.model;
         user.firstName  = [self randomStringWithLength:10];
         user.lastName   = [self randomStringWithLength:10];
         user.email      = [self randomStringWithLength:10];
         user.password   = [self randomStringWithLength:10];
-    }]];
+    }]]]];
 }
 
 

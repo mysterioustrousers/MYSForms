@@ -33,7 +33,7 @@
 
 + (CGSize)sizeRequiredForElement:(MYSFormImagePickerElement *)element width:(CGFloat)width
 {
-    return CGSizeMake(width, 100);
+    return CGSizeMake(width, [self cellContentInset].top + 100 + [self cellContentInset].bottom);
 }
 
 - (void)didChangeValueAtValueKeyPath

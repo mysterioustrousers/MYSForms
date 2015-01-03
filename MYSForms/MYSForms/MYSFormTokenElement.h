@@ -27,6 +27,7 @@
  when called on any item of the model's array.
  */
 + (instancetype)tokenElementWithModelKeyPath:(NSString *)modelKeyPath
-      itemDisplayStringValueTransformerBlock:(NSString * (^)(id item))valueTransformerBlock;
+                forwardValueTransformerBlock:(NSString * (^)(id item))forwardValueTransformerBlock
+                reverseValueTransformerBlock:(id (^)(NSString *tokenText))reverseValueTransformerBlock;
 
 @end

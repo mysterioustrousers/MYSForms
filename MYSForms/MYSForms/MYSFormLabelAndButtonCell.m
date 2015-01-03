@@ -15,14 +15,8 @@
 - (void)populateWithElement:(MYSFormLabelAndButtonElement *)element
 {
     self.label.text     = element.label;
-    self.button         = element.button;
     self.button.enabled = element.isEnabled;
-
-    if ([[self.button actionsForTarget:self forControlEvent:UIControlEventTouchUpInside] count] == 0) {
-        [self.button removeTarget:self action:@selector(buttonWasTapped:) forControlEvents:UIControlEventTouchUpInside];
-    }
-    [self.button addTarget:self action:@selector(buttonWasTapped:) forControlEvents:UIControlEventTouchUpInside];
-
+    [self.button setTitle:[element.button titleForState:UIControlStateNormal] forState:UIControlStateNormal];
     [super populateWithElement:element];
 }
 

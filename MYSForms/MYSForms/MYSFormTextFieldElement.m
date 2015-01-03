@@ -48,8 +48,6 @@
 }
 
 
-
-
 #pragma mark - DELEGATE text field cell
 
 - (void)textFormCell:(MYSFormTextFieldCell *)cell textDidChange:(NSString *)text

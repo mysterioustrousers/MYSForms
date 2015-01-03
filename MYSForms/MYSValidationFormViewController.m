@@ -16,6 +16,7 @@
 {
     [super viewDidLoad];
     self.model = [MYSExampleUser new];
+    self.collectionView.contentInset = UIEdgeInsetsMake(20, 0, 20, 0);
 }
 
 - (void)configureForm

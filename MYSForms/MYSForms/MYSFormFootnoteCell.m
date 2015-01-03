@@ -21,9 +21,7 @@
                                                             NSFontAttributeName : element.font ?: [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote]
                                                             }
                                                   context:nil].size;
-    size.height = ceil(size.height);
-
-    size.height += 10;
+    size.height = ceil(size.height) + [self cellContentInset].top + [self cellContentInset].bottom;
 
     return size;
 }

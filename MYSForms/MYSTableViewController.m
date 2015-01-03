@@ -56,7 +56,7 @@
 {
     // log in form
     if (indexPath.row == 0) {
-        MYSFormSlideViewController *formViewController = [MYSFormSlideViewController new];
+        MYSFormViewController *formViewController = [MYSFormViewController new];
 
         // setting the model before configuration
         formViewController.model = self.fakeUser;
@@ -113,6 +113,8 @@
         formViewController.formDelegate = self;
         
         [self.navigationController pushViewController:formViewController animated:YES];
+
+        formViewController.collectionView.contentInset = UIEdgeInsetsMake(20, 0, 20, 0);
     }
 }
 

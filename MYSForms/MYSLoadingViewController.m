@@ -17,6 +17,12 @@
 
 @implementation MYSLoadingViewController
 
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    self.collectionView.contentInset = UIEdgeInsetsMake(20, 0, 20, 0);
+}
+
 - (void)configureForm
 {
     [super configureForm];

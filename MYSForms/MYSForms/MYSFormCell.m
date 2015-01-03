@@ -14,7 +14,7 @@
 
 + (CGSize)sizeRequiredForElement:(MYSFormElement *)element width:(CGFloat)width
 {
-    return CGSizeMake(width, 50);
+    return CGSizeMake(width, [self cellContentInset].top + 44 + [self cellContentInset].bottom);
 }
 
 + (UIEdgeInsets)cellContentInset

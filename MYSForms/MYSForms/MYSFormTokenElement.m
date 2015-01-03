@@ -21,27 +21,46 @@
 @synthesize valueTransformer=_valueTransformer;
 
 - (instancetype)initWithModelKeyPath:(NSString *)modelKeyPath
-itemDisplayStringValueTransformerBlock:(NSString * (^)(id item))valueTransformerBlock
+        forwardValueTransformerBlock:(NSString * (^)(id item))forwardValueTransformerBlock
+        reverseValueTransformerBlock:(id (^)(NSString *tokenText))reverseValueTransformerBlock;
 {
     self = [super init];
     if (self) {
         _modelKeyPath = modelKeyPath;
-        _valueTransformer = [MYSFormValueTransformer transformerWithBlock:^NSArray *(NSArray *items) {
-            NSMutableArray *transformedItems = [NSMutableArray new];
-            for (id item in items) {
-                [transformedItems addObject:valueTransformerBlock(item)];
+        _valueTransformer = [MYSFormValueTransformer reversibleTransformerWithForwardBlock:^id(id value) {
+            if ([value respondsToSelector:@selector(count)]) {
+                NSMutableArray *transformedItems = [NSMutableArray new];
+                for (id item in value) {
+                    [transformedItems addObject:forwardValueTransformerBlock(item)];
+                }
+                return transformedItems;
             }
-            return transformedItems;
+            else {
+                return forwardValueTransformerBlock(value);
+            }
+        } reverseBlock:^id(id value) {
+            if ([value respondsToSelector:@selector(count)]) {
+                NSMutableArray *transformedItems = [NSMutableArray new];
+                for (id item in value) {
+                    [transformedItems addObject:reverseValueTransformerBlock(item)];
+                }
+                return transformedItems;
+            }
+            else {
+                return reverseValueTransformerBlock(value);
+            }
         }];
     }
     return self;
 }
 
 + (instancetype)tokenElementWithModelKeyPath:(NSString *)modelKeyPath
-           itemDisplayStringValueTransformerBlock:(NSString * (^)(id item))valueTransformerBlock
+                forwardValueTransformerBlock:(NSString * (^)(id item))forwardValueTransformerBlock
+                reverseValueTransformerBlock:(id (^)(NSString *tokenText))reverseValueTransformerBlock;
 {
     return [[self alloc] initWithModelKeyPath:modelKeyPath
-       itemDisplayStringValueTransformerBlock:valueTransformerBlock];
+            forwardValueTransformerBlock:forwardValueTransformerBlock
+                 reverseValueTransformerBlock:reverseValueTransformerBlock];
 }
 
 - (void)setCell:(MYSFormTokenCell *)cell

@@ -46,10 +46,7 @@
                                                        NSFontAttributeName : element.font
                                                        }
                                              context:nil].size;
-    size.height = ceil(size.height);
-
-    // the top and bottom padding between the edges of the cell and text view
-    size.height += 18 + 18;
+    size.height = ceil(size.height) + [self cellContentInset].top + [self cellContentInset].bottom;
 
     return size;
 }

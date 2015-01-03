@@ -23,7 +23,7 @@
 
 + (CGSize)sizeRequiredForElement:(MYSFormMapElement *)element width:(CGFloat)width
 {
-    return CGSizeMake(width, 150);
+    return CGSizeMake(width, [self cellContentInset].top + 150 + [self cellContentInset].bottom);
 }
 
 - (void)populateWithElement:(MYSFormMapElement *)element

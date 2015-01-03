@@ -22,7 +22,7 @@
 #import <Foundation/Foundation.h>
 
 
-typedef id (^MYSFormValueTransformerBlock)(id);
+typedef id (^MYSFormValueTransformerBlock)(id value);
 
 //
 // A value transformer supporting block-based transformation.

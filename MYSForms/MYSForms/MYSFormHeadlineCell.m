@@ -21,7 +21,7 @@
                                                            NSFontAttributeName : [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline]
                                                            }
                                                  context:nil].size;
-    size.height = ceil(size.height) + 20;
+    size.height = ceil(size.height) + [self cellContentInset].top + [self cellContentInset].bottom;
     return size;
 }
 

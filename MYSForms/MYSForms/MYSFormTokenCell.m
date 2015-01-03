@@ -34,13 +34,14 @@ static CGFloat tokenSpacing = 8.0;
             maxY = CGRectGetMaxY(frame);
         }
     }
+    // top inset is already calculated in with the dummy frames
     return CGSizeMake(width, (maxY ?: 20) + insets.bottom);
 }
 
 + (UIEdgeInsets)cellContentInset
 {
     UIEdgeInsets insets = [super cellContentInset];
-    insets.top = insets.bottom = insets.left;
+//    insets.top = insets.bottom = insets.left;
     return insets;
 }
 

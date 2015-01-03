@@ -9,6 +9,6 @@
 #import "MYSForms.h"
 
 
-@interface MYSLoadingViewController : MYSFormSlideViewController
+@interface MYSLoadingViewController : MYSFormViewController
 
 @end

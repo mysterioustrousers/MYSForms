@@ -9,6 +9,6 @@
 #import "MYSForms.h"
 
 
-@interface MYSValidationFormViewController : MYSFormSlideViewController
+@interface MYSValidationFormViewController : MYSFormViewController
 
 @end

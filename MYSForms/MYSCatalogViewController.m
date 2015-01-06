@@ -26,7 +26,7 @@
     exampleUser.yearsOld = 10;
     exampleUser.isLegalAdult = YES;
     exampleUser.biography = @"Gozer the Traveler. He will come in one of the pre-chosen forms. During the rectification of the Vuldrini, the traveler came as a large and moving Torg! Then, during the third reconciliation of the last of the McKetrick supplicants, they chose a new form for him: that of a giant Slor! Many Shuvs and Zuuls knew what it was to be roasted in the depths of the Slor that day, I can tell you!";
-    exampleUser.tags = @[@"high priority", @"silly", @"a long tag name", @"blue", @"orange"];
+    exampleUser.tags = [NSOrderedSet orderedSetWithObjects:@"high priority", @"silly", @"a long tag name", @"blue", @"orange", nil];
 }
 
 - (void)configureForm
@@ -83,11 +83,9 @@
 
 
     MYSFormTokenElement *tokenElement = [MYSFormTokenElement tokenElementWithModelKeyPath:@"tags"
-                                         forwardValueTransformerBlock:^NSString *(id item) {
-                                             return item;
-                                         } reverseValueTransformerBlock:^id(NSString *tokenText) {
-                                             return tokenText;
-                                         }];
+                                                                    valueTransformerBlock:^NSString *(id item) {
+                                                                        return item;
+                                                                    }];
     [tokenElement setDidTapTokenBlock:^(UIControl *control, NSInteger index) {
         MYSExampleUser *exampleUser = self.model;
         NSMutableArray *mutableTags = [exampleUser.tags mutableCopy];
@@ -100,6 +98,9 @@
         [mutableTags addObject:@"new tag"];
         exampleUser.tags = [mutableTags copy];
     }];
+    [tokenElement setValueTransformer:[MYSFormValueTransformer transformerWithBlock:^NSArray *(NSOrderedSet *value) {
+        return [value array];
+    }]];
     [self addFormElement:tokenElement];
 }
 

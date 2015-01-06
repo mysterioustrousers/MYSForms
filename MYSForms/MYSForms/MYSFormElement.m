@@ -61,7 +61,7 @@
 {
     [self.cell populateWithElement:self];
     if ([self isModelKeyPathValid]) {
-        id modelValue = [self.dataSource modelValueForFormElement:self];
+        id modelValue = [self currentModelValue];
         [self.cell setValue:modelValue forKeyPath:[self.cell valueKeyPath]];
         [self.cell didChangeValueAtValueKeyPath];
     }
@@ -103,7 +103,7 @@
 {
     NSMutableArray *validationErrors = [NSMutableArray new];
     if ([self.modelKeyPath length] > 0) {
-        id value = [self.dataSource modelValueForFormElement:self];
+        id value = [self currentModelValue];
         for (MYSFormValidation *formValidation in self.formValidations) {
             NSError *error = [formValidation errorFromValidatingValue:value];
             if (error) {

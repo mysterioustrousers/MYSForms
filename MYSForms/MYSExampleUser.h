@@ -8,12 +8,12 @@
 
 
 @interface MYSExampleUser : NSObject
-@property (nonatomic, copy  ) NSString   *firstName;
-@property (nonatomic, copy  ) NSString   *lastName;
-@property (nonatomic, copy  ) NSString   *email;
-@property (nonatomic, copy  ) NSString   *password;
-@property (nonatomic, assign) NSUInteger yearsOld;
-@property (nonatomic, assign) BOOL       isLegalAdult;
-@property (nonatomic, copy  ) NSString   *biography;
-@property (nonatomic, copy  ) NSArray    *tags;
+@property (nonatomic, copy  ) NSString     *firstName;
+@property (nonatomic, copy  ) NSString     *lastName;
+@property (nonatomic, copy  ) NSString     *email;
+@property (nonatomic, copy  ) NSString     *password;
+@property (nonatomic, assign) NSUInteger   yearsOld;
+@property (nonatomic, assign) BOOL         isLegalAdult;
+@property (nonatomic, copy  ) NSString     *biography;
+@property (nonatomic, copy  ) NSOrderedSet *tags;
 @end

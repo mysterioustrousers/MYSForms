@@ -214,12 +214,6 @@
 		C2B1BE191915A0BE00F4E8BB /* MYSFormButtonElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYSFormButtonElement.m; sourceTree = "<group>"; };
 		C2B1BE1C1915ECED00F4E8BB /* MYSValidationFormViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYSValidationFormViewController.h; sourceTree = "<group>"; };
 		C2B1BE1D1915ECED00F4E8BB /* MYSValidationFormViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYSValidationFormViewController.m; sourceTree = "<group>"; };
-		C2CC8BBD19C20AEC0052225F /* MYSFormsStatic-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MYSFormsStatic-Prefix.pch"; sourceTree = "<group>"; };
-		C2CC8BBE19C20AEC0052225F /* MYSFormsStatic.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MYSFormsStatic.h; sourceTree = "<group>"; };
-		C2CC8BC019C20AEC0052225F /* MYSFormsStatic.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MYSFormsStatic.m; sourceTree = "<group>"; };
-		C2CC8BCF19C20AEC0052225F /* MYSFormsStaticTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MYSFormsStaticTests-Info.plist"; sourceTree = "<group>"; };
-		C2CC8BD119C20AEC0052225F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		C2CC8BD319C20AEC0052225F /* MYSFormsStaticTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MYSFormsStaticTests.m; sourceTree = "<group>"; };
 		C2E435571942252F00F0DDC6 /* MYSFormSlideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYSFormSlideViewController.h; sourceTree = "<group>"; };
 		C2E435581942252F00F0DDC6 /* MYSFormSlideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYSFormSlideViewController.m; sourceTree = "<group>"; };
 		C2F15E2C1923E3EA00E55FDA /* MYSFormStringFromNumberValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYSFormStringFromNumberValueTransformer.h; sourceTree = "<group>"; };
@@ -350,8 +344,6 @@
 			children = (
 				C289A2571913440A0047D0CF /* MYSForms */,
 				C289A2791913440B0047D0CF /* MYSFormsTests */,
-				C2CC8BBB19C20AEB0052225F /* MYSFormsStatic */,
-				C2CC8BCD19C20AEC0052225F /* MYSFormsStaticTests */,
 				C289A2501913440A0047D0CF /* Frameworks */,
 				C289A24F1913440A0047D0CF /* Products */,
 			);
@@ -553,42 +545,6 @@
 				C292C0BD191EED0B000567FC /* MYSCatalogViewController.m */,
 			);
 			name = "Example Forms";
-			sourceTree = "<group>";
-		};
-		C2CC8BBB19C20AEB0052225F /* MYSFormsStatic */ = {
-			isa = PBXGroup;
-			children = (
-				C2CC8BBE19C20AEC0052225F /* MYSFormsStatic.h */,
-				C2CC8BC019C20AEC0052225F /* MYSFormsStatic.m */,
-				C2CC8BBC19C20AEB0052225F /* Supporting Files */,
-			);
-			path = MYSFormsStatic;
-			sourceTree = "<group>";
-		};
-		C2CC8BBC19C20AEB0052225F /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				C2CC8BBD19C20AEC0052225F /* MYSFormsStatic-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		C2CC8BCD19C20AEC0052225F /* MYSFormsStaticTests */ = {
-			isa = PBXGroup;
-			children = (
-				C2CC8BD319C20AEC0052225F /* MYSFormsStaticTests.m */,
-				C2CC8BCE19C20AEC0052225F /* Supporting Files */,
-			);
-			path = MYSFormsStaticTests;
-			sourceTree = "<group>";
-		};
-		C2CC8BCE19C20AEC0052225F /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				C2CC8BCF19C20AEC0052225F /* MYSFormsStaticTests-Info.plist */,
-				C2CC8BD019C20AEC0052225F /* InfoPlist.strings */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		C2E43556194224E600F0DDC6 /* Subclasses */ = {
@@ -818,14 +774,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				C289A27D1913440B0047D0CF /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		C2CC8BD019C20AEC0052225F /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C2CC8BD119C20AEC0052225F /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";

@@ -34,7 +34,7 @@
 {
     [super configureForm];
 
-    [self addFormElement:[MYSFormDatePickerElement datePickerElementWithLabel:@"Date Picker" modelKeyPath:@"birthDate"]];
+    [self addFormElement:[MYSFormDatePickerElement datePickerElementWithLabel:@"Date Picker with a long title" modelKeyPath:@"birthDate"]];
 
     [self addFormElement:[MYSFormHeadlineElement headlineElementWithHeadline:@"A Headline"]];
 

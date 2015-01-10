@@ -12,6 +12,7 @@
 		C231C2831A61A70A0078970F /* MYSFormDatePickerElement.m in Sources */ = {isa = PBXBuildFile; fileRef = C231C2821A61A70A0078970F /* MYSFormDatePickerElement.m */; };
 		C231C2861A61A77F0078970F /* MYSFormDatePickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C231C2851A61A77F0078970F /* MYSFormDatePickerCell.m */; };
 		C231C2881A61A7980078970F /* MYSFormDatePickerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C231C2871A61A7980078970F /* MYSFormDatePickerCell.xib */; };
+		C231C28B1A61B69C0078970F /* LaunchImage.xib in Resources */ = {isa = PBXBuildFile; fileRef = C231C28A1A61B69C0078970F /* LaunchImage.xib */; };
 		C23CB39F191941A100C5C0B7 /* MYSFormRegexValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = C23CB39E191941A100C5C0B7 /* MYSFormRegexValidation.m */; };
 		C24F1B7E191A77E100356D9A /* MYSFormLoadingChildCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C24F1B7D191A77E100356D9A /* MYSFormLoadingChildCell.m */; };
 		C24F1B82191A782200356D9A /* MYSFormLoadingChildCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C24F1B81191A782200356D9A /* MYSFormLoadingChildCell.xib */; };
@@ -109,6 +110,7 @@
 		C231C2851A61A77F0078970F /* MYSFormDatePickerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYSFormDatePickerCell.m; sourceTree = "<group>"; };
 		C231C2871A61A7980078970F /* MYSFormDatePickerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MYSFormDatePickerCell.xib; sourceTree = "<group>"; };
 		C231C2891A61A8120078970F /* MYSFormDatePickerCell-Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MYSFormDatePickerCell-Private.h"; sourceTree = "<group>"; };
+		C231C28A1A61B69C0078970F /* LaunchImage.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchImage.xib; sourceTree = "<group>"; };
 		C23CB39D191941A100C5C0B7 /* MYSFormRegexValidation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYSFormRegexValidation.h; sourceTree = "<group>"; };
 		C23CB39E191941A100C5C0B7 /* MYSFormRegexValidation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYSFormRegexValidation.m; sourceTree = "<group>"; };
 		C243F39C192157FC00FB86D6 /* MYSFormImagePickerCell-Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MYSFormImagePickerCell-Private.h"; sourceTree = "<group>"; };
@@ -394,6 +396,7 @@
 				C289A25A1913440A0047D0CF /* InfoPlist.strings */,
 				C289A25D1913440A0047D0CF /* main.m */,
 				C289A25F1913440A0047D0CF /* MYSForms-Prefix.pch */,
+				C231C28A1A61B69C0078970F /* LaunchImage.xib */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -650,6 +653,7 @@
 				C26614E819155A810073DAD8 /* MYSFormFootnoteCell.xib in Resources */,
 				C2F89CE2192B97E900198706 /* MYSFormTextViewCell.xib in Resources */,
 				C26614DD19153CD40073DAD8 /* MYSFormHeadlineCell.xib in Resources */,
+				C231C28B1A61B69C0078970F /* LaunchImage.xib in Resources */,
 				C231C2881A61A7980078970F /* MYSFormDatePickerCell.xib in Resources */,
 				C26614EC19155A9D0073DAD8 /* MYSFormButtonCell.xib in Resources */,
 				C24F1B9D191AD90300356D9A /* MYSFormLabelAndButtonCell.xib in Resources */,
@@ -857,7 +861,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -874,7 +877,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

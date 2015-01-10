@@ -9,12 +9,12 @@
 #import "MYSFormPickerElement.h"
 #import "MYSFormPickerCell.h"
 #import "MYSFormPickerCell-Private.h"
-#import "MYSFormPickerElement-Private.h"
 
 
 @interface MYSFormPickerElement () <MYSFormPickerCellDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
-@property (nonatomic, copy  ) NSMutableArray *data;
-@property (nonatomic, strong) UIPickerView   *pickerView;
+@property (nonatomic, copy                    ) NSMutableArray *data;
+@property (nonatomic, strong                  ) UIPickerView   *pickerView;
+@property (nonatomic, assign, getter=isVisible) BOOL           visible;
 @end
 
 
@@ -124,8 +124,6 @@
 {
     return [self.data count];
 }
-
-
 
 
 #pragma mark - DELEGATE picker view

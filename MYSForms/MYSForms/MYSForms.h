@@ -18,6 +18,7 @@
 #import "MYSFormLabelAndButtonElement.h"
 #import "MYSFormImagePickerElement.h"
 #import "MYSFormPickerElement.h"
+#import "MYSFormDatePickerElement.h"
 #import "MYSFormToggleElement.h"
 #import "MYSFormMapElement.h"
 #import "MYSFormTokenElement.h"

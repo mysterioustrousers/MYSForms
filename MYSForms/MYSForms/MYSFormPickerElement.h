@@ -33,7 +33,7 @@
 
 /**
  To fully control the contents of the picker view, set an object you control as the dataSource/delegate. Optionally, you can
- provide to this element prepared static content that it will display.
+ provide to this element prepared static content that it will display by using the `setValues:` and `addValue:` methods above.
  */
 @property (nonatomic, weak) id<UIPickerViewDataSource> pickerDataSource;
 @property (nonatomic, weak) id<UIPickerViewDelegate> pickerDelegate;

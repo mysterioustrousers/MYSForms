@@ -276,15 +276,15 @@ That's it. To recap:
 
 A log in form and sign up form:
 
-![Basic Example Screenshot](http://d.pr/i/RLOk/3NtdmBml+) ![Sign up form example](http://d.pr/i/TTeZ/ihh9alMz+)
+![Basic Example Screenshot](https://raw.githubusercontent.com/mysterioustrousers/MYSForms/master/README-assets/1.png) ![Sign up form example](https://raw.githubusercontent.com/mysterioustrousers/MYSForms/master/README-assets/2.png)
 
 Validation errors and loading message:
 
-![Example of validation errors](http://d.pr/i/W0Wh/30akIyEt+) ![Example of a loading message](http://d.pr/i/kGj5/3HGxUAtk+)
+![Example of validation errors](https://raw.githubusercontent.com/mysterioustrousers/MYSForms/master/README-assets/3.png) ![Example of a loading message](https://raw.githubusercontent.com/mysterioustrousers/MYSForms/master/README-assets/4.png)
 
 Misc element examples:
 
-![Example catalog elements](http://d.pr/i/tyfJ/5lL6qHh0+) ![Example of misc form elements](http://d.pr/i/qabo/5A3GGWo9+)
+![Example catalog elements](https://raw.githubusercontent.com/mysterioustrousers/MYSForms/master/README-assets/5.png) ![Example of misc form elements](https://raw.githubusercontent.com/mysterioustrousers/MYSForms/master/README-assets/6.png)
 
 ## Extras
 

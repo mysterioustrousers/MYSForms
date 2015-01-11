@@ -100,7 +100,7 @@ MYSFormViewController *formViewController = [MYSFormViewController new];
 formViewController.model = self.fakeUser;
 
 // add a header element
-MYSFormHeadlineElement *headline = [MYSFormHeadlineElement headlineElementWithHeadline:@"Log In"];
+MYSFormLabelElement *headline = [MYSFormLabelElement labelElementWithText:@"Log In"];
 [formViewController addFormElement:headline];
 
 // add a text field for the user to type in an email
@@ -142,9 +142,9 @@ Second, the more robust approach, you can subclass `MYSFormViewController` like 
 {
     [super configureForm];
 
-    [self addFormElement:[MYSFormHeadlineElement headlineElementWithHeadline:@"Sign Up"]];
+    [self addFormElement:[MYSFormLabelElement labelElementWithText:@"Sign Up"]];
 
-    [self addFormElement:[MYSFormFootnoteElement footnoteElementWithFootnote:
+    [self addFormElement:[MYSFormLabelElement labelElementWithText:
                           @"Example of a subclassed form view controller where a blank model is created in its viewDidLoad."]];
 
     [self addFormElement:[MYSFormTextFieldElement textFieldElementWithLabel:@"First Name" modelKeyPath:@"firstName"]];
@@ -302,7 +302,7 @@ The trick is to make sure that you hook up the outlets of the views in your xibs
 {
     [super configureForm];
 
-    MYSFormHeadlineElement *headlineElement = [MYSFormHeadlineElement headlineElementWithHeadline:@"Sign Up"];
+    MYSFormHeadlineElement *headlineElement = [labelElementWithText labelElementWithText:@"Sign Up"];
     headlineElement.cellClass = [FCIFormHeaderCell class];
     [self addFormElement:headlineElement];
 }

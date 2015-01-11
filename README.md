@@ -217,6 +217,50 @@ Show a loading message above a specific form element:
 
 ## Customization
 
+There are two ways to customize forms:
+
+  1. Using `MYSFormTheme`
+  2. Subclassing Elements/Cells and replacing xibs.
+
+### Method 1: `MYSFormTheme`
+
+You can create a `MYSFormTheme`, tweak the properties on that object and then assign it to any `MYSFormElement`. If
+you customize the label font/color properties on the theme, the label(s) any elements you assign the theme to will
+have those customizations applied.
+
+You can also assign a theme to the entire form which will be subsequently passed to all elements. The properties
+set on an element theme takes precedence over a form theme passed to the element. For example, if you set the `tintColor`
+property on two different themes, assign one to the form and another to an element, the element will use the `tintColor`
+on the theme assigned directly to it.
+
+Here's an example of setting some properties on the form's theme (set on `self.theme`) and a theme assigned to an
+element:
+
+```
+- (void)configureForm
+{
+    [super configureForm];
+
+    // set a form-wide theme
+    self.theme = [MYSFormTheme new];
+    self.theme.buttonStyle = @(MYSFormButtonStyleFilled);
+    self.theme.labelFont = [UIFont fontWithName:@"Avenir" size:12];
+    self.theme.inputTextFont = [UIFont fontWithName:@"Noteworthy" size:14];
+
+    MYSFormLabelElement *headlineElement = [MYSFormLabelElement labelElementWithText:@"A Headline"];
+    headlineElement.theme = [MYSFormTheme formThemeWithLabelFont:[UIFont fontWithName:@"Zapfino" size:26]];
+    [self addFormElement:headlineElement];
+}
+```
+
+### Method 2:
+
+Depending on how crazy you want to get, you can subclass an entire element, just its cell or just replace it's xib
+with your own. If all you want to do is change how auto layout works for an cell or move views around in the element's
+cell, you can get away with just replacing the xib with your own. If you want to customize animations, behavior or how
+height is calculated based on content, then you'll want to subclass the cell for the element. If you subclass a cell
+you must also replace the xib with your own. The following walks you through how to subclass an element's cell:
+
 Let's say you want to customize how the header element looks. You could subclass `MYSFormHeadlineCell.h` like this:
 
 **FCIFormHeaderCell.h**

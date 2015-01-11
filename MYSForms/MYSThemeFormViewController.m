@@ -33,6 +33,7 @@
     // set a form-wide theme
     self.theme = [MYSFormTheme new];
     self.theme.buttonStyle = @(MYSFormButtonStyleFilled);
+    self.theme.buttonTitleFont = [UIFont fontWithName:@"Noteworthy" size:18];
     self.theme.labelFont = [UIFont fontWithName:@"Avenir" size:12];
     self.theme.inputTextFont = [UIFont fontWithName:@"Noteworthy" size:14];
 
@@ -51,12 +52,12 @@
     [self addFormElement:[MYSFormTextFieldElement textFieldElementWithLabel:@"Text Field" modelKeyPath:@"lastName"]];
 
 
-    [self addFormElement:[MYSFormButtonElement buttonElementWithButtons:@[[MYSFormButton formButtonWithTitle:@"Button" action:^(MYSFormElement *element) {
+    [self addFormElement:[MYSFormButtonElement buttonElementWithButtons:@[[MYSFormButton formButtonWithTitle:@"Button" style:MYSFormButtonStyleNone action:^(MYSFormElement *element) {
         [self showSuccessMessage:@"A success message." belowElement:element duration:3 completion:nil];
     }]]]];
 
 
-    [self addFormElement:[MYSFormLabelAndButtonElement labelAndButtonElementWithLabel:@"A label" button:[MYSFormButton formButtonWithTitle:@"A Button" action:^(MYSFormElement *element) {
+    [self addFormElement:[MYSFormLabelAndButtonElement labelAndButtonElementWithLabel:@"A label" button:[MYSFormButton formButtonWithTitle:@"A Button" style:MYSFormButtonStyleNone action:^(MYSFormElement *element) {
         [self showErrorMessage:@"An error message." belowElement:element duration:3 completion:nil];
     }]]];
 

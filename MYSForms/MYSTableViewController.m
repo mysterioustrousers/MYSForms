@@ -82,34 +82,51 @@
         [formViewController addFormElement:passwordField];
 
 
-        [formViewController addFormElement:[MYSFormLabelAndButtonElement labelAndButtonElementWithLabel:@"A label" button:[MYSFormButton formButtonWithTitle:@"A button title" action:^(MYSFormElement *element) {
+        [formViewController addFormElement:[MYSFormLabelAndButtonElement labelAndButtonElementWithLabel:@"A label"
+                                                                                                 button:[MYSFormButton formButtonWithTitle:@"A button title"
+                                                                                                                                     style:MYSFormButtonStyleDefault
+                                                                                                                                    action:^(MYSFormElement *element)
+        {
             NSLog(@"Label and button was tapped");
         }]]];
 
-        MYSFormButton *leftButton = [MYSFormButton formButtonWithTitle:@"Left Button" action:^(MYSFormElement *element) {
+        MYSFormButton *leftButton = [MYSFormButton formButtonWithTitle:@"Left Button"
+                                                                 style:MYSFormButtonStyleDefault
+                                                                action:^(MYSFormElement *element)
+        {
             NSLog(@"Left button pressed");
         }];
 
-        MYSFormButton *rightButton = [MYSFormButton formButtonWithTitle:@"Right Button" action:^(MYSFormElement *element) {
+        MYSFormButton *rightButton = [MYSFormButton formButtonWithTitle:@"Right Button"
+                                                                  style:MYSFormButtonStyleDefault
+                                                                 action:^(MYSFormElement *element)
+        {
             NSLog(@"Rigth button pressed");
         }];
 
         [formViewController addFormElement:[MYSFormButtonElement buttonElementWithButtons:@[leftButton, rightButton]]];
 
 
-        MYSFormButton *button1 = [MYSFormButton formButtonWithTitle:@"Button 1" action:^(MYSFormElement *element) {
+        MYSFormButton *button1 = [MYSFormButton formButtonWithTitle:@"Button 1"
+                                                              style:MYSFormButtonStyleDefault
+                                                             action:^(MYSFormElement *element)
+        {
             NSLog(@"button 1 pressed");
         }];
 
-        MYSFormButton *button2 = [MYSFormButton formButtonWithTitle:@"Button 2" action:^(MYSFormElement *element) {
+        MYSFormButton *button2 = [MYSFormButton formButtonWithTitle:@"Button 2"
+                                                              style:MYSFormButtonStyleBordered
+                                                             action:^(MYSFormElement *element)
+        {
             NSLog(@"button 2 pressed");
         }];
-        button2.buttonStyle = MYSFormButtonStyleBordered;
 
-        MYSFormButton *button3 = [MYSFormButton formButtonWithTitle:@"Button 3" action:^(MYSFormElement *element) {
+        MYSFormButton *button3 = [MYSFormButton formButtonWithTitle:@"Button 3"
+                                                              style:MYSFormButtonStyleFilled
+                                                             action:^(MYSFormElement *element)
+        {
             NSLog(@"button 3 pressed");
         }];
-        button3.buttonStyle = MYSFormButtonStyleFilled;
 
         [formViewController addFormElement:[MYSFormButtonElement buttonElementWithButtons:@[button1, button2, button3]]];
 

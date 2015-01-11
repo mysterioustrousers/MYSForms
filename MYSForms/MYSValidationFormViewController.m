@@ -50,7 +50,10 @@
     [self addFormElement:emailField];
 
 
-    [self addFormElement:[MYSFormButtonElement buttonElementWithButtons:@[[MYSFormButton formButtonWithTitle:@"Validate" action:^(MYSFormElement *element) {
+    [self addFormElement:[MYSFormButtonElement buttonElementWithButtons:@[[MYSFormButton formButtonWithTitle:@"Validate"
+                                                                                                       style:MYSFormButtonStyleDefault
+                                                                                                      action:^(MYSFormElement *element)
+    {
         if ([self validate]) {
             NSLog(@"Valid!");
         }

@@ -15,15 +15,16 @@
 {
     self = [super init];
     if (self) {
-        self.buttonStyle = MYSFormButtonStyleNone;
+        _buttonStyle = MYSFormButtonStyleNone;
     }
     return self;
 }
 
-+ (instancetype)formButtonWithTitle:(NSString *)title action:(MYSFormButtonActionBlock)action
++ (instancetype)formButtonWithTitle:(NSString *)title style:(MYSFormButtonStyle)style action:(MYSFormButtonActionBlock)action
 {
     MYSFormButton *button = [self new];
     button.action = action;
+    button.buttonStyle = style;
     [button setTitle:title forState:UIControlStateNormal];
     return button;
 }
@@ -33,18 +34,15 @@
     _buttonStyle = buttonStyle;
     if (self.buttonStyle == MYSFormButtonStyleDefault) {
         self.layer.cornerRadius = 0;
-        self.layer.borderWidth = 0;
-        self.layer.borderColor = nil;
-        self.backgroundColor = nil;
+        self.layer.borderWidth  = 0;
     }
     else if (self.buttonStyle == MYSFormButtonStyleBordered) {
         self.layer.cornerRadius = 5.0;
-        self.layer.borderWidth = 1.0;
-        self.backgroundColor = nil;
+        self.layer.borderWidth  = 1.0;
     }
     else if (self.buttonStyle == MYSFormButtonStyleFilled) {
         self.layer.cornerRadius = 5.0;
-        self.layer.borderWidth = 1.0;
+        self.layer.borderWidth  = 1.0;
     }
     [self setNeedsLayout];
 }
@@ -52,18 +50,35 @@
 - (void)didMoveToWindow
 {
     [super didMoveToWindow];
-    UIColor *tint = [self superview].tintColor;
     if (self.buttonStyle == MYSFormButtonStyleDefault) {
-        [self setTitleColor:tint forState:UIControlStateNormal];
+        [self setTitleColor:self.tintColor forState:UIControlStateNormal];
+        self.layer.borderColor = nil;
+        self.backgroundColor = nil;
     }
     else if (self.buttonStyle == MYSFormButtonStyleBordered) {
-        [self setTitleColor:tint forState:UIControlStateNormal];
-        self.layer.borderColor = tint.CGColor;
+        [self setTitleColor:self.tintColor forState:UIControlStateNormal];
+        self.layer.borderColor = self.tintColor.CGColor;
+        self.backgroundColor = nil;
     }
     else if (self.buttonStyle == MYSFormButtonStyleFilled) {
-        self.layer.borderColor = tint.CGColor;
-        self.backgroundColor = tint;
         [self setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [self setTitleColor:self.tintColor forState:UIControlStateHighlighted];
+        self.layer.borderColor = self.tintColor.CGColor;
+        self.backgroundColor = self.tintColor;
+    }
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    if (self.buttonStyle == MYSFormButtonStyleDefault) {
+        self.titleLabel.textColor = self.tintColor;
+    }
+    else if (self.buttonStyle == MYSFormButtonStyleBordered) {
+        self.titleLabel.textColor = self.tintColor;
+    }
+    else if (self.buttonStyle == MYSFormButtonStyleFilled) {
+        self.titleLabel.textColor = [UIColor whiteColor];
     }
 }
 

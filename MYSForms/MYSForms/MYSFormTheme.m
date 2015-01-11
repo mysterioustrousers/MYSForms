@@ -37,12 +37,15 @@
     MERGE(_contentInsets,        theme.contentInsets);
     MERGE(_backgroundColor,      theme.backgroundColor);
     MERGE(_height,               theme.height);
+    MERGE(_inputLabelFont,       theme.inputLabelFont);
+    MERGE(_inputLabelColor,      theme.inputLabelColor);
     MERGE(_inputTextFont,        theme.inputTextFont);
     MERGE(_inputTextColor,       theme.inputTextColor);
     MERGE(_tintColor,            theme.tintColor);
     MERGE(_messageTextFont,      theme.messageTextFont);
     MERGE(_messageTextColor,     theme.messageTextColor);
     MERGE(_buttonStyle,          theme.buttonStyle);
+    MERGE(_buttonTitleFont,      theme.buttonTitleFont);
     MERGE(_toggleOnTintColor,    theme.toggleOnTintColor);
     MERGE(_toggleThumbTintColor, theme.toggleThumbTintColor);
 }
@@ -63,6 +66,7 @@ GETTER(UIColor,  tintColor,             nil);
 GETTER(UIFont,   messageTextFont,       [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote]);
 GETTER(UIColor,  messageTextColor,      [UIColor blackColor]);
 GETTER(NSNumber, buttonStyle,           @(MYSFormButtonStyleDefault));
+GETTER(UIFont,   buttonTitleFont,       [UIFont preferredFontForTextStyle:UIFontTextStyleBody]);
 GETTER(UIColor,  toggleOnTintColor,     nil);
 GETTER(UIColor,  toggleThumbTintColor,  nil);
 

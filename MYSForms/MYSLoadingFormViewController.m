@@ -43,7 +43,10 @@
     [self addFormElement:self.firstNameElement];
 
 
-    self.loadButtonElement = [MYSFormButtonElement buttonElementWithButtons:@[[MYSFormButton formButtonWithTitle:@"Show Loading" action:^(MYSFormElement *element) {
+    self.loadButtonElement = [MYSFormButtonElement buttonElementWithButtons:@[[MYSFormButton formButtonWithTitle:@"Show Loading"
+                                                                                                           style:MYSFormButtonStyleDefault
+                                                                                                          action:^(MYSFormElement *element)
+    {
         [self showLoadingMessage:@"This is a loading message added to Show Loading button" aboveElement:self.loadButtonElement completion:nil];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [self hideLoadingAboveElement:self.loadButtonElement completion:nil];
@@ -52,7 +55,10 @@
     [self addFormElement:self.loadButtonElement];
 
 
-    [self addFormElement:[MYSFormButtonElement buttonElementWithButtons:@[[MYSFormButton formButtonWithTitle:@"Show Loading Specific" action:^(MYSFormElement *element) {
+    [self addFormElement:[MYSFormButtonElement buttonElementWithButtons:@[[MYSFormButton formButtonWithTitle:@"Show Loading Specific"
+                                                                                                       style:MYSFormButtonStyleDefault
+                                                                                                      action:^(MYSFormElement *element)
+    {
         [self showLoadingMessage:@"Loading for a specific form element." aboveElement:self.firstNameElement completion:nil];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [self hideLoadingAboveElement:self.firstNameElement completion:nil];
@@ -60,7 +66,9 @@
     }]]]];
 
 
-    [self addFormElement:[MYSFormButtonElement buttonElementWithButtons:@[[MYSFormButton formButtonWithTitle:@"Hide Loading Specific" action:^(MYSFormElement *element) {
+    [self addFormElement:[MYSFormButtonElement buttonElementWithButtons:@[[MYSFormButton formButtonWithTitle:@"Hide Loading Specific"
+                                                                                                       style:MYSFormButtonStyleDefault
+                                                                                                      action:^(MYSFormElement *element) {
         [self showLoadingMessage:@"This will show loading for 2 elements, stop one element after 4 seconds. And then all after 6 seconds."
                     aboveElement:self.loadButtonElement
                       completion:nil];

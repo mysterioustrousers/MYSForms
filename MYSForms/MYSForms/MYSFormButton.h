@@ -30,6 +30,6 @@ typedef NS_ENUM(NSInteger, MYSFormButtonStyle) {
 
 @property (nonatomic) MYSFormButtonStyle buttonStyle;
 
-+ (instancetype)formButtonWithTitle:(NSString *)title action:(MYSFormButtonActionBlock)action;
++ (instancetype)formButtonWithTitle:(NSString *)title style:(MYSFormButtonStyle)style action:(MYSFormButtonActionBlock)action;
 
 @end

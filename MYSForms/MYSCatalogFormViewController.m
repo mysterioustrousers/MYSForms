@@ -48,13 +48,19 @@
     [self addFormElement:[MYSFormTextFieldElement textFieldElementWithLabel:@"Text Field" modelKeyPath:@"lastName"]];
 
 
-    [self addFormElement:[MYSFormButtonElement buttonElementWithButtons:@[[MYSFormButton formButtonWithTitle:@"Button" action:^(MYSFormElement *element) {
+    [self addFormElement:[MYSFormButtonElement buttonElementWithButtons:@[[MYSFormButton formButtonWithTitle:@"Button"
+                                                                                                       style:MYSFormButtonStyleDefault
+                                                                                                      action:^(MYSFormElement *element)
+    {
         [self showSuccessMessage:@"A success message." belowElement:element duration:3 completion:nil];
         [self logModel];
     }]]]];
 
 
-    [self addFormElement:[MYSFormLabelAndButtonElement labelAndButtonElementWithLabel:@"A label" button:[MYSFormButton formButtonWithTitle:@"A Button" action:^(MYSFormElement *element) {
+    [self addFormElement:[MYSFormLabelAndButtonElement labelAndButtonElementWithLabel:@"A label" button:[MYSFormButton formButtonWithTitle:@"A Button"
+                                                                                                                                     style:MYSFormButtonStyleDefault
+                                                                                                                                    action:^(MYSFormElement *element)
+    {
         [self showErrorMessage:@"An error message." belowElement:element duration:3 completion:nil];
     }]]];
 

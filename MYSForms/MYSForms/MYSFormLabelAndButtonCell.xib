@@ -14,14 +14,23 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ofh-JN-8AE">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+                        <state key="normal">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="buttonWasTapped:" destination="mz9-Oa-E3C" eventType="touchUpInside" id="sRN-l7-mbo"/>
+                        </connections>
+                    </button>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AxG-Lz-i3A">
-                        <rect key="frame" x="20" y="15" width="280" height="19.5"/>
+                        <rect key="frame" x="20" y="15" width="222" height="19.5"/>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A7L-QZ-za1" customClass="MYSFormButton">
-                        <rect key="frame" x="20" y="5" width="280" height="40"/>
+                    <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A7L-QZ-za1" userLabel="Value" customClass="MYSFormButton">
+                        <rect key="frame" x="250" y="5" width="50" height="40"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="40" id="A7s-nx-sKj"/>
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="wEQ-tf-ukv"/>
@@ -29,26 +38,27 @@
                         <state key="normal" title="Button">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
-                        <connections>
-                            <action selector="buttonWasTapped:" destination="mz9-Oa-E3C" eventType="touchUpInside" id="W0y-ee-Rlb"/>
-                        </connections>
                     </button>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="ofh-JN-8AE" firstAttribute="leading" secondItem="mz9-Oa-E3C" secondAttribute="leading" id="4vi-3s-6Te"/>
                 <constraint firstAttribute="centerY" secondItem="A7L-QZ-za1" secondAttribute="centerY" id="T2u-pU-Wx7"/>
-                <constraint firstItem="A7L-QZ-za1" firstAttribute="leading" secondItem="mz9-Oa-E3C" secondAttribute="leading" constant="20" id="awQ-LL-sC5"/>
-                <constraint firstAttribute="trailing" secondItem="A7L-QZ-za1" secondAttribute="trailing" constant="20" id="f6j-KI-Per"/>
+                <constraint firstAttribute="trailing" secondItem="A7L-QZ-za1" secondAttribute="trailing" constant="20" id="dwB-vX-Fsm"/>
                 <constraint firstItem="AxG-Lz-i3A" firstAttribute="leading" secondItem="mz9-Oa-E3C" secondAttribute="leading" constant="20" id="g4A-AJ-WgG"/>
+                <constraint firstItem="ofh-JN-8AE" firstAttribute="top" secondItem="mz9-Oa-E3C" secondAttribute="top" id="icX-bf-Ud9"/>
+                <constraint firstAttribute="bottom" secondItem="ofh-JN-8AE" secondAttribute="bottom" id="l8q-Js-aNZ"/>
+                <constraint firstItem="A7L-QZ-za1" firstAttribute="leading" secondItem="AxG-Lz-i3A" secondAttribute="trailing" constant="8" id="ofN-7h-QGo"/>
                 <constraint firstAttribute="centerY" secondItem="AxG-Lz-i3A" secondAttribute="centerY" id="oj6-0D-Jmf"/>
-                <constraint firstAttribute="trailing" secondItem="AxG-Lz-i3A" secondAttribute="trailing" constant="20" id="xv9-pX-gUu"/>
+                <constraint firstAttribute="trailing" secondItem="ofh-JN-8AE" secondAttribute="trailing" id="yeY-9z-uyl"/>
             </constraints>
             <connections>
                 <outlet property="button" destination="A7L-QZ-za1" id="HjI-sG-tDQ"/>
                 <outlet property="label" destination="AxG-Lz-i3A" id="oQq-3P-ccC"/>
             </connections>
+            <point key="canvasLocation" x="362" y="305"/>
         </collectionViewCell>
     </objects>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

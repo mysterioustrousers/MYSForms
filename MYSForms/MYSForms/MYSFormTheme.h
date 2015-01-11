@@ -50,6 +50,8 @@
  */
 @property (nonatomic, copy) NSNumber *buttonStyle;
 
+@property (nonatomic, copy) UIFont *buttonTitleFont;
+
 @property (nonatomic, copy) UIColor *toggleOnTintColor;
 
 @property (nonatomic, copy) UIColor *toggleThumbTintColor;

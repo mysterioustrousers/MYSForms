@@ -28,11 +28,14 @@
     [super configureForm];
 
 
-    [self addFormElement:[MYSFormHeadlineElement headlineElementWithHeadline:@"Edit User"]];
+    MYSFormLabelElement *headlineElement = [MYSFormLabelElement labelElementWithText:@"Edit User"];
+    headlineElement.theme = [MYSFormTheme formThemeWithLabelFont:[UIFont preferredFontForTextStyle:UIFontTextStyleHeadline]];
+    [self addFormElement:headlineElement];
 
 
-    [self addFormElement:[MYSFormFootnoteElement footnoteElementWithFootnote:
-                          @"Example of a form that utilizes the built-in per-element error message functionality."]];
+    MYSFormLabelElement *footnoteElement = [MYSFormLabelElement labelElementWithText:@"Example of a form that utilizes the built-in per-element error message functionality."];
+    footnoteElement.theme = [MYSFormTheme formThemeWithLabelFont:[UIFont preferredFontForTextStyle:UIFontTextStyleFootnote]];
+    [self addFormElement:footnoteElement];
 
 
     self.firstNameElement = [MYSFormTextFieldElement textFieldElementWithLabel:@"First Name" modelKeyPath:@"firstName"];

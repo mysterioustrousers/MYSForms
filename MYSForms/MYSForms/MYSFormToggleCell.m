@@ -9,15 +9,31 @@
 #import "MYSFormToggleCell.h"
 #import "MYSFormToggleElement.h"
 #import "MYSFormToggleCell-Private.h"
+#import "MYSFormTheme.h"
 
 
 @implementation MYSFormToggleCell
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    self.toggleSwitch.tintColor = self.tintColor;
+}
 
 - (void)populateWithElement:(MYSFormToggleElement *)element
 {
     self.label.text           = element.label;
     self.toggleSwitch.enabled = element.isEnabled;
     [super populateWithElement:element];
+}
+
+- (void)applyTheme:(MYSFormTheme *)theme
+{
+    [super applyTheme:theme];
+    self.label.font                     = theme.labelFont;
+    self.label.textColor                = theme.labelTextColor;
+    self.toggleSwitch.onTintColor       = theme.toggleOnTintColor;
+    self.toggleSwitch.thumbTintColor    = theme.toggleThumbTintColor;
 }
 
 

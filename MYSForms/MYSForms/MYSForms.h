@@ -10,8 +10,7 @@
 #import "MYSFormSlideViewController.h"
 
 // form elements
-#import "MYSFormHeadlineElement.h"
-#import "MYSFormFootnoteElement.h"
+#import "MYSFormLabelElement.h"
 #import "MYSFormTextFieldElement.h"
 #import "MYSFormTextViewElement.h"
 #import "MYSFormButtonElement.h"
@@ -33,3 +32,9 @@
 #import "MYSFormStringFromNumberValueTransformer.h"
 #import "MYSFormStringFromTimeZoneValueTransformer.h"
 #import "MYSFormStringFromURLValueTransformer.h"
+
+// form themes
+#import "MYSFormTheme.h"
+
+// form controls
+#import "MYSFormButton.h"

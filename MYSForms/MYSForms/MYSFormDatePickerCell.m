@@ -9,6 +9,8 @@
 #import "MYSFormDatePickerCell.h"
 #import "MYSFormDatePickerCell-Private.h"
 #import "MYSFormDatePickerElement.h"
+#import "MYSFormButton.h"
+#import "MYSFormTheme.h"
 
 
 @interface MYSFormDatePickerCell ()
@@ -20,11 +22,20 @@
 
 - (void)populateWithElement:(MYSFormDatePickerElement *)element
 {
-    self.label.text = element.label;
-    [super populateWithElement:element];
+    self.label.text     = element.label;
     self.button.enabled = element.isEnabled;
+    self.dateFormatter  = element.dateFormatter;
     [super populateWithElement:element];
-    self.dateFormatter = element.dateFormatter;
+}
+
+- (void)applyTheme:(MYSFormTheme *)theme
+{
+    [super applyTheme:theme];
+    self.label.font         = theme.labelFont;
+    self.label.textColor    = theme.labelTextColor;
+    if (self.button.buttonStyle == MYSFormButtonStyleNone) {
+        self.button.buttonStyle = [theme.buttonStyle integerValue];
+    }
 }
 
 - (NSString *)valueKeyPath

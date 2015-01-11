@@ -23,9 +23,14 @@
 {
     [super configureForm];
 
-    [self addFormElement:[MYSFormHeadlineElement headlineElementWithHeadline:@"Edit User"]];
+    MYSFormLabelElement *headlineElement = [MYSFormLabelElement labelElementWithText:@"Edit User"];
+    headlineElement.theme = [MYSFormTheme formThemeWithLabelFont:[UIFont preferredFontForTextStyle:UIFontTextStyleHeadline]];
+    [self addFormElement:headlineElement];
 
-    [self addFormElement:[MYSFormFootnoteElement footnoteElementWithFootnote:@"Example of a form that utilizes validations."]];
+
+    MYSFormLabelElement *footnoteElement = [MYSFormLabelElement labelElementWithText:@"Example of a form that utilizes validations."];
+    footnoteElement.theme = [MYSFormTheme formThemeWithLabelFont:[UIFont preferredFontForTextStyle:UIFontTextStyleFootnote]];
+    [self addFormElement:footnoteElement];
 
 
     MYSFormTextFieldElement *firstNameField = [MYSFormTextFieldElement textFieldElementWithLabel:@"First Name" modelKeyPath:@"firstName"];

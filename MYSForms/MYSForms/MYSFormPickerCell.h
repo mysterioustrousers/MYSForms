@@ -9,12 +9,15 @@
 #import "MYSFormCell.h"
 
 
+@class MYSFormButton;
+
+
 @interface MYSFormPickerCell : MYSFormCell
 
 @property (nonatomic, weak) IBOutlet UILabel *label;
 
-@property (nonatomic, weak) IBOutlet UIButton *button;
+@property (nonatomic, weak) IBOutlet MYSFormButton *button;
 
-@property (nonatomic, copy) NSString *buttonTitle;
+@property (nonatomic, copy) NSString *selectedValue;
 
 @end

@@ -6,15 +6,15 @@
 //  Copyright (c) 2014 Mysterious Trousers. All rights reserved.
 //
 
-#import "MYSCatalogViewController.h"
+#import "MYSCatalogFormViewController.h"
 #import "MYSExampleUser.h"
 
 
-@interface MYSCatalogViewController ()
+@interface MYSCatalogFormViewController ()
 @end
 
 
-@implementation MYSCatalogViewController
+@implementation MYSCatalogFormViewController
 
 - (void)viewDidLoad
 {
@@ -34,12 +34,13 @@
 {
     [super configureForm];
 
-    [self addFormElement:[MYSFormDatePickerElement datePickerElementWithLabel:@"Date Picker with a long title" modelKeyPath:@"birthDate"]];
+    MYSFormLabelElement *headlineElement = [MYSFormLabelElement labelElementWithText:@"A Headline"];
+    headlineElement.theme = [MYSFormTheme formThemeWithLabelFont:[UIFont preferredFontForTextStyle:UIFontTextStyleHeadline]];
+    [self addFormElement:headlineElement];
 
-    [self addFormElement:[MYSFormHeadlineElement headlineElementWithHeadline:@"A Headline"]];
-
-    [self addFormElement:[MYSFormFootnoteElement footnoteElementWithFootnote:
-                          @"A footnote/description element for offering a more detailed explanation in your form."]];
+    MYSFormLabelElement *footnoteElement = [MYSFormLabelElement labelElementWithText:@"A footnote/description element for offering a more detailed explanation in your form."];
+    footnoteElement.theme = [MYSFormTheme formThemeWithLabelFont:[UIFont preferredFontForTextStyle:UIFontTextStyleFootnote]];
+    [self addFormElement:footnoteElement];
 
 
     [self addFormElement:[MYSFormTextFieldElement textFieldElementWithLabel:@"Text Field" modelKeyPath:@"firstName"]];
@@ -105,6 +106,8 @@
         return [value array];
     }]];
     [self addFormElement:tokenElement];
+
+    [self addFormElement:[MYSFormDatePickerElement datePickerElementWithLabel:@"Date Picker with a long title" modelKeyPath:@"birthDate"]];
 }
 
 

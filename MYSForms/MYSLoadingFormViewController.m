@@ -6,16 +6,16 @@
 //  Copyright (c) 2014 Mysterious Trousers. All rights reserved.
 //
 
-#import "MYSLoadingViewController.h"
+#import "MYSLoadingFormViewController.h"
 
 
-@interface MYSLoadingViewController ()
+@interface MYSLoadingFormViewController ()
 @property (nonatomic, strong) MYSFormElement *firstNameElement;
 @property (nonatomic, strong) MYSFormElement *loadButtonElement;
 @end
 
 
-@implementation MYSLoadingViewController
+@implementation MYSLoadingFormViewController
 
 - (void)viewDidLoad
 {
@@ -28,11 +28,14 @@
     [super configureForm];
 
 
-    [self addFormElement:[MYSFormHeadlineElement headlineElementWithHeadline:@"Edit User"]];
+    MYSFormLabelElement *headlineElement = [MYSFormLabelElement labelElementWithText:@"Edit User"];
+    headlineElement.theme = [MYSFormTheme formThemeWithLabelFont:[UIFont preferredFontForTextStyle:UIFontTextStyleHeadline]];
+    [self addFormElement:headlineElement];
 
 
-    [self addFormElement:[MYSFormFootnoteElement footnoteElementWithFootnote:
-                          @"Example of a form that utilizes the built-in loading mechanism on form elements. Dismisses after 4 seconds."]];
+    MYSFormLabelElement *footnoteElement = [MYSFormLabelElement labelElementWithText:@"Example of a form that utilizes the built-in loading mechanism on form elements. Dismisses after 4 seconds."];
+    footnoteElement.theme = [MYSFormTheme formThemeWithLabelFont:[UIFont preferredFontForTextStyle:UIFontTextStyleFootnote]];
+    [self addFormElement:footnoteElement];
 
 
     self.firstNameElement = [MYSFormTextFieldElement textFieldElementWithLabel:@"First Name" modelKeyPath:@"firstName"];

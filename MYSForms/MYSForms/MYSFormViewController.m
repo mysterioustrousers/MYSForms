@@ -156,6 +156,9 @@
                   options:0
                   context:NULL];
     }
+    if (self.theme) {
+        [element.theme mergeWithTheme:self.theme];
+    }
 }
 
 - (BOOL)validate
@@ -280,6 +283,16 @@
     }
 }
 
+- (void)setTheme:(MYSFormTheme *)theme
+{
+    _theme = theme;
+    for (MYSFormElement *element in self.elements) {
+        if (self.theme) {
+            [element.theme mergeWithTheme:self.theme];
+        }
+    }
+}
+
 
 #pragma mark - DATASOURCE collection view
 
@@ -294,6 +307,7 @@
         MYSFormElement *element = self.elements[indexPath.row];
         MYSFormCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([element cellClass]) forIndexPath:indexPath];
         [cell populateWithElement:element];
+        [cell applyTheme:element.theme];
         element.cell = cell;
         [element updateCell];
         return cell;
@@ -329,7 +343,9 @@
         if (!cachedSize) {
             MYSFormElement *element = self.elements[indexPath.row];
             CGFloat width = self.fixedWidth > 0 && self.fixedWidth < collectionView.frame.size.width ? self.fixedWidth : collectionView.frame.size.width;
-            CGSize size = [[element cellClass] sizeRequiredForElement:element width:width];
+            CGSize size = (element.theme.height ?
+                           CGSizeMake(width, [element.theme.height floatValue]) :
+                           [[element cellClass] sizeRequiredForElement:element width:width]);
             size.width = width;
             cachedSize = [NSValue valueWithCGSize:size];
             self.cachedCellSizes[indexPath] = cachedSize;

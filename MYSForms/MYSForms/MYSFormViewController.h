@@ -12,6 +12,7 @@
 @class MYSFormElement;
 @class MYSFormViewController;
 @class MYSFormCell;
+@class MYSFormTheme;
 
 
 /**
@@ -84,6 +85,13 @@ typedef NS_ENUM(NSUInteger, MYSFormElementRelativePosition) {
  If set to NO, all editable, tapable, actionable elements in the from will be disabled.
  */
 @property (nonatomic, assign, getter = isEnabled) BOOL enabled;
+
+/**
+ The theme that will be applied to all elements. Any elements with with themes of their own will be merged and any attributes on the element
+ will take precedence.
+ */
+@property (nonatomic, strong) MYSFormTheme *theme;
+
 
 /**
  For subclasses to override. This will get called no matter how the object was created (code/storyboard/etc).

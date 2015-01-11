@@ -8,6 +8,7 @@
 
 #import "MYSFormElement.h"
 #import "MYSFormCell.h"
+#import "MYSFormTheme.h"
 
 
 @interface MYSFormElement ()
@@ -24,6 +25,7 @@
     if (self) {
         _enabled         = YES;
         _formValidations = [NSMutableSet new];
+        _theme           = [MYSFormTheme new];
     }
     return self;
 }

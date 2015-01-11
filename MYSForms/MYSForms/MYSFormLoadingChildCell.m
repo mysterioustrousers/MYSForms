@@ -8,6 +8,7 @@
 
 #import "MYSFormLoadingChildCell.h"
 #import "MYSFormMessageChildElement.h"
+#import "MYSFormTheme.h"
 
 
 static CGFloat spinnerSize      = 20;
@@ -18,8 +19,10 @@ static CGFloat standardSpacing  = 8;
 
 + (CGSize)sizeRequiredForElement:(MYSFormMessageChildElement *)element width:(CGFloat)width
 {
+    UIEdgeInsets insets = [element.theme.contentInsets UIEdgeInsetsValue];
+
     // subtract the cell margins
-    width -= [self cellContentInset].left + [self cellContentInset].right;
+    width -= insets.left + insets.right;
 
     // subtract the spinner and spacing
     width -= spinnerSize + standardSpacing;
@@ -27,13 +30,20 @@ static CGFloat standardSpacing  = 8;
     CGSize size = [element.message boundingRectWithSize:CGSizeMake(width, FLT_MAX)
                                                 options:NSStringDrawingUsesLineFragmentOrigin
                                              attributes:@{
-                                                          NSFontAttributeName : [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline]
+                                                          NSFontAttributeName : element.theme.messageTextFont
                                                           }
                                                 context:nil].size;
     size.height = ceil(size.height);
     size.height = size.height >= spinnerSize ? size.height : spinnerSize;
     size.height += 20;
     return size;
+}
+
+- (void)applyTheme:(MYSFormTheme *)theme
+{
+    [super applyTheme:theme];
+    self.messageLabel.font      = theme.messageTextFont;
+    self.messageLabel.textColor = theme.messageTextColor;
 }
 
 @end

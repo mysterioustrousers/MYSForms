@@ -8,18 +8,15 @@
 
 #import "MYSFormCell.h"
 #import "MYSFormElement.h"
+#import "MYSFormTheme.h"
 
 
 @implementation MYSFormCell
 
 + (CGSize)sizeRequiredForElement:(MYSFormElement *)element width:(CGFloat)width
 {
-    return CGSizeMake(width, [self cellContentInset].top + 44 + [self cellContentInset].bottom);
-}
-
-+ (UIEdgeInsets)cellContentInset
-{
-    return UIEdgeInsetsMake(0, 20, 0, 20);
+    UIEdgeInsets insets = [element.theme.contentInsets UIEdgeInsetsValue];
+    return CGSizeMake(width, insets.top + 44 + insets.bottom);
 }
 
 - (NSString *)valueKeyPath
@@ -31,6 +28,12 @@
 {
     [self setNeedsLayout];
     [self setNeedsDisplay];
+}
+
+- (void)applyTheme:(MYSFormTheme *)theme
+{
+    self.backgroundColor = theme.backgroundColor;
+    self.tintColor = theme.tintColor;
 }
 
 - (UIView *)textInput

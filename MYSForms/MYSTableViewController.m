@@ -61,12 +61,14 @@
         // setting the model before configuration
         formViewController.model = self.fakeUser;
 
-        MYSFormHeadlineElement *headline = [MYSFormHeadlineElement headlineElementWithHeadline:@"Log In"];
+        MYSFormLabelElement *headline = [MYSFormLabelElement labelElementWithText:@"Log In"];
+        headline.theme = [MYSFormTheme formThemeWithLabelFont:[UIFont preferredFontForTextStyle:UIFontTextStyleHeadline]];
         [formViewController addFormElement:headline];
 
 
-        MYSFormFootnoteElement *footnote = [MYSFormFootnoteElement new];
-        footnote.footnote = @"An example form that does not subclass the form view controller. It just creates one, configures and displays it.";
+        MYSFormLabelElement *footnote = [MYSFormLabelElement new];
+        footnote.label = @"An example form that does not subclass the form view controller. It just creates one, configures and displays it.";
+        footnote.theme = [MYSFormTheme formThemeWithLabelFont:[UIFont preferredFontForTextStyle:UIFontTextStyleFootnote]];
         [formViewController addFormElement:footnote];
 
 
@@ -102,10 +104,12 @@
         MYSFormButton *button2 = [MYSFormButton formButtonWithTitle:@"Button 2" action:^(MYSFormElement *element) {
             NSLog(@"button 2 pressed");
         }];
+        button2.buttonStyle = MYSFormButtonStyleBordered;
 
         MYSFormButton *button3 = [MYSFormButton formButtonWithTitle:@"Button 3" action:^(MYSFormElement *element) {
             NSLog(@"button 3 pressed");
         }];
+        button3.buttonStyle = MYSFormButtonStyleFilled;
 
         [formViewController addFormElement:[MYSFormButtonElement buttonElementWithButtons:@[button1, button2, button3]]];
 

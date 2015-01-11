@@ -9,6 +9,7 @@
 #import "MYSFormImagePickerCell.h"
 #import "MYSFormImagePickerElement.h"
 #import "MYSFormImagePickerCell-Private.h"
+#import "MYSFormTheme.h"
 
 
 @interface MYSFormImagePickerCell () <UIActionSheetDelegate>
@@ -33,7 +34,8 @@
 
 + (CGSize)sizeRequiredForElement:(MYSFormImagePickerElement *)element width:(CGFloat)width
 {
-    return CGSizeMake(width, [self cellContentInset].top + 100 + [self cellContentInset].bottom);
+    UIEdgeInsets insets = [element.theme.contentInsets UIEdgeInsetsValue];
+    return CGSizeMake(width, insets.top + 100 + insets.bottom);
 }
 
 - (void)didChangeValueAtValueKeyPath
@@ -61,6 +63,12 @@
     [super populateWithElement:element];
 }
 
+- (void)applyTheme:(MYSFormTheme *)theme
+{
+    [super applyTheme:theme];
+    self.label.font         = theme.labelFont;
+    self.label.textColor    = theme.labelTextColor;
+}
 
 
 

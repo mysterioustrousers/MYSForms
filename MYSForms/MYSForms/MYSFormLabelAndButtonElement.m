@@ -7,6 +7,7 @@
 //
 
 #import "MYSFormLabelAndButtonElement.h"
+#import "MYSFormButton.h"
 
 
 @interface MYSFormLabelAndButtonElement () <MYSFormLabelAndButtonCellDelegate>

@@ -10,21 +10,6 @@
 #import "MYSFormButtonCell.h"
 
 
-@class MYSFormButtonElement;
-
-
-typedef void(^MYSFormButtonActionBlock)(MYSFormElement *element);
-
-
-@interface MYSFormButton : UIButton
-
-@property (nonatomic, copy) MYSFormButtonActionBlock action;
-
-+ (instancetype)formButtonWithTitle:(NSString *)title action:(MYSFormButtonActionBlock)action;
-
-@end
-
-
 @interface MYSFormButtonElement : MYSFormElement
 
 @property (nonatomic, copy) NSArray *buttons;

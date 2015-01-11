@@ -9,6 +9,7 @@
 #import "MYSFormTextViewCell.h"
 #import "MYSFormTextViewCell-Private.h"
 #import "MYSFormTextViewElement.h"
+#import "MYSFormTheme.h"
 
 
 @interface MYSFormTextViewCell () <UITextViewDelegate>
@@ -33,8 +34,9 @@
 
 + (CGSize)sizeRequiredForElement:(MYSFormTextViewElement *)element width:(CGFloat)width
 {
+    UIEdgeInsets insets = [element.theme.contentInsets UIEdgeInsetsValue];
 
-    width -= [self cellContentInset].left + [self cellContentInset].right;
+    width -= insets.left + insets.right;
 
     // my guess at the padding UITextView adds to it's sides.
     width -= 13;
@@ -43,10 +45,10 @@
     CGSize size = [currentModelValue boundingRectWithSize:CGSizeMake(width, FLT_MAX)
                                              options:NSStringDrawingUsesLineFragmentOrigin
                                           attributes:@{
-                                                       NSFontAttributeName : element.font
+                                                       NSFontAttributeName : element.theme.inputTextFont
                                                        }
                                              context:nil].size;
-    size.height = ceil(size.height) + [self cellContentInset].top + [self cellContentInset].bottom;
+    size.height = ceil(size.height) + insets.top + insets.bottom;
 
     return size;
 }
@@ -58,9 +60,16 @@
 
 - (void)populateWithElement:(MYSFormTextViewElement *)element
 {
-    self.textView.font     = element.font;
+    self.textView.font     = element.theme.inputTextFont;
     self.textView.editable = element.isEditable && element.isEnabled;
     [super populateWithElement:element];
+}
+
+- (void)applyTheme:(MYSFormTheme *)theme
+{
+    [super applyTheme:theme];
+    self.textView.font      = theme.inputTextFont;
+    self.textView.textColor = theme.inputTextColor;
 }
 
 - (UIView *)textInput

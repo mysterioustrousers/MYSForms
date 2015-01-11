@@ -12,6 +12,7 @@
 
 @class MYSFormElement;
 @class MYSFormCell;
+@class MYSFormTheme;
 
 
 @protocol MYSFormElementDataSource;
@@ -53,6 +54,11 @@
  The class of the cell to be used to display this form element. By default, this is the same name as this class with Cell replacing Element.
  */
 @property (nonatomic) Class cellClass;
+
+/**
+ The theme that will be applied to the appropriate views in the view representation of this element (the cell).
+ */
+@property (nonatomic, strong) MYSFormTheme *theme;
 
 /**
  Is asked of the element to make sure this element can be added for this form/device/orientation/whatever.
@@ -123,15 +129,23 @@
 
 
 @protocol MYSFormElementDelegate <NSObject>
+
 - (void)formElement:(MYSFormElement *)formElement valueDidChange:(id)value;
+
 - (void)formElementNeedsLayout:(MYSFormElement *)formElement;
+
 - (void)formElement:(MYSFormElement *)formElement didRequestPresentationOfActionSheet:(UIActionSheet *)actionSheet;
+
 - (void)formElement:(MYSFormElement *)formElement didRequestPresentationOfViewController:(UIViewController *)viewController
            animated:(BOOL)animated
          completion:(void (^)(void))completion;
+
 - (void)formElement:(MYSFormElement *)formElement didRequestPresentationOfChildView:(UIView *)childView;
+
 - (void)formElement:(MYSFormElement *)formElement didRequestDismissalOfChildView:(UIView *)childView;
+
 - (void)formElementDidRequestResignationOfFirstResponder:(MYSFormElement *)formElement;
+
 @end
 
 

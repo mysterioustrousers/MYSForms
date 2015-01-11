@@ -8,9 +8,17 @@
 
 #import "MYSFormLabelAndButtonCell.h"
 #import "MYSFormLabelAndButtonElement.h"
+#import "MYSFormButton.h"
+#import "MYSFormTheme.h"
 
 
 @implementation MYSFormLabelAndButtonCell
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    [self.button setTitleColor:[self tintColor] forState:UIControlStateNormal];
+}
 
 - (void)populateWithElement:(MYSFormLabelAndButtonElement *)element
 {
@@ -20,10 +28,14 @@
     [super populateWithElement:element];
 }
 
-- (void)layoutSubviews
+- (void)applyTheme:(MYSFormTheme *)theme
 {
-    [super layoutSubviews];
-    [self.button setTitleColor:[self tintColor] forState:UIControlStateNormal];
+    [super applyTheme:theme];
+    self.label.font         = theme.labelFont;
+    self.label.textColor    = theme.labelTextColor;
+    if (self.button.buttonStyle == MYSFormButtonStyleNone) {
+        self.button.buttonStyle = [theme.buttonStyle integerValue];
+    }
 }
 
 

@@ -8,19 +8,7 @@
 
 #import "MYSFormButtonElement.h"
 #import "MYSFormButtonCell.h"
-
-
-@implementation MYSFormButton
-
-+ (instancetype)formButtonWithTitle:(NSString *)title action:(MYSFormButtonActionBlock)action
-{
-    MYSFormButton *button = [self new];
-    button.action = action;
-    [button setTitle:title forState:UIControlStateNormal];
-    return button;
-}
-
-@end
+#import "MYSFormButton.h"
 
 
 @interface MYSFormButtonElement () <MYSFormButtonCellDelegate>

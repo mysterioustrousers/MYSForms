@@ -23,10 +23,13 @@
 {
     [super configureForm];
 
-    [self addFormElement:[MYSFormHeadlineElement headlineElementWithHeadline:@"Sign Up"]];
+    MYSFormLabelElement *headlineElement = [MYSFormLabelElement labelElementWithText:@"Sign Up"];
+    headlineElement.theme = [MYSFormTheme formThemeWithLabelFont:[UIFont preferredFontForTextStyle:UIFontTextStyleHeadline]];
+    [self addFormElement:headlineElement];
 
-    [self addFormElement:[MYSFormFootnoteElement footnoteElementWithFootnote:
-                          @"Example of a subclassed form view controller where a blank model is created in its viewDidLoad."]];
+    MYSFormLabelElement *footnoteElement = [MYSFormLabelElement labelElementWithText:@"Example of a subclassed form view controller where a blank model is created in its viewDidLoad."];
+    footnoteElement.theme = [MYSFormTheme formThemeWithLabelFont:[UIFont preferredFontForTextStyle:UIFontTextStyleFootnote]];
+    [self addFormElement:footnoteElement];
 
     [self addFormElement:[MYSFormTextFieldElement textFieldElementWithLabel:@"First Name" modelKeyPath:@"firstName"]];
 

@@ -1,5 +1,5 @@
 //
-//  MYSFormFootnoteElement.h
+//  MYSFormHeadlineElement.h
 //  MYSForms
 //
 //  Created by Adam Kirk on 5/2/14.
@@ -9,9 +9,8 @@
 #import "MYSFormCell.h"
 
 
-@interface MYSFormFootnoteCell : MYSFormCell
+@interface MYSFormLabelCell : MYSFormCell
 
-@property (weak, nonatomic) IBOutlet UILabel *footnoteLabel;
+@property (weak, nonatomic) IBOutlet UILabel *label;
 
 @end
-

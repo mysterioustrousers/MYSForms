@@ -32,6 +32,16 @@
 - (void)addValue:(id)value;
 
 /**
+ Open the actual picker below this element.
+ */
+- (void)openPicker;
+
+/**
+ If the picker is open, close it.
+ */
+- (void)closePicker;
+
+/**
  To fully control the contents of the picker view, set an object you control as the dataSource/delegate. Optionally, you can
  provide to this element prepared static content that it will display by using the `setValues:` and `addValue:` methods above.
  */

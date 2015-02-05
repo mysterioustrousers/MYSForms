@@ -41,7 +41,7 @@
     // my guess at the padding UITextView adds to it's sides.
     width -= 13;
 
-    NSString *currentModelValue = [element currentModelValue];
+    NSString *currentModelValue = [element transformedModelValue];
     CGSize size = [currentModelValue boundingRectWithSize:CGSizeMake(width, FLT_MAX)
                                              options:NSStringDrawingUsesLineFragmentOrigin
                                           attributes:@{

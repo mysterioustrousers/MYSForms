@@ -9,7 +9,7 @@
 #import "MYSFormElement.h"
 
 
-typedef NS_ENUM(NSUInteger, MYSFormChildElementType) {
+typedef NS_ENUM(NSInteger, MYSFormChildElementType) {
     MYSFormChildElementTypeLoading,
     MYSFormChildElementTypeValidationError,
     MYSFormChildElementTypeError,
@@ -22,6 +22,6 @@ typedef NS_ENUM(NSUInteger, MYSFormChildElementType) {
 
 @property (nonatomic, weak) MYSFormElement *parentElement;
 
-@property (nonatomic, assign, readonly) MYSFormChildElementType type;
+@property (nonatomic, readonly) MYSFormChildElementType type;
 
 @end

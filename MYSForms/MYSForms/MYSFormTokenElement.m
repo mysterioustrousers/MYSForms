@@ -9,6 +9,7 @@
 #import "MYSFormTokenElement.h"
 #import "MYSFormTokenCell-Private.h"
 #import "MYSFormValueTransformer.h"
+#import "MYSFormTheme.h"
 
 
 @interface MYSFormTokenElement () <MYSFormTokenCellDelegate>
@@ -46,10 +47,15 @@
     cell.tokenCellDelegate = self;
 }
 
-- (id)currentModelValue
+- (id)transformedModelValue
 {
     id value = [super currentModelValue];
     return [self.displayStringValueTransformer transformedValue:value];
+}
+
+- (void)configureDefaultTheme:(MYSFormTheme *)theme
+{
+    theme.backgroundColor = [UIColor clearColor];
 }
 
 

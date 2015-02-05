@@ -15,6 +15,11 @@
 + (instancetype)datePickerElementWithLabel:(NSString *)label modelKeyPath:(NSString *)modelKeyPath;
 
 /**
+ The date picker that will be presented when this element is tapped. Exposed for your customizing pleasure.
+ */
+@property (nonatomic, strong, readonly) UIDatePicker *datePicker;
+
+/**
  The label that appears as the title of what the user is picking a date for.
  */
 @property (nonatomic, copy) NSString *label;

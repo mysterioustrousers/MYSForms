@@ -30,11 +30,10 @@
         _pickerView.dataSource      = self;
         _pickerView.delegate        = self;
         _pickerView.backgroundColor = [UIColor whiteColor];
+        _closesOnSelect             = YES;
     }
     return self;
 }
-
-
 
 
 #pragma mark - Public
@@ -75,15 +74,7 @@
 
 - (void)setValues:(NSArray *)values
 {
-    NSMutableArray *newData = [NSMutableArray new];
-    for (id value in values) {
-        id transformedValue = value;
-        if (self.valueTransformer) {
-            transformedValue = [self.valueTransformer transformedValue:value];
-        }
-        [newData addObject:transformedValue];
-    }
-    self.data = newData;
+    self.data = [values mutableCopy];
     [self.pickerView reloadAllComponents];
 }
 
@@ -94,17 +85,14 @@
 }
 
 
-
 #pragma mark - DELEGATE form cell
-
-
 
 
 #pragma mark - DELEGATE picker cell
 
 - (void)formPickerCellRequestedPicker:(MYSFormPickerCell *)cell
 {
-    id value = [self.dataSource modelValueForFormElement:self];
+    id value = [self currentModelValue];
     NSInteger index = [self.data indexOfObject:value];
     if (index != NSNotFound) {
         [self.pickerView selectRow:index inComponent:0 animated:YES];
@@ -137,7 +125,7 @@
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    id value =  self.data[row];
+    id value = self.data[row];
     if (self.valueTransformer) {
         value = [self.valueTransformer transformedValue:value];
     }
@@ -148,7 +136,9 @@
 {
     id value = self.data[row];
     [self.delegate formElement:self valueDidChange:value];
+    if (self.closesOnSelect) {
+        [self closePicker];
+    }
 }
-
 
 @end

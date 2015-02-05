@@ -9,5 +9,5 @@
 #import "MYSFormChildElement.h"
 
 @interface MYSFormChildElement ()
-@property (nonatomic, assign, readwrite) MYSFormChildElementType type;
+@property (nonatomic, readwrite) MYSFormChildElementType type;
 @end

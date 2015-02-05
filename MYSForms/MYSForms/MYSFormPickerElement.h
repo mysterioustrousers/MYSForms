@@ -21,6 +21,11 @@
 @property (nonatomic, copy) NSString *label;
 
 /**
+ Closes the picker as soon as the value changes. `YES` by default.
+ */
+@property (nonatomic) BOOL closesOnSelect;
+
+/**
  This allows you to set all the values of the picker at once.
  */
 - (void)setValues:(NSArray *)values;

@@ -7,6 +7,7 @@
 //
 
 #import "MYSFormElement.h"
+#import "MYSFormElement-Private.h"
 #import "MYSFormCell.h"
 #import "MYSFormTheme.h"
 
@@ -26,6 +27,8 @@
         _enabled         = YES;
         _formValidations = [NSMutableSet new];
         _theme           = [MYSFormTheme new];
+        _childElements   = [NSMutableArray new];
+        [self configureDefaultTheme:self.theme];
     }
     return self;
 }
@@ -41,6 +44,18 @@
 - (id)currentModelValue
 {
     return [self.dataSource modelValueForFormElement:self];
+}
+
+- (id)transformedModelValue
+{
+    id value = [self currentModelValue];
+
+    // transform the value if needed
+    if (self.valueTransformer) {
+        value = [self.valueTransformer transformedValue:value];
+    }
+
+    return value;
 }
 
 - (void)setCell:(MYSFormCell *)cell
@@ -59,11 +74,16 @@
     return NSClassFromString(cellClassName);
 }
 
+- (void)configureDefaultTheme:(MYSFormTheme *)theme
+{
+
+}
+
 - (void)updateCell
 {
     [self.cell populateWithElement:self];
     if ([self isModelKeyPathValid]) {
-        id modelValue = [self currentModelValue];
+        id modelValue = [self transformedModelValue];
         [self.cell setValue:modelValue forKeyPath:[self.cell valueKeyPath]];
         [self.cell didChangeValueAtValueKeyPath];
     }

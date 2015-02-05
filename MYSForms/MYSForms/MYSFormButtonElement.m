@@ -9,6 +9,7 @@
 #import "MYSFormButtonElement.h"
 #import "MYSFormButtonCell.h"
 #import "MYSFormButton.h"
+#import "MYSFormTheme.h"
 
 
 @interface MYSFormButtonElement () <MYSFormButtonCellDelegate>
@@ -34,6 +35,11 @@
 {
     _buttons = [buttons copy];
     [self.cell setNeedsLayout];
+}
+
+- (void)configureDefaultTheme:(MYSFormTheme *)theme
+{
+    theme.backgroundColor = [UIColor clearColor];
 }
 
 

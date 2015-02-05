@@ -27,6 +27,11 @@
  */
 @property (nonatomic, copy) NSValue *contentInsets;
 
+/**
+ NSValue of UIEdgeInsets.
+ */
+@property (nonatomic, copy) NSValue *padding;
+
 @property (nonatomic, copy) UIColor *backgroundColor;
 
 @property (nonatomic, copy) NSNumber *height;
@@ -41,8 +46,14 @@
 
 @property (nonatomic, copy) UIColor *tintColor;
 
+/**
+ Error, loading, success message font.
+ */
 @property (nonatomic, copy) UIFont *messageTextFont;
 
+/**
+ Error, loading, success message text color.
+ */
 @property (nonatomic, copy) UIColor *messageTextColor;
 
 /**

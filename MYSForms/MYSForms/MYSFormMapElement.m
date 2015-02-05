@@ -7,6 +7,7 @@
 //
 
 #import "MYSFormMapElement.h"
+#import "MYSFormTheme.h"
 
 
 @implementation MYSFormMapElement
@@ -21,6 +22,11 @@
 + (double)coordinatesForMiles:(CGFloat)miles
 {
     return 0.0144927536 * miles;
+}
+
+- (void)configureDefaultTheme:(MYSFormTheme *)theme
+{
+    theme.backgroundColor = [UIColor clearColor];
 }
 
 @end

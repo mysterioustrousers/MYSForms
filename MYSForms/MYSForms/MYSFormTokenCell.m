@@ -6,7 +6,6 @@
 //  Copyright (c) 2014 Mysterious Trousers. All rights reserved.
 //
 
-#import "MYSFormTokenCell.h"
 #import "MYSFormTokenElement.h"
 #import "MYSFormTokenCell-Private.h"
 #import "MYSFormTheme.h"
@@ -27,7 +26,7 @@ static CGFloat tokenSpacing = 8.0;
 {
     UIEdgeInsets insets = [element.theme.contentInsets UIEdgeInsetsValue];
     MYSFormTokenCell *measurementCell = [[MYSFormTokenCell alloc] initWithFrame:CGRectMake(0, 0, width, 150)];
-    [measurementCell setTokenDisplayStrings:[element currentModelValue]];
+    [measurementCell setTokenDisplayStrings:[element transformedModelValue]];
     [measurementCell populateWithElement:element];
     NSArray *frames = [measurementCell tokenFrames];
     CGFloat maxY = 0;

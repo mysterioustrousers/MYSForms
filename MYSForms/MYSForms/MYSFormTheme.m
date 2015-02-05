@@ -9,9 +9,6 @@
 #import "MYSFormTheme.h"
 
 
-#define MERGE(a, b) if (!a) a = [b copy]
-
-
 @implementation MYSFormTheme
 
 + (instancetype)formThemeWithLabelFont:(UIFont *)font
@@ -30,11 +27,14 @@
     return theme;
 }
 
+#define MERGE(a, b) if (!a) a = [b copy]
+
 - (void)mergeWithTheme:(MYSFormTheme *)theme
 {
     MERGE(_labelFont,            theme.labelFont);
     MERGE(_labelTextColor,       theme.labelTextColor);
     MERGE(_contentInsets,        theme.contentInsets);
+    MERGE(_padding,              theme.padding);
     MERGE(_backgroundColor,      theme.backgroundColor);
     MERGE(_height,               theme.height);
     MERGE(_inputLabelFont,       theme.inputLabelFont);
@@ -50,12 +50,20 @@
     MERGE(_toggleThumbTintColor, theme.toggleThumbTintColor);
 }
 
-
-#define GETTER(t, n, d) - (t *)n { if (_##n) { return _##n; } else { return d; } }
+#define GETTER(t, n, d) \
+- (t *)n { \
+    if (_##n) { \
+        return _##n; \
+    } \
+    else { \
+        return d; \
+    } \
+}
 
 GETTER(UIFont,   labelFont,             [UIFont preferredFontForTextStyle:UIFontTextStyleBody]);
 GETTER(UIColor,  labelTextColor,        [UIColor blackColor]);
 GETTER(NSValue,  contentInsets,         [NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(0, 20, 0, 20)]);
+GETTER(NSValue,  padding,               [NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)]);
 GETTER(UIColor,  backgroundColor,       [UIColor whiteColor]);
 GETTER(NSNumber, height,                nil);
 GETTER(UIFont,   inputLabelFont,        [UIFont preferredFontForTextStyle:UIFontTextStyleCaption1]);

@@ -7,6 +7,8 @@
 //
 
 #import "MYSForms.h"
+#import "MYSFormElement-Private.h"
+#import "MYSFormChildElement-Private.h"
 #import "MYSFormMessageChildElement.h"
 #import "MYSFormLoadingChildCell.h"
 #import "MYSFormMessageChildElement-Private.h"
@@ -35,7 +37,6 @@
 - (instancetype)init
 {
     UICollectionViewFlowLayout *layout = [UICollectionViewFlowLayout new];
-    layout.minimumInteritemSpacing = CGFLOAT_MAX;
     self = [super initWithCollectionViewLayout:layout];
     if (self) {
         [self formInit];
@@ -64,13 +65,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    self.collectionView.backgroundColor      = [UIColor whiteColor];
-    self.view.backgroundColor                = [UIColor whiteColor];
     self.collectionView.alwaysBounceVertical = YES;
-
+    self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    self.collectionView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     [self configureForm];
-
     [self registerElementCellsForReuse];
     [self setupKeyboardNotifications];
 }
@@ -158,6 +156,17 @@
     }
     if (self.theme) {
         [element.theme mergeWithTheme:self.theme];
+    }
+}
+
+- (void)addPadding:(CGFloat)padding
+{
+    MYSFormElement *lastElementAdded = [self.elements lastObject];
+    if (lastElementAdded) {
+        MYSFormTheme *theme = lastElementAdded.theme;
+        UIEdgeInsets insets = [theme.padding UIEdgeInsetsValue];
+        insets.bottom += padding;
+        theme.padding = [NSValue valueWithUIEdgeInsets:insets];
     }
 }
 
@@ -296,27 +305,26 @@
 
 #pragma mark - DATASOURCE collection view
 
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+{
+    return [self.elements count];
+}
+
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return [self.elements count] + 1;
+    MYSFormElement *element = self.elements[section];
+    return 1 + [element.childElements count];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.item < [self.elements count]) {
-        MYSFormElement *element = self.elements[indexPath.row];
-        MYSFormCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([element cellClass]) forIndexPath:indexPath];
-        [cell populateWithElement:element];
-        [cell applyTheme:element.theme];
-        element.cell = cell;
-        [element updateCell];
-        return cell;
-    }
-
-    // have to do this because there's some bug I can't figure out that causes the last cell in a collection view to jump/stutter
-    // when rows are inserted.
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"InvisibleCell" forIndexPath:indexPath];
-    cell.backgroundColor = [UIColor clearColor];
+    MYSFormElement *element = self.elements[indexPath.section];
+    
+    MYSFormCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([element cellClass]) forIndexPath:indexPath];
+    [cell populateWithElement:element];
+    [cell applyTheme:element.theme];
+    element.cell = cell;
+    [element updateCell];
     return cell;
 }
 
@@ -325,8 +333,10 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didEndDisplayingCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.item < [self.elements count] && [self.formDelegate respondsToSelector:@selector(formViewController:willRemoveElement:cell:)]) {
-        MYSFormElement *element = self.elements[indexPath.item];
+    if (indexPath.section < [self.elements count] &&
+        [self.formDelegate respondsToSelector:@selector(formViewController:willRemoveElement:cell:)])
+    {
+        MYSFormElement *element = self.elements[indexPath.section];
         [self.formDelegate formViewController:self willRemoveElement:element cell:cell];
     }
 }
@@ -338,21 +348,25 @@
                   layout:(UICollectionViewLayout *)collectionViewLayout
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.item < [self.elements count]) {
-        NSValue *cachedSize = self.cachedCellSizes[indexPath];
-        if (!cachedSize) {
-            MYSFormElement *element = self.elements[indexPath.row];
-            CGFloat width = self.fixedWidth > 0 && self.fixedWidth < collectionView.frame.size.width ? self.fixedWidth : collectionView.frame.size.width;
-            CGSize size = (element.theme.height ?
-                           CGSizeMake(width, [element.theme.height floatValue]) :
-                           [[element cellClass] sizeRequiredForElement:element width:width]);
-            size.width = width;
-            cachedSize = [NSValue valueWithCGSize:size];
-            self.cachedCellSizes[indexPath] = cachedSize;
-        }
-        return [cachedSize CGSizeValue];
+    NSValue *cachedSize = self.cachedCellSizes[indexPath];
+    if (!cachedSize) {
+        MYSFormElement *element = self.elements[indexPath.section];
+        CGFloat width = self.fixedWidth > 0 && self.fixedWidth < collectionView.frame.size.width ? self.fixedWidth : collectionView.frame.size.width;
+        CGSize size = (element.theme.height ?
+                       CGSizeMake(width, [element.theme.height floatValue]) :
+                       [[element cellClass] sizeRequiredForElement:element width:width]);
+        size.width = width;
+        cachedSize = [NSValue valueWithCGSize:size];
+        self.cachedCellSizes[indexPath] = cachedSize;
     }
-    return CGSizeMake(self.collectionView.frame.size.width, 50);
+    return [cachedSize CGSizeValue];
+}
+
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView
+                        layout:(UICollectionViewLayout *)collectionViewLayout
+        insetForSectionAtIndex:(NSInteger)section
+{
+    return UIEdgeInsetsMake(5, 0, 5, 0);
 }
 
 
@@ -361,14 +375,7 @@
 - (id)modelValueForFormElement:(MYSFormElement *)formElement
 {
     if ([self elementHasValidKeyPath:formElement]) {
-        id value = [self.model valueForKeyPath:formElement.modelKeyPath];
-
-        // transform the value if needed
-        if (formElement.valueTransformer) {
-            value = [formElement.valueTransformer transformedValue:value];
-        }
-
-        return value;
+        return [self.model valueForKeyPath:formElement.modelKeyPath];
     }
     return nil;
 }
@@ -433,6 +440,11 @@
     [self attemptToDismissKeyboard];
 }
 
+- (void)formElement:(MYSFormElement *)formElement didRequestPushOfViewController:(UIViewController *)viewController
+{
+    [self.navigationController pushViewController:viewController animated:YES];
+}
+
 
 #pragma mark - KVO (the model changed)
 
@@ -442,8 +454,8 @@
         if ([element.modelKeyPath isEqualToString:keyPath]) {
             if (![[element.cell textInput] isFirstResponder]) {
                 NSIndexPath *ip = [self indexPathOfElement:element];
-                if (ip.item < [self.collectionView numberOfItemsInSection:0]) {
-                    [self.collectionView reloadItemsAtIndexPaths:@[ip]];
+                if (ip.section < [self.collectionView numberOfSections]) {
+                    [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:ip.section]];
                 }
             }
             return;
@@ -472,23 +484,28 @@
     NSMutableArray *indexPathsToInsert  = [NSMutableArray new];
 
     for (MYSFormElement *element in [self.elements copy]) {
-        NSInteger indexOffset       = position == MYSFormElementRelativePositionBelow ? 1 : 0;
-        NSInteger indexMultiplier   = position == MYSFormElementRelativePositionBelow ? 1 : -1;
+        NSInteger indexOffset     = position == MYSFormElementRelativePositionBelow ? 1 : 0;
+        NSInteger indexMultiplier = position == MYSFormElementRelativePositionBelow ? 1 : -1;
         for (MYSFormMessageChildElement *childElement in childElements) {
             
             // make sure this child isn't already showing
-            NSArray *visibleChildElements = [self childElementsOfType:childElement.type];
+            NSArray *visibleChildElements = [self childElementsOfParentElement:childElement.parentElement type:childElement.type];
             if ([visibleChildElements containsObject:childElement]) {
                 continue;
             }
             
             if ([element isEqual:childElement.parentElement]) {
-                NSInteger index = [self.elements indexOfObject:childElement.parentElement];
-                NSAssert(index != NSNotFound, @"element must be added to the form.");
+                NSInteger section = [self.elements indexOfObject:childElement.parentElement];
+                NSAssert(section != NSNotFound, @"element must be added to the form.");
 
-                NSInteger newIndex = index + (indexOffset++ * indexMultiplier);
-                [self addFormElement:childElement atIndex:newIndex];
-                [indexPathsToInsert addObject:[NSIndexPath indexPathForItem:newIndex inSection:0]];
+                NSInteger newIndex = indexOffset++ * indexMultiplier;
+                childElement.dataSource  = self;
+                childElement.delegate    = self;
+                [element.childElements addObject:childElement];
+                if (self.theme) {
+                    [childElement.theme mergeWithTheme:self.theme];
+                }
+                [indexPathsToInsert addObject:[NSIndexPath indexPathForItem:newIndex inSection:section]];
 
                 if (duration > 0) {
                     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(duration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -505,7 +522,9 @@
             [self.collectionView insertItemsAtIndexPaths:indexPathsToInsert];
         } completion:^(BOOL finished) {
             NSIndexPath *ip = [indexPathsToInsert firstObject];
-            if (ip) [self.collectionView scrollToItemAtIndexPath:ip atScrollPosition:UICollectionViewScrollPositionCenteredVertically animated:YES];
+            if (ip) [self.collectionView scrollToItemAtIndexPath:ip
+                                                atScrollPosition:UICollectionViewScrollPositionCenteredVertically
+                                                        animated:YES];
             if (completion) completion();
         }];
     }
@@ -519,21 +538,16 @@
 {
     if (!self.collectionView.window) return;
 
-    NSArray *childElements = [self childElementsOfType:type];
+    NSArray *childElements = [self childElementsOfParentElement:parentElement type:type];
 
     NSMutableArray *indexPathsToRemove = [NSMutableArray new];
     for (MYSFormMessageChildElement *childElement in childElements) {
         if (!parentElement || [childElement.parentElement isEqual:parentElement]) {
             NSIndexPath *ip = [self.collectionView indexPathForCell:childElement.cell];
             if (ip) {
-                [self.elements removeObject:childElement];
+                [parentElement.childElements removeObject:childElement];
                 [indexPathsToRemove addObject:ip];
             }
-
-//            NSInteger index = [self.elements indexOfObject:childElement];
-//            NSIndexPath *ip = [NSIndexPath indexPathForItem:index inSection:0];
-//            [self.elements removeObject:childElement];
-//            [indexPathsToRemove addObject:ip];
         }
     }
 
@@ -550,9 +564,9 @@
     }
 }
 
-- (NSArray *)childElementsOfType:(MYSFormChildElementType)type
+- (NSArray *)childElementsOfParentElement:(MYSFormElement *)element type:(MYSFormChildElementType)type
 {
-    return [self.elements filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(MYSFormElement *element, NSDictionary *bindings) {
+    return [element.childElements filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(MYSFormElement *element, NSDictionary *bindings) {
         return ([element isKindOfClass:[MYSFormChildElement class]] && [(MYSFormChildElement *)element type] == type);
     }]];
 }
@@ -730,7 +744,7 @@
 - (NSIndexPath *)indexPathOfElement:(MYSFormElement *)element
 {
     NSInteger index = [self.elements indexOfObject:element];
-    return [NSIndexPath indexPathForItem:index inSection:0];
+    return [NSIndexPath indexPathForItem:0 inSection:index];
 }
 
 @end

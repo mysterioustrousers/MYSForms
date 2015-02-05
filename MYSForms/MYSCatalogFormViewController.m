@@ -8,6 +8,7 @@
 
 #import "MYSCatalogFormViewController.h"
 #import "MYSExampleUser.h"
+#import "MYSErrorFormViewController.h"
 
 
 @interface MYSCatalogFormViewController ()
@@ -34,16 +35,24 @@
 {
     [super configureForm];
 
-    MYSFormLabelElement *headlineElement = [MYSFormLabelElement labelElementWithText:@"A Headline"];
+    MYSFormLabelElement *headlineElement = [MYSFormLabelElement labelElementWithText:@"Headline"];
     headlineElement.theme = [MYSFormTheme formThemeWithLabelFont:[UIFont preferredFontForTextStyle:UIFontTextStyleHeadline]];
+    headlineElement.theme.backgroundColor = [UIColor clearColor];
     [self addFormElement:headlineElement];
 
     MYSFormLabelElement *footnoteElement = [MYSFormLabelElement labelElementWithText:@"A footnote/description element for offering a more detailed explanation in your form."];
-    footnoteElement.theme = [MYSFormTheme formThemeWithLabelFont:[UIFont preferredFontForTextStyle:UIFontTextStyleFootnote]];
     [self addFormElement:footnoteElement];
 
 
+    MYSFormNavigationElement *navigationElement = [MYSFormNavigationElement navigationElementWithLabel:@"Child Form"
+                                                                        destinationViewControllerBlock:^UIViewController *{
+                                                                            return [MYSErrorFormViewController new];
+                                                                        }];
+    [self addFormElement:navigationElement];
+
+
     [self addFormElement:[MYSFormTextFieldElement textFieldElementWithLabel:@"Text Field" modelKeyPath:@"firstName"]];
+
 
     [self addFormElement:[MYSFormTextFieldElement textFieldElementWithLabel:@"Text Field" modelKeyPath:@"lastName"]];
 

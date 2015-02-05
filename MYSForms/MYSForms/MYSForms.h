@@ -21,6 +21,7 @@
 #import "MYSFormToggleElement.h"
 #import "MYSFormMapElement.h"
 #import "MYSFormTokenElement.h"
+#import "MYSFormNavigationElement.h"
 
 // form validators
 #import "MYSFormPresenceValidation.h"

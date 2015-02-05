@@ -8,6 +8,7 @@
 
 #import "MYSFormLabelAndButtonElement.h"
 #import "MYSFormButton.h"
+#import "MYSFormTheme.h"
 
 
 @interface MYSFormLabelAndButtonElement () <MYSFormLabelAndButtonCellDelegate>
@@ -30,6 +31,10 @@
     cell.labelAndButtonCellDelegate = self;
 }
 
+- (void)configureDefaultTheme:(MYSFormTheme *)theme
+{
+    theme.backgroundColor = [UIColor clearColor];
+}
 
 #pragma mark - DELEGATE label and button cell
 

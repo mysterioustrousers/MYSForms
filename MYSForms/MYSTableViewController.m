@@ -38,16 +38,12 @@
 }
 
 
-
-
 #pragma mark - DELEGATE form view controller
 
 - (void)formViewControllerDidSubmit:(MYSFormViewController *)controller
 {
     NSLog(@"Current Model: %@", self.fakeUser);
 }
-
-
 
 
 #pragma mark - DELEGATE table view
@@ -57,6 +53,8 @@
     // log in form
     if (indexPath.row == 0) {
         MYSFormViewController *formViewController = [MYSFormViewController new];
+
+        formViewController.view.backgroundColor = [UIColor whiteColor];
 
         // setting the model before configuration
         formViewController.model = self.fakeUser;
@@ -138,6 +136,5 @@
         formViewController.collectionView.contentInset = UIEdgeInsetsMake(20, 0, 20, 0);
     }
 }
-
 
 @end

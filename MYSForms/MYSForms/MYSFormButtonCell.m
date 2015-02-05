@@ -44,6 +44,7 @@
 
 - (void)applyTheme:(MYSFormTheme *)theme
 {
+    [super applyTheme:theme];
     for (MYSFormButton *button in self.buttons) {
         if (button.buttonStyle == MYSFormButtonStyleNone) {
             button.buttonStyle = [theme.buttonStyle integerValue];

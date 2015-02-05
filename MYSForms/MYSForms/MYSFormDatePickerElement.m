@@ -73,7 +73,7 @@
 
 - (void)formDatePickerCellRequestedDatePicker:(MYSFormDatePickerCell *)cell
 {
-    id value = [self.dataSource modelValueForFormElement:self];
+    id value = [self currentModelValue];
     self.datePicker.date = value ?: [NSDate date];
     if (!self.isVisible) {
         self.visible = YES;

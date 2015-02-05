@@ -7,6 +7,7 @@
 //
 
 #import "MYSFormLabelElement.h"
+#import "MYSFormTheme.h"
 
 
 @implementation MYSFormLabelElement
@@ -16,6 +17,12 @@
     MYSFormLabelElement *element = [self new];
     element.label = text;
     return element;
+}
+
+- (void)configureDefaultTheme:(MYSFormTheme *)theme
+{
+    theme.backgroundColor = [UIColor clearColor];
+    theme.labelFont = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
 }
 
 @end

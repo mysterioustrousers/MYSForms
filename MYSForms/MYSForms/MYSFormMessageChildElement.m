@@ -10,6 +10,7 @@
 #import "MYSFormLoadingChildCell.h"
 #import "MYSFormMessageChildElement-Private.h"
 #import "MYSFormChildElement-Private.h"
+#import "MYSFormTheme.h"
 
 
 @interface MYSFormMessageChildElement ()
@@ -47,6 +48,12 @@
 - (NSUInteger)hash
 {
     return [self.parentElement hash] ^ self.type ^ [self.message hash];
+}
+
+- (void)configureDefaultTheme:(MYSFormTheme *)theme
+{
+    theme.backgroundColor = [UIColor clearColor];
+    theme.labelFont = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
 }
 
 @end

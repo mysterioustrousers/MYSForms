@@ -7,21 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MYSFormRelativePosition.h"
 
 
 @class MYSFormElement;
 @class MYSFormViewController;
 @class MYSFormCell;
 @class MYSFormTheme;
-
-
-/**
- When requesting that a child element be presented next to a parent, an above or below position can sometimes be specified.
- */
-typedef NS_ENUM(NSUInteger, MYSFormElementRelativePosition) {
-    MYSFormElementRelativePositionAbove,
-    MYSFormElementRelativePositionBelow
-};
 
 
 /**

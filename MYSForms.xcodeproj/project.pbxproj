@@ -135,6 +135,7 @@
 		C24F1B9A191AD8E700356D9A /* MYSFormLabelAndButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYSFormLabelAndButtonCell.m; sourceTree = "<group>"; };
 		C24F1B9C191AD90300356D9A /* MYSFormLabelAndButtonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MYSFormLabelAndButtonCell.xib; sourceTree = "<group>"; };
 		C25FB6831A81D6BA0017D34C /* MYSFormElement-Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MYSFormElement-Private.h"; sourceTree = "<group>"; };
+		C25FB6851A8318DF0017D34C /* MYSFormRelativePosition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MYSFormRelativePosition.h; sourceTree = "<group>"; };
 		C26614D9191533B80073DAD8 /* MYSSignUpFormViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYSSignUpFormViewController.h; sourceTree = "<group>"; };
 		C26614DA191533B80073DAD8 /* MYSSignUpFormViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYSSignUpFormViewController.m; sourceTree = "<group>"; };
 		C26614DC19153CD40073DAD8 /* MYSFormLabelCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MYSFormLabelCell.xib; sourceTree = "<group>"; };
@@ -358,6 +359,7 @@
 		C25FB6841A8301BC0017D34C /* Headers */ = {
 			isa = PBXGroup;
 			children = (
+				C25FB6851A8318DF0017D34C /* MYSFormRelativePosition.h */,
 			);
 			name = Headers;
 			sourceTree = "<group>";

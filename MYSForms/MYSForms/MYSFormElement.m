@@ -10,11 +10,14 @@
 #import "MYSFormElement-Private.h"
 #import "MYSFormCell.h"
 #import "MYSFormTheme.h"
+#import "MYSFormChildElement-Private.h"
 
 
 @interface MYSFormElement ()
-@property (nonatomic, strong) NSMutableSet *formValidations;
-@property (nonatomic, copy  ) void         (^cellConfigurationBlock)(MYSFormCell *cell);
+@property (nonatomic, strong) NSMutableSet   *formValidations;
+@property (nonatomic, copy  ) void           (^cellConfigurationBlock)(MYSFormCell *cell);
+@property (nonatomic, copy  ) NSMutableArray *childElementsAbove;
+@property (nonatomic, copy  ) NSMutableArray *childElementsBelow;
 @end
 
 
@@ -24,10 +27,11 @@
 {
     self = [super init];
     if (self) {
-        _enabled         = YES;
-        _formValidations = [NSMutableSet new];
-        _theme           = [MYSFormTheme new];
-        _childElements   = [NSMutableArray new];
+        _enabled            = YES;
+        _formValidations    = [NSMutableSet new];
+        _theme              = [MYSFormTheme new];
+        _childElementsAbove = [NSMutableArray new];
+        _childElementsBelow = [NSMutableArray new];
         [self configureDefaultTheme:self.theme];
     }
     return self;
@@ -143,6 +147,30 @@
 {
     _enabled = enabled;
     [self.cell populateWithElement:self];
+}
+
+
+#pragma mark - Private
+
+- (void)addChildElement:(MYSFormChildElement *)childElement
+{
+    if (childElement.position == MYSFormElementRelativePositionAbove) {
+        [self.childElementsAbove addObject:childElement];
+    }
+    else {
+        [self.childElementsBelow addObject:childElement];
+    }
+}
+
+- (void)removeChildElement:(MYSFormChildElement *)childElement
+{
+    [self.childElementsAbove removeObject:childElement];
+    [self.childElementsBelow removeObject:childElement];
+}
+
+- (NSArray *)elementGroup
+{
+    return [[self.childElementsAbove arrayByAddingObject:self] arrayByAddingObjectsFromArray:self.childElementsBelow];
 }
 
 @end

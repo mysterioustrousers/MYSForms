@@ -68,6 +68,9 @@
     self.collectionView.alwaysBounceVertical = YES;
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     self.collectionView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    UICollectionViewFlowLayout *flowLayout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
+    flowLayout.minimumLineSpacing = 0;
+    flowLayout.minimumInteritemSpacing = CGFLOAT_MAX;
     [self configureForm];
     [self registerElementCellsForReuse];
     [self setupKeyboardNotifications];
@@ -313,13 +316,13 @@
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     MYSFormElement *element = self.elements[section];
-    return 1 + [element.childElements count];
+    return [[element elementGroup] count];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    MYSFormElement *element = self.elements[indexPath.section];
-    
+    NSArray *elementGroup = [self.elements[indexPath.section] elementGroup];
+    MYSFormElement *element = elementGroup[indexPath.item];
     MYSFormCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([element cellClass]) forIndexPath:indexPath];
     [cell populateWithElement:element];
     [cell applyTheme:element.theme];
@@ -487,7 +490,7 @@
         NSInteger indexOffset     = position == MYSFormElementRelativePositionBelow ? 1 : 0;
         NSInteger indexMultiplier = position == MYSFormElementRelativePositionBelow ? 1 : -1;
         for (MYSFormMessageChildElement *childElement in childElements) {
-            
+
             // make sure this child isn't already showing
             NSArray *visibleChildElements = [self childElementsOfParentElement:childElement.parentElement type:childElement.type];
             if ([visibleChildElements containsObject:childElement]) {
@@ -498,10 +501,12 @@
                 NSInteger section = [self.elements indexOfObject:childElement.parentElement];
                 NSAssert(section != NSNotFound, @"element must be added to the form.");
 
+                childElement.position   = position;
+                childElement.dataSource = self;
+                childElement.delegate   = self;
+
                 NSInteger newIndex = indexOffset++ * indexMultiplier;
-                childElement.dataSource  = self;
-                childElement.delegate    = self;
-                [element.childElements addObject:childElement];
+                [element addChildElement:childElement];
                 if (self.theme) {
                     [childElement.theme mergeWithTheme:self.theme];
                 }
@@ -545,7 +550,7 @@
         if (!parentElement || [childElement.parentElement isEqual:parentElement]) {
             NSIndexPath *ip = [self.collectionView indexPathForCell:childElement.cell];
             if (ip) {
-                [parentElement.childElements removeObject:childElement];
+                [parentElement removeChildElement:childElement];
                 [indexPathsToRemove addObject:ip];
             }
         }
@@ -566,7 +571,7 @@
 
 - (NSArray *)childElementsOfParentElement:(MYSFormElement *)element type:(MYSFormChildElementType)type
 {
-    return [element.childElements filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(MYSFormElement *element, NSDictionary *bindings) {
+    return [[element elementGroup] filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(MYSFormElement *element, NSDictionary *bindings) {
         return ([element isKindOfClass:[MYSFormChildElement class]] && [(MYSFormChildElement *)element type] == type);
     }]];
 }

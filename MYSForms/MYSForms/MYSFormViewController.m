@@ -536,7 +536,6 @@
     else {
         if (completion) completion();
     }
-
 }
 
 - (void)hideChildrenOfElement:(MYSFormElement *)parentElement type:(MYSFormChildElementType)type completion:(void (^)(void))completion

@@ -486,38 +486,32 @@
 
     NSMutableArray *indexPathsToInsert  = [NSMutableArray new];
 
-    for (MYSFormElement *element in [self.elements copy]) {
-        NSInteger indexOffset     = position == MYSFormElementRelativePositionBelow ? 1 : 0;
-        NSInteger indexMultiplier = position == MYSFormElementRelativePositionBelow ? 1 : -1;
-        for (MYSFormMessageChildElement *childElement in childElements) {
+    for (MYSFormMessageChildElement *childElement in childElements) {
 
-            // make sure this child isn't already showing
-            NSArray *visibleChildElements = [self childElementsOfParentElement:childElement.parentElement type:childElement.type];
-            if ([visibleChildElements containsObject:childElement]) {
-                continue;
-            }
-            
-            if ([element isEqual:childElement.parentElement]) {
-                NSInteger section = [self.elements indexOfObject:childElement.parentElement];
-                NSAssert(section != NSNotFound, @"element must be added to the form.");
+        // make sure this child isn't already showing
+        NSArray *visibleChildElements = [self childElementsOfParentElement:childElement.parentElement type:childElement.type];
+        if ([visibleChildElements containsObject:childElement]) {
+            continue;
+        }
+        
+        NSInteger section = [self.elements indexOfObject:childElement.parentElement];
+        NSAssert(section != NSNotFound, @"element must be added to the form.");
 
-                childElement.position   = position;
-                childElement.dataSource = self;
-                childElement.delegate   = self;
+        childElement.position   = position;
+        childElement.dataSource = self;
+        childElement.delegate   = self;
 
-                NSInteger newIndex = indexOffset++ * indexMultiplier;
-                [element addChildElement:childElement];
-                if (self.theme) {
-                    [childElement.theme mergeWithTheme:self.theme];
-                }
-                [indexPathsToInsert addObject:[NSIndexPath indexPathForItem:newIndex inSection:section]];
+        [childElement.parentElement addChildElement:childElement];
+        NSInteger newIndex = [[childElement.parentElement elementGroup] indexOfObject:childElement];
+        if (self.theme) {
+            [childElement.theme mergeWithTheme:self.theme];
+        }
+        [indexPathsToInsert addObject:[NSIndexPath indexPathForItem:newIndex inSection:section]];
 
-                if (duration > 0) {
-                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(duration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                        [self hideChildrenOfElement:childElement.parentElement type:childElement.type completion:nil];
-                    });
-                }
-            }
+        if (duration > 0) {
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(duration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self hideChildrenOfElement:childElement.parentElement type:childElement.type completion:nil];
+            });
         }
     }
 
@@ -570,8 +564,8 @@
 
 - (NSArray *)childElementsOfParentElement:(MYSFormElement *)element type:(MYSFormChildElementType)type
 {
-    return [[element elementGroup] filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(MYSFormElement *element, NSDictionary *bindings) {
-        return ([element isKindOfClass:[MYSFormChildElement class]] && [(MYSFormChildElement *)element type] == type);
+    return [[element elementGroup] filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(MYSFormElement *childElement, NSDictionary *bindings) {
+        return ([childElement isKindOfClass:[MYSFormChildElement class]] && [(MYSFormChildElement *)childElement type] == type);
     }]];
 }
 

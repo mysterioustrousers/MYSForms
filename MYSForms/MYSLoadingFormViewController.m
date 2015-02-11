@@ -29,12 +29,13 @@
 
 
     MYSFormLabelElement *headlineElement = [MYSFormLabelElement labelElementWithText:@"Edit User"];
-    headlineElement.theme = [MYSFormTheme formThemeWithLabelFont:[UIFont preferredFontForTextStyle:UIFontTextStyleHeadline]];
+    headlineElement.theme.labelFont = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
     [self addFormElement:headlineElement];
 
 
     MYSFormLabelElement *footnoteElement = [MYSFormLabelElement labelElementWithText:@"Example of a form that utilizes the built-in loading mechanism on form elements. Dismisses after 4 seconds."];
-    footnoteElement.theme = [MYSFormTheme formThemeWithLabelFont:[UIFont preferredFontForTextStyle:UIFontTextStyleFootnote]];
+    footnoteElement.theme.labelFont = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
+    footnoteElement.theme.padding = [NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(5, 0, 10, 0)];
     [self addFormElement:footnoteElement];
 
 

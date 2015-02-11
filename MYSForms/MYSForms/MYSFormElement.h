@@ -59,12 +59,12 @@
  Subclasses can override this to customize the default theme that is created for each element. If an application applies a theme to the
  element it will take precedence over the defaults set in this override. Do not call this method directly.
  */
-- (void)configureDefaultTheme:(MYSFormTheme *)theme;
+- (void)configureClassThemeDefaults:(MYSFormTheme *)theme;
 
 /**
  The theme that will be applied to the appropriate views in the view representation of this element (the cell).
  */
-@property (nonatomic, strong) MYSFormTheme *theme;
+@property (nonatomic, strong, readonly) MYSFormTheme *theme;
 
 /**
  Is asked of the element to make sure this element can be added for this form/device/orientation/whatever.

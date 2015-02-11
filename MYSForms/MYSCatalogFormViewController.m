@@ -36,11 +36,12 @@
     [super configureForm];
 
     MYSFormLabelElement *headlineElement = [MYSFormLabelElement labelElementWithText:@"Headline"];
-    headlineElement.theme = [MYSFormTheme formThemeWithLabelFont:[UIFont preferredFontForTextStyle:UIFontTextStyleHeadline]];
+    headlineElement.theme.labelFont = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
     headlineElement.theme.backgroundColor = [UIColor clearColor];
     [self addFormElement:headlineElement];
 
     MYSFormLabelElement *footnoteElement = [MYSFormLabelElement labelElementWithText:@"A footnote/description element for offering a more detailed explanation in your form."];
+    footnoteElement.theme.padding = [NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(5, 0, 10, 0)];
     [self addFormElement:footnoteElement];
 
 
@@ -122,7 +123,10 @@
     }]];
     [self addFormElement:tokenElement];
 
-    [self addFormElement:[MYSFormDatePickerElement datePickerElementWithLabel:@"Date Picker with a long title" modelKeyPath:@"birthDate"]];
+    MYSFormDatePickerElement *datePickerElement = [MYSFormDatePickerElement datePickerElementWithLabel:@"Date Picker with a long title"
+                                                                                          modelKeyPath:@"birthDate"];
+    datePickerElement.theme.contentInsets = [NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(10, 0, 10, 0)];
+    [self addFormElement:datePickerElement];
 }
 
 

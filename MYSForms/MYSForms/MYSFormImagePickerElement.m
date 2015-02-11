@@ -66,7 +66,7 @@ NSString * const MYSFormImagePickerCellActionSheetButtonRemovePhoto         = @"
     [self formImagePickerCellWasTapped:nil];
 }
 
-- (void)configureDefaultTheme:(MYSFormTheme *)theme
+- (void)configureClassThemeDefaults:(MYSFormTheme *)theme
 {
     theme.backgroundColor = [UIColor clearColor];
 }

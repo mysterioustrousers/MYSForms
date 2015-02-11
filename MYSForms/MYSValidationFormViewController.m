@@ -24,12 +24,12 @@
     [super configureForm];
 
     MYSFormLabelElement *headlineElement = [MYSFormLabelElement labelElementWithText:@"Edit User"];
-    headlineElement.theme = [MYSFormTheme formThemeWithLabelFont:[UIFont preferredFontForTextStyle:UIFontTextStyleHeadline]];
+    headlineElement.theme.labelFont = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
     [self addFormElement:headlineElement];
 
 
     MYSFormLabelElement *footnoteElement = [MYSFormLabelElement labelElementWithText:@"Example of a form that utilizes validations."];
-    footnoteElement.theme = [MYSFormTheme formThemeWithLabelFont:[UIFont preferredFontForTextStyle:UIFontTextStyleFootnote]];
+    footnoteElement.theme.labelFont = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
     [self addFormElement:footnoteElement];
 
 

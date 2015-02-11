@@ -38,8 +38,6 @@
         [button addTarget:self action:@selector(buttonWasTapped:) forControlEvents:UIControlEventTouchUpInside];
         button.enabled = element.isEnabled;
     }
-
-    self.contentInsets = [element.theme.contentInsets UIEdgeInsetsValue];
 }
 
 - (void)applyTheme:(MYSFormTheme *)theme
@@ -51,6 +49,7 @@
         }
         button.titleLabel.font = theme.buttonTitleFont;
     }
+    self.contentInsets = [theme.contentInsets UIEdgeInsetsValue];
 }
 
 - (void)layoutSubviews

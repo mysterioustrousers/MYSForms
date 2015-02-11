@@ -37,7 +37,7 @@
     [self.cell setNeedsLayout];
 }
 
-- (void)configureDefaultTheme:(MYSFormTheme *)theme
+- (void)configureClassThemeDefaults:(MYSFormTheme *)theme
 {
     theme.backgroundColor = [UIColor clearColor];
 }

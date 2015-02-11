@@ -158,7 +158,7 @@
                   context:NULL];
     }
     if (self.theme) {
-        [element.theme mergeWithTheme:self.theme];
+        [element.theme mergeWithTheme:self.theme strategy:MYSFormThemeMergeStrategyPassive];
     }
 }
 
@@ -300,7 +300,7 @@
     _theme = theme;
     for (MYSFormElement *element in self.elements) {
         if (self.theme) {
-            [element.theme mergeWithTheme:self.theme];
+            [element.theme mergeWithTheme:self.theme strategy:MYSFormThemeMergeStrategyPassive];
         }
     }
 }
@@ -324,8 +324,6 @@
     NSArray *elementGroup = [self.elements[indexPath.section] elementGroup];
     MYSFormElement *element = elementGroup[indexPath.item];
     MYSFormCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([element cellClass]) forIndexPath:indexPath];
-    [cell populateWithElement:element];
-    [cell applyTheme:element.theme];
     element.cell = cell;
     [element updateCell];
     return cell;
@@ -353,12 +351,18 @@
 {
     NSValue *cachedSize = self.cachedCellSizes[indexPath];
     if (!cachedSize) {
-        MYSFormElement *element = self.elements[indexPath.section];
-        CGFloat width = self.fixedWidth > 0 && self.fixedWidth < collectionView.frame.size.width ? self.fixedWidth : collectionView.frame.size.width;
+        NSArray *elementGroup = [self.elements[indexPath.section] elementGroup];
+        MYSFormElement *element = elementGroup[indexPath.item];
+
+        CGFloat width = (self.fixedWidth > 0 && self.fixedWidth < collectionView.frame.size.width ?
+                         self.fixedWidth :
+                         collectionView.frame.size.width);
+
         CGSize size = (element.theme.height ?
                        CGSizeMake(width, [element.theme.height floatValue]) :
                        [[element cellClass] sizeRequiredForElement:element width:width]);
         size.width = width;
+
         cachedSize = [NSValue valueWithCGSize:size];
         self.cachedCellSizes[indexPath] = cachedSize;
     }
@@ -369,7 +373,8 @@
                         layout:(UICollectionViewLayout *)collectionViewLayout
         insetForSectionAtIndex:(NSInteger)section
 {
-    return UIEdgeInsetsMake(5, 0, 5, 0);
+    MYSFormElement *element = self.elements[section];
+    return [element.theme.padding UIEdgeInsetsValue];
 }
 
 
@@ -458,7 +463,7 @@
             if (![[element.cell textInput] isFirstResponder]) {
                 NSIndexPath *ip = [self indexPathOfElement:element];
                 if (ip.section < [self.collectionView numberOfSections]) {
-                    [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:ip.section]];
+                    [self.collectionView reloadItemsAtIndexPaths:@[ip]];
                 }
             }
             return;
@@ -504,7 +509,7 @@
         [childElement.parentElement addChildElement:childElement];
         NSInteger newIndex = [[childElement.parentElement elementGroup] indexOfObject:childElement];
         if (self.theme) {
-            [childElement.theme mergeWithTheme:self.theme];
+            [childElement.theme mergeWithTheme:self.theme strategy:MYSFormThemeMergeStrategyPassive];
         }
         [indexPathsToInsert addObject:[NSIndexPath indexPathForItem:newIndex inSection:section]];
 
@@ -741,8 +746,9 @@
 
 - (NSIndexPath *)indexPathOfElement:(MYSFormElement *)element
 {
-    NSInteger index = [self.elements indexOfObject:element];
-    return [NSIndexPath indexPathForItem:0 inSection:index];
+    NSInteger section = [self.elements indexOfObject:element];
+    NSInteger item = [[element elementGroup] indexOfObject:element];
+    return [NSIndexPath indexPathForItem:item inSection:section];
 }
 
 @end

@@ -53,9 +53,10 @@
     return [self.displayStringValueTransformer transformedValue:value];
 }
 
-- (void)configureDefaultTheme:(MYSFormTheme *)theme
+- (void)configureClassThemeDefaults:(MYSFormTheme *)theme
 {
     theme.backgroundColor = [UIColor clearColor];
+    theme.padding = [NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(10, 0, 10, 0)];
 }
 
 

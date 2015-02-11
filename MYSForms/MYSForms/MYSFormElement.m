@@ -29,10 +29,12 @@
     if (self) {
         _enabled            = YES;
         _formValidations    = [NSMutableSet new];
-        _theme              = [MYSFormTheme new];
         _childElementsAbove = [NSMutableArray new];
         _childElementsBelow = [NSMutableArray new];
-        [self configureDefaultTheme:self.theme];
+        _theme = [MYSFormTheme formThemeWithDefaults];
+        MYSFormTheme *blankTheme = [MYSFormTheme new];
+        [self configureClassThemeDefaults:blankTheme];
+        [_theme mergeWithTheme:blankTheme strategy:MYSFormThemeMergeStrategyAggressive];
     }
     return self;
 }
@@ -78,7 +80,7 @@
     return NSClassFromString(cellClassName);
 }
 
-- (void)configureDefaultTheme:(MYSFormTheme *)theme
+- (void)configureClassThemeDefaults:(MYSFormTheme *)theme
 {
 
 }
@@ -86,6 +88,7 @@
 - (void)updateCell
 {
     [self.cell populateWithElement:self];
+    [self.cell applyTheme:self.theme];
     if ([self isModelKeyPathValid]) {
         id modelValue = [self transformedModelValue];
         [self.cell setValue:modelValue forKeyPath:[self.cell valueKeyPath]];

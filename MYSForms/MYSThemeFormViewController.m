@@ -38,11 +38,11 @@
     self.theme.inputTextFont = [UIFont fontWithName:@"Noteworthy" size:14];
 
     MYSFormLabelElement *headlineElement = [MYSFormLabelElement labelElementWithText:@"A Headline"];
-    headlineElement.theme = [MYSFormTheme formThemeWithLabelFont:[UIFont fontWithName:@"Zapfino" size:26]];
+    headlineElement.theme.labelFont = [UIFont fontWithName:@"Zapfino" size:26];
     [self addFormElement:headlineElement];
 
     MYSFormLabelElement *footnoteElement = [MYSFormLabelElement labelElementWithText:@"A footnote/description element for offering a more detailed explanation in your form."];
-    footnoteElement.theme = [MYSFormTheme formThemeWithLabelFont:[UIFont preferredFontForTextStyle:UIFontTextStyleFootnote]];
+    footnoteElement.theme.labelFont = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
     footnoteElement.theme.labelTextColor = [UIColor orangeColor];
     [self addFormElement:footnoteElement];
 

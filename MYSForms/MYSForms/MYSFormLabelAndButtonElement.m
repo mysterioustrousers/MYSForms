@@ -31,7 +31,7 @@
     cell.labelAndButtonCellDelegate = self;
 }
 
-- (void)configureDefaultTheme:(MYSFormTheme *)theme
+- (void)configureClassThemeDefaults:(MYSFormTheme *)theme
 {
     theme.backgroundColor = [UIColor clearColor];
 }

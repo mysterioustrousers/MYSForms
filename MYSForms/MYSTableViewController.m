@@ -60,13 +60,13 @@
         formViewController.model = self.fakeUser;
 
         MYSFormLabelElement *headline = [MYSFormLabelElement labelElementWithText:@"Log In"];
-        headline.theme = [MYSFormTheme formThemeWithLabelFont:[UIFont preferredFontForTextStyle:UIFontTextStyleHeadline]];
+        headline.theme.labelFont = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
         [formViewController addFormElement:headline];
 
 
         MYSFormLabelElement *footnote = [MYSFormLabelElement new];
         footnote.label = @"An example form that does not subclass the form view controller. It just creates one, configures and displays it.";
-        footnote.theme = [MYSFormTheme formThemeWithLabelFont:[UIFont preferredFontForTextStyle:UIFontTextStyleFootnote]];
+        footnote.theme.labelFont = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
         [formViewController addFormElement:footnote];
 
 

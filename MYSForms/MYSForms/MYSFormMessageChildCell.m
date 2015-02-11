@@ -36,7 +36,10 @@
     size.height = ceil(size.height);
 
     // some padding
-    if (element.type != MYSFormChildElementTypeValidationError) {
+    if (element.type == MYSFormChildElementTypeValidationError) {
+        size.height += 10;
+    }
+    else {
         size.height += 20;
     }
 

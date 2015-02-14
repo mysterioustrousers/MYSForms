@@ -73,8 +73,8 @@
     return theme;
 }
 
-#define MERGE(a, b, s) if (s == (MYSFormThemeMergeStrategyPassive    && !a) || \
-                                (MYSFormThemeMergeStrategyAggressive && b)) \
+#define MERGE(a, b, s) if ((s == MYSFormThemeMergeStrategyPassive    && !a) || \
+                           (s == MYSFormThemeMergeStrategyAggressive && b)) \
                                 a = [b copy]
 
 - (void)mergeWithTheme:(MYSFormTheme *)theme strategy:(MYSFormThemeMergeStrategy)strategy

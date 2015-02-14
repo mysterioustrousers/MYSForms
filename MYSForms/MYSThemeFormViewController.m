@@ -31,7 +31,6 @@
     [super configureForm];
 
     // set a form-wide theme
-    self.theme = [MYSFormTheme new];
     self.theme.buttonStyle = @(MYSFormButtonStyleFilled);
     self.theme.buttonTitleFont = [UIFont fontWithName:@"Noteworthy" size:18];
     self.theme.labelFont = [UIFont fontWithName:@"Avenir" size:12];
@@ -44,6 +43,7 @@
     MYSFormLabelElement *footnoteElement = [MYSFormLabelElement labelElementWithText:@"A footnote/description element for offering a more detailed explanation in your form."];
     footnoteElement.theme.labelFont = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
     footnoteElement.theme.labelTextColor = [UIColor orangeColor];
+    footnoteElement.theme.padding = [NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(5, 0, 10, 0)];
     [self addFormElement:footnoteElement];
 
 

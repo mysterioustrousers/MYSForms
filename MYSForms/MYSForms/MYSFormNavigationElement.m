@@ -42,6 +42,7 @@
 {
     if (self.destinationViewControllerBlock) {
         UIViewController *destinationViewController = self.destinationViewControllerBlock();
+        destinationViewController.title = self.label;
         [self.delegate formElement:self didRequestPushOfViewController:destinationViewController];
     }
 }

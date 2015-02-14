@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "MYSForms"
-  s.version      = "0.0.6"
+  s.version      = "0.1.0"
   s.summary      = "Easily build forms on ios 7+."
   s.description  = <<-DESC
                    A longer description of MYSForms in Markdown format.

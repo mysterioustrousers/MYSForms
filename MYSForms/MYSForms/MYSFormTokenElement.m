@@ -27,7 +27,16 @@
     if (self) {
         _modelKeyPath = modelKeyPath;
         _displayStringValueTransformer = [MYSFormValueTransformer transformerWithBlock:^id(id value) {
-            return valueTransformerBlock(value);
+            if (value && ![value conformsToProtocol:@protocol(NSFastEnumeration)]) {
+                [[NSException exceptionWithName:@"MYSFormTokenElementValueTransformerParamter"
+                                         reason:@"The value of the model for this element must conform to NSFastEnumeration"
+                                       userInfo:nil] raise];
+            }
+            NSMutableArray *displayStrings = [NSMutableArray new];
+            for (id obj in value) {
+                [displayStrings addObject:valueTransformerBlock(obj)];
+            }
+            return displayStrings;
         }];
     }
     return self;
@@ -51,7 +60,6 @@
     id value = [super currentModelValue];
     return [self.displayStringValueTransformer transformedValue:value];
 }
-
 
 #pragma mark - DELEGATE token field cell
 

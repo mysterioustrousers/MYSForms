@@ -151,10 +151,10 @@
     [self.elements insertObject:element atIndex:index];
 
     if ([self elementHasValidKeyPath:element]) {
-        [self addObserver:self.model
-               forKeyPath:element.modelKeyPath
-                  options:0
-                  context:NULL];
+        [self.model addObserver:self
+                     forKeyPath:element.modelKeyPath
+                        options:0
+                        context:NULL];
     }
 }
 

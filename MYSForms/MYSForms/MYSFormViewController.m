@@ -23,6 +23,7 @@
 @property (nonatomic, strong) NSMutableArray      *elements;
 @property (nonatomic, strong) NSMutableDictionary *cachedCellSizes;
 @property (nonatomic, assign) NSUInteger          outstandingValidationErrorCount;
+@property (nonatomic, strong) MYSFormTheme        *theme;
 @end
 
 
@@ -32,6 +33,7 @@
 {
     self.elements = [NSMutableArray new];
     self.fixedWidth = 0;
+    self.theme = [MYSFormTheme formThemeWithDefaults];
 }
 
 - (instancetype)init
@@ -74,6 +76,9 @@
     [self configureForm];
     [self registerElementCellsForReuse];
     [self setupKeyboardNotifications];
+    if ([self.navigationItem.title length] == 0) {
+        self.navigationItem.title = self.title;
+    }
 }
 
 - (void)dealloc

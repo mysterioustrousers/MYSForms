@@ -82,7 +82,7 @@
  The theme that will be applied to all elements. Any elements with with themes of their own will be merged and any attributes on the element
  will take precedence.
  */
-@property (nonatomic, strong) MYSFormTheme *theme;
+@property (nonatomic, strong, readonly) MYSFormTheme *theme;
 
 
 /**

@@ -23,9 +23,14 @@
 {
     [super configureForm];
 
-    [self addFormElement:[MYSFormHeadlineElement headlineElementWithHeadline:@"Edit User"]];
+    MYSFormLabelElement *headlineElement = [MYSFormLabelElement labelElementWithText:@"Edit User"];
+    headlineElement.theme.labelFont = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
+    [self addFormElement:headlineElement];
 
-    [self addFormElement:[MYSFormFootnoteElement footnoteElementWithFootnote:@"Example of a form that utilizes validations."]];
+
+    MYSFormLabelElement *footnoteElement = [MYSFormLabelElement labelElementWithText:@"Example of a form that utilizes validations."];
+    footnoteElement.theme.labelFont = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
+    [self addFormElement:footnoteElement];
 
 
     MYSFormTextFieldElement *firstNameField = [MYSFormTextFieldElement textFieldElementWithLabel:@"First Name" modelKeyPath:@"firstName"];
@@ -45,7 +50,10 @@
     [self addFormElement:emailField];
 
 
-    [self addFormElement:[MYSFormButtonElement buttonElementWithButtons:@[[MYSFormButton formButtonWithTitle:@"Validate" action:^(MYSFormElement *element) {
+    [self addFormElement:[MYSFormButtonElement buttonElementWithButtons:@[[MYSFormButton formButtonWithTitle:@"Validate"
+                                                                                                       style:MYSFormButtonStyleDefault
+                                                                                                      action:^(MYSFormElement *element)
+    {
         if ([self validate]) {
             NSLog(@"Valid!");
         }

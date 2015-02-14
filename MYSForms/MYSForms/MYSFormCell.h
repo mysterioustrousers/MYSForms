@@ -7,17 +7,18 @@
 //
 
 @class MYSFormElement;
+@class MYSFormTheme;
 
 
 @interface MYSFormCell : UICollectionViewCell
 
 + (CGSize)sizeRequiredForElement:(MYSFormElement *)element width:(CGFloat)width;
 
-+ (UIEdgeInsets)cellContentInset;
-
 - (NSString *)valueKeyPath;
 
 - (void)populateWithElement:(MYSFormElement *)element;
+
+- (void)applyTheme:(MYSFormTheme *)theme;
 
 - (UIView *)textInput;
 

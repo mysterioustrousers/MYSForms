@@ -100,7 +100,7 @@ MYSFormViewController *formViewController = [MYSFormViewController new];
 formViewController.model = self.fakeUser;
 
 // add a header element
-MYSFormHeadlineElement *headline = [MYSFormHeadlineElement headlineElementWithHeadline:@"Log In"];
+MYSFormLabelElement *headline = [MYSFormLabelElement labelElementWithText:@"Log In"];
 [formViewController addFormElement:headline];
 
 // add a text field for the user to type in an email
@@ -142,9 +142,9 @@ Second, the more robust approach, you can subclass `MYSFormViewController` like 
 {
     [super configureForm];
 
-    [self addFormElement:[MYSFormHeadlineElement headlineElementWithHeadline:@"Sign Up"]];
+    [self addFormElement:[MYSFormLabelElement labelElementWithText:@"Sign Up"]];
 
-    [self addFormElement:[MYSFormFootnoteElement footnoteElementWithFootnote:
+    [self addFormElement:[MYSFormLabelElement labelElementWithText:
                           @"Example of a subclassed form view controller where a blank model is created in its viewDidLoad."]];
 
     [self addFormElement:[MYSFormTextFieldElement textFieldElementWithLabel:@"First Name" modelKeyPath:@"firstName"]];
@@ -217,6 +217,50 @@ Show a loading message above a specific form element:
 
 ## Customization
 
+There are two ways to customize forms:
+
+  1. Using `MYSFormTheme`
+  2. Subclassing Elements/Cells and replacing xibs.
+
+### Method 1: `MYSFormTheme`
+
+You can create a `MYSFormTheme`, tweak the properties on that object and then assign it to any `MYSFormElement`. If
+you customize the label font/color properties on the theme, the label(s) any elements you assign the theme to will
+have those customizations applied.
+
+You can also assign a theme to the entire form which will be subsequently passed to all elements. The properties
+set on an element theme takes precedence over a form theme passed to the element. For example, if you set the `tintColor`
+property on two different themes, assign one to the form and another to an element, the element will use the `tintColor`
+on the theme assigned directly to it.
+
+Here's an example of setting some properties on the form's theme (set on `self.theme`) and a theme assigned to an
+element:
+
+```
+- (void)configureForm
+{
+    [super configureForm];
+
+    // set a form-wide theme
+    self.theme = [MYSFormTheme new];
+    self.theme.buttonStyle = @(MYSFormButtonStyleFilled);
+    self.theme.labelFont = [UIFont fontWithName:@"Avenir" size:12];
+    self.theme.inputTextFont = [UIFont fontWithName:@"Noteworthy" size:14];
+
+    MYSFormLabelElement *headlineElement = [MYSFormLabelElement labelElementWithText:@"A Headline"];
+    headlineElement.theme = [MYSFormTheme formThemeWithLabelFont:[UIFont fontWithName:@"Zapfino" size:26]];
+    [self addFormElement:headlineElement];
+}
+```
+
+### Method 2:
+
+Depending on how crazy you want to get, you can subclass an entire element, just its cell or just replace it's xib
+with your own. If all you want to do is change how auto layout works for an cell or move views around in the element's
+cell, you can get away with just replacing the xib with your own. If you want to customize animations, behavior or how
+height is calculated based on content, then you'll want to subclass the cell for the element. If you subclass a cell
+you must also replace the xib with your own. The following walks you through how to subclass an element's cell:
+
 Let's say you want to customize how the header element looks. You could subclass `MYSFormHeadlineCell.h` like this:
 
 **FCIFormHeaderCell.h**
@@ -258,7 +302,7 @@ The trick is to make sure that you hook up the outlets of the views in your xibs
 {
     [super configureForm];
 
-    MYSFormHeadlineElement *headlineElement = [MYSFormHeadlineElement headlineElementWithHeadline:@"Sign Up"];
+    MYSFormHeadlineElement *headlineElement = [labelElementWithText labelElementWithText:@"Sign Up"];
     headlineElement.cellClass = [FCIFormHeaderCell class];
     [self addFormElement:headlineElement];
 }
@@ -276,15 +320,15 @@ That's it. To recap:
 
 A log in form and sign up form:
 
-![Basic Example Screenshot](http://d.pr/i/RLOk/3NtdmBml+) ![Sign up form example](http://d.pr/i/TTeZ/ihh9alMz+)
+![Basic Example Screenshot](https://raw.githubusercontent.com/mysterioustrousers/MYSForms/master/README-assets/1.png) ![Sign up form example](https://raw.githubusercontent.com/mysterioustrousers/MYSForms/master/README-assets/2.png)
 
 Validation errors and loading message:
 
-![Example of validation errors](http://d.pr/i/W0Wh/30akIyEt+) ![Example of a loading message](http://d.pr/i/kGj5/3HGxUAtk+)
+![Example of validation errors](https://raw.githubusercontent.com/mysterioustrousers/MYSForms/master/README-assets/3.png) ![Example of a loading message](https://raw.githubusercontent.com/mysterioustrousers/MYSForms/master/README-assets/4.png)
 
 Misc element examples:
 
-![Example catalog elements](http://d.pr/i/tyfJ/5lL6qHh0+) ![Example of misc form elements](http://d.pr/i/qabo/5A3GGWo9+)
+![Example catalog elements](https://raw.githubusercontent.com/mysterioustrousers/MYSForms/master/README-assets/5.png) ![Example of misc form elements](https://raw.githubusercontent.com/mysterioustrousers/MYSForms/master/README-assets/6.png)
 
 ## Extras
 

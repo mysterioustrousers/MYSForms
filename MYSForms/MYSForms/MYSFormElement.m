@@ -7,12 +7,17 @@
 //
 
 #import "MYSFormElement.h"
+#import "MYSFormElement-Private.h"
 #import "MYSFormCell.h"
+#import "MYSFormTheme.h"
+#import "MYSFormChildElement-Private.h"
 
 
 @interface MYSFormElement ()
-@property (nonatomic, strong) NSMutableSet *formValidations;
-@property (nonatomic, copy  ) void         (^cellConfigurationBlock)(MYSFormCell *cell);
+@property (nonatomic, strong) NSMutableSet   *formValidations;
+@property (nonatomic, copy  ) void           (^cellConfigurationBlock)(MYSFormCell *cell);
+@property (nonatomic, copy  ) NSMutableArray *childElementsAbove;
+@property (nonatomic, copy  ) NSMutableArray *childElementsBelow;
 @end
 
 
@@ -22,8 +27,14 @@
 {
     self = [super init];
     if (self) {
-        _enabled         = YES;
-        _formValidations = [NSMutableSet new];
+        _enabled            = YES;
+        _formValidations    = [NSMutableSet new];
+        _childElementsAbove = [NSMutableArray new];
+        _childElementsBelow = [NSMutableArray new];
+        _theme = [MYSFormTheme formThemeWithDefaults];
+        MYSFormTheme *blankTheme = [MYSFormTheme new];
+        [self configureClassThemeDefaults:blankTheme];
+        [_theme mergeWithTheme:blankTheme strategy:MYSFormThemeMergeStrategyAggressive];
     }
     return self;
 }
@@ -39,6 +50,18 @@
 - (id)currentModelValue
 {
     return [self.dataSource modelValueForFormElement:self];
+}
+
+- (id)transformedModelValue
+{
+    id value = [self currentModelValue];
+
+    // transform the value if needed
+    if (self.valueTransformer) {
+        value = [self.valueTransformer transformedValue:value];
+    }
+
+    return value;
 }
 
 - (void)setCell:(MYSFormCell *)cell
@@ -57,11 +80,17 @@
     return NSClassFromString(cellClassName);
 }
 
+- (void)configureClassThemeDefaults:(MYSFormTheme *)theme
+{
+
+}
+
 - (void)updateCell
 {
     [self.cell populateWithElement:self];
+    [self.cell applyTheme:self.theme];
     if ([self isModelKeyPathValid]) {
-        id modelValue = [self currentModelValue];
+        id modelValue = [self transformedModelValue];
         [self.cell setValue:modelValue forKeyPath:[self.cell valueKeyPath]];
         [self.cell didChangeValueAtValueKeyPath];
     }
@@ -121,6 +150,30 @@
 {
     _enabled = enabled;
     [self.cell populateWithElement:self];
+}
+
+
+#pragma mark - Private
+
+- (void)addChildElement:(MYSFormChildElement *)childElement
+{
+    if (childElement.position == MYSFormElementRelativePositionAbove) {
+        [self.childElementsAbove addObject:childElement];
+    }
+    else {
+        [self.childElementsBelow addObject:childElement];
+    }
+}
+
+- (void)removeChildElement:(MYSFormChildElement *)childElement
+{
+    [self.childElementsAbove removeObject:childElement];
+    [self.childElementsBelow removeObject:childElement];
+}
+
+- (NSArray *)elementGroup
+{
+    return [[self.childElementsAbove arrayByAddingObject:self] arrayByAddingObjectsFromArray:self.childElementsBelow];
 }
 
 @end

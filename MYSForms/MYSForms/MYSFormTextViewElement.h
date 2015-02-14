@@ -12,8 +12,6 @@
 
 @interface MYSFormTextViewElement : MYSFormElement
 
-@property (nonatomic, strong) UIFont *font;
-
 @property (nonatomic, assign, getter=isEditable) BOOL editable;
 
 + (instancetype)textViewElementWithModelKeyPath:(NSString *)modelKeyPath;

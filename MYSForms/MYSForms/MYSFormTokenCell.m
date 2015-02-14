@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Mysterious Trousers. All rights reserved.
 //
 
-#import "MYSFormTokenCell.h"
 #import "MYSFormTokenElement.h"
 #import "MYSFormTokenCell-Private.h"
+#import "MYSFormTheme.h"
 
 
 static CGFloat tokenSpacing = 8.0;
@@ -16,6 +16,7 @@ static CGFloat tokenSpacing = 8.0;
 
 @interface MYSFormTokenCell ()
 @property (nonatomic, copy) NSArray *tokenControls;
+@property (nonatomic) UIEdgeInsets contentInsets;
 @end
 
 
@@ -23,9 +24,10 @@ static CGFloat tokenSpacing = 8.0;
 
 + (CGSize)sizeRequiredForElement:(MYSFormTokenElement *)element width:(CGFloat)width
 {
-    UIEdgeInsets insets = [self cellContentInset];
+    UIEdgeInsets insets = [element.theme.contentInsets UIEdgeInsetsValue];
     MYSFormTokenCell *measurementCell = [[MYSFormTokenCell alloc] initWithFrame:CGRectMake(0, 0, width, 150)];
-    [measurementCell setTokenDisplayStrings:[element currentModelValue]];
+    [measurementCell setTokenDisplayStrings:[element transformedModelValue]];
+    [measurementCell populateWithElement:element];
     NSArray *frames = [measurementCell tokenFrames];
     CGFloat maxY = 0;
     for (NSValue *frameValue in frames) {
@@ -38,11 +40,10 @@ static CGFloat tokenSpacing = 8.0;
     return CGSizeMake(width, (maxY ?: 20) + insets.bottom);
 }
 
-+ (UIEdgeInsets)cellContentInset
+- (void)populateWithElement:(MYSFormElement *)element
 {
-    UIEdgeInsets insets = [super cellContentInset];
-//    insets.top = insets.bottom = insets.left;
-    return insets;
+    [super populateWithElement:element];
+    self.contentInsets = [element.theme.contentInsets UIEdgeInsetsValue];
 }
 
 - (NSString *)valueKeyPath
@@ -128,14 +129,13 @@ static CGFloat tokenSpacing = 8.0;
 - (NSArray *)tokenFrames
 {
     NSMutableArray *frames = [NSMutableArray new];
-    UIEdgeInsets insets = [[self class] cellContentInset];
-    CGFloat x = insets.left;
-    CGFloat y = insets.top;
+    CGFloat x = self.contentInsets.left;
+    CGFloat y = self.contentInsets.top;
     for (UIControl *control in self.tokenControls) {
         CGRect frame = control.frame;
         CGFloat nextX = x + CGRectGetWidth(frame) + tokenSpacing;
-        if (nextX > self.bounds.size.width - insets.right) {
-            x = insets.left;
+        if (nextX > self.bounds.size.width - self.contentInsets.right) {
+            x = self.contentInsets.left;
             y += tokenSpacing + CGRectGetHeight(frame);
         }
         frame.origin.x = x;

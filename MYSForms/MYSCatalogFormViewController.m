@@ -6,15 +6,16 @@
 //  Copyright (c) 2014 Mysterious Trousers. All rights reserved.
 //
 
-#import "MYSCatalogViewController.h"
+#import "MYSCatalogFormViewController.h"
 #import "MYSExampleUser.h"
+#import "MYSErrorFormViewController.h"
 
 
-@interface MYSCatalogViewController ()
+@interface MYSCatalogFormViewController ()
 @end
 
 
-@implementation MYSCatalogViewController
+@implementation MYSCatalogFormViewController
 
 - (void)viewDidLoad
 {
@@ -24,6 +25,7 @@
     MYSExampleUser *exampleUser = self.model;
     exampleUser.firstName = @"Adam";
     exampleUser.yearsOld = 10;
+    exampleUser.birthDate = [NSDate dateWithTimeIntervalSinceNow:-60 * 60 * 24 * 365 * 28];
     exampleUser.isLegalAdult = YES;
     exampleUser.biography = @"Gozer the Traveler. He will come in one of the pre-chosen forms. During the rectification of the Vuldrini, the traveler came as a large and moving Torg! Then, during the third reconciliation of the last of the McKetrick supplicants, they chose a new form for him: that of a giant Slor! Many Shuvs and Zuuls knew what it was to be roasted in the depths of the Slor that day, I can tell you!";
     exampleUser.tags = [NSOrderedSet orderedSetWithObjects:@"high priority", @"silly", @"a long tag name", @"blue", @"orange", nil];
@@ -33,24 +35,42 @@
 {
     [super configureForm];
 
-    [self addFormElement:[MYSFormHeadlineElement headlineElementWithHeadline:@"A Headline"]];
+    MYSFormLabelElement *headlineElement = [MYSFormLabelElement labelElementWithText:@"Headline"];
+    headlineElement.theme.labelFont = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
+    headlineElement.theme.backgroundColor = [UIColor clearColor];
+    [self addFormElement:headlineElement];
 
-    [self addFormElement:[MYSFormFootnoteElement footnoteElementWithFootnote:
-                          @"A footnote/description element for offering a more detailed explanation in your form."]];
+    MYSFormLabelElement *footnoteElement = [MYSFormLabelElement labelElementWithText:@"A footnote/description element for offering a more detailed explanation in your form."];
+    footnoteElement.theme.padding = [NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(5, 0, 10, 0)];
+    [self addFormElement:footnoteElement];
+
+
+    MYSFormNavigationElement *navigationElement = [MYSFormNavigationElement navigationElementWithLabel:@"Child Form"
+                                                                        destinationViewControllerBlock:^UIViewController *{
+                                                                            return [MYSErrorFormViewController new];
+                                                                        }];
+    [self addFormElement:navigationElement];
 
 
     [self addFormElement:[MYSFormTextFieldElement textFieldElementWithLabel:@"Text Field" modelKeyPath:@"firstName"]];
 
+
     [self addFormElement:[MYSFormTextFieldElement textFieldElementWithLabel:@"Text Field" modelKeyPath:@"lastName"]];
 
 
-    [self addFormElement:[MYSFormButtonElement buttonElementWithButtons:@[[MYSFormButton formButtonWithTitle:@"Button" action:^(MYSFormElement *element) {
+    [self addFormElement:[MYSFormButtonElement buttonElementWithButtons:@[[MYSFormButton formButtonWithTitle:@"Button"
+                                                                                                       style:MYSFormButtonStyleDefault
+                                                                                                      action:^(MYSFormElement *element)
+    {
         [self showSuccessMessage:@"A success message." belowElement:element duration:3 completion:nil];
         [self logModel];
     }]]]];
 
 
-    [self addFormElement:[MYSFormLabelAndButtonElement labelAndButtonElementWithLabel:@"A label" button:[MYSFormButton formButtonWithTitle:@"A Button" action:^(MYSFormElement *element) {
+    [self addFormElement:[MYSFormLabelAndButtonElement labelAndButtonElementWithLabel:@"A label" button:[MYSFormButton formButtonWithTitle:@"A Button"
+                                                                                                                                     style:MYSFormButtonStyleDefault
+                                                                                                                                    action:^(MYSFormElement *element)
+    {
         [self showErrorMessage:@"An error message." belowElement:element duration:3 completion:nil];
     }]]];
 
@@ -102,6 +122,11 @@
         return [value array];
     }]];
     [self addFormElement:tokenElement];
+
+    MYSFormDatePickerElement *datePickerElement = [MYSFormDatePickerElement datePickerElementWithLabel:@"Date Picker with a long title"
+                                                                                          modelKeyPath:@"birthDate"];
+    datePickerElement.theme.contentInsets = [NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(10, 0, 10, 0)];
+    [self addFormElement:datePickerElement];
 }
 
 

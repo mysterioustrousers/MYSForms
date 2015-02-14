@@ -9,6 +9,8 @@
 #import "MYSFormPickerCell.h"
 #import "MYSFormPickerCell-Private.h"
 #import "MYSFormPickerElement.h"
+#import "MYSFormButton.h"
+#import "MYSFormTheme.h"
 
 
 @implementation MYSFormPickerCell
@@ -16,27 +18,30 @@
 - (void)populateWithElement:(MYSFormPickerElement *)element
 {
     self.label.text = element.label;
-    [super populateWithElement:element];
     self.button.enabled = element.isEnabled;
     [super populateWithElement:element];
 }
 
-- (void)setButtonTitle:(NSString *)buttonTitle
+- (void)applyTheme:(MYSFormTheme *)theme
 {
-    [self.button setTitle:buttonTitle forState:UIControlStateNormal];
-}
-
-- (NSString *)buttonTitle
-{
-    return [self.button titleForState:UIControlStateNormal];
+    [super applyTheme:theme];
+    self.label.font         = theme.labelFont;
+    self.label.textColor    = theme.labelTextColor;
+    if (self.button.buttonStyle == MYSFormButtonStyleNone) {
+        self.button.buttonStyle = [theme.buttonStyle integerValue];
+    }
+    self.button.titleLabel.font = theme.buttonTitleFont;
 }
 
 - (NSString *)valueKeyPath
 {
-    return @"buttonTitle";
+    return @"selectedValue";
 }
 
-
+- (void)didChangeValueAtValueKeyPath
+{
+    [self.button setTitle:self.selectedValue forState:UIControlStateNormal];
+}
 
 
 #pragma mark - Actions

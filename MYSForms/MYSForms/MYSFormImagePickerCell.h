@@ -9,6 +9,9 @@
 #import "MYSFormCell.h"
 
 @interface MYSFormImagePickerCell : MYSFormCell
-@property (nonatomic, weak) IBOutlet UILabel     *label;
+
+@property (nonatomic, weak) IBOutlet UILabel *label;
+
 @property (nonatomic, weak) IBOutlet UIImageView *imageView;
+
 @end

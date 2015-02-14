@@ -38,16 +38,12 @@
 }
 
 
-
-
 #pragma mark - DELEGATE form view controller
 
 - (void)formViewControllerDidSubmit:(MYSFormViewController *)controller
 {
     NSLog(@"Current Model: %@", self.fakeUser);
 }
-
-
 
 
 #pragma mark - DELEGATE table view
@@ -58,15 +54,19 @@
     if (indexPath.row == 0) {
         MYSFormViewController *formViewController = [MYSFormViewController new];
 
+        formViewController.view.backgroundColor = [UIColor whiteColor];
+
         // setting the model before configuration
         formViewController.model = self.fakeUser;
 
-        MYSFormHeadlineElement *headline = [MYSFormHeadlineElement headlineElementWithHeadline:@"Log In"];
+        MYSFormLabelElement *headline = [MYSFormLabelElement labelElementWithText:@"Log In"];
+        headline.theme.labelFont = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
         [formViewController addFormElement:headline];
 
 
-        MYSFormFootnoteElement *footnote = [MYSFormFootnoteElement new];
-        footnote.footnote = @"An example form that does not subclass the form view controller. It just creates one, configures and displays it.";
+        MYSFormLabelElement *footnote = [MYSFormLabelElement new];
+        footnote.label = @"An example form that does not subclass the form view controller. It just creates one, configures and displays it.";
+        footnote.theme.labelFont = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
         [formViewController addFormElement:footnote];
 
 
@@ -80,30 +80,49 @@
         [formViewController addFormElement:passwordField];
 
 
-        [formViewController addFormElement:[MYSFormLabelAndButtonElement labelAndButtonElementWithLabel:@"A label" button:[MYSFormButton formButtonWithTitle:@"A button title" action:^(MYSFormElement *element) {
+        [formViewController addFormElement:[MYSFormLabelAndButtonElement labelAndButtonElementWithLabel:@"A label"
+                                                                                                 button:[MYSFormButton formButtonWithTitle:@"A button title"
+                                                                                                                                     style:MYSFormButtonStyleDefault
+                                                                                                                                    action:^(MYSFormElement *element)
+        {
             NSLog(@"Label and button was tapped");
         }]]];
 
-        MYSFormButton *leftButton = [MYSFormButton formButtonWithTitle:@"Left Button" action:^(MYSFormElement *element) {
+        MYSFormButton *leftButton = [MYSFormButton formButtonWithTitle:@"Left Button"
+                                                                 style:MYSFormButtonStyleDefault
+                                                                action:^(MYSFormElement *element)
+        {
             NSLog(@"Left button pressed");
         }];
 
-        MYSFormButton *rightButton = [MYSFormButton formButtonWithTitle:@"Right Button" action:^(MYSFormElement *element) {
+        MYSFormButton *rightButton = [MYSFormButton formButtonWithTitle:@"Right Button"
+                                                                  style:MYSFormButtonStyleDefault
+                                                                 action:^(MYSFormElement *element)
+        {
             NSLog(@"Rigth button pressed");
         }];
 
         [formViewController addFormElement:[MYSFormButtonElement buttonElementWithButtons:@[leftButton, rightButton]]];
 
 
-        MYSFormButton *button1 = [MYSFormButton formButtonWithTitle:@"Button 1" action:^(MYSFormElement *element) {
+        MYSFormButton *button1 = [MYSFormButton formButtonWithTitle:@"Button 1"
+                                                              style:MYSFormButtonStyleDefault
+                                                             action:^(MYSFormElement *element)
+        {
             NSLog(@"button 1 pressed");
         }];
 
-        MYSFormButton *button2 = [MYSFormButton formButtonWithTitle:@"Button 2" action:^(MYSFormElement *element) {
+        MYSFormButton *button2 = [MYSFormButton formButtonWithTitle:@"Button 2"
+                                                              style:MYSFormButtonStyleBordered
+                                                             action:^(MYSFormElement *element)
+        {
             NSLog(@"button 2 pressed");
         }];
 
-        MYSFormButton *button3 = [MYSFormButton formButtonWithTitle:@"Button 3" action:^(MYSFormElement *element) {
+        MYSFormButton *button3 = [MYSFormButton formButtonWithTitle:@"Button 3"
+                                                              style:MYSFormButtonStyleFilled
+                                                             action:^(MYSFormElement *element)
+        {
             NSLog(@"button 3 pressed");
         }];
 
@@ -117,6 +136,5 @@
         formViewController.collectionView.contentInset = UIEdgeInsetsMake(20, 0, 20, 0);
     }
 }
-
 
 @end

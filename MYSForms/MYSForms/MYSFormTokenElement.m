@@ -9,6 +9,7 @@
 #import "MYSFormTokenElement.h"
 #import "MYSFormTokenCell-Private.h"
 #import "MYSFormValueTransformer.h"
+#import "MYSFormTheme.h"
 
 
 @interface MYSFormTokenElement () <MYSFormTokenCellDelegate>
@@ -55,10 +56,16 @@
     cell.tokenCellDelegate = self;
 }
 
-- (id)currentModelValue
+- (id)transformedModelValue
 {
     id value = [super currentModelValue];
     return [self.displayStringValueTransformer transformedValue:value];
+}
+
+- (void)configureClassThemeDefaults:(MYSFormTheme *)theme
+{
+    theme.backgroundColor = [UIColor clearColor];
+    theme.padding = [NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(10, 0, 10, 0)];
 }
 
 #pragma mark - DELEGATE token field cell

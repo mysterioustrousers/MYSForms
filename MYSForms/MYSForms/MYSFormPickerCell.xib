@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -13,43 +14,56 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vgr-42-tvG">
-                        <rect key="frame" x="20" y="15" width="280" height="20"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="evK-fb-usS">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="49.5"/>
+                        <state key="normal">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="buttonWasTapped:" destination="p3W-hN-cwK" eventType="touchUpInside" id="yOS-7I-rim"/>
+                        </connections>
+                    </button>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="172" translatesAutoresizingMaskIntoConstraints="NO" id="Vgr-42-tvG">
+                        <rect key="frame" x="20" y="15" width="172" height="19.5"/>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SC6-wz-kTN">
-                        <rect key="frame" x="20" y="5" width="280" height="40"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SC6-wz-kTN" userLabel="Value" customClass="MYSFormButton">
+                        <rect key="frame" x="200" y="5" width="100" height="40"/>
                         <constraints>
-                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="HQj-Jz-0MM"/>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="HQj-Jz-0MM"/>
                             <constraint firstAttribute="height" constant="40" id="Yol-bJ-Sfr"/>
                         </constraints>
                         <state key="normal" title="Button">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
-                        <connections>
-                            <action selector="buttonWasTapped:" destination="p3W-hN-cwK" eventType="touchUpInside" id="64N-nd-UNw"/>
-                        </connections>
                     </button>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstAttribute="bottom" secondItem="evK-fb-usS" secondAttribute="bottom" id="3FM-Gg-ZzX"/>
                 <constraint firstAttribute="centerY" secondItem="SC6-wz-kTN" secondAttribute="centerY" id="B0W-G0-jsY"/>
                 <constraint firstAttribute="trailing" secondItem="SC6-wz-kTN" secondAttribute="trailing" constant="20" id="EKm-da-GV9"/>
                 <constraint firstAttribute="centerY" secondItem="Vgr-42-tvG" secondAttribute="centerY" id="Gar-Kf-eLr"/>
+                <constraint firstItem="evK-fb-usS" firstAttribute="top" secondItem="p3W-hN-cwK" secondAttribute="top" id="IRi-iU-W9P"/>
                 <constraint firstItem="Vgr-42-tvG" firstAttribute="leading" secondItem="p3W-hN-cwK" secondAttribute="leading" constant="20" id="PgO-wB-z8V"/>
-                <constraint firstItem="SC6-wz-kTN" firstAttribute="leading" secondItem="p3W-hN-cwK" secondAttribute="leading" constant="20" id="eS0-Ix-dSM"/>
-                <constraint firstAttribute="trailing" secondItem="Vgr-42-tvG" secondAttribute="trailing" constant="20" id="leX-mP-bcA"/>
+                <constraint firstItem="evK-fb-usS" firstAttribute="leading" secondItem="p3W-hN-cwK" secondAttribute="leading" id="Vx4-cU-Rfu"/>
+                <constraint firstAttribute="trailing" secondItem="evK-fb-usS" secondAttribute="trailing" id="hn8-vx-bUV"/>
+                <constraint firstItem="SC6-wz-kTN" firstAttribute="leading" secondItem="Vgr-42-tvG" secondAttribute="trailing" constant="8" id="zaB-fL-746"/>
             </constraints>
             <connections>
-                <outlet property="button" destination="SC6-wz-kTN" id="Mcc-3X-ExB"/>
+                <outlet property="button" destination="SC6-wz-kTN" id="c7H-RA-6m0"/>
                 <outlet property="label" destination="Vgr-42-tvG" id="ixm-ED-k2p"/>
             </connections>
+            <point key="canvasLocation" x="95" y="472"/>
         </collectionViewCell>
     </objects>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
 </document>

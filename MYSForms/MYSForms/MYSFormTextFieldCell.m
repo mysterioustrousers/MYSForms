@@ -9,6 +9,7 @@
 #import "MYSFormTextFieldCell.h"
 #import "MYSFormTextFieldElement.h"
 #import "MYSFormTextFieldCell-Private.h"
+#import "MYSFormTheme.h"
 
 
 @interface MYSFormTextFieldCell () <UITextFieldDelegate>
@@ -38,22 +39,17 @@
     [self layoutLabelAndTextFieldWithText:self.textField.text];
 }
 
-- (void)drawRect:(CGRect)rect
-{
-    [super drawRect:rect];
-
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSetShouldAntialias(context, NO);
-
-    UIBezierPath *path = [UIBezierPath bezierPath];
-    [path moveToPoint:CGPointMake([[self class] cellContentInset].left, ceil(self.bounds.size.height - 5))];
-    [path addLineToPoint:CGPointMake(self.frame.size.width - [[self class] cellContentInset].right, ceil(self.bounds.size.height - 5))];
-    [[UIColor lightGrayColor] setStroke];
-    [path stroke];
-}
-
 
 #pragma mark - Public
+
++ (CGSize)sizeRequiredForElement:(MYSFormTextFieldElement *)element width:(CGFloat)width
+{
+    UIEdgeInsets insets     = [element.theme.contentInsets UIEdgeInsetsValue];
+    CGSize labelSize        = [element.label sizeWithAttributes:@{ NSFontAttributeName : element.theme.inputLabelFont }];
+    CGSize textFieldSize    = [@"A" sizeWithAttributes:@{ NSFontAttributeName : element.theme.inputTextFont }];
+    CGFloat height          = ceil(labelSize.height) + 7 + ceil(textFieldSize.height) + 7 + insets.top + insets.bottom;
+    return CGSizeMake(width, height);
+}
 
 - (NSString *)valueKeyPath
 {
@@ -71,6 +67,15 @@
     [super populateWithElement:element];
 }
 
+- (void)applyTheme:(MYSFormTheme *)theme
+{
+    [super applyTheme:theme];
+    self.label.font             = theme.inputLabelFont;
+    self.label.textColor        = theme.inputLabelColor;
+    self.textField.font         = theme.inputTextFont;
+    self.textField.textColor    = theme.inputTextColor;
+}
+
 - (UIView *)textInput
 {
     return self.textField;
@@ -82,8 +87,6 @@
         [self layoutLabelAndTextFieldWithText:self.textField.text];
     }
 }
-
-
 
 
 #pragma mark - DELEGATE text field
@@ -103,8 +106,6 @@
 }
 
 
-
-
 #pragma mark - Notifications
 
 - (void)textFieldDidChange:(NSNotification *)note
@@ -115,14 +116,12 @@
 }
 
 
-
-
 #pragma mark - Private
 
 - (void)layoutLabelAndTextFieldWithText:(NSString *)text
 {
-    CGFloat labelHeight = self.label.frame.size.height;
-    CGFloat textFieldHeight = self.textField.frame.size.height;
+    CGFloat labelHeight = [self.label.text sizeWithAttributes:@{ NSFontAttributeName : self.label.font }].height + 4;
+    CGFloat textFieldHeight = [text sizeWithAttributes:@{ NSFontAttributeName : self.textField.font }].height + 4;
     CGFloat totalHeight = (labelHeight + 5 + textFieldHeight) - 4;
     CGFloat topAndBottomPadding = (self.bounds.size.height - totalHeight) / 2.0;
     CGFloat labelDeltaY = CGRectGetMidY(self.label.frame) - topAndBottomPadding - (self.label.frame.size.height / 2.0);

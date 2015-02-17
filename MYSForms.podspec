@@ -20,7 +20,6 @@ Pod::Spec.new do |s|
                       :tag => "#{s.version}"
                     }
   s.source_files  = "MYSForms/MYSForms/**/*.{h,m}"
-  s.resource_bundles = { 'MYSForms' => "MYSForms/MYSForms/**/*.png" }
-  s.resources = "MYSForms/MYSForms/**/*.xib"
+  s.resource_bundles = { "MYSForms" => ["MYSForms/MYSForms/**/*.png", "MYSForms/MYSForms/**/*.xib"] }
   s.requires_arc = true
 end

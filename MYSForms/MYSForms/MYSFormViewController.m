@@ -24,6 +24,7 @@
 @property (nonatomic, strong) NSMutableDictionary *cachedCellSizes;
 @property (nonatomic, assign) NSUInteger          outstandingValidationErrorCount;
 @property (nonatomic, strong) MYSFormTheme        *theme;
+@property (nonatomic        ) BOOL                isAlreadyAppeared;
 @end
 
 
@@ -31,9 +32,10 @@
 
 - (void)formInit;
 {
-    self.elements   = [NSMutableArray new];
-    self.fixedWidth = 0;
-    self.theme      = [MYSFormTheme new];
+    self.elements           = [NSMutableArray new];
+    self.fixedWidth         = 0;
+    self.theme              = [MYSFormTheme new];
+    self.isAlreadyAppeared  = NO;
 }
 
 - (instancetype)init
@@ -67,17 +69,20 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.collectionView.alwaysBounceVertical = YES;
-    self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    self.collectionView.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    UICollectionViewFlowLayout *flowLayout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
-    flowLayout.minimumLineSpacing = 0;
-    flowLayout.minimumInteritemSpacing = CGFLOAT_MAX;
-    [self configureForm];
-    [self registerElementCellsForReuse];
-    [self setupKeyboardNotifications];
-    if ([self.navigationItem.title length] == 0) {
-        self.navigationItem.title = self.title;
+    if (!self.isAlreadyAppeared) {
+        self.isAlreadyAppeared = YES;
+        self.collectionView.alwaysBounceVertical = YES;
+        self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
+        self.collectionView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+        UICollectionViewFlowLayout *flowLayout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
+        flowLayout.minimumLineSpacing = 0;
+        flowLayout.minimumInteritemSpacing = CGFLOAT_MAX;
+        [self configureForm];
+        [self registerElementCellsForReuse];
+        [self setupKeyboardNotifications];
+        if ([self.navigationItem.title length] == 0) {
+            self.navigationItem.title = self.title;
+        }
     }
 }
 

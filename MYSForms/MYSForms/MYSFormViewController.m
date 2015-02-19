@@ -64,9 +64,9 @@
     return self;
 }
 
-- (void)viewDidLoad
+- (void)viewWillAppear:(BOOL)animated
 {
-    [super viewDidLoad];
+    [super viewWillAppear:animated];
     self.collectionView.alwaysBounceVertical = YES;
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     self.collectionView.backgroundColor = [UIColor groupTableViewBackgroundColor];
@@ -137,9 +137,6 @@
 
     // register view child cell
     [self.collectionView registerClass:[MYSFormViewChildCell class] forCellWithReuseIdentifier:NSStringFromClass([MYSFormViewChildCell class])];
-
-    // register an invisble footer cell
-    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"InvisibleCell"];
 }
 
 - (void)addFormElement:(MYSFormElement *)element
@@ -177,8 +174,8 @@
             valid = NO;
             for (NSError *error in validationErrors) {
                 MYSFormMessageChildElement *errorFormElement = [MYSFormMessageChildElement messageElementWithMessage:[error localizedDescription]
-                                                                                                      type:MYSFormChildElementTypeValidationError
-                                                                                             parentElement:element];
+                                                                                                                type:MYSFormChildElementTypeValidationError
+                                                                                                       parentElement:element];
                 [errorElementsToShow addObject:errorFormElement];
             }
         }
@@ -186,7 +183,7 @@
     self.outstandingValidationErrorCount = [errorElementsToShow count];
 
     // remove all existing error elements
-    [self hideChildrenOfElement:nil type:MYSFormChildElementTypeValidationError completion:^{
+    [self hideChildrenOfElements:self.elements type:MYSFormChildElementTypeValidationError completion:^{
         [self showChildElements:errorElementsToShow position:MYSFormElementRelativePositionBelow duration:0 completion:nil];
     }];
 
@@ -220,7 +217,7 @@
 - (void)hideLoadingAboveElement:(MYSFormElement *)element completion:(void (^)(void))completion
 {
     if (!self.collectionView.window) return;
-    [self hideChildrenOfElement:element type:MYSFormChildElementTypeLoading completion:completion];
+    [self hideChildrenOfElements:@[element] type:MYSFormChildElementTypeLoading completion:completion];
 }
 
 - (void)showErrorMessage:(NSString *)message
@@ -239,7 +236,7 @@
 
 - (void)hideErrorMessageBelowElement:(MYSFormElement *)element completion:(void (^)(void))completion
 {
-    [self hideChildrenOfElement:element type:MYSFormChildElementTypeError completion:completion];
+    [self hideChildrenOfElements:@[element] type:MYSFormChildElementTypeError completion:completion];
 }
 
 - (void)showSuccessMessage:(NSString *)message
@@ -258,7 +255,7 @@
 
 - (void)hideSuccessMessageBelowElement:(MYSFormElement *)element completion:(void (^)(void))completion
 {
-    [self hideChildrenOfElement:element type:MYSFormChildElementTypeSuccess completion:completion];
+    [self hideChildrenOfElements:@[element] type:MYSFormChildElementTypeSuccess completion:completion];
 }
 
 - (void)showView:(UIView *)view
@@ -272,7 +269,7 @@
 
 - (void)hideViewRelativeToElement:(MYSFormElement *)element completion:(void (^)(void))completion
 {
-    [self hideChildrenOfElement:element type:MYSFormChildElementTypeView completion:nil];
+    [self hideChildrenOfElements:@[element] type:MYSFormChildElementTypeView completion:nil];
 }
 
 
@@ -421,7 +418,7 @@
 
 - (void)formElement:(MYSFormElement *)formElement didRequestDismissalOfChildView:(UIView *)childView
 {
-    [self hideChildrenOfElement:formElement type:MYSFormChildElementTypeView completion:nil];
+    [self hideChildrenOfElements:@[formElement] type:MYSFormChildElementTypeView completion:nil];
 }
 
 - (void)formElementDidRequestResignationOfFirstResponder:(MYSFormElement *)formElement
@@ -498,7 +495,7 @@
 
         if (duration > 0) {
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(duration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [self hideChildrenOfElement:childElement.parentElement type:childElement.type completion:nil];
+                [self hideChildrenOfElements:@[childElement.parentElement] type:childElement.type completion:nil];
             });
         }
     }
@@ -508,10 +505,10 @@
         [self.collectionView performBatchUpdates:^{
             [self.collectionView insertItemsAtIndexPaths:indexPathsToInsert];
         } completion:^(BOOL finished) {
-            NSIndexPath *ip = [indexPathsToInsert firstObject];
-            if (ip) [self.collectionView scrollToItemAtIndexPath:ip
-                                                atScrollPosition:UICollectionViewScrollPositionCenteredVertically
-                                                        animated:YES];
+//            NSIndexPath *ip = [indexPathsToInsert firstObject];
+//            if (ip) [self.collectionView scrollToItemAtIndexPath:ip
+//                                                atScrollPosition:UICollectionViewScrollPositionCenteredVertically
+//                                                        animated:YES];
             if (completion) completion();
         }];
     }
@@ -520,20 +517,21 @@
     }
 }
 
-- (void)hideChildrenOfElement:(MYSFormElement *)parentElement type:(MYSFormChildElementType)type completion:(void (^)(void))completion
+- (void)hideChildrenOfElements:(NSArray *)elements type:(MYSFormChildElementType)type completion:(void (^)(void))completion
 {
     if (!self.collectionView.window) return;
 
-    NSArray *childElements = [self childElementsOfParentElement:parentElement type:type];
+    NSMutableArray *childElements = [NSMutableArray new];
+    for (MYSFormElement *element in elements) {
+        [childElements addObjectsFromArray:[self childElementsOfParentElement:element type:type]];
+    }
 
     NSMutableArray *indexPathsToRemove = [NSMutableArray new];
     for (MYSFormMessageChildElement *childElement in childElements) {
-        if (!parentElement || [childElement.parentElement isEqual:parentElement]) {
-            NSIndexPath *ip = [self.collectionView indexPathForCell:childElement.cell];
-            if (ip) {
-                [parentElement removeChildElement:childElement];
-                [indexPathsToRemove addObject:ip];
-            }
+        NSIndexPath *ip = [self.collectionView indexPathForCell:childElement.cell];
+        if (ip) {
+            [childElement.parentElement removeChildElement:childElement];
+            [indexPathsToRemove addObject:ip];
         }
     }
 
@@ -567,15 +565,15 @@
                                                        queue:[NSOperationQueue mainQueue]
                                                   usingBlock:^(NSNotification *note)
     {
-        CGRect endFrame             = [note.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
-        CGFloat animationDuration   = [note.userInfo[UIKeyboardAnimationDurationUserInfoKey] floatValue];
-        UIViewAnimationCurve curve  = [note.userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue];
-        UIEdgeInsets insets         = self.collectionView.contentInset;
-        CGPoint offset              = self.collectionView.contentOffset;
+        CGRect endFrame            = [note.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+        CGFloat animationDuration  = [note.userInfo[UIKeyboardAnimationDurationUserInfoKey] floatValue];
+        UIViewAnimationCurve curve = [note.userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue];
+        UIEdgeInsets insets        = self.collectionView.contentInset;
+        CGPoint offset             = self.collectionView.contentOffset;
         
 //        if (self.interfaceOrientation == UIInterfaceOrientationPortrait ||
 //            self.interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
-            insets.bottom = endFrame.size.height;
+        insets.bottom = endFrame.size.height;
 //        }
 //        else {
 //            insets.bottom = endFrame.size.width;

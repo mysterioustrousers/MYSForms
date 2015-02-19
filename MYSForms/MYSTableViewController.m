@@ -28,16 +28,6 @@
 }
 
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([segue.identifier isEqualToString:@"SignUpFormSegue"]) {
-        MYSSignUpFormViewController *signUpFormViewController = [segue destinationViewController];
-        signUpFormViewController.formDelegate = self;
-        // model is created in viewDidLoad of sign up vc
-    }
-}
-
-
 #pragma mark - DELEGATE form view controller
 
 - (void)formViewControllerDidSubmit:(MYSFormViewController *)controller

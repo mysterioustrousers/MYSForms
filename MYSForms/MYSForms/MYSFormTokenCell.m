@@ -9,7 +9,6 @@
 #import "MYSFormTokenElement.h"
 #import "MYSFormTokenCell-Private.h"
 #import "MYSFormTheme.h"
-#import "MYSFormElement-Private.h"
 
 
 static CGFloat tokenSpacing = 8.0;

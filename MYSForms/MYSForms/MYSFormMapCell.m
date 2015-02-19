@@ -9,7 +9,6 @@
 #import "MYSFormMapCell.h"
 #import "MYSFormMapElement.h"
 #import "MYSFormTheme.h"
-#import "MYSFormElement-Private.h"
 
 
 @implementation MYSFormMapCell

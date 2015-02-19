@@ -67,6 +67,11 @@
 @property (nonatomic, strong, readonly) MYSFormTheme *theme;
 
 /**
+ Computed theme from merging the most general global default theme down to the specific element's theme.
+ */
+- (MYSFormTheme *)evaluatedTheme;
+
+/**
  Is asked of the element to make sure this element can be added for this form/device/orientation/whatever.
  For example, the image picker element can't be added on a device with no cameras and no library.
  */
@@ -84,6 +89,11 @@
 
 /**
  If any data on this element has changed, call this method to update the cell so it's displayed to the user.
+ 
+ NOTE: If you subclass a cell and provide a custom xib, the theme of the element will not be applied to the cell.
+ Otherwise, there would be a danger of global defaults overriding customizations you've made to your views in your
+ custom xib. If you would like to restore this behavior. you can override this method in your custom element subclass
+ companion to the custom cell subclass and call `[self.cell applyTheme:[self evaluatedTheme]];` after calling super.
  */
 - (void)updateCell;
 

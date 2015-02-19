@@ -9,7 +9,6 @@
 #import "MYSFormImagePickerCell.h"
 #import "MYSFormImagePickerElement.h"
 #import "MYSFormImagePickerCell-Private.h"
-#import "MYSFormElement-Private.h"
 #import "MYSFormTheme.h"
 
 

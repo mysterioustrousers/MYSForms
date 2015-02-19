@@ -75,9 +75,7 @@
     if (_cellClass) {
         return _cellClass;
     }
-    NSString *className     = NSStringFromClass([self class]);
-    NSString *cellClassName = [className stringByReplacingOccurrencesOfString:@"Element" withString:@"Cell"];
-    return NSClassFromString(cellClassName);
+    return [self defaultCellClass];
 }
 
 - (void)configureClassDefaultTheme:(MYSFormTheme *)theme
@@ -88,7 +86,10 @@
 - (void)updateCell
 {
     [self.cell populateWithElement:self];
-    [self.cell applyTheme:[self evaluatedTheme]];
+    // only apply a theme if they have not subclassed and customized their own cell class.
+    if (self.cellClass == [self defaultCellClass]) {
+        [self.cell applyTheme:[self evaluatedTheme]];
+    }
     if ([self isModelKeyPathValid]) {
         id modelValue = [self transformedModelValue];
         [self.cell setValue:modelValue forKeyPath:[self.cell valueKeyPath]];
@@ -190,6 +191,13 @@
     [theme mergeWithTheme:self.theme];
     // we end up with the theme that should be used to style this element.
     return theme;
+}
+
+- (Class)defaultCellClass
+{
+    NSString *className     = NSStringFromClass([self class]);
+    NSString *cellClassName = [className stringByReplacingOccurrencesOfString:@"Element" withString:@"Cell"];
+    return NSClassFromString(cellClassName);
 }
 
 @end

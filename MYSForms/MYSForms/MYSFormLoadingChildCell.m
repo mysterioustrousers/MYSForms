@@ -9,6 +9,7 @@
 #import "MYSFormLoadingChildCell.h"
 #import "MYSFormMessageChildElement.h"
 #import "MYSFormTheme.h"
+#import "MYSFormElement-Private.h"
 
 
 static CGFloat spinnerSize      = 20;
@@ -19,7 +20,8 @@ static CGFloat standardSpacing  = 8;
 
 + (CGSize)sizeRequiredForElement:(MYSFormMessageChildElement *)element width:(CGFloat)width
 {
-    UIEdgeInsets insets = [element.theme.contentInsets UIEdgeInsetsValue];
+    MYSFormTheme *theme = [element evaluatedTheme];
+    UIEdgeInsets insets = [theme.contentInsets UIEdgeInsetsValue];
 
     // subtract the cell margins
     width -= insets.left + insets.right;
@@ -30,7 +32,7 @@ static CGFloat standardSpacing  = 8;
     CGSize size = [element.message boundingRectWithSize:CGSizeMake(width, FLT_MAX)
                                                 options:NSStringDrawingUsesLineFragmentOrigin
                                              attributes:@{
-                                                          NSFontAttributeName : element.theme.messageTextFont
+                                                          NSFontAttributeName : theme.messageTextFont
                                                           }
                                                 context:nil].size;
     size.height = ceil(size.height);

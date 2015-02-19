@@ -107,11 +107,6 @@
 - (void)addFormElement:(MYSFormElement *)element atIndex:(NSInteger)index;
 
 /**
- This is an abstraction. All this is doing is adding the value you pass in to the bottom padding of the element above.
- */
-- (void)addPadding:(CGFloat)padding;
-
-/**
  Runs all the validations on the model and adds validation errors by the elements that failed their validations.
  Returns YES if there were no errors and NO if there were validation errors.
  */

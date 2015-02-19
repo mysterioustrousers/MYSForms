@@ -10,6 +10,7 @@
 #import "MYSFormTextViewCell-Private.h"
 #import "MYSFormTextViewElement.h"
 #import "MYSFormTheme.h"
+#import "MYSFormElement-Private.h"
 
 
 @interface MYSFormTextViewCell () <UITextViewDelegate>
@@ -34,7 +35,9 @@
 
 + (CGSize)sizeRequiredForElement:(MYSFormTextViewElement *)element width:(CGFloat)width
 {
-    UIEdgeInsets insets = [element.theme.contentInsets UIEdgeInsetsValue];
+    MYSFormTheme *theme = [element evaluatedTheme];
+
+    UIEdgeInsets insets = [theme.contentInsets UIEdgeInsetsValue];
 
     width -= insets.left + insets.right;
 
@@ -45,7 +48,7 @@
     CGSize size = [currentModelValue boundingRectWithSize:CGSizeMake(width, FLT_MAX)
                                              options:NSStringDrawingUsesLineFragmentOrigin
                                           attributes:@{
-                                                       NSFontAttributeName : element.theme.inputTextFont
+                                                       NSFontAttributeName : theme.inputTextFont
                                                        }
                                              context:nil].size;
     size.height = ceil(size.height) + insets.top + insets.bottom;
@@ -60,8 +63,8 @@
 
 - (void)populateWithElement:(MYSFormTextViewElement *)element
 {
-    self.textView.font     = element.theme.inputTextFont;
-    self.textView.editable = element.isEditable && element.isEnabled;
+    self.textView.font      = [element evaluatedTheme].inputTextFont;
+    self.textView.editable  = element.isEditable && element.isEnabled;
     [super populateWithElement:element];
 }
 

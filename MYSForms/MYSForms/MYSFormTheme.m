@@ -73,29 +73,27 @@
     return theme;
 }
 
-#define MERGE(a, b, s) if ((s == MYSFormThemeMergeStrategyPassive    && !a) || \
-                           (s == MYSFormThemeMergeStrategyAggressive && b)) \
-                                a = [b copy]
+#define MERGE(a, b) if (b) { a = [b copy]; }
 
-- (void)mergeWithTheme:(MYSFormTheme *)theme strategy:(MYSFormThemeMergeStrategy)strategy
+- (void)mergeWithTheme:(MYSFormTheme *)theme
 {
-    MERGE(_labelFont,            theme.labelFont,            strategy);
-    MERGE(_labelTextColor,       theme.labelTextColor,       strategy);
-    MERGE(_contentInsets,        theme.contentInsets,        strategy);
-    MERGE(_padding,              theme.padding,              strategy);
-    MERGE(_backgroundColor,      theme.backgroundColor,      strategy);
-    MERGE(_height,               theme.height,               strategy);
-    MERGE(_inputLabelFont,       theme.inputLabelFont,       strategy);
-    MERGE(_inputLabelColor,      theme.inputLabelColor,      strategy);
-    MERGE(_inputTextFont,        theme.inputTextFont,        strategy);
-    MERGE(_inputTextColor,       theme.inputTextColor,       strategy);
-    MERGE(_tintColor,            theme.tintColor,            strategy);
-    MERGE(_messageTextFont,      theme.messageTextFont,      strategy);
-    MERGE(_messageTextColor,     theme.messageTextColor,     strategy);
-    MERGE(_buttonStyle,          theme.buttonStyle,          strategy);
-    MERGE(_buttonTitleFont,      theme.buttonTitleFont,      strategy);
-    MERGE(_toggleOnTintColor,    theme.toggleOnTintColor,    strategy);
-    MERGE(_toggleThumbTintColor, theme.toggleThumbTintColor, strategy);
+    MERGE(_labelFont,            theme.labelFont);
+    MERGE(_labelTextColor,       theme.labelTextColor);
+    MERGE(_contentInsets,        theme.contentInsets);
+    MERGE(_padding,              theme.padding);
+    MERGE(_backgroundColor,      theme.backgroundColor);
+    MERGE(_height,               theme.height);
+    MERGE(_inputLabelFont,       theme.inputLabelFont);
+    MERGE(_inputLabelColor,      theme.inputLabelColor);
+    MERGE(_inputTextFont,        theme.inputTextFont);
+    MERGE(_inputTextColor,       theme.inputTextColor);
+    MERGE(_tintColor,            theme.tintColor);
+    MERGE(_messageTextFont,      theme.messageTextFont);
+    MERGE(_messageTextColor,     theme.messageTextColor);
+    MERGE(_buttonStyle,          theme.buttonStyle);
+    MERGE(_buttonTitleFont,      theme.buttonTitleFont);
+    MERGE(_toggleOnTintColor,    theme.toggleOnTintColor);
+    MERGE(_toggleThumbTintColor, theme.toggleThumbTintColor);
 }
 
 @end

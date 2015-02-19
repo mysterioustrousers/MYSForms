@@ -9,6 +9,7 @@
 #import "MYSFormTextFieldCell.h"
 #import "MYSFormTextFieldElement.h"
 #import "MYSFormTextFieldCell-Private.h"
+#import "MYSFormElement-Private.h"
 #import "MYSFormTheme.h"
 
 
@@ -44,9 +45,10 @@
 
 + (CGSize)sizeRequiredForElement:(MYSFormTextFieldElement *)element width:(CGFloat)width
 {
-    UIEdgeInsets insets     = [element.theme.contentInsets UIEdgeInsetsValue];
-    CGSize labelSize        = [element.label sizeWithAttributes:@{ NSFontAttributeName : element.theme.inputLabelFont }];
-    CGSize textFieldSize    = [@"A" sizeWithAttributes:@{ NSFontAttributeName : element.theme.inputTextFont }];
+    MYSFormTheme *theme = [element evaluatedTheme];
+    UIEdgeInsets insets     = [theme.contentInsets UIEdgeInsetsValue];
+    CGSize labelSize        = [element.label sizeWithAttributes:@{ NSFontAttributeName : theme.inputLabelFont }];
+    CGSize textFieldSize    = [@"A" sizeWithAttributes:@{ NSFontAttributeName : theme.inputTextFont }];
     CGFloat height          = ceil(labelSize.height) + 7 + ceil(textFieldSize.height) + 7 + insets.top + insets.bottom;
     return CGSizeMake(width, height);
 }

@@ -24,7 +24,7 @@
     return 0.0144927536 * miles;
 }
 
-- (void)configureClassThemeDefaults:(MYSFormTheme *)theme
+- (void)configureClassDefaultTheme:(MYSFormTheme *)theme
 {
     theme.backgroundColor = [UIColor clearColor];
 }

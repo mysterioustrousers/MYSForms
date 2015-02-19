@@ -19,7 +19,7 @@
     return element;
 }
 
-- (void)configureClassThemeDefaults:(MYSFormTheme *)theme
+- (void)configureClassDefaultTheme:(MYSFormTheme *)theme
 {
     theme.backgroundColor = [UIColor clearColor];
     theme.labelFont = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];

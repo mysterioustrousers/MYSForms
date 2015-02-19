@@ -31,9 +31,9 @@
 
 - (void)formInit;
 {
-    self.elements = [NSMutableArray new];
+    self.elements   = [NSMutableArray new];
     self.fixedWidth = 0;
-    self.theme = [MYSFormTheme formThemeWithDefaults];
+    self.theme      = [MYSFormTheme new];
 }
 
 - (instancetype)init
@@ -162,20 +162,6 @@
                         options:0
                         context:NULL];
     }
-    if (self.theme) {
-        [element.theme mergeWithTheme:self.theme strategy:MYSFormThemeMergeStrategyPassive];
-    }
-}
-
-- (void)addPadding:(CGFloat)padding
-{
-    MYSFormElement *lastElementAdded = [self.elements lastObject];
-    if (lastElementAdded) {
-        MYSFormTheme *theme = lastElementAdded.theme;
-        UIEdgeInsets insets = [theme.padding UIEdgeInsetsValue];
-        insets.bottom += padding;
-        theme.padding = [NSValue valueWithUIEdgeInsets:insets];
-    }
 }
 
 - (BOOL)validate
@@ -300,16 +286,6 @@
     }
 }
 
-- (void)setTheme:(MYSFormTheme *)theme
-{
-    _theme = theme;
-    for (MYSFormElement *element in self.elements) {
-        if (self.theme) {
-            [element.theme mergeWithTheme:self.theme strategy:MYSFormThemeMergeStrategyPassive];
-        }
-    }
-}
-
 
 #pragma mark - DATASOURCE collection view
 
@@ -362,9 +338,9 @@
         CGFloat width = (self.fixedWidth > 0 && self.fixedWidth < collectionView.frame.size.width ?
                          self.fixedWidth :
                          collectionView.frame.size.width);
-
-        CGSize size = (element.theme.height ?
-                       CGSizeMake(width, [element.theme.height floatValue]) :
+        MYSFormTheme *theme = [element evaluatedTheme];
+        CGSize size = (theme.height ?
+                       CGSizeMake(width, [theme.height floatValue]) :
                        [[element cellClass] sizeRequiredForElement:element width:width]);
         size.width = width;
 
@@ -379,7 +355,7 @@
         insetForSectionAtIndex:(NSInteger)section
 {
     MYSFormElement *element = self.elements[section];
-    return [element.theme.padding UIEdgeInsetsValue];
+    return [[element evaluatedTheme].padding UIEdgeInsetsValue];
 }
 
 
@@ -458,6 +434,11 @@
     [self.navigationController pushViewController:viewController animated:YES];
 }
 
+- (MYSFormTheme *)formElementFormTheme
+{
+    return self.theme;
+}
+
 
 #pragma mark - KVO (the model changed)
 
@@ -513,9 +494,6 @@
 
         [childElement.parentElement addChildElement:childElement];
         NSInteger newIndex = [[childElement.parentElement elementGroup] indexOfObject:childElement];
-        if (self.theme) {
-            [childElement.theme mergeWithTheme:self.theme strategy:MYSFormThemeMergeStrategyPassive];
-        }
         [indexPathsToInsert addObject:[NSIndexPath indexPathForItem:newIndex inSection:section]];
 
         if (duration > 0) {

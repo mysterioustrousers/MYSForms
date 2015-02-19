@@ -50,7 +50,7 @@
     return [self.parentElement hash] ^ self.type ^ [self.message hash];
 }
 
-- (void)configureClassThemeDefaults:(MYSFormTheme *)theme
+- (void)configureClassDefaultTheme:(MYSFormTheme *)theme
 {
     theme.backgroundColor = [UIColor clearColor];
     theme.labelFont = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];

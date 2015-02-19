@@ -18,6 +18,7 @@
 @property (nonatomic, copy  ) void           (^cellConfigurationBlock)(MYSFormCell *cell);
 @property (nonatomic, copy  ) NSMutableArray *childElementsAbove;
 @property (nonatomic, copy  ) NSMutableArray *childElementsBelow;
+@property (nonatomic, strong) MYSFormTheme   *classDefaultTheme;
 @end
 
 
@@ -31,10 +32,9 @@
         _formValidations    = [NSMutableSet new];
         _childElementsAbove = [NSMutableArray new];
         _childElementsBelow = [NSMutableArray new];
-        _theme = [MYSFormTheme formThemeWithDefaults];
-        MYSFormTheme *blankTheme = [MYSFormTheme new];
-        [self configureClassThemeDefaults:blankTheme];
-        [_theme mergeWithTheme:blankTheme strategy:MYSFormThemeMergeStrategyAggressive];
+        _theme              = [MYSFormTheme new];
+        _classDefaultTheme  = [MYSFormTheme new];
+        [self configureClassDefaultTheme:_classDefaultTheme];
     }
     return self;
 }
@@ -80,7 +80,7 @@
     return NSClassFromString(cellClassName);
 }
 
-- (void)configureClassThemeDefaults:(MYSFormTheme *)theme
+- (void)configureClassDefaultTheme:(MYSFormTheme *)theme
 {
 
 }
@@ -88,7 +88,7 @@
 - (void)updateCell
 {
     [self.cell populateWithElement:self];
-    [self.cell applyTheme:self.theme];
+    [self.cell applyTheme:[self evaluatedTheme]];
     if ([self isModelKeyPathValid]) {
         id modelValue = [self transformedModelValue];
         [self.cell setValue:modelValue forKeyPath:[self.cell valueKeyPath]];
@@ -174,6 +174,22 @@
 - (NSArray *)elementGroup
 {
     return [[self.childElementsAbove arrayByAddingObject:self] arrayByAddingObjectsFromArray:self.childElementsBelow];
+}
+
+- (MYSFormTheme *)evaluatedTheme
+{
+    // We start with a theme containing all the global defaults and we overwrite those defaults with values from
+    // more and more specific themes values. The precedence is:
+    // Global Defaults < Class Defaults < Form Customizations < Element Customizations
+    MYSFormTheme *theme = [MYSFormTheme formThemeWithDefaults];
+    // first, the element class theme defaults take precedence over the global defaults
+    [theme mergeWithTheme:self.classDefaultTheme];
+    // next, the values set on the form theme take precedence over the element class defaults
+    [theme mergeWithTheme:[self.delegate formElementFormTheme]];
+    // finally, the values set on this element's theme are supreme.
+    [theme mergeWithTheme:self.theme];
+    // we end up with the theme that should be used to style this element.
+    return theme;
 }
 
 @end

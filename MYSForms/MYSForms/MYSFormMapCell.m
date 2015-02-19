@@ -9,6 +9,7 @@
 #import "MYSFormMapCell.h"
 #import "MYSFormMapElement.h"
 #import "MYSFormTheme.h"
+#import "MYSFormElement-Private.h"
 
 
 @implementation MYSFormMapCell
@@ -24,7 +25,7 @@
 
 + (CGSize)sizeRequiredForElement:(MYSFormMapElement *)element width:(CGFloat)width
 {
-    UIEdgeInsets insets = [element.theme.contentInsets UIEdgeInsetsValue];
+    UIEdgeInsets insets = [[element evaluatedTheme].contentInsets UIEdgeInsetsValue];
     return CGSizeMake(width, insets.top + 150 + insets.bottom);
 }
 

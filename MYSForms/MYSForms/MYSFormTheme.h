@@ -10,18 +10,6 @@
 #import "MYSFormButton.h"
 
 
-typedef NS_ENUM(NSInteger, MYSFormThemeMergeStrategy) {
-    /**
-     Will only overwrite the receivers value if the receiver does not have a value.
-     */
-    MYSFormThemeMergeStrategyPassive,
-    /**
-     If a value on `theme` is present, it will overwrite the receiver's value.
-     */
-    MYSFormThemeMergeStrategyAggressive
-};
-
-
 @interface MYSFormTheme : NSObject
 
 + (instancetype)formThemeWithLabelFont:(UIFont *)font;
@@ -30,7 +18,7 @@ typedef NS_ENUM(NSInteger, MYSFormThemeMergeStrategy) {
 
 + (instancetype)formThemeWithDefaults;
 
-- (void)mergeWithTheme:(MYSFormTheme *)theme strategy:(MYSFormThemeMergeStrategy)strategy;
+- (void)mergeWithTheme:(MYSFormTheme *)theme;
 
 @property (nonatomic, copy) UIFont *labelFont;
 

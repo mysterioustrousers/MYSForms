@@ -9,13 +9,14 @@
 #import "MYSFormCell.h"
 #import "MYSFormElement.h"
 #import "MYSFormTheme.h"
+#import "MYSFormElement-Private.h"
 
 
 @implementation MYSFormCell
 
 + (CGSize)sizeRequiredForElement:(MYSFormElement *)element width:(CGFloat)width
 {
-    UIEdgeInsets insets = [element.theme.contentInsets UIEdgeInsetsValue];
+    UIEdgeInsets insets = [[element evaluatedTheme].contentInsets UIEdgeInsetsValue];
     return CGSizeMake(width, insets.top + 44 + insets.bottom);
 }
 

@@ -9,18 +9,20 @@
 #import "MYSFormLabelCell.h"
 #import "MYSFormLabelElement.h"
 #import "MYSFormTheme.h"
+#import "MYSFormElement-Private.h"
 
 
 @implementation MYSFormLabelCell
 
 + (CGSize)sizeRequiredForElement:(MYSFormLabelElement *)element width:(CGFloat)width
 {
-    UIEdgeInsets insets = [element.theme.contentInsets UIEdgeInsetsValue];
+    MYSFormTheme *theme = [element evaluatedTheme];
+    UIEdgeInsets insets = [theme.contentInsets UIEdgeInsetsValue];
     width -= insets.left + insets.right;
     CGSize size = [element.label boundingRectWithSize:CGSizeMake(width, FLT_MAX)
                                                  options:NSStringDrawingUsesLineFragmentOrigin
                                               attributes:@{
-                                                           NSFontAttributeName : element.theme.labelFont
+                                                           NSFontAttributeName : theme.labelFont
                                                            }
                                                  context:nil].size;
     size.height = ceil(size.height) + insets.top + insets.bottom;

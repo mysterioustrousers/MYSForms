@@ -25,4 +25,9 @@
  */
 - (NSArray *)elementGroup;
 
+/**
+ Computed theme from merging the most general global default theme down to the specific element's theme.
+ */
+- (MYSFormTheme *)evaluatedTheme;
+
 @end

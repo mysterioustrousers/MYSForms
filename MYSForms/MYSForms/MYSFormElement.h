@@ -59,7 +59,7 @@
  Subclasses can override this to customize the default theme that is created for each element. If an application applies a theme to the
  element it will take precedence over the defaults set in this override. Do not call this method directly.
  */
-- (void)configureClassThemeDefaults:(MYSFormTheme *)theme;
+- (void)configureClassDefaultTheme:(MYSFormTheme *)theme;
 
 /**
  The theme that will be applied to the appropriate views in the view representation of this element (the cell).
@@ -158,6 +158,8 @@
 - (void)formElementDidRequestResignationOfFirstResponder:(MYSFormElement *)formElement;
 
 - (void)formElement:(MYSFormElement *)formElement didRequestPushOfViewController:(UIViewController *)viewController;
+
+- (MYSFormTheme *)formElementFormTheme;
 
 @end
 

@@ -11,7 +11,6 @@
 #import "MYSFormChildElement-Private.h"
 #import "MYSFormMessageChildElement.h"
 #import "MYSFormLoadingChildCell.h"
-#import "MYSFormMessageChildElement-Private.h"
 #import "MYSFormViewChildElement.h"
 #import "MYSFormViewChildCell.h"
 

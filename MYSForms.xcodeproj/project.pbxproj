@@ -143,7 +143,6 @@
 		C26614DF191544880073DAD8 /* MYSFormCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYSFormCell.m; sourceTree = "<group>"; };
 		C26614E919155A900073DAD8 /* MYSFormTextFieldCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MYSFormTextFieldCell.xib; sourceTree = "<group>"; };
 		C26614EB19155A9D0073DAD8 /* MYSFormButtonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MYSFormButtonCell.xib; sourceTree = "<group>"; };
-		C26C4FE41922E90000D6ADBB /* MYSFormMessageChildElement-Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MYSFormMessageChildElement-Private.h"; sourceTree = "<group>"; };
 		C26C4FE61923964100D6ADBB /* MYSFormPickerElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYSFormPickerElement.h; sourceTree = "<group>"; };
 		C26C4FE71923964100D6ADBB /* MYSFormPickerElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYSFormPickerElement.m; sourceTree = "<group>"; };
 		C26C4FE91923989C00D6ADBB /* MYSFormPickerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYSFormPickerCell.h; sourceTree = "<group>"; };
@@ -317,7 +316,6 @@
 				C2F15E3F19242D6400E55FDA /* MYSFormToggleCell-Private.h */,
 				C243F3A01921613900FB86D6 /* MYSFormTextFieldCell-Private.h */,
 				C2F89CE6192B987800198706 /* MYSFormTextViewCell-Private.h */,
-				C26C4FE41922E90000D6ADBB /* MYSFormMessageChildElement-Private.h */,
 				C2F15E2F1923EE7D00E55FDA /* MYSFormPickerCell-Private.h */,
 				C22A156D196F4412006728A8 /* MYSFormChildElement-Private.h */,
 				C29694E91A4E102900F43A23 /* MYSFormTokenCell-Private.h */,
@@ -652,9 +650,6 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Mysterious Trousers";
 				TargetAttributes = {
-					C289A24D1913440A0047D0CF = {
-						DevelopmentTeam = JXK78JN25R;
-					};
 					C289A2711913440A0047D0CF = {
 						TestTargetID = C289A24D1913440A0047D0CF;
 					};

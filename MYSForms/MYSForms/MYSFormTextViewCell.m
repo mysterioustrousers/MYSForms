@@ -44,12 +44,19 @@
     width -= 13;
 
     NSString *currentModelValue = [element transformedModelValue];
-    CGSize size = [currentModelValue boundingRectWithSize:CGSizeMake(width, FLT_MAX)
-                                             options:NSStringDrawingUsesLineFragmentOrigin
-                                          attributes:@{
-                                                       NSFontAttributeName : theme.inputTextFont
-                                                       }
-                                             context:nil].size;
+    CGSize size;
+    if ([currentModelValue length] > 0) {
+        size = [currentModelValue boundingRectWithSize:CGSizeMake(width, FLT_MAX)
+                                               options:NSStringDrawingUsesLineFragmentOrigin
+                                            attributes:@{
+                                                         NSFontAttributeName : theme.inputTextFont
+                                                         }
+                                               context:nil].size;
+        size.height += 16;
+    }
+    else {
+        size = CGSizeMake(width, 150);
+    }
     size.height = ceil(size.height) + insets.top + insets.bottom;
 
     return size;

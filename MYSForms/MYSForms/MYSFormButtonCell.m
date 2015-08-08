@@ -26,7 +26,7 @@
 
     for (MYSFormButton *button in self.buttons) {
         [button removeFromSuperview];
-        if ([[button actionsForTarget:self forControlEvent:UIControlEventTouchUpInside] count] == 0) {
+        if (![[button actionsForTarget:self forControlEvent:UIControlEventTouchUpInside] count] == 0) {
             [button removeTarget:self action:@selector(buttonWasTapped:) forControlEvents:UIControlEventTouchUpInside];
         }
     }

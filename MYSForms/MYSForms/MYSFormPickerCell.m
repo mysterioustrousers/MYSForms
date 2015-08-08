@@ -38,7 +38,7 @@
     return @"selectedValue";
 }
 
-- (void)didChangeValueAtValueKeyPath
+- (void)modelValueDidChange
 {
     [self.button setTitle:self.selectedValue forState:UIControlStateNormal];
 }

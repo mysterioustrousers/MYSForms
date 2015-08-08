@@ -129,20 +129,6 @@
     // overriden by subclasses
 }
 
-- (void)registerElementCellsForReuse
-{
-    for (MYSFormElement *element in self.elements) {
-        [self registerCellForClass:[element cellClass]];
-    }
-
-    // register metadata cells
-    [self registerCellForClass:[MYSFormMessageChildCell class]];
-    [self registerCellForClass:[MYSFormLoadingChildCell class]];
-
-    // register view child cell
-    [self.collectionView registerClass:[MYSFormViewChildCell class] forCellWithReuseIdentifier:NSStringFromClass([MYSFormViewChildCell class])];
-}
-
 - (void)addFormElement:(MYSFormElement *)element
 {
     [self addFormElement:element atIndex:[self.elements count]];
@@ -273,7 +259,7 @@
 
 - (void)hideViewRelativeToElement:(MYSFormElement *)element completion:(void (^)(void))completion
 {
-    [self hideChildrenOfElements:@[element] type:MYSFormChildElementTypeView completion:nil];
+    [self hideChildrenOfElements:@[element] type:MYSFormChildElementTypeView completion:completion];
 }
 
 
@@ -423,11 +409,6 @@
 - (void)formElement:(MYSFormElement *)formElement didRequestDismissalOfChildView:(UIView *)childView
 {
     [self hideChildrenOfElements:@[formElement] type:MYSFormChildElementTypeView completion:nil];
-}
-
-- (void)formElementDidRequestResignationOfFirstResponder:(MYSFormElement *)formElement
-{
-    [self attemptToDismissKeyboard];
 }
 
 - (void)formElement:(MYSFormElement *)formElement didRequestPushOfViewController:(UIViewController *)viewController
@@ -645,6 +626,7 @@
         if (element) {
             MYSFormElement *nextElement = [self elementAfter:element];
             if (nextElement) {
+                [self attemptToDismissKeyboard];
                 [nextElement beginEditing];
             }
             else {
@@ -725,6 +707,20 @@
 {
     UINib *nib = [UINib nibWithNibName:NSStringFromClass(cellClass) bundle:[NSBundle bundleForClass:cellClass]];
     [self.collectionView registerNib:nib forCellWithReuseIdentifier:NSStringFromClass(cellClass)];
+}
+
+- (void)registerElementCellsForReuse
+{
+    for (MYSFormElement *element in self.elements) {
+        [self registerCellForClass:[element cellClass]];
+    }
+
+    // register metadata cells
+    [self registerCellForClass:[MYSFormMessageChildCell class]];
+    [self registerCellForClass:[MYSFormLoadingChildCell class]];
+
+    // register view child cell
+    [self.collectionView registerClass:[MYSFormViewChildCell class] forCellWithReuseIdentifier:NSStringFromClass([MYSFormViewChildCell class])];
 }
 
 #pragma mark (helpers)

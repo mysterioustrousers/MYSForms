@@ -104,11 +104,6 @@
 - (void)configureCellBlock:(void (^)(id))block;
 
 /**
- Returns YES if this is the type of form element that accepts text input.
- */
-- (BOOL)isTextInput;
-
-/**
  Returns YES if the element has a value that can be edited.
  */
 - (BOOL)isEditable;
@@ -153,8 +148,6 @@
 
 - (void)formElement:(MYSFormElement *)formElement valueDidChange:(id)value;
 
-- (void)formElementNeedsLayout:(MYSFormElement *)formElement;
-
 - (void)formElement:(MYSFormElement *)formElement didRequestPresentationOfActionSheet:(UIActionSheet *)actionSheet;
 
 - (void)formElement:(MYSFormElement *)formElement didRequestPresentationOfViewController:(UIViewController *)viewController
@@ -164,8 +157,6 @@
 - (void)formElement:(MYSFormElement *)formElement didRequestPresentationOfChildView:(UIView *)childView;
 
 - (void)formElement:(MYSFormElement *)formElement didRequestDismissalOfChildView:(UIView *)childView;
-
-- (void)formElementDidRequestResignationOfFirstResponder:(MYSFormElement *)formElement;
 
 - (void)formElement:(MYSFormElement *)formElement didRequestPushOfViewController:(UIViewController *)viewController;
 

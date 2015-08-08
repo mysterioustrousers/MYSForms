@@ -58,7 +58,7 @@
     return @"selectedDate";
 }
 
-- (void)didChangeValueAtValueKeyPath
+- (void)modelValueDidChange
 {
     if (!self.dateFormatter) {
         self.dateFormatter = [NSDateFormatter new];

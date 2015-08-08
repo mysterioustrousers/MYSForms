@@ -93,18 +93,13 @@
     if ([self isModelKeyPathValid]) {
         id modelValue = [self transformedModelValue];
         [self.cell setValue:modelValue forKeyPath:[self.cell valueKeyPath]];
-        [self.cell didChangeValueAtValueKeyPath];
+        [self.cell modelValueDidChange];
     }
 }
 
 - (void)configureCellBlock:(void (^)(id))block
 {
     self.cellConfigurationBlock = block;
-}
-
-- (BOOL)isTextInput
-{
-    return NO;
 }
 
 - (BOOL)isEditable

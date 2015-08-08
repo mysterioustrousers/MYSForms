@@ -41,7 +41,7 @@
     return nil;
 }
 
-- (void)didChangeValueAtValueKeyPath
+- (void)modelValueDidChange
 {
 
 }

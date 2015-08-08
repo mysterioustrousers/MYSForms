@@ -35,11 +35,6 @@
     return YES;
 }
 
-- (void)beginEditing
-{
-    [self.delegate formElementDidRequestResignationOfFirstResponder:self];
-}
-
 
 #pragma mark - DELEGATE toggle cell
 

@@ -82,7 +82,7 @@
     return self.textField;
 }
 
-- (void)didChangeValueAtValueKeyPath
+- (void)modelValueDidChange
 {
     if (self.window) {
         [self layoutLabelAndTextFieldWithText:self.textField.text];

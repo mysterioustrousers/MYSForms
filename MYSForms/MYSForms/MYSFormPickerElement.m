@@ -67,11 +67,6 @@
     return YES;
 }
 
-- (void)beginEditing
-{
-    [self.delegate formElementDidRequestResignationOfFirstResponder:self];
-}
-
 - (void)setValues:(NSArray *)values
 {
     self.data = [values mutableCopy];

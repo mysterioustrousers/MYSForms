@@ -55,11 +55,6 @@
     return YES;
 }
 
-- (void)beginEditing
-{
-    [self.delegate formElementDidRequestResignationOfFirstResponder:self];
-}
-
 
 #pragma mark - Actions
 

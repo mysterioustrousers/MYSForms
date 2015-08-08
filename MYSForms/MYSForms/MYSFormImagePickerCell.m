@@ -38,7 +38,7 @@
     return CGSizeMake(width, insets.top + 100 + insets.bottom);
 }
 
-- (void)didChangeValueAtValueKeyPath
+- (void)modelValueDidChange
 {
     if (!self.imageView.image) {
         self.imageView.image = self.placeholderImage;

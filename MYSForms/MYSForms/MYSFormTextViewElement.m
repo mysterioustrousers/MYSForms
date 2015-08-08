@@ -44,18 +44,11 @@
 }
 
 
-
-
 #pragma mark - DELEGATE text view cell
 
 - (void)textViewFormCell:(MYSFormTextViewCell *)cell textDidChange:(NSString *)text
 {
     [self.delegate formElement:self valueDidChange:text];
-}
-
-- (NSString *)textViewFormCellCurrentModelValue:(MYSFormTextViewCell *)cell
-{
-    return [self.dataSource modelValueForFormElement:self];
 }
 
 @end

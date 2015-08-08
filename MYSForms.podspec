@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "MYSForms"
-  s.version      = "0.1.2"
+  s.version      = "0.1.3"
   s.summary      = "Easily build forms on ios 7+."
   s.description  = <<-DESC
                     Easily create highly customizable forms bound to a model in iOS.

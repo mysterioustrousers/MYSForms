@@ -723,7 +723,7 @@
 
 - (void)registerCellForClass:(Class)cellClass
 {
-    UINib *nib = [UINib nibWithNibName:NSStringFromClass(cellClass) bundle:nil];
+    UINib *nib = [UINib nibWithNibName:NSStringFromClass(cellClass) bundle:[NSBundle bundleForClass:[MYSFormViewController class]]];
     [self.collectionView registerNib:nib forCellWithReuseIdentifier:NSStringFromClass(cellClass)];
 }
 
